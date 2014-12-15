@@ -90,24 +90,3 @@ INSERT [dbo].[CompanyAccount] ([ID], [CompanyID], [AccountNumber], [AccountPwd],
 INSERT [dbo].[CompanyAccount] ([ID], [CompanyID], [AccountNumber], [AccountPwd], [Name], [Phone], [Email]) VALUES (2, 2, N'xuefulan', N'm8YlpCH5g1U=', N'雪佛兰', N'xuefulan', N'xuefulan')
 SET IDENTITY_INSERT [dbo].[CompanyAccount] OFF
 
-/******----------------------------******/
-SET IDENTITY_INSERT [dbo].[ParticularYear] ON
-INSERT [dbo].[ParticularYear] ([ID], [Year]) VALUES (1, 2015)
-SET IDENTITY_INSERT [dbo].[ParticularYear] OFF
-
-
-/******----------------------------******/
-SET IDENTITY_INSERT [dbo].[BudgetClass] ON
-INSERT [dbo].[BudgetClass] ([ID], [Name],[CoefficientURL]) VALUES (1, '损益预算','/Coefficient/ProfitLoss_Coefficient')
-SET IDENTITY_INSERT [dbo].[BudgetClass] OFF
-
-
-/******----------------------------******/
-SET IDENTITY_INSERT [dbo].[ProfitLoss_Coefficient] ON
-INSERT [dbo].[ProfitLoss_Coefficient] ([ID], [CompanyID],[FenQiShuLiang],[XinBaoShuLiang],[XuBaoShuLiang],[GuaPaiShuLiang],[ErShouCheXiaoShouShuLiang],[ZhuYingShouRu_ZhengChe]
-,[ZhuYingShouRu_ZhuangShiZhuangHuang],[ZhuYingShouRu_FenQi],[ZhuYingShouRu_XinBao],[ZhuYingShouRu_XuBao],[ZhuYingShouRu_GuaPai],[ZhuYingShouRu_ErShouChe],[ZhuYingChengBen_ZhengChe]
-,[ZhuYingChengBen_WeiXiuPeiJian],[ZhuYingChengBen_ZhuangShiZhuangHuang]) VALUES (1, 1,0.16,0.88,0.3,0.35,0.01,10,0.025,0.33,0.068,0.058,0.085,0.1,0.986,0.8,0.6)
-INSERT [dbo].[ProfitLoss_Coefficient] ([ID], [CompanyID],[FenQiShuLiang],[XinBaoShuLiang],[XuBaoShuLiang],[GuaPaiShuLiang],[ErShouCheXiaoShouShuLiang],[ZhuYingShouRu_ZhengChe]
-,[ZhuYingShouRu_ZhuangShiZhuangHuang],[ZhuYingShouRu_FenQi],[ZhuYingShouRu_XinBao],[ZhuYingShouRu_XuBao],[ZhuYingShouRu_GuaPai],[ZhuYingShouRu_ErShouChe],[ZhuYingChengBen_ZhengChe]
-,[ZhuYingChengBen_WeiXiuPeiJian],[ZhuYingChengBen_ZhuangShiZhuangHuang]) VALUES (2, 2,0.16,0.88,0.3,0.35,0.01,10,0.025,0.33,0.068,0.058,0.085,0.1,0.986,0.8,0.6)
-SET IDENTITY_INSERT [dbo].[ProfitLoss_Coefficient] OFF

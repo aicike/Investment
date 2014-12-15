@@ -1,0 +1,162 @@
+﻿@{
+    ViewBag.Title = "登录";
+
+    Layout = null;
+}
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+<!-- BEGIN HEAD -->
+<head>
+    <meta charset="utf-8" />
+    <title>华夏汽贸 | 登录</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    <link href="@Url.Content("/media/css/bootstrap.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("/media/css/bootstrap-responsive.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("/media/css/font-awesome.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("/media/css/style-metro.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("/media/css/style.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("/media/css/style-responsive.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("/media/css/default.css")" rel="stylesheet" type="text/css" id="style_color" />
+    <link href="@Url.Content("/media/css/uniform.default.css")" rel="stylesheet" type="text/css" />
+    <!-- END GLOBAL MANDATORY STYLES -->
+    <!-- BEGIN PAGE LEVEL STYLES -->
+    <link href="@Url.Content("/media/css/login.css")" rel="stylesheet" type="text/css" />
+    <!-- END PAGE LEVEL STYLES -->
+    <link rel="shortcut icon" href="@Url.Content("/media/image/favicon.ico")" />
+</head>
+<!-- END HEAD -->
+<!-- BEGIN BODY -->
+<body class="login">
+    <!-- BEGIN LOGO -->
+    <div class="logo">
+        <img src="@Url.Content("/media/image/logo-big2.png")" alt="" />
+    </div>
+    <!-- END LOGO -->
+    <!-- BEGIN LOGIN -->
+    <div class="content">
+        <!-- BEGIN LOGIN FORM -->
+        @using (Ajax.BeginForm("Index", "Login", new { BackUrl = ViewBag.BackUrl }, new AjaxOptions() { UpdateTargetId = "alert", OnBegin = "" }, new { @class = "form-vertical login-form" }))
+        { 
+            <h3 class="form-title">
+                陕西华夏汽车贸易集团</h3>
+            <div class="alert alert-error hide">
+                <button class="close" data-dismiss="alert">
+                </button>
+                <span>请输入账号和密码。</span>
+            </div>
+            <div class="control-group">
+                <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
+                <label class="control-label visible-ie8 visible-ie9">
+                    账号</label>
+                <div class="controls">
+                    <div class="input-icon left">
+                        <i class="icon-user"></i>
+                        <input class="m-wrap placeholder-no-fix" type="text" placeholder="账号" name="username"
+                            id="username" />
+                    </div>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label visible-ie8 visible-ie9">
+                    密码</label>
+                <div class="controls">
+                    <div class="input-icon left">
+                        <i class="icon-lock"></i>
+                        <input class="m-wrap placeholder-no-fix" type="password" placeholder="密码" name="password"
+                            id="password" />
+                    </div>
+                </div>
+            </div>
+            <div class="form-actions">
+                <select style="width: 70px; display: inline-block; float: left; margin: 3px 20px 0px 0px;"
+                    name="role" id="role">
+                    <option value="1">公司</option>
+                    <option value="2">集团</option>
+                </select>
+                <label class="checkbox">
+                    <input type="checkbox" name="remember" style="margin-left: 0px;" value="1" />
+                    记住密码
+                </label>
+                <button type="submit" class="btn green pull-right">
+                    登录 <i class="m-icon-swapright m-icon-white"></i>
+                </button>
+            </div>
+            <div class="forget-password" style="display:none">
+                <p>
+                    <a href="javascript:;" class="" id="forget-password">忘记密码？</a></p>
+            </div>
+        }
+        <!-- END LOGIN FORM -->
+        <!-- BEGIN FORGOT PASSWORD FORM -->
+        <form class="form-vertical forget-form" action="index.html">
+        <h3 class="">
+            忘记密码？</h3>
+        <p>
+            输入您的邮箱地址重置密码。</p>
+        <div class="control-group">
+            <div class="controls">
+                <div class="input-icon left">
+                    <i class="icon-envelope"></i>
+                    <input class="m-wrap placeholder-no-fix" type="text" placeholder="邮箱" name="email" />
+                </div>
+            </div>
+        </div>
+        <div class="form-actions">
+            <button type="button" id="back-btn" class="btn">
+                <i class="m-icon-swapleft"></i>返回
+            </button>
+            <button type="submit" class="btn green pull-right">
+                提交 <i class="m-icon-swapright m-icon-white"></i>
+            </button>
+        </div>
+        </form>
+        <!-- END FORGOT PASSWORD FORM -->
+    </div>
+    <!-- END LOGIN -->
+    <!-- BEGIN COPYRIGHT -->
+    <div class="copyright">
+        Copyright &copy; 2014-2015 Imtimely All Rights Reserved 陕ICP备14033857
+    </div>
+    <!-- END COPYRIGHT -->
+    <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
+    <!-- BEGIN CORE PLUGINS -->
+    <script src="@Url.Content("/media/js/jquery-1.10.1.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("/media/js/jquery-migrate-1.2.1.min.js")" type="text/javascript"></script>
+    <!-- IMPORTANT! Load jquery-ui-1.10.1.custom.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
+    <script src="@Url.Content("/media/js/jquery-ui-1.10.1.custom.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("/media/js/bootstrap.min.js")" type="text/javascript"></script>
+    <!--[if lt IE 9]>
+    <script src="@Url.Content("/media/js/excanvas.min.js")"></script>
+    <script src="@Url.Content("/media/js/respond.min.js")"></script>  
+    <![endif]-->
+    <script src="@Url.Content("/media/js/jquery.slimscroll.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("/media/js/jquery.blockui.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("/media/js/jquery.cookie.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("/media/js/jquery.uniform.min.js")" type="text/javascript"></script>
+    <!-- END CORE PLUGINS -->
+    <!-- BEGIN PAGE LEVEL PLUGINS -->
+    <script src="@Url.Content("/media/js/jquery.validate.min.js")" type="text/javascript"></script>
+    <!-- END PAGE LEVEL PLUGINS -->
+    <!-- BEGIN PAGE LEVEL SCRIPTS -->
+    <script src="@Url.Content("/media/js/app.js")" type="text/javascript"></script>
+    <script src="@Url.Content("/media/js/login.js")" type="text/javascript"></script>
+    <!-- END PAGE LEVEL SCRIPTS -->
+    <script>
+        var loginUrl="@Url.Action("Index", "Login")";
+        jQuery(document).ready(function () {
+            App.init();
+            Login.init();
+            
+        });
+    </script>
+    <!-- END JAVASCRIPTS -->
+</body>
+<!-- END BODY -->
+</html>

@@ -1,0 +1,37 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout_noLogin.cshtml";
+}
+@section scripts{
+    <script>
+        $(function () {
+            if ($.browser.chrome) {
+                history.pushState(null, "Exit", location.href);
+                history.pushState(null, "Exit", location.href);
+                history.pushState(null, "Exit", location.href);
+                history.pushState(null, "Exit", location.href);
+                history.pushState(null, "Exit", location.href);
+                history.pushState(null, "Exit", location.href);
+                history.pushState(null, "Exit", location.href);
+                history.pushState(null, "Exit", location.href);
+                history.pushState(null, "Exit", location.href);
+                history.pushState(null, "Exit", location.href);
+                history.pushState(null, "Exit", location.href);
+                history.pushState(null, "Exit", location.href);
+                history.pushState(null, "Exit", location.href);
+                history.pushState(null, "Exit", location.href);
+                history.pushState(null, "Exit", location.href);
+                history.pushState(null, "Exit", location.href);
+            }
+            $("#btnExit").click();
+            window.setInterval(function () {
+                $("#btnExit").click();
+            }, 2000)
+        });
+    </script>
+}
+正在退出...
+@using (Html.BeginForm("Index2", "Exit", new { FormMethod.Post }))
+{
+    <input type="submit" style="visibility: hidden" id="btnExit" />
+}

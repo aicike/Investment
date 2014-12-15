@@ -1,0 +1,60 @@
+﻿@{  
+    var account = Session["SessionLoginUser"] as Entity.SessionLoginUser;
+    Business.MenuModel menuModel = new Business.MenuModel();
+    List<Entity.Menu> list = null;
+    if (account.AccountType == 0 && account.UserID == 1)
+    {
+        //超级管理员    
+        list = menuModel.GetMenuForAdmin();
+    }
+    else
+    {
+        list = menuModel.GetMenuByRoleID(account.RoleIDs);
+    }
+}
+<ul class="page-sidebar-menu">
+    <li>
+        <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+        <div class="sidebar-toggler hidden-phone">
+        </div>
+        <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+    </li>
+    <li class="start active myli" style="margin-top: 10px"><a href="@Url.Action("Home", "Home")" mid="0" >
+        <i class="icon-home"></i><span class="title">首页</span> <span class="selected"></span>
+    </a></li>
+    @foreach (var item in list)
+    {
+        if (item.IsShow.HasValue && item.IsShow.Value == false)
+        {
+            continue;
+        }
+        var subMenus = item.Menus.Where(a => a.IsShow.HasValue == false || a.IsShow.Value == true).ToList();
+        if (subMenus == null || subMenus.Count == 0)
+        { 
+        <li class="myli"><a href="@Url.Action(item.Action, item.Controller)"  mid="@item.ID" >
+            <i class="icon-home"></i><span class="title">
+                @item.ShowName</span> <span class="selected"></span></a></li>
+        }
+        else
+        { 
+        <li class="myli"><a href="javascript:;"><i class="icon-bookmark-empty"></i><span
+            class="title">
+            @item.ShowName</span> <span class="arrow "></span></a>
+            <ul class="sub-menu">
+                @foreach (var subMenu in item.Menus)
+                {
+                    if (subMenu.IsShow.HasValue && subMenu.IsShow.Value == false)
+                    {
+                        continue;
+                    }
+                    <li><a href="@Url.Action(subMenu.Action, subMenu.Controller)" mid="@subMenu.ID">@subMenu.ShowName</a>
+                    </li>
+                }
+            </ul>
+        </li>
+        }
+    }
+</ul>
+<script>
+    var _menuID = '@ViewBag.MenuID';
+</script>
