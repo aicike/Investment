@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Company.cs" />
     <Compile Include="CompanyAccount.cs" />
+    <Compile Include="CompanyLoan.cs" />
     <Compile Include="MenuOption.cs" />
     <Compile Include="RoleAccount.cs" />
     <Compile Include="RoleMenu.cs" />

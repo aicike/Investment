@@ -12,12 +12,35 @@ namespace EF.Migrations
                 c => new
                     {
                         ID = c.Int(nullable: false, identity: true),
-                        GroupID = c.Int(nullable: false),
                         Name = c.String(nullable: false, maxLength: 100),
+                        Address = c.String(nullable: false, maxLength: 100),
+                        SetUpTime = c.DateTime(nullable: false),
+                        ChengLiShiJianJiYingYeQiXian = c.String(),
+                        ZhuCheZiJin = c.Double(nullable: false),
+                        ShiShouZiBen = c.Double(nullable: false),
+                        FaDingDaiBiaoRen = c.String(),
+                        ZiChanZongE = c.Double(nullable: false),
+                        FuZhaiZongE = c.Double(nullable: false),
+                        ZhuYingYeWuShouRu = c.Double(nullable: false),
+                        JingLiRun = c.Double(nullable: false),
+                        HuoYouFuZhai = c.Double(nullable: false),
+                        KeWoGongQiuGuanXi = c.String(),
+                        NiDaiKuanYinHang = c.String(),
+                        GuQuanJieGou = c.String(),
+                        ShiJiKongZhiRenXinYongJiLu = c.String(),
+                        XinYongDengJi = c.String(),
+                        JingYingQingKuangJiQiBianDong = c.String(),
+                        HeXinJingZhengLi = c.String(),
+                        CaiWuQingKuangJiQiBianDong = c.String(),
+                        CaiWuQingKuang = c.String(),
+                        GuanLianFangJiGuanLianFangJiaoYi = c.String(),
+                        MuQianDaiKuanDanBaoZhiXingQingKuang = c.String(),
+                        DiZhiYaFanDanBao = c.String(),
+                        QiYeXingZhi = c.String(),
+                        YingYeZhiZhao = c.String(),
+                        JingYingFanWei = c.String(),
                     })
-                .PrimaryKey(t => t.ID)
-                .ForeignKey("dbo.Group", t => t.GroupID)
-                .Index(t => t.GroupID);
+                .PrimaryKey(t => t.ID);
             
             CreateTable(
                 "dbo.CompanyAccount",
@@ -148,6 +171,28 @@ namespace EF.Migrations
                 .ForeignKey("dbo.Role", t => t.RoleID, cascadeDelete: true)
                 .Index(t => t.RoleID)
                 .Index(t => t.MenuOptionID);
+            
+            CreateTable(
+                "dbo.CompanyLoan",
+                c => new
+                    {
+                        ID = c.Int(nullable: false, identity: true),
+                        XiangMuMingCheng = c.String(),
+                        XiangMuLeiXing = c.String(),
+                        RongZiJinE = c.Double(nullable: false),
+                        RongZiQiXian = c.Double(nullable: false),
+                        RongZiChengBen = c.Double(nullable: false),
+                        RongZiYongTu = c.String(),
+                        HuanKuanLaiYuan = c.String(),
+                        RongZiBiaoDi = c.String(),
+                        ZengXinCuoShi = c.String(),
+                        RongZiFangAn = c.String(),
+                        CompanyID = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.ID)
+                .ForeignKey("dbo.Company", t => t.CompanyID)
+                .Index(t => t.CompanyID);
+
 
             var migrationDir = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\");
             var ddlSqlFiles = new string[] { "Initial.sql" };
@@ -165,6 +210,7 @@ namespace EF.Migrations
         
         public override void Down()
         {
+            DropForeignKey("dbo.CompanyLoan", "CompanyID", "dbo.Company");
             DropForeignKey("dbo.RoleAccount", "RoleID", "dbo.Role");
             DropForeignKey("dbo.RoleMenu", "RoleID", "dbo.Role");
             DropForeignKey("dbo.RoleMenu", "MenuID", "dbo.Menu");
@@ -174,9 +220,9 @@ namespace EF.Migrations
             DropForeignKey("dbo.MenuOption", "MenuID", "dbo.Menu");
             DropForeignKey("dbo.RoleAccount", "GroupAccountID", "dbo.GroupAccount");
             DropForeignKey("dbo.GroupAccount", "GroupID", "dbo.Group");
-            DropForeignKey("dbo.Company", "GroupID", "dbo.Group");
             DropForeignKey("dbo.RoleAccount", "CompanyAccountID", "dbo.CompanyAccount");
             DropForeignKey("dbo.CompanyAccount", "CompanyID", "dbo.Company");
+            DropIndex("dbo.CompanyLoan", new[] { "CompanyID" });
             DropIndex("dbo.RoleOption", new[] { "MenuOptionID" });
             DropIndex("dbo.RoleOption", new[] { "RoleID" });
             DropIndex("dbo.MenuOption", new[] { "MenuID" });
@@ -188,7 +234,7 @@ namespace EF.Migrations
             DropIndex("dbo.RoleAccount", new[] { "GroupAccountID" });
             DropIndex("dbo.RoleAccount", new[] { "RoleID" });
             DropIndex("dbo.CompanyAccount", new[] { "CompanyID" });
-            DropIndex("dbo.Company", new[] { "GroupID" });
+            DropTable("dbo.CompanyLoan");
             DropTable("dbo.RoleOption");
             DropTable("dbo.MenuOption");
             DropTable("dbo.Menu");

@@ -30,9 +30,5 @@ namespace Entity
         /// 集团用户表
         /// </summary>
         public virtual ICollection<GroupAccount> GroupAccount { get; set; }
-        /// <summary>
-        /// 公司表
-        /// </summary>
-        public virtual ICollection<Company> Company { get; set; }
     }
 }
