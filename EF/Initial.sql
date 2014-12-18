@@ -23,8 +23,8 @@ INSERT [dbo].[Menu] ([ID], [Area], [Controller], [Action], [Name], [ShowName], [
 INSERT [dbo].[Menu] ([ID], [Area], [Controller], [Action], [Name], [ShowName], [Order], [ParentMenuID],AccountType) VALUES (51, NULL, 'Home', 'Home', N'账号管理', N'账号管理', 5, NULL,0)
 
 INSERT [dbo].[Menu] ([ID], [Area], [Controller], [Action], [Name], [ShowName], [Order], [ParentMenuID],AccountType) VALUES (61, NULL, 'Home', 'Home', N'系统管理', N'系统管理', 6, NULL,0)
-INSERT [dbo].[Menu] ([ID], [Area], [Controller], [Action], [Name], [ShowName], [Order], [ParentMenuID],AccountType) VALUES (62, NULL, 'Home', 'Home', N'角色管理', N'角色管理', 1, 61,0)
-INSERT [dbo].[Menu] ([ID], [Area], [Controller], [Action], [Name], [ShowName], [Order], [ParentMenuID],AccountType) VALUES (63, NULL, 'Home', 'Home', N'人员管理', N'人员管理', 2, 61,0)
+INSERT [dbo].[Menu] ([ID], [Area], [Controller], [Action], [Name], [ShowName], [Order], [ParentMenuID],AccountType) VALUES (62, NULL, 'Role', 'Index', N'角色管理', N'角色管理', 1, 61,0)
+INSERT [dbo].[Menu] ([ID], [Area], [Controller], [Action], [Name], [ShowName], [Order], [ParentMenuID],AccountType) VALUES (63, NULL, 'GroupAccount', 'Index', N'人员管理', N'人员管理', 2, 61,0)
 
 SET IDENTITY_INSERT [dbo].[Menu] OFF
 
