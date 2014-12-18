@@ -23,8 +23,8 @@ INSERT [dbo].[Menu] ([ID], [Area], [Controller], [Action], [Name], [ShowName], [
 INSERT [dbo].[Menu] ([ID], [Area], [Controller], [Action], [Name], [ShowName], [Order], [ParentMenuID],AccountType) VALUES (51, NULL, 'Home', 'Home', N'账号管理', N'账号管理', 5, NULL,0)
 
 INSERT [dbo].[Menu] ([ID], [Area], [Controller], [Action], [Name], [ShowName], [Order], [ParentMenuID],AccountType) VALUES (61, NULL, 'Home', 'Home', N'系统管理', N'系统管理', 6, NULL,0)
-INSERT [dbo].[Menu] ([ID], [Area], [Controller], [Action], [Name], [ShowName], [Order], [ParentMenuID],AccountType) VALUES (62, NULL, 'Home', 'Home', N'角色管理', N'角色管理', 1, 61,0)
-INSERT [dbo].[Menu] ([ID], [Area], [Controller], [Action], [Name], [ShowName], [Order], [ParentMenuID],AccountType) VALUES (63, NULL, 'Home', 'Home', N'人员管理', N'人员管理', 2, 61,0)
+INSERT [dbo].[Menu] ([ID], [Area], [Controller], [Action], [Name], [ShowName], [Order], [ParentMenuID],AccountType) VALUES (62, NULL, 'Role', 'Index', N'角色管理', N'角色管理', 1, 61,0)
+INSERT [dbo].[Menu] ([ID], [Area], [Controller], [Action], [Name], [ShowName], [Order], [ParentMenuID],AccountType) VALUES (63, NULL, 'GroupAccount', 'Index', N'人员管理', N'人员管理', 2, 61,0)
 
 SET IDENTITY_INSERT [dbo].[Menu] OFF
 
@@ -38,13 +38,13 @@ SET IDENTITY_INSERT [dbo].[Menu] OFF
 
 /****** Object:  Table [dbo].[Group]    Script Date: 11/27/2014 14:40:46 ******/
 SET IDENTITY_INSERT [dbo].[Group] ON
-INSERT [dbo].[Group] ([ID], [Name]) VALUES (1, N'华夏汽车集团')
+INSERT [dbo].[Group] ([ID], [Name]) VALUES (1, N'兆恒投资')
 SET IDENTITY_INSERT [dbo].[Group] OFF
 
 
 /****** Object:  Table [dbo].[GroupAccount]    Script Date: 11/27/2014 14:40:46 ******/
 SET IDENTITY_INSERT [dbo].[GroupAccount] ON
-INSERT [dbo].[GroupAccount] ([ID], [GroupID], [AccountNumber], [AccountPwd], [Name], [Phone], [Email]) VALUES (1, 1, N'huaxia', N'm8YlpCH5g1U=', N'华夏', N'huaxia', N'huaxia')
+INSERT [dbo].[GroupAccount] ([ID], [GroupID], [AccountNumber], [AccountPwd], [Name], [Phone], [Email]) VALUES (1, 1, N'zhaoheng', N'm8YlpCH5g1U=', N'zhaoheng', N'zhaoheng', N'zhaoheng')
 SET IDENTITY_INSERT [dbo].[GroupAccount] OFF
 
 
