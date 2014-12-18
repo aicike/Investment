@@ -37,5 +37,10 @@ namespace Entity
         /// 角色
         /// </summary>
         public List<int> RoleIDs { get; set; }
+
+        /// <summary>
+        /// 头像
+        /// </summary>
+        public string HeadImg { get; set; }
     }
 }

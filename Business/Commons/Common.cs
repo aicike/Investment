@@ -9,6 +9,8 @@ using System.Configuration;
 using System.Data.SqlClient;
 using System.Collections;
 using System.Web.Script.Serialization;
+using System.Web;
+using System.IO;
 
 namespace Business.Commons
 {
@@ -228,6 +230,22 @@ namespace Business.Commons
             }
             return dtb;
         }
+
+        /// <summary>
+        /// 获取个人文件夹位置
+        /// </summary>
+        /// <returns></returns>
+        public static string GetAccountPath(int AccountID)
+        {
+            string Path = "/File/Account/" + AccountID;
+            string TempPath = HttpContext.Current.Server.MapPath(Path);
+            if (Directory.Exists(TempPath) == false)
+            {
+                Directory.CreateDirectory(TempPath);
+            }
+            return Path;
+        }
+
 
     }
 }

@@ -39,9 +39,6 @@
       <HintPath>..\packages\EntityFramework.6.1.1\lib\net40\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="MvcPager">
-      <HintPath>..\packages\MvcPager.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -938,6 +935,10 @@
     <ProjectReference Include="..\Entity\Entity.csproj">
       <Project>{D892F458-C83A-404B-9319-3DA0558E7845}</Project>
       <Name>Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MvcPager\MvcPager.csproj">
+      <Project>{11FAED02-B907-40B7-B9F4-0C471ED9781D}</Project>
+      <Name>MvcPager</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
