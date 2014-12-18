@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{D710F9E7-40BD-4BBD-87F8-B6CB32A6BD01}</ProjectGuid>
+    <ProjectGuid>{11FAED02-B907-40B7-B9F4-0C471ED9781D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>EF</RootNamespace>
-    <AssemblyName>EF</AssemblyName>
+    <RootNamespace>MvcPager</RootNamespace>
+    <AssemblyName>MvcPager</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -31,14 +31,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework">
-      <HintPath>..\packages\EntityFramework.6.1.1\lib\net40\EntityFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer">
-      <HintPath>..\packages\EntityFramework.6.1.1\lib\net40\EntityFramework.SqlServer.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -46,41 +45,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Context.cs" />
-    <Compile Include="Mapping\RoleMenuMap.cs" />
-    <Compile Include="Mapping\RoleOptionMap.cs" />
-    <Compile Include="Mapping\RoleAccountMap.cs" />
-    <Compile Include="Migrations\201412180616553_Update.cs" />
-    <Compile Include="Migrations\201412180616553_Update.Designer.cs">
-      <DependentUpon>201412180616553_Update.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201412180832143_update2.cs" />
-    <Compile Include="Migrations\201412180832143_update2.Designer.cs">
-      <DependentUpon>201412180832143_update2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Entity\Entity.csproj">
-      <Project>{D892F458-C83A-404B-9319-3DA0558E7845}</Project>
-      <Name>Entity</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Initial.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201412180616553_Update.resx">
-      <DependentUpon>201412180616553_Update.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201412180832143_update2.resx">
-      <DependentUpon>201412180832143_update2.cs</DependentUpon>
-    </EmbeddedResource>
+    <Compile Include="Webdiyer\WebControls\Mvc\PagedList!1.cs" />
+    <Compile Include="Webdiyer\WebControls\Mvc\PageIndexBoxType.cs" />
+    <Compile Include="Webdiyer\WebControls\Mvc\PageLinqExtensions.cs" />
+    <Compile Include="Webdiyer\WebControls\Mvc\PagerBuilder.cs" />
+    <Compile Include="Webdiyer\WebControls\Mvc\PagerHelper.cs" />
+    <Compile Include="Webdiyer\WebControls\Mvc\PagerItem.cs" />
+    <Compile Include="Webdiyer\WebControls\Mvc\PagerItemType.cs" />
+    <Compile Include="Webdiyer\WebControls\Mvc\PagerOptions.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

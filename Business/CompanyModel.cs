@@ -11,6 +11,5 @@ namespace Business
     /// </summary>
     public class CompanyModel : BaseModel<Company>
     {
-       
     }
 }

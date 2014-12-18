@@ -17,6 +17,11 @@ namespace Entity
         public int ID { get; set; }
 
         /// <summary>
+        /// 状态：0未审核   1:审核不通过    2:审核不通过
+        /// </summary>
+        public int Status { get; set; }
+
+        /// <summary>
         /// 客户名称
         /// </summary>
         [Display(Name = "客户名称")]
