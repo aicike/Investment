@@ -9,7 +9,7 @@
 <!--<![endif]-->
 <head>
     <meta charset="utf-8" />
-    <title>陕西华夏汽车贸易集团 - @ViewBag.Title</title>
+    <title>陕西兆恒投资 - @ViewBag.Title</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <meta content="" name="description" />
     <meta content="" name="author" />
@@ -53,7 +53,7 @@
             <div class="container-fluid">
                 <!-- BEGIN LOGO -->
                 <a class="brand" href="#">
-                    <img src="@Url.Content("/media/image/logo-big2.png")" alt="logo" />
+                    <img src="@Url.Content("/Image/logo.png")" alt="logo" style="height:28px"/>
                 </a>
                 <!-- END LOGO -->
                 <!-- BEGIN RESPONSIVE MENU TOGGLER -->
@@ -151,7 +151,14 @@
                     <!-- END TODO DROPDOWN -->
                     <!-- BEGIN USER LOGIN DROPDOWN -->
                     <li class="dropdown user"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <img alt="" src="@Url.Content("/media/image/avatar1_small.jpg")" />
+                        @if (string.IsNullOrEmpty(account.HeadImg))
+                        {
+                            <img alt="" src="@Url.Content("/Image/default_Avatar.png")" style=" width:28px" />
+                        }
+                        else
+                        { 
+                            <img alt="" src="@Url.Content(account.HeadImg)" style=" width:28px" />
+                        }
                         @if (account != null)
                         {
                             <span class="username">@account.CompanyName &nbsp;&nbsp;&nbsp;@account.UserName</span>

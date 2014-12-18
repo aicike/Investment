@@ -113,8 +113,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\AjaxController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\ExitController.cs" />
+    <Compile Include="Controllers\GroupProfileController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Global.asax.cs">
@@ -189,8 +191,15 @@
     <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="Error.htm" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Image\404.jpg" />
+    <Content Include="Image\Bg_1.png" />
+    <Content Include="Image\default_Avatar.png" />
+    <Content Include="Image\logo.png" />
+    <Content Include="Image\Logo_144.png" />
+    <Content Include="Image\touzilLogo.jpg" />
     <Content Include="media\css\about-us.css" />
     <Content Include="media\css\animate.css" />
     <Content Include="media\css\blog.css" />
@@ -549,6 +558,9 @@
     <Content Include="media\js\ui-tree.js" />
     <Content Include="media\js\wysihtml5-0.3.0.js" />
     <Content Include="Scripts\common.js" />
+    <Content Include="Scripts\jcrop\Jcrop.gif" />
+    <Content Include="Scripts\jcrop\jquery.Jcrop.css" />
+    <Content Include="Scripts\jcrop\jquery.Jcrop.js" />
     <Content Include="Scripts\jquery-1.7.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.7.1.js" />
     <Content Include="Scripts\jquery-1.7.1.min.js" />
@@ -903,6 +915,12 @@
     <Content Include="Scripts\ueditor\ueditor.config_about.js" />
     <Content Include="Scripts\ueditor\ueditor.parse.js" />
     <Content Include="Scripts\ueditor\ueditor.parse.min.js" />
+    <Content Include="Scripts\uploadify\crossdomain.xml" />
+    <Content Include="Scripts\uploadify\jquery.uploadify.js" />
+    <Content Include="Scripts\uploadify\jquery.uploadify.min.js" />
+    <Content Include="Scripts\uploadify\uploadify-cancel.png" />
+    <Content Include="Scripts\uploadify\uploadify.css" />
+    <Content Include="Scripts\uploadify\uploadify.swf" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -968,6 +986,7 @@
     <Content Include="Views\Home\Home.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\GroupProfile\ProFile.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

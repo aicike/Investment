@@ -585,6 +585,20 @@ namespace Business.Commons
             }
         }
 
+        /// <summary>
+        /// 获取临时文件夹位置
+        /// </summary>
+        /// <returns></returns>
+        public static string GetTemporaryPath()
+        {
+            string Path = "/File/Temporary/" + DateTime.Now.ToString("yyyy-MM-dd");
+            string TempPath = HttpContext.Current.Server.MapPath(Path);
+            if (Directory.Exists(TempPath) == false)
+            {
+                Directory.CreateDirectory(TempPath);
+            }
+            return Path;
+        }
     
     }
 }

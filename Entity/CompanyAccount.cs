@@ -61,6 +61,12 @@ namespace Entity
         [RegularExpression(@"\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*", ErrorMessage = "请输入有效的邮箱")]
         public string Email { get; set; }
 
+        /// <summary>
+        /// 头像地址
+        /// </summary>
+        [Display(Name = "头像地址")]
+        public string HeadPortrait { get; set; }
+
         public virtual ICollection<RoleAccount> RoleAccounts { get; set; }
     }
 }

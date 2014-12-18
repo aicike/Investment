@@ -93,6 +93,7 @@ namespace Budget.Controllers
                         sessionLoginUser.UserName = ca.Name;
                         sessionLoginUser.AccountType = 1;
                         sessionLoginUser.RoleIDs = ca.RoleAccounts.Select(a => a.RoleID).ToList();
+                        sessionLoginUser.HeadImg = ca.HeadPortrait;
                         Session["SessionLoginUser"] = sessionLoginUser;
                     }
                     break;
@@ -109,6 +110,7 @@ namespace Budget.Controllers
                         sessionLoginUser.UserID = ga.ID;
                         sessionLoginUser.AccountType = 0;
                         sessionLoginUser.RoleIDs = ga.RoleAccounts.Select(a => a.RoleID).ToList();
+                        sessionLoginUser.HeadImg = ga.HeadPortrait;
                         Session["SessionLoginUser"] = sessionLoginUser;
                     }
                     break;
