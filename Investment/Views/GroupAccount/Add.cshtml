@@ -1,0 +1,110 @@
+﻿@{
+    ViewBag.Title = "集团账号管理-添加账号";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var Role = ViewBag.Role as List<Entity.Role>;
+}
+@section scripts{
+<script>
+    function GetRole() {
+        var Roleid = "";
+        $("input[name='CK_Role']:checked").each(function (i, e) {
+            Roleid = Roleid + $(this).val() + ",";
+        });
+        $("#Roles").val(Roleid);
+    }
+</script>
+    <style>
+        .table-hover td
+        {
+            padding: 8px 8px 0px 8px;
+            vertical-align: baseline;
+        }
+    </style>
+
+}
+@model Entity.GroupAccount
+<div class="row-fluid">
+    <div class="span12" style="width: 100%">
+        <div class="portlet box blue">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-cogs"></i>集团账号管理-添加账号
+                </div>
+                <div class="tools">
+                </div>
+            </div>
+            <div class="portlet-body">
+                @using (Ajax.BeginForm("Add", "GroupAccount", new AjaxOptions() { UpdateTargetId = "alert" }))
+                {
+                    <button class="btn blue" onclick="GetRole()" type="submit">
+                        添加</button>
+                    <a href="@Url.Action("Index", "GroupAccount")" class="btn blue" style="">
+                        返回</a><br />
+                    <br />
+                    <input type="hidden" name="Roles" id="Roles"/>
+                    <table class="table table-hover" style="">
+                        <tr>
+                            <td style="width: 120px">
+                                登陆账号：
+                            </td>
+                            <td>@Html.TextBoxFor(a => a.AccountNumber)
+                                <input type="hidden" value="@ViewBag.CID" name="CompanyID" />
+                            </td>
+                            <td>@Html.ValidationMessageFor(a => a.AccountNumber)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 120px">
+                                姓名：
+                            </td>
+                            <td>@Html.TextBoxFor(a => a.Name)
+                            </td>
+                            <td>@Html.ValidationMessageFor(a => a.Name)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 120px">
+                                邮箱：
+                            </td>
+                            <td>@Html.TextBoxFor(a => a.Email)
+                            </td>
+                            <td>@Html.ValidationMessageFor(a => a.Email)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 120px">
+                                电话：
+                            </td>
+                            <td>@Html.TextBoxFor(a => a.Phone)
+                            </td>
+                            <td>@Html.ValidationMessageFor(a => a.Phone)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 120px">
+                                角色：
+                            </td>
+                            <td>
+                                @foreach (var item in Role)
+                                {
+                                    <label class="checkbox line">
+                                        <input type="checkbox" value="@item.ID" name= "CK_Role" />
+                                        @item.RoleName
+                                    </label>
+
+                                }
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                    </table>
+                    <button class="btn blue"  onclick="GetRole()" type="submit">
+                        添加</button>
+                    <a href="@Url.Action("Index", "GroupAccount")" class="btn blue" style="">
+                        返回</a><br />
+                   
+                }
+            </div>
+        </div>
+    </div>
+</div>

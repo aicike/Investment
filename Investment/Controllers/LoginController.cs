@@ -6,7 +6,7 @@ using System.Web.Mvc;
 using Business;
 using Entity;
 
-namespace Budget.Controllers
+namespace Investment.Controllers
 {
     public class LoginController : Controller
     {

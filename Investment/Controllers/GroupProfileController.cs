@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Business;
-using Budget.Controllers;
+using Investment.Controllers;
 using Entity;
 
 namespace Investment.Controllers

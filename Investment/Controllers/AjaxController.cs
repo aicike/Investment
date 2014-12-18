@@ -6,7 +6,7 @@ using System.Web.Mvc;
 using Business.Commons;
 using System.IO;
 using System.Drawing;
-using Budget.Controllers;
+using Investment.Controllers;
 
 namespace Investment.Controllers
 {

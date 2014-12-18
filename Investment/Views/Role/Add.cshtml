@@ -1,0 +1,39 @@
+﻿@{
+    ViewBag.Title = "新增角色";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section scripts{
+}
+@model Entity.Role
+<div class="row-fluid">
+    <div class="span12">
+        <div class="portlet box blue">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-cogs"></i>创建角色
+                </div>
+                <div class="tools">
+                </div>
+            </div>
+            <div class="portlet-body">
+                @using (Ajax.BeginForm("Add", "Role", new AjaxOptions() { UpdateTargetId = "alert" }))
+                {
+                    <table class="table table-hover">
+                        <tr>
+                            <td style="width: 120px">
+                                角色名称：
+                            </td>
+                            <td>@Html.TextBoxFor(a => a.RoleName)
+                            </td>
+                            <td>@Html.ValidationMessageFor(a => a.RoleName)
+                            </td>
+                        </tr>
+                    </table>
+                    <button class="btn blue" type="submit">
+                        保存</button>
+                    <a href="@Url.Action("Index", "Role")" class="btn blue" style="">返回</a><br />
+                }
+            </div>
+        </div>
+    </div>
+</div>

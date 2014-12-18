@@ -7,7 +7,7 @@ using Entity;
 using System.Web.Routing;
 using Business;
 
-namespace Budget.Controllers
+namespace Investment.Controllers
 {
     public class BaseController : Controller
     {
