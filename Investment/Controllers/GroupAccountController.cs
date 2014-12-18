@@ -78,7 +78,7 @@ namespace Investment.Controllers
                 emailInfo.UseSSL = false;
 
                 var strUrl = System.Configuration.ConfigurationManager.AppSettings["URl"];
-                emailInfo.Body = "您好！<br/><br/>您的陕西兆恒投资管理系统账号为：" + gAccount.AccountNumber + " <br/><br/>您的密码为：" + pwd + "<br/><br/>请点击<a href='" + strUrl + "'>华夏集团预算系统</a> 选择集团登陆，尽快更改密码！<br/><br/>----华夏集团预算系统";
+                emailInfo.Body = "您好！<br/><br/>您的陕西兆恒投资管理系统账号为：" + gAccount.AccountNumber + " <br/><br/>您的密码为：" + pwd + "<br/><br/>请点击<a href='" + strUrl + "'>华夏集团预算系统</a> 选择集团登陆，尽快更改密码！<br/><br/>----陕西兆恒投资有限公司";
                 SendEmail.SendMailAsync(emailInfo);
             }
             return JavaScript("window.location.href='" + Url.Action("Index", "GroupAccount") + "'");

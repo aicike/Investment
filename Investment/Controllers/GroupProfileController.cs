@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using Business;
 using Investment.Controllers;
 using Entity;
+using System.IO;
 
 namespace Investment.Controllers
 {
@@ -91,6 +92,7 @@ namespace Investment.Controllers
             {
                 return JavaScript("JMessage('上传失败,请重试！',true)");
             }
+            System.IO.File.Delete(Server.MapPath(ImgPath));
             LoginAccount.HeadImg = result.Entity.ToString();
             return JavaScript("window.location.href='" + Url.Action("ProFile", "GroupProfile", new { imgIsOk = 1 }) + "'");
         }
