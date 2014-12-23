@@ -16,6 +16,7 @@ namespace EF
         public DbSet<CompanyAccount> CompanyAccount { get; set; }
         public DbSet<Group> Group { get; set; }
         public DbSet<GroupAccount> GroupAccount { get; set; }
+        public DbSet<Attachment> Attachment { get; set; }
 
         //数据库生成的其他设置
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
