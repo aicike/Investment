@@ -27,8 +27,8 @@ namespace Investment.Controllers
                 var token = DateTime.Now.ToString("yyyyMMddHHmmss");
                 var LastName = token + con.CreateRandom("", 5) + Request.Files[0].FileName.GetFileSuffix();
                 //图片显示界面
-                var ImagePath = Paths[0] + "\\" + LastName; //网页路径
-                var mapePath = Paths[1] + "\\" + LastName;  //物理路径
+                var ImagePath = Paths[0] + "/" + LastName; //网页路径
+                var mapePath = Paths[1] + "/" + LastName;  //物理路径
                 int dataLengthToRead = (int)Request.Files[0].InputStream.Length;//获取下载的文件总大小
                 byte[] buffer = new byte[dataLengthToRead];
 

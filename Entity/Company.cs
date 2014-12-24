@@ -22,6 +22,11 @@ namespace Entity
         public int Status { get; set; }
 
         /// <summary>
+        /// 信息是否齐全
+        /// </summary>
+        public bool IsComplete { get; set; } 
+
+        /// <summary>
         /// 客户名称
         /// </summary>
         [Display(Name = "客户名称")]
@@ -34,7 +39,7 @@ namespace Entity
         /// </summary>
         [Display(Name = "详细地址")]
         [Required(ErrorMessage = "请输入详细地址")]
-        [StringLength(100, ErrorMessage = "不能超过100字")]
+        [StringLength(200, ErrorMessage = "不能超过200字")]
         public string Address { get; set; }
 
         /// <summary>
@@ -182,6 +187,7 @@ namespace Entity
         /// </summary>
         [Display(Name = "营业执照")]
         public string YingYeZhiZhao { get; set; }
+
         
         /// <summary>
         /// 经营范围

@@ -37,6 +37,11 @@ namespace Entity
             public const string iv = "12345678";
 
         }
+
+        public class TableName
+        {
+            public const string Company = "Company";
+        }
     }
 
 }

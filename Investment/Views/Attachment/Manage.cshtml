@@ -1,0 +1,43 @@
+﻿@{
+    ViewBag.Title = "Manage";
+    Layout = null;
+}
+<script>
+    $(function () {
+        $("#link_manage_attachment").click(function () {
+            
+        });
+    });
+</script>
+@model Investment.Models.AttachmentControl
+<a id="link_manage_attachment">[管理附件]</a>
+<div class="span6">
+    <div class="portlet box red">
+        <div class="portlet-title">
+            <div class="caption">
+                <i class="icon-reorder"></i>@Model.Text</div>
+            <div class="tools">
+            </div>
+        </div>
+        <div class="portlet-body" style="height: 100px; overflow-y: scroll">
+            <div>
+                文件1</div>
+            <div>
+                文件2</div>
+            <div>
+                文件3</div>
+            <div>
+                文件1</div>
+            <div>
+                文件2</div>
+            <div>
+                文件3</div>
+            <div>
+                文件1</div>
+            <div>
+                文件2</div>
+            <div>
+                文件3</div>
+        </div>
+    </div>
+</div>

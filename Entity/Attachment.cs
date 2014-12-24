@@ -37,7 +37,7 @@ namespace Entity
         /// <summary>
         /// 附件对象ID
         /// </summary>
-        public string TableID { get; set; }
+        public int TableID { get; set; }
 
         /// <summary>
         /// 附件业务分类

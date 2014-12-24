@@ -114,6 +114,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\AjaxController.cs" />
+    <Compile Include="Controllers\AttachmentController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CompanyController.cs" />
     <Compile Include="Controllers\ExitController.cs" />
@@ -125,6 +126,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AttachmentControl.cs" />
     <Compile Include="Models\HtmlHelperExtensions.cs" />
     <Compile Include="Models\NoClientCache.cs" />
     <Compile Include="Models\PermissionExtensions.cs" />
@@ -554,10 +556,6 @@
     <Content Include="media\js\ui-tree.js" />
     <Content Include="media\js\wysihtml5-0.3.0.js" />
     <Content Include="Scripts\common.js" />
-    <Content Include="Scripts\jquery-1.7.1-vsdoc.js" />
-    <Content Include="Scripts\jquery-1.7.1.js" />
-    <Content Include="Scripts\jquery-1.7.1.min.js" />
-    <Content Include="Scripts\jquery-1.8.3.min.js" />
     <Content Include="Scripts\jquery-ui-1.10.3.custom.min.js" />
     <Content Include="Scripts\jquery-ui-1.8.20.js" />
     <Content Include="Scripts\jquery-ui-1.8.20.min.js" />
@@ -992,7 +990,9 @@
     <Content Include="Views\Role\Edit.cshtml" />
     <Content Include="Views\Role\Index.cshtml" />
     <Content Include="Views\Role\RoleMenu.cshtml" />
+    <Content Include="Views\Company\Edit.cshtml" />
     <Content Include="Views\Company\Add.cshtml" />
+    <Content Include="Views\Attachment\Manage.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

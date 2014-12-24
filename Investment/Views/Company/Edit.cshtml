@@ -1,0 +1,350 @@
+﻿@{
+    ViewBag.Title = "修改客户";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var a_YingYeZhiZhao = ViewBag.A_YingYeZhiZhao as Entity.Attachment;
+}
+@section scripts{
+    <link href="@Url.Content("/Scripts/uploadify/uploadify.css")" rel="stylesheet" type="text/css" />
+    <script src="@Url.Content("/Scripts/uploadify/jquery.uploadify.js")" type="text/javascript"></script>
+    <script>
+        $(function () {
+            var UpImgUrl = '@Url.Action("UploadImage", "Ajax")';
+
+            $("#file_upload").uploadify({
+                height: 30,
+                swf: '@Url.Content("/Scripts/uploadify/uploadify.swf")',
+                uploader: UpImgUrl,
+                width: 100,
+                fileSizeLimit: '5MB',
+                buttonText: '上传营业执照',
+                multi: false,
+                fileTypeExts: '*.jpg;*.jpge;*.gif;*.png;*.bmp',
+                onUploadSuccess: function (file, data, response) {
+                    if (data == "" || data == undefined || data == "false") {
+                        JMessage("上传失败请重新上传！", true);
+                        return;
+                    }
+                    var json = JSON.parse(data);
+                    $("#imgYingYeZhiZhao").attr('src', json.FileUrl);
+                    $("#hidYingYeZhiZhao").val(data);
+                }
+            });
+        });
+    </script>
+}
+@model Entity.Company
+<div class="row-fluid">
+    <div class="span12">
+        <div class="portlet box blue">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-cogs"></i>修改客户
+                </div>
+                <div class="tools">
+                    管理附件
+                </div>
+            </div>
+            <div class="portlet-body form">
+                @using (Ajax.BeginForm("Edit", "Company", new AjaxOptions() { UpdateTargetId = "alert" }, new { @class = "horizontal-form" }))
+                {
+                    <h3 class="form-section">
+                        基本信息</h3>
+                    <div class="row-fluid">
+                        <div class="span6 ">
+                            <div class="control-group">
+                                <label class="control-label">
+                                    客户名称</label>
+                                <div class="controls">
+                                    @Html.TextBoxFor(a => a.Name, new { @class = "m-wrap span12" })@Html.HiddenFor(a => a.ID)@Html.HiddenFor(a => a.Status)
+                                    <span class="help-block">@Html.ValidationMessageFor(a => a.Name)</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="span6 ">
+                            <div class="control-group">
+                                <label class="control-label">
+                                    详细地址</label>
+                                <div class="controls">
+                                    @Html.TextBoxFor(a => a.Address, new { @class = "m-wrap span12" })
+                                    <span class="help-block">@Html.ValidationMessageFor(a => a.Address)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row-fluid">
+                        <div class="span4 ">
+                            <div class="control-group">
+                                <label class="control-label">
+                                    企业性质</label>
+                                <div class="controls">
+                                    @Html.TextBoxFor(a => a.QiYeXingZhi, new { @class = "m-wrap span12" })
+                                    <span class="help-block">@Html.ValidationMessageFor(a => a.QiYeXingZhi)</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="span4 ">
+                            <div class="control-group">
+                                <label class="control-label">
+                                    营业执照</label>
+                                <div class="controls">
+                                    @Html.TextBoxFor(a => a.YingYeZhiZhao, new { @class = "m-wrap span12", placeholder = "注册号" })
+                                    <span class="help-block">@Html.ValidationMessageFor(a => a.YingYeZhiZhao)</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="span4 ">
+                            <div class="control-group">
+                                <div style="float: left">
+                                    @if (a_YingYeZhiZhao != null)
+                                    {
+                                        <img id="imgYingYeZhiZhao" style="width: 70px; height: 70px" src="@a_YingYeZhiZhao.FileUrl" />
+                                    }
+                                    else
+                                    {
+                                        <img id="imgYingYeZhiZhao" style="width: 70px; height: 70px" />
+                                    }
+                                </div>
+                                <div style="float: left; margin-left: 10px;">
+                                    <input id="file_upload" name="file_upload" type="file" multiple="false" />
+                                    <input id="hidYingYeZhiZhao" name="hidYingYeZhiZhao" type="hidden" />
+                                    <input id="hidYingYeZhiZhaoOld" name="hidYingYeZhiZhaoOld" type="hidden" value="@a_YingYeZhiZhao.FileName_Number" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row-fluid">
+                        <div class="span4 ">
+                            <div class="control-group">
+                                <label class="control-label">
+                                    成立时间（ yyyy/MM/dd ）</label>
+                                <div class="controls">
+                                    @Html.TextBox("SetUpTime", @Model.SetUpTime.ToString("yyyy/MM/dd"), new { @class = "m-wrap span12", placeholder = "年/月/日 （如：2014/05/01）" })
+                                    <span class="help-block">@Html.ValidationMessageFor(a => a.SetUpTime)</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="span4 ">
+                            <div class="control-group">
+                                <label class="control-label">
+                                    注册资本（万元）</label>
+                                <div class="controls">
+                                    @Html.TextBoxFor(a => a.ZhuCheZiJin, new { @class = "m-wrap span12" })
+                                    <span class="help-block">@Html.ValidationMessageFor(a => a.ZhuCheZiJin)</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="span4 ">
+                            <div class="control-group">
+                                <label class="control-label">
+                                    实收资本（万元）</label>
+                                <div class="controls">
+                                    @Html.TextBoxFor(a => a.ShiShouZiBen, new { @class = "m-wrap span12" })
+                                    <span class="help-block">@Html.ValidationMessageFor(a => a.ShiShouZiBen)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row-fluid">
+                        <div class="span4 ">
+                            <div class="control-group">
+                                <label class="control-label">
+                                    法定代表人</label>
+                                <div class="controls">
+                                    @Html.TextBoxFor(a => a.FaDingDaiBiaoRen, new { @class = "m-wrap span12" })
+                                    <span class="help-block">@Html.ValidationMessageFor(a => a.FaDingDaiBiaoRen)</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="span4 ">
+                            <div class="control-group">
+                                <label class="control-label">
+                                    资产总额（万元）</label>
+                                <div class="controls">
+                                    @Html.TextBoxFor(a => a.ZiChanZongE, new { @class = "m-wrap span12" })
+                                    <span class="help-block">@Html.ValidationMessageFor(a => a.ZiChanZongE)</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="span4 ">
+                            <div class="control-group">
+                                <label class="control-label">
+                                    负债总额（万元）</label>
+                                <div class="controls">
+                                    @Html.TextBoxFor(a => a.FuZhaiZongE, new { @class = "m-wrap span12" })
+                                    <span class="help-block">@Html.ValidationMessageFor(a => a.FuZhaiZongE)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row-fluid">
+                        <div class="span4 ">
+                            <div class="control-group">
+                                <label class="control-label">
+                                    主营业务收入（万元）</label>
+                                <div class="controls">
+                                    @Html.TextBoxFor(a => a.ZhuYingYeWuShouRu, new { @class = "m-wrap span12" })
+                                    <span class="help-block">@Html.ValidationMessageFor(a => a.ZhuYingYeWuShouRu)</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="span4 ">
+                            <div class="control-group">
+                                <label class="control-label">
+                                    净利润（万元）</label>
+                                <div class="controls">
+                                    @Html.TextBoxFor(a => a.JingLiRun, new { @class = "m-wrap span12" })
+                                    <span class="help-block">@Html.ValidationMessageFor(a => a.JingLiRun)</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="span4 ">
+                            <div class="control-group">
+                                <label class="control-label">
+                                    或有负债（万元）</label>
+                                <div class="controls">
+                                    @Html.TextBoxFor(a => a.HuoYouFuZhai, new { @class = "m-wrap span12" })
+                                    <span class="help-block">@Html.ValidationMessageFor(a => a.HuoYouFuZhai)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row-fluid">
+                        <div class="span4 ">
+                            <div class="control-group">
+                                <label class="control-label">
+                                    股权结构</label>
+                                <div class="controls">
+                                    @Html.TextBoxFor(a => a.GuQuanJieGou, new { @class = "m-wrap span12" })
+                                    <span class="help-block">@Html.ValidationMessageFor(a => a.GuQuanJieGou)</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="span4 ">
+                            <div class="control-group">
+                                <label class="control-label">
+                                    实际控制人信用记录</label>
+                                <div class="controls">
+                                    @Html.TextBoxFor(a => a.ShiJiKongZhiRenXinYongJiLu, new { @class = "m-wrap span12" })
+                                    <span class="help-block">@Html.ValidationMessageFor(a => a.ShiJiKongZhiRenXinYongJiLu)</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="span4 ">
+                            <div class="control-group">
+                                <label class="control-label">
+                                    信用等级</label>
+                                <div class="controls">
+                                    @Html.TextBoxFor(a => a.XinYongDengJi, new { @class = "m-wrap span12" })
+                                    <span class="help-block">@Html.ValidationMessageFor(a => a.XinYongDengJi)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row-fluid">
+                        <div class="span12 ">
+                            <div class="control-group">
+                                <label class="control-label">
+                                    经营范围</label>
+                                <div class="controls">
+                                    @Html.TextAreaFor(a => a.JingYingFanWei, new { @class = "m-wrap span12" })
+                                    <span class="help-block">@Html.ValidationMessageFor(a => a.JingYingFanWei)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <h3 class="form-section">
+                        详细信息</h3>
+                    <div class="row-fluid">
+                        <div class="span12 ">
+                            <div class="control-group">
+                                <label class="control-label">
+                                    经营情况及其变动</label>
+                                <div class="controls">
+                                    @Html.TextAreaFor(a => a.JingYingQingKuangJiQiBianDong, new { @class = "m-wrap span12" })
+                                    <span class="help-block">@Html.ValidationMessageFor(a => a.JingYingQingKuangJiQiBianDong)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row-fluid">
+                        <div class="span12 ">
+                            <div class="control-group">
+                                <label class="control-label">
+                                    核心竞争力</label>
+                                <div class="controls">
+                                    @Html.TextAreaFor(a => a.HeXinJingZhengLi, new { @class = "m-wrap span12" })
+                                    <span class="help-block">@Html.ValidationMessageFor(a => a.HeXinJingZhengLi)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row-fluid">
+                        <div class="span12 ">
+                            <div class="control-group">
+                                <label class="control-label">
+                                    财务情况及其变动</label>
+                                <div class="controls">
+                                    @Html.TextAreaFor(a => a.CaiWuQingKuangJiQiBianDong, new { @class = "m-wrap span12" })
+                                    <span class="help-block">@Html.ValidationMessageFor(a => a.CaiWuQingKuangJiQiBianDong)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row-fluid">
+                        <div class="span12 ">
+                            <div class="control-group">
+                                <label class="control-label">
+                                    财务情况</label>
+                                <div class="controls">
+                                    @Html.TextAreaFor(a => a.CaiWuQingKuang, new { @class = "m-wrap span12" })
+                                    <span class="help-block">@Html.ValidationMessageFor(a => a.CaiWuQingKuang)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row-fluid">
+                        <div class="span12 ">
+                            <div class="control-group">
+                                <label class="control-label">
+                                    关联方及关联方交易</label>
+                                <div class="controls">
+                                    @Html.TextAreaFor(a => a.GuanLianFangJiGuanLianFangJiaoYi, new { @class = "m-wrap span12" })
+                                    <span class="help-block">@Html.ValidationMessageFor(a => a.GuanLianFangJiGuanLianFangJiaoYi)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row-fluid">
+                        <div class="span12 ">
+                            <div class="control-group">
+                                <label class="control-label">
+                                    目前贷款、担保执行情况</label>
+                                <div class="controls">
+                                    @Html.TextAreaFor(a => a.MuQianDaiKuanDanBaoZhiXingQingKuang, new { @class = "m-wrap span12" })
+                                    <span class="help-block">@Html.ValidationMessageFor(a => a.MuQianDaiKuanDanBaoZhiXingQingKuang)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row-fluid">
+                        <div class="span12 ">
+                            <div class="control-group">
+                                <label class="control-label">
+                                    抵质押反担保</label>
+                                <div class="controls">
+                                    @Html.TextAreaFor(a => a.DiZhiYaFanDanBao, new { @class = "m-wrap span12" })
+                                    <span class="help-block">@Html.ValidationMessageFor(a => a.DiZhiYaFanDanBao)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button class="btn blue" type="submit" id="btnSubmit">
+                        保存</button>
+                    <a href="@Url.Action("Index", "Role")" class="btn blue" style="">返回</a><br />
+                }
+            </div>
+        </div>
+    </div>
+</div>
