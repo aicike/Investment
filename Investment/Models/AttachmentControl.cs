@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Entity.Enum;
 
 namespace Investment.Models
 {
@@ -17,5 +18,11 @@ namespace Investment.Models
             get { return text ?? "附件管理"; }
             set { text = value; }
         }
+
+        public string Table { get; set; }
+
+        public int Id { get; set; }
+
+        public EnumAttachmentType? EnumAttachmentType { get; set; }
     }
 }

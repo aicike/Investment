@@ -2,42 +2,37 @@
     ViewBag.Title = "Manage";
     Layout = null;
 }
-<script>
-    $(function () {
-        $("#link_manage_attachment").click(function () {
-            
-        });
-    });
-</script>
-@model Investment.Models.AttachmentControl
-<a id="link_manage_attachment">[管理附件]</a>
-<div class="span6">
-    <div class="portlet box red">
-        <div class="portlet-title">
-            <div class="caption">
-                <i class="icon-reorder"></i>@Model.Text</div>
-            <div class="tools">
+@{Html.AddStyle(Url.Content("/Scripts/uploadify/uploadify.css"));}
+@{Html.AddJavaScript(Url.Content("/Scripts/uploadify/jquery.uploadify.js"));}
+@{Html.AddJavaScript(Url.Content("/Scripts/Attachment.js"));}
+@model List<Entity.Attachment>
+<span class="help-inline"><a class="blue" data-toggle="modal" href="#responsive">[管理附件]</a></span>
+<div id="responsive" class="modal hide fade" tabindex="-1">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+        </button>
+        <h3>
+            附件管理</h3>
+    </div>
+    <div class="modal-body">
+        <div class="row-fluid">
+            <div class="span12" style="max-height: 600px; min-height: 300px; overflow-y: scroll">
+                <div class="control-group">
+                    <input id="file_upload_zhengben" name="file_upload" type="file" multiple="false" />
+                    <input id="hidYingYeZhiZhao_zhengben" name="hidYingYeZhiZhao" type="hidden" />
+                </div>
+                @foreach (var item in Model)
+                {
+                    <div>
+                        @item.FileName</div>
+                }
             </div>
         </div>
-        <div class="portlet-body" style="height: 100px; overflow-y: scroll">
-            <div>
-                文件1</div>
-            <div>
-                文件2</div>
-            <div>
-                文件3</div>
-            <div>
-                文件1</div>
-            <div>
-                文件2</div>
-            <div>
-                文件3</div>
-            <div>
-                文件1</div>
-            <div>
-                文件2</div>
-            <div>
-                文件3</div>
-        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" data-dismiss="modal" class="btn">
+            关闭</button>
+        <!--<button type="button" class="btn blue">
+            Save changes</button>-->
     </div>
 </div>

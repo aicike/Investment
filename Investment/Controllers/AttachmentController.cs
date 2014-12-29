@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Investment.Models;
+using Business;
+using Entity;
 
 namespace Investment.Controllers
 {
@@ -16,8 +18,13 @@ namespace Investment.Controllers
 
         public ActionResult Manage(AttachmentControl ac)
         {
-            
-            return PartialView(ac);
+            AttachmentModel attachmentModel = new AttachmentModel();
+            var attachmentList = attachmentModel.GetAttachment(ac.Table, ac.Id);
+            if (ac.EnumAttachmentType.HasValue)
+            {
+                attachmentList = attachmentList.Where(a => a.EnumAttachmentType == (int)ac.EnumAttachmentType).ToList();
+            }
+            return PartialView(attachmentList);
         }
     }
 }

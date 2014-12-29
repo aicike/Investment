@@ -16,8 +16,38 @@ namespace Entity.Enum
         Unknown=0,
 
         /// <summary>
-        /// 营业执照
+        /// 营业执照正
         /// </summary>
-        YingYeZhiZhao=1
+        YingYeZhiZhao1 = 1,
+
+        /// <summary>
+        /// 营业执照反
+        /// </summary>
+        YingYeZhiZhao2 = 2,
+        
+        /// <summary>
+        /// 组织机构代码证正
+        /// </summary>
+        ZuZhiJiGouDaiMa1 = 3,
+
+        /// <summary>
+        /// 组织机构代码证反
+        /// </summary>
+        ZuZhiJiGouDaiMa2 = 4,
+        
+        /// <summary>
+        /// 税务正
+        /// </summary>
+        ShuiWu1 = 5,
+
+        /// <summary>
+        /// 税务反
+        /// </summary>
+        ShuiWu2 = 6,
+
+        /// <summary>
+        /// 验资报告
+        /// </summary>
+        YanZiBaoGao = 7
     }
 }

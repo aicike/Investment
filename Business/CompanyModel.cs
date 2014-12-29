@@ -33,7 +33,7 @@ namespace Business
             {
                 //保存营业执照照片
                 AttachmentModel attachmentModel = new AttachmentModel();
-                attachment_YingYeZhiZhao.EnumAttachmentType = (int)EnumAttachmentType.YingYeZhiZhao;
+                attachment_YingYeZhiZhao.EnumAttachmentType = (int)attachment_YingYeZhiZhao.EnumAttachmentType;
                 attachment_YingYeZhiZhao.TableName = SystemConst.TableName.Company;
                 attachment_YingYeZhiZhao.TableID = company.ID;
                 result = attachmentModel.CopyAttachment_Company(company.ID, attachment_YingYeZhiZhao);
@@ -75,7 +75,7 @@ namespace Business
                     }
                 }
                 //保存营业执照照片
-                attachment_YingYeZhiZhao.EnumAttachmentType = (int)EnumAttachmentType.YingYeZhiZhao;
+                attachment_YingYeZhiZhao.EnumAttachmentType = (int)attachment_YingYeZhiZhao.EnumAttachmentType;
                 attachment_YingYeZhiZhao.TableName = SystemConst.TableName.Company;
                 attachment_YingYeZhiZhao.TableID = company.ID;
                 result = attachmentModel.CopyAttachment_Company(company.ID, attachment_YingYeZhiZhao);

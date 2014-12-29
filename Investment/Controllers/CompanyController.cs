@@ -24,20 +24,32 @@ namespace Investment.Controllers
             return View(company);
         }
 
+        //[HttpPost]
+        //public ActionResult Add(Company company, string hidYingYeZhiZhao)
+        //{
+        //    CompanyModel companyModel = new CompanyModel();
+        //    Result result = null;
+        //    if (hidYingYeZhiZhao.Length > 0)
+        //    {
+        //        var attachment_YingYeZhiZhao = Newtonsoft.Json.JsonConvert.DeserializeObject<Attachment>(hidYingYeZhiZhao);
+        //        result = companyModel.Add(company, attachment_YingYeZhiZhao);
+        //    }
+        //    else
+        //    {
+        //        result = companyModel.Add(company, null);
+        //    }
+        //    if (result.HasError)
+        //    {
+        //        return JavaScript("JMessage('" + result.Error + "',true)");
+        //    }
+        //    return JavaScript("window.location.href='" + Url.Action("Index", "Company") + "'");
+        //}
+
         [HttpPost]
-        public ActionResult Add(Company company, string hidYingYeZhiZhao)
+        public ActionResult Add(Company company)
         {
             CompanyModel companyModel = new CompanyModel();
-            Result result = null;
-            if (hidYingYeZhiZhao.Length > 0)
-            {
-                var attachment_YingYeZhiZhao = Newtonsoft.Json.JsonConvert.DeserializeObject<Attachment>(hidYingYeZhiZhao);
-                result = companyModel.Add(company, attachment_YingYeZhiZhao);
-            }
-            else
-            {
-                result = companyModel.Add(company, null);
-            }
+            Result result = companyModel.Add(company, null);
             if (result.HasError)
             {
                 return JavaScript("JMessage('" + result.Error + "',true)");
@@ -51,7 +63,8 @@ namespace Investment.Controllers
             var company = companyModel.Get(id);
             AttachmentModel attachmentModel = new AttachmentModel();
             var attachmentList = attachmentModel.GetAttachment(SystemConst.TableName.Company, id);
-            ViewBag.A_YingYeZhiZhao = attachmentList.Where(a => a.EnumAttachmentType == (int)EnumAttachmentType.YingYeZhiZhao).FirstOrDefault();
+            ViewBag.A_YingYeZhiZhao1 = attachmentList.Where(a => a.EnumAttachmentType == (int)EnumAttachmentType.YingYeZhiZhao1).FirstOrDefault();
+            ViewBag.A_YingYeZhiZhao2 = attachmentList.Where(a => a.EnumAttachmentType == (int)EnumAttachmentType.YingYeZhiZhao2).FirstOrDefault();
 
 
             return View(company);
