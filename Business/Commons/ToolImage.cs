@@ -7,6 +7,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Web;
 using System.IO;
+using Entity;
 
 namespace Business.Commons
 {
@@ -135,7 +136,8 @@ namespace Business.Commons
                     SavePath = Path + filename;
                     sPath = TempPath + filename;
                 }
-                else {
+                else
+                {
                     sPath = SavePath;
                 }
                 #endregion
@@ -586,19 +588,24 @@ namespace Business.Commons
         }
 
         /// <summary>
-        /// 获取临时文件夹位置
+        /// 获取临时文件夹位置,数组中[0]网址路径,[1]物理路径
         /// </summary>
         /// <returns></returns>
-        public static string GetTemporaryPath()
+        public static string[] GetTemporaryPath()
         {
-            string Path = "/File/Temporary/" + DateTime.Now.ToString("yyyy-MM-dd");
-            string TempPath = HttpContext.Current.Server.MapPath(Path);
+            var directory = SystemConst.AttachmentPathTemp.Substring(SystemConst.AttachmentPathTemp.LastIndexOf('/') + 1);
+            var token = DateTime.Now.ToString("yyyy-MM-dd");
+            string Path = SystemConst.AttachmentUrl + directory + "\\" + token;
+            string TempPath = SystemConst.AttachmentPathTemp + "\\" + token;
             if (Directory.Exists(TempPath) == false)
             {
                 Directory.CreateDirectory(TempPath);
             }
-            return Path;
+            string[] paths = new string[2];
+            paths[0] = Path;//网址路径
+            paths[1] = TempPath;//物理路径
+            return paths;
         }
-    
+
     }
 }

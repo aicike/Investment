@@ -14,7 +14,7 @@ namespace Entity
 
         public string Body { get; set; }
 
-        public List<Attachment> Attachments { get; set; }
+        public List<System.Net.Mail.Attachment> Attachments { get; set; }
 
         public List<LinkedResource> EmbeddedResources { get; set; }
 

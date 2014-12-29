@@ -60,6 +60,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AttachmentModel.cs" />
     <Compile Include="BaseModel.cs" />
     <Compile Include="Commons\Common.cs" />
     <Compile Include="Commons\DESEncrypt.cs" />

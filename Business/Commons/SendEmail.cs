@@ -86,7 +86,7 @@ namespace Business.Commons
 
                     if (email.Attachments != null)
                     {
-                        foreach (Attachment TempAttachment in email.Attachments)
+                        foreach (System.Net.Mail.Attachment TempAttachment in email.Attachments)
                         {
                             message.Attachments.Add(TempAttachment);
                         }

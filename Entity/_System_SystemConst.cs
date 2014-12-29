@@ -7,6 +7,19 @@ namespace Entity
 {
     public static class SystemConst
     {
+        /// <summary>
+        /// 附件服务器Url
+        /// </summary>
+        public static string AttachmentUrl = System.Configuration.ConfigurationManager.AppSettings["AttachmentUrl"];
+
+        /// <summary>
+        /// 附件，临时文件路径
+        /// </summary>
+        public static string AttachmentPathTemp = System.Configuration.ConfigurationManager.AppSettings["AttachmentPathTemp"];
+        /// <summary>
+        /// 附件，正式文件路径
+        /// </summary>
+        public static string AttachmentPath = System.Configuration.ConfigurationManager.AppSettings["AttachmentPath"];
 
         public class Session
         {
@@ -19,12 +32,15 @@ namespace Entity
         {
             private Business() { }
 
-            public const string FilePath = "/File/{0}";
-            public const string FileTempPath = "/File/Temp";
 
             public const string key = "abcdefgh";
             public const string iv = "12345678";
 
+        }
+
+        public class TableName
+        {
+            public const string Company = "Company";
         }
     }
 
