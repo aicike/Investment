@@ -8,7 +8,7 @@
 <a style="margin-right:10px;cursor:pointer;" id="link_single_@ac.ID">@ac.Text</a><span id="span_single_@ac.ID">
     @if (Model != null)
     { 
-        <a href="javascript:;" class="inline popovers" data-trigger="hover" data-placement="bottom" data-html="true" data-content="<img style='max-width:400px;max-height:400px' src='@Model.FileUrl'></img>" data-original-title="">@Model.FileName</a><a style="cursor: pointer;margin-left:20px;" class="inline link_delete_attachment_single_old_@ac.ID" tid='@Model.TableID' link_id='@Model.ID'>
+        <a href="javascript:;" class="inline popovers" data-placement="bottom" data-html="true" data-content="<img style='max-width:400px;max-height:400px' src='@Model.FileUrl'></img>" data-original-title="">@Model.FileName</a><a style="cursor: pointer;margin-left:20px;" class="inline link_delete_attachment_single_old_@ac.ID" tid='@Model.TableID' link_id='@Model.ID'>
             删除</a>    
     }
 </span>

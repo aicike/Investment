@@ -153,6 +153,37 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="control-group">
+                                    <label class="control-label">
+                                        股权结构</label>
+                                    <div class="controls">
+                                        @Html.TextAreaFor(a => a.GuQuanJieGou, new { @class = "span6 m-wrap" })
+                                        <span class="help-inline">@Html.ValidationMessageFor(a => a.GuQuanJieGou)</span>
+                                    </div>
+                                </div>                                
+                                <div class="control-group">
+                                    <label class="control-label">
+                                        信用记录</label>
+                                    <div class="controls">
+                                        @Html.TextAreaFor(a => a.ShiJiKongZhiRenXinYongJiLu, new { @class = "span6 m-wrap" })
+                                        <span class="help-inline">@Html.ValidationMessageFor(a => a.ShiJiKongZhiRenXinYongJiLu)</span>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">
+                                        贷款卡</label>
+                                    <div class="controls">
+                                        @Html.TextBoxFor(a => a.DaiKuanKa, new { @class = "span6 m-wrap" })
+                                        <span class="help-inline">@Html.ValidationMessageFor(a => a.DaiKuanKa)</span>
+                                    </div>
+                                </div>
+                                <div class="row-fluid">
+                                    <label class="control-label">
+                                        关联企业</label>
+                                    <div class="controls">
+                                        <span class="help-inline"></span>
+                                    </div>
+                                </div>
                                 <div class="form-actions">
                                     <button type="submit" class="btn blue">
                                         保存</button>
@@ -164,7 +195,7 @@
                     </div>
                 </div>
                 <div class="tab-pane " id="tab_2">
-                    <div class="portlet box green">
+                    <div class="portlet box blue">
                         <div class="portlet-title">
                             <div class="caption">
                                 <i class="icon-reorder"></i>附件信息</div>
@@ -179,7 +210,7 @@
                                         法人身份证</label>
                                     <div class="controls">
                                         <div>
-                                            <span class="help-inline span12">
+                                            <span class="help-inline">
                                                 @{Html.RenderAction("SingleManage", "Attachment", new Investment.Models.AttachmentControl { ID = "1", Text = "[正面上传]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.FaRen1 });}
                                             </span>
                                         </div>
@@ -197,10 +228,14 @@
                                         营业执照</label>
                                     <div class="controls">
                                         <div id="container">
-                                            <span class="help-inline"><a class="myLink">正本</a><a style="margin-left: 10px;" class="myLink">[上传]</a></span>
+                                            <span class="help-inline">
+                                                @{Html.RenderAction("SingleManage", "Attachment", new Investment.Models.AttachmentControl { ID = "3", Text = "[正本上传]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.YingYeZhiZhao1 });}
+                                            </span>
                                         </div>
                                         <div>
-                                            <span class="help-inline"><a class="myLink">副本</a><a style="margin-left: 10px;" class="myLink">[上传]</a></span>
+                                            <span class="help-inline">
+                                                @{Html.RenderAction("SingleManage", "Attachment", new Investment.Models.AttachmentControl { ID = "4", Text = "[副本上传]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.YingYeZhiZhao2 });}
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
@@ -209,10 +244,14 @@
                                         组织机构代码证</label>
                                     <div class="controls">
                                         <div>
-                                            <span class="help-inline"><a class="myLink">正本</a><a style="margin-left: 10px;" class="myLink">[上传]</a></span>
+                                            <span class="help-inline">
+                                                @{Html.RenderAction("SingleManage", "Attachment", new Investment.Models.AttachmentControl { ID = "5", Text = "[正本上传]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.ZuZhiJiGouDaiMa1 });}
+                                            </span>
                                         </div>
                                         <div>
-                                            <span class="help-inline"><a class="myLink">副本</a><a style="margin-left: 10px;" class="myLink">[上传]</a></span>
+                                            <span class="help-inline">
+                                                @{Html.RenderAction("SingleManage", "Attachment", new Investment.Models.AttachmentControl { ID = "6", Text = "[副本上传]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.ZuZhiJiGouDaiMa2 });}
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
@@ -221,10 +260,25 @@
                                         税务 ( 国税、地税 )</label>
                                     <div class="controls">
                                         <div>
-                                            <span class="help-inline"><a class="myLink">正本</a><a style="margin-left: 10px;" class="myLink">[上传]</a></span>
+                                            <span class="help-inline">
+                                                @{Html.RenderAction("SingleManage", "Attachment", new Investment.Models.AttachmentControl { ID = "7", Text = "[正本上传]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.ShuiWu1 });}
+                                            </span>
                                         </div>
                                         <div>
-                                            <span class="help-inline"><a class="myLink">副本</a><a style="margin-left: 10px;" class="myLink">[上传]</a></span>
+                                            <span class="help-inline">
+                                                @{Html.RenderAction("SingleManage", "Attachment", new Investment.Models.AttachmentControl { ID = "8", Text = "[副本上传]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.ShuiWu2 });}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">
+                                        贷款卡</label>
+                                    <div class="controls">
+                                        <div>
+                                            <span class="help-inline">
+                                                @{Html.RenderAction("SingleManage", "Attachment", new Investment.Models.AttachmentControl { ID = "9", Text = "[上传]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.DaiKuanKa });}
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
@@ -253,7 +307,7 @@
                     </div>
                 </div>
                 <div class="tab-pane " id="tab_3">
-                    <div class="portlet box green">
+                    <div class="portlet box blue">
                         <div class="portlet-title">
                             <div class="caption">
                                 <i class="icon-reorder"></i>融资信息</div>

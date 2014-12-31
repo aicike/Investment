@@ -114,6 +114,55 @@ namespace Investment.Controllers
                 var attachment_FaRen2 = Newtonsoft.Json.JsonConvert.DeserializeObject<Attachment>(FaRen2);
                 attachmentList.Add(attachment_FaRen2);
             }
+            string YingYeZhiZhao1 = Request.Form["hid_attachment_single_3"];
+            if (string.IsNullOrEmpty(YingYeZhiZhao1) == false)
+            {
+                var attachment_YingYeZhiZhao1 = Newtonsoft.Json.JsonConvert.DeserializeObject<Attachment>(YingYeZhiZhao1);
+                attachmentList.Add(attachment_YingYeZhiZhao1);
+            }
+            string YingYeZhiZhao2 = Request.Form["hid_attachment_single_4"];
+            if (string.IsNullOrEmpty(YingYeZhiZhao2) == false)
+            {
+                var attachment_YingYeZhiZhao2 = Newtonsoft.Json.JsonConvert.DeserializeObject<Attachment>(YingYeZhiZhao2);
+                attachmentList.Add(attachment_YingYeZhiZhao2);
+            }
+            string ZuZhiJiGouDaiMa1 = Request.Form["hid_attachment_single_5"];
+            if (string.IsNullOrEmpty(ZuZhiJiGouDaiMa1) == false)
+            {
+                var attachment_ZuZhiJiGouDaiMa1 = Newtonsoft.Json.JsonConvert.DeserializeObject<Attachment>(ZuZhiJiGouDaiMa1);
+                attachmentList.Add(attachment_ZuZhiJiGouDaiMa1);
+            }
+            string ZuZhiJiGouDaiMa2 = Request.Form["hid_attachment_single_6"];
+            if (string.IsNullOrEmpty(ZuZhiJiGouDaiMa2) == false)
+            {
+                var attachment_ZuZhiJiGouDaiMa2 = Newtonsoft.Json.JsonConvert.DeserializeObject<Attachment>(ZuZhiJiGouDaiMa2);
+                attachmentList.Add(attachment_ZuZhiJiGouDaiMa2);
+            }
+            string ShuiWu1 = Request.Form["hid_attachment_single_7"];
+            if (string.IsNullOrEmpty(ShuiWu1) == false)
+            {
+                var attachment_ShuiWu1 = Newtonsoft.Json.JsonConvert.DeserializeObject<Attachment>(ShuiWu1);
+                attachmentList.Add(attachment_ShuiWu1);
+            }
+            string ShuiWu2 = Request.Form["hid_attachment_single_8"];
+            if (string.IsNullOrEmpty(ShuiWu2) == false)
+            {
+                var attachment_ShuiWu2 = Newtonsoft.Json.JsonConvert.DeserializeObject<Attachment>(ShuiWu2);
+                attachmentList.Add(attachment_ShuiWu2);
+            }
+            string DaiKuanKa = Request.Form["hid_attachment_single_9"];
+            if (string.IsNullOrEmpty(DaiKuanKa) == false)
+            {
+                var attachment_DaiKuanKa = Newtonsoft.Json.JsonConvert.DeserializeObject<Attachment>(DaiKuanKa);
+                attachmentList.Add(attachment_DaiKuanKa);
+            }
+
+
+
+
+
+
+
 
             CompanyModel companyModel = new CompanyModel();
             Result result = companyModel.UploadAttachment(company.ID, attachmentList);

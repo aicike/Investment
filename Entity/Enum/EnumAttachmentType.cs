@@ -59,5 +59,10 @@ namespace Entity.Enum
         /// 法人身份证 反面
         /// </summary>
         FaRen2 = 9,
+
+        /// <summary>
+        /// 贷款卡
+        /// </summary>
+        DaiKuanKa=10
     }
 }

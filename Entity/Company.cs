@@ -207,6 +207,13 @@ namespace Entity
         [Display(Name = "经营范围")]
         public string JingYingFanWei { get; set; }
 
+        /// <summary>
+        /// 贷款卡
+        /// </summary>
+        [Display(Name="贷款卡")]
+        public string DaiKuanKa { get; set; }
+
+
         //----------------------子表------------------------------------------
         /// <summary>
         /// 公司用户表
