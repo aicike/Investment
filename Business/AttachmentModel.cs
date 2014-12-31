@@ -50,6 +50,26 @@ namespace Business
         }
 
         /// <summary>
+        /// 正式附件删除（目前只限制于公司基本资料的删除）
+        /// </summary>
+        /// <returns></returns>
+        public Result DeleteAttachment(int tableID, int id)
+        {
+            //找到未删除的该附件
+            var attachment = List().Where(a => a.TableName.Equals(SystemConst.TableName.Company, StringComparison.CurrentCultureIgnoreCase) &&
+                                               a.TableID == tableID &&
+                                               a.ID == id &&
+                                               a.Status == 0).FirstOrDefault();
+            Result result = new Result();
+            if (attachment != null)
+            {
+                attachment.Status = 1;
+                result = Edit(attachment);
+            }
+            return result;
+        }
+
+        /// <summary>
         /// 删除附件数据，包含物理文件
         /// </summary>
         /// <param name="tableName">表名</param>
@@ -81,7 +101,7 @@ namespace Business
         /// <returns></returns>
         public List<Attachment> GetAttachment(string tableName, int tableID)
         {
-            return List().Where(a => a.TableName.Equals(tableName, StringComparison.CurrentCultureIgnoreCase) && a.TableID == tableID).ToList();
+            return List().Where(a => a.TableName.Equals(tableName, StringComparison.CurrentCultureIgnoreCase) && a.TableID == tableID && a.Status == 0).ToList();
         }
     }
 }

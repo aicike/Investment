@@ -8,6 +8,8 @@ namespace Investment.Models
 {
     public class AttachmentControl
     {
+        public string ID { get; set; }
+
         private string text;
 
         /// <summary>
@@ -21,7 +23,7 @@ namespace Investment.Models
 
         public string Table { get; set; }
 
-        public int Id { get; set; }
+        public int TableId { get; set; }
 
         public EnumAttachmentType? EnumAttachmentType { get; set; }
     }

@@ -71,28 +71,60 @@ namespace Investment.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(Company company, string hidYingYeZhiZhao)
+        public ActionResult Edit(Company company)
         {
             Result result = null;
             CompanyModel companyModel = new CompanyModel();
-            if (hidYingYeZhiZhao.Length > 0)
-            {
-                List<string> oldFiles = new List<string>();
-                oldFiles.Add(Request.Form["hidYingYeZhiZhaoOld"]);
-                var attachment_YingYeZhiZhao = Newtonsoft.Json.JsonConvert.DeserializeObject<Attachment>(hidYingYeZhiZhao);
-                result = companyModel.Edit(company, attachment_YingYeZhiZhao, oldFiles);
-            }
-            else
-            {
-                result = companyModel.Edit(company, null, null);
-            }
+            result = companyModel.Edit(company);
             if (result.HasError)
             {
                 return JavaScript("JMessage('" + result.Error + "',true)");
             }
-            return JavaScript("window.location.href='" + Url.Action("Index", "Company") + "'");
+            else
+            {
+                return JavaScript("JMessage('保存成功！',false,true)");
+            }
         }
 
+        [HttpPost]
+        public ActionResult EditAttachment(Company company)
+        {
+            List<Attachment> attachmentList = new List<Attachment>();
+            string YanZhiBaoGao = Request.Form["hid_attachment_1"];
+            if (string.IsNullOrEmpty(YanZhiBaoGao) == false)
+            {
+                var attachment_YanZhiBaoGao = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Attachment>>(YanZhiBaoGao);
+                attachmentList.AddRange(attachment_YanZhiBaoGao);
+            }
+            string QiTa = Request.Form["hid_attachment_2"];
+            if (string.IsNullOrEmpty(QiTa) == false)
+            {
+                var attachment_QiTa = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Attachment>>(QiTa);
+                attachmentList.AddRange(attachment_QiTa);
+            }
+            string FaRen1 = Request.Form["hid_attachment_single_1"];
+            if (string.IsNullOrEmpty(FaRen1) == false)
+            {
+                var attachment_FaRen1 = Newtonsoft.Json.JsonConvert.DeserializeObject<Attachment>(FaRen1);
+                attachmentList.Add(attachment_FaRen1);
+            }
+            string FaRen2 = Request.Form["hid_attachment_single_2"];
+            if (string.IsNullOrEmpty(FaRen2) == false)
+            {
+                var attachment_FaRen2 = Newtonsoft.Json.JsonConvert.DeserializeObject<Attachment>(FaRen2);
+                attachmentList.Add(attachment_FaRen2);
+            }
 
+            CompanyModel companyModel = new CompanyModel();
+            Result result = companyModel.UploadAttachment(company.ID, attachmentList);
+            if (result.HasError)
+            {
+                return JavaScript("JMessage('" + result.Error + "',true)");
+            }
+            else
+            {
+                return JavaScript("JMessage('保存成功！',false,true);");
+            }
+        }
     }
 }

@@ -46,6 +46,8 @@
     <Compile Include="Company.cs" />
     <Compile Include="CompanyAccount.cs" />
     <Compile Include="CompanyLoan.cs" />
+    <Compile Include="CompanyRelation.cs" />
+    <Compile Include="Relation.cs" />
     <Compile Include="Enum\EnumAttachmentType.cs" />
     <Compile Include="MenuOption.cs" />
     <Compile Include="RoleAccount.cs" />

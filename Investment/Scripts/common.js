@@ -1,10 +1,13 @@
 ﻿
-function JMessage(msg, isError) {
+function JMessage(msg, isError, isRefresh) {
     $('#jmessage').html(msg);
     if (isError != undefined && isError == true) {
         $('#jmessage').showTopbarMessage({ background: "#f00", close: 3000 });
     } else {
         $('#jmessage').showTopbarMessage({ background: "#093", close: 3000 });
+    }
+    if (isRefresh != undefined && isRefresh == true) {
+        window.setTimeout("window.location.reload();", 2000);
     }
 }
 

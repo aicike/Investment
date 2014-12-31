@@ -21,8 +21,8 @@
         <div class="tabbable tabbable-custom boxless">
             <ul class="nav nav-tabs">
                 <li class="active"><a href="#tab_1" id="link_1" data-toggle="tab">基本信息</a></li>
-                <li><a class="" href="#tab_2" data-toggle="tab">附件信息</a></li>
-                <li><a class="" href="#tab_3" data-toggle="tab">融资信息</a></li>
+                <li class="disabled"><a class="" href="#tab_2" data-toggle="">附件信息</a></li>
+                <li class="disabled"><a class="" href="#tab_3" data-toggle="">融资信息</a></li>
             </ul>
             <div class="tab-content">
                 <div class="tab-pane active" id="tab_1">
@@ -59,6 +59,14 @@
                                     <div class="controls">
                                         @Html.TextBoxFor(a => a.FaDingDaiBiaoRen, new { @class = "span6 m-wrap" })
                                         <span class="help-inline">@Html.ValidationMessageFor(a => a.FaDingDaiBiaoRen)</span>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">
+                                        实际控制人</label>
+                                    <div class="controls">
+                                        @Html.TextBoxFor(a => a.ShiJiKongZhiRen, new { @class = "span6 m-wrap" })
+                                        <span class="help-inline">@Html.ValidationMessageFor(a => a.ShiJiKongZhiRen)</span>
                                     </div>
                                 </div>
                                 <div class="control-group">
@@ -174,7 +182,7 @@
                             {
                                 <div class="control-group">
                                     <label class="control-label">
-                                        法定身份证</label>
+                                        法人身份证</label>
                                     <div class="controls">
                                         <div>
                                             <span class="help-inline"><a class="myLink">正面</a><a style="margin-left: 10px;" class="myLink">[上传]</a></span>

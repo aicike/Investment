@@ -93,6 +93,12 @@ namespace Entity
         public double ZhuYingYeWuShouRu { get; set; }
 
         /// <summary>
+        /// 主营业务
+        /// </summary>
+        [Display(Name = "主营业务")]
+        public double ZhuYingYeWu { get; set; }
+
+        /// <summary>
         /// 净利润
         /// </summary>
         [Display(Name = "净利润")]
@@ -121,6 +127,12 @@ namespace Entity
         /// </summary>
         [Display(Name = "股权结构")]
         public string GuQuanJieGou { get; set; }
+
+        /// <summary>
+        /// 实际控制人
+        /// </summary>
+        [Display(Name = "实际控制人")]
+        public string ShiJiKongZhiRen { get; set; }
 
         /// <summary>
         /// 实际控制人信用记录
@@ -202,6 +214,8 @@ namespace Entity
         public virtual ICollection<CompanyAccount> CompanyAccount { get; set; }
 
         public virtual ICollection<CompanyLoan> CompanyLoans { get; set; }
+
+        public virtual ICollection<CompanyRelation> CompanyRelations { get; set; }
 
     }
 }
