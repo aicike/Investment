@@ -69,5 +69,7 @@ namespace Entity
 
         public virtual ICollection<RoleAccount> RoleAccounts { get; set; }
 
+        public virtual ICollection<Company> Companys { get; set; }
+
     }
 }

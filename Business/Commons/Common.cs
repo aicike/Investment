@@ -196,12 +196,29 @@ namespace Business.Commons
         }
         #endregion
 
+        #region 在线预览office
+
+        /// <summary>
+        /// 使用微软Office在线预览服务
+        /// </summary>
+        /// <param name="fileUrl"></param>
+        /// <returns></returns>
+        public string GetOfficeUrl(string fileUrl)
+        {
+            string url = "https://view.officeapps.live.com/op/view.aspx?src=";
+            fileUrl = HttpContext.Current.Server.UrlEncode(fileUrl);
+            url = url + fileUrl;
+            return url;
+        }
+
+        #endregion
+
         /// <summary>
         /// 将json字符窜 反序列化为DataTable
         /// </summary>
         /// <param name="json"></param>
         /// <returns></returns>
-        public  DataTable JsonToTable(string json)
+        public DataTable JsonToTable(string json)
         {
             JavaScriptSerializer jss = new JavaScriptSerializer();
             ArrayList dic = jss.Deserialize<ArrayList>(json);

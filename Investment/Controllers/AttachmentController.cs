@@ -6,6 +6,8 @@ using System.Web.Mvc;
 using Investment.Models;
 using Business;
 using Entity;
+using Business.Commons;
+using System.IO;
 
 namespace Investment.Controllers
 {
@@ -99,7 +101,7 @@ namespace Investment.Controllers
         public ActionResult DeleteAttachment(int tableId, int id)
         {
             AttachmentModel attachmentModel = new AttachmentModel();
-            var result = attachmentModel.DeleteAttachment( tableId, id);
+            var result = attachmentModel.DeleteAttachment(tableId, id);
             return Json(result);
         }
 
@@ -137,12 +139,12 @@ namespace Investment.Controllers
                             silverlight_xap_url: url_xap,
                             filters: {{
                                 max_file_size: '15mb',
-                                mime_types: [{{ title: {1}Image files{1}, extensions:{1}jpg,jpge,gif,png,bmp{1} }}]
+                                mime_types: [{{ title: {1}Image files{1}, extensions:{1}jpg,jpge,gif,png,bmp,doc,docx{1} }}]
                             }},
                             init: {{
                                 FilesAdded: function (up, files) {{
                                     plupload.each(files, function (file) {{
-                                        //document.getElementById('span_single_{0}').innerHTML =' <a class={1}inline popovers{1} data-trigger={1}hover{1} data-placement={1}right{1} data-html={1}true{1} data-content={1}<img style='width:400px;height:400px' src='@Model.FileUrl'></img>{1} data-original-title={1}{1}>'+file.name+'</a><a style={1}cursor: pointer;margin-left:20px;{1} class={1}inline link_delete_attachment_single_{0}{1}>删除</a>';
+                                        
                                     }});
                                 uploader.start();
                                 }},
@@ -153,8 +155,12 @@ namespace Investment.Controllers
                                 FileUploaded: function (up, file, info) {{
                                     var result=JSON.parse(info.response).result;
                                     var json_val = JSON.stringify(result);
-                                    $('#hid_attachment_single_{0}').val(json_val);
-                                    document.getElementById('span_single_{0}').innerHTML =' <a href={1}javascript:;{1} class={1}inline popovers{1} data-trigger={1}hover{1} data-placement={1}bottom{1} data-html={1}true{1} data-content={1}<img style=\'max-width:400px;max-height:400px\' src=\''+result.FileUrl+'\'></img>{1} data-original-title={1}{1}>'+result.FileName+'</a><a style={1}cursor: pointer;margin-left:20px;{1} class={1}inline link_delete_attachment_single_{0}{1}>删除</a>';
+                                    $('#hid_attachment_{0}').val(json_val);
+                                    if(result.EnumAttachmentFormat==1){{
+                                        document.getElementById('span_single_{0}').innerHTML =' <a href={1}javascript:;{1} class={1}inline popovers{1} data-trigger={1}hover{1} data-placement={1}bottom{1} data-html={1}true{1} data-content={1}<img style=\'max-width:400px;max-height:400px\' src=\''+result.FileUrl+'\'></img>{1} data-original-title={1}{1}>'+result.FileName+'</a><a style={1}cursor: pointer;margin-left:20px;{1} class={1}inline link_delete_attachment_single_{0}{1}>删除</a>';
+                                    }}else{{
+                                        document.getElementById('span_single_{0}').innerHTML =' <a href={1}javascript:;{1} class={1}inline popovers{1} data-trigger={1}hover{1} data-placement={1}bottom{1} data-html={1}true{1} data-content={1}无预览内容{1} data-original-title={1}{1}>'+result.FileName+'</a><a style={1}cursor: pointer;margin-left:20px;{1} class={1}inline link_delete_attachment_single_{0}{1}>删除</a>';
+                                    }}
                                     App.init();                
                                 }},
                             }}
@@ -164,7 +170,7 @@ namespace Investment.Controllers
                         $('.link_delete_attachment_single_{0}').live('click',function () {{
                               if (confirm('确定删除该附件？')) {{
                                   $(this).parent().html({1}{1});
-                                  $('#hid_attachment_single_{0}').val({1}{1});
+                                  $('#hid_attachment_{0}').val({1}{1});
                                   return true;
                               }}
                         }});
@@ -179,7 +185,7 @@ namespace Investment.Controllers
                                           JMessage('删除失败！', true);
                                       }} else {{
                                           obj.parent().html({1}{1});
-                                          $('#hid_attachment_single_{0}').val({1}{1});
+                                          $('#hid_attachment_{0}').val({1}{1});
                                       }}
                                   }}, 'json');
                                   return true;
@@ -187,6 +193,39 @@ namespace Investment.Controllers
                           }});
                     }});", formID, "\"", enumAttachmentType, table, tableID);
             return JavaScript(javascrpit);
+        }
+
+        #endregion
+
+        #region 预览 下载
+
+        /// <summary>
+        /// 预览
+        /// </summary>
+        /// <param name="url"></param>
+        /// <returns></returns>
+        public ActionResult ViewOffice(string url)
+        {
+            Common common = new Common();
+            //url = "http://121.42.10.158/test.docx";
+            url = "http://video.ch9.ms/build/2011/slides/TOOL-532T_Sutter.pptx";
+            var viewUrl = common.GetOfficeUrl(url);
+            ViewBag.Url = viewUrl;
+
+            return View();
+        }
+
+        /// <summary>
+        /// 下载
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public FileStreamResult Download(int id)
+        {
+            AttachmentModel attachmentModel = new AttachmentModel();
+            var attachment = attachmentModel.Get(id);
+            (attachment != null).NotAuthorizedPage();
+            return File(new FileStream(attachment.FilePath, FileMode.Open), "application/octet-stream", Server.UrlEncode(attachment.FileName));
         }
 
         #endregion

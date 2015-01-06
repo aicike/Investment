@@ -22,9 +22,16 @@ namespace Entity
         public int Status { get; set; }
 
         /// <summary>
+        /// 平台负责人ID
+        /// </summary>
+        public int? OwnerID { get; set; }
+
+        public virtual GroupAccount Owner { get; set; }
+
+        /// <summary>
         /// 信息是否齐全
         /// </summary>
-        public bool IsComplete { get; set; } 
+        public bool IsComplete { get; set; }
 
         /// <summary>
         /// 客户名称
@@ -200,7 +207,7 @@ namespace Entity
         [Display(Name = "营业执照")]
         public string YingYeZhiZhao { get; set; }
 
-        
+
         /// <summary>
         /// 经营范围
         /// </summary>
@@ -210,7 +217,7 @@ namespace Entity
         /// <summary>
         /// 贷款卡
         /// </summary>
-        [Display(Name="贷款卡")]
+        [Display(Name = "贷款卡")]
         public string DaiKuanKa { get; set; }
 
 
@@ -223,6 +230,8 @@ namespace Entity
         public virtual ICollection<CompanyLoan> CompanyLoans { get; set; }
 
         public virtual ICollection<CompanyRelation> CompanyRelations { get; set; }
+
+        public virtual ICollection<Financing> Financings { get; set; }
 
     }
 }

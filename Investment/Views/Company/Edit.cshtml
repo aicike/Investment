@@ -187,7 +187,20 @@
                                 <div class="form-actions">
                                     <button type="submit" class="btn blue">
                                         保存</button>
-                                    <button type="button" class="btn">
+                                    @if (Model.Status == 0)
+                                    { 
+                                        @Ajax.ActionLink("审核通过", "ChangeStatus", "Company", new { id = Model.ID, status = 1 }, new AjaxOptions { UpdateTargetId = "alert" }, new { @class = "btn red" }, true, false)@:
+                                        @Ajax.ActionLink("审核不通过", "ChangeStatus", "Company", new { id = Model.ID, status = 2 }, new AjaxOptions { UpdateTargetId = "alert" }, new { @class = "btn red" }, true, false)
+                                    }
+                                    else if (Model.Status == 1)
+                                    { 
+                                        @Ajax.ActionLink("审核不通过", "ChangeStatus", "Company", new { id = Model.ID, status = 2 }, new AjaxOptions { UpdateTargetId = "alert" }, new { @class = "btn red" }, true, false)
+                                    }
+                                    else
+                                    { 
+                                        @Ajax.ActionLink("审核通过", "ChangeStatus", "Company", new { id = Model.ID, status = 1 }, new AjaxOptions { UpdateTargetId = "alert" }, new { @class = "btn red" }, true, false)
+                                    }
+                                    <button type="button" class="btn" onclick="location.href='@Url.Action("Index", "Company")'">
                                         返回</button>
                                 </div>
                             }
@@ -284,22 +297,210 @@
                                 </div>
                                 <div class="control-group">
                                     <label class="control-label">
-                                        验资报告、历次变更时的验资报告</label>
+                                        开户许可证、信用代码证</label>
                                     <div class="controls">
-                                        @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "1", Text = "附件管理", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.YanZiBaoGao });}
+                                        @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "10", Text = "附件管理", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.KaiHuXuKe_XinYongDaiMa });}
                                     </div>
                                 </div>
                                 <div class="control-group">
                                     <label class="control-label">
+                                        验质证书</label>
+                                    <div class="controls">
+                                        <div>
+                                            <span class="help-inline">
+                                                @{Html.RenderAction("SingleManage", "Attachment", new Investment.Models.AttachmentControl { ID = "11", Text = "[上传]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.YanZhiZhengShu });}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">
+                                        公司章程及修正案</label>
+                                    <div class="controls">
+                                        @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "12", Text = "附件管理", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.GongSiZhangChengJiXiuZhengAn });}
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">
+                                        验资报告、历次变更时的验资报告</label>
+                                    <div class="controls">
+                                        @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "13", Text = "附件管理", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.YanZiBaoGao });}
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">
+                                        工商基本信息查询单</label>
+                                    <div class="controls">
+                                        <div>
+                                            <span class="help-inline">
+                                                @{Html.RenderAction("SingleManage", "Attachment", new Investment.Models.AttachmentControl { ID = "14", Text = "[上传]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.GongShangJiBenXinXiChaXunDan });}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">
+                                        法人及股东身份证</label>
+                                    <div class="controls">
+                                        @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "15", Text = "附件管理", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.FaRenJiGuDongShenFenZheng });}
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">
+                                        高管简历</label>
+                                    <div class="controls">
+                                        <div>
+                                            <span class="help-inline">
+                                                @{Html.RenderAction("SingleManage", "Attachment", new Investment.Models.AttachmentControl { ID = "16", Text = "[上传]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.GaoGuanJianLi });}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">
+                                        项目相关批文</label>
+                                    <div class="controls">
+                                        @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "17", Text = "附件管理", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.XiangMuXiangGuanPiWen });}
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">
+                                        可行性报告</label>
+                                    <div class="controls">
+                                        @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "18", Text = "附件管理", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.KeXingXingBaoGao });}
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">
+                                        项目简介及效果图</label>
+                                    <div class="controls">
+                                        @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "19", Text = "附件管理", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.XiangMuJianJieJiXiaoGuoTu });}
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">
+                                        公司简介</label>
+                                    <div class="controls">
+                                        <div>
+                                            <span class="help-inline">
+                                                @{Html.RenderAction("SingleManage", "Attachment", new Investment.Models.AttachmentControl { ID = "20", Text = "[上传]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.GaoGuanJianLi });}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">
+                                        融资申请书及还款计划书</label>
+                                    <div class="controls">
+                                        <div>
+                                            <span class="help-inline">
+                                                @{Html.RenderAction("SingleManage", "Attachment", new Investment.Models.AttachmentControl { ID = "21", Text = "[上传]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.RongZhiShenQingShuJiHuanKuanJiHuaShu });}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">
+                                        五证</label>
+                                    <div class="controls">
+                                        @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "22", Text = "附件管理", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.WuZheng });}
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">
+                                        公司近三年及当年财务报表和审批报告</label>
+                                    <div class="controls">
+                                        @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "23", Text = "附件管理", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.GongSiJinSanNianJiDangNianCaiWuBaoBiaoHeShenJiBaoGao });}
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">
+                                        二级科目明细</label>
+                                    <div class="controls">
+                                        @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "24", Text = "[上传]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.ErJiKeMuMingXi });}
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">
+                                        公司最近一年的增值税、营业税、所得税纳税申请表和纳税凭证复印件</label>
+                                    <div class="controls">
+                                        @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "25", Text = "[上传]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.ZengZhiShui_YingYeShui_SuoDeShui });}
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">
+                                        公司贷款明细，包含借款主体、期限、金额、方式、抵押或担保情况、到期日、贷款银行等，并提供贷款合同复印件</label>
+                                    <div class="controls">
+                                        @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "26", Text = "[上传]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.GongSiDaiKuanMingXi });}
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">
+                                        施工合同</label>
+                                    <div class="controls">
+                                        @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "27", Text = "[上传]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.ShiGongHeTong });}
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">
+                                        销售明细</label>
+                                    <div class="controls">
+                                        @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "28", Text = "[上传]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.XiaoShouMingXi });}
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">
+                                        申请人的所有账号近一年的银行对账单</label>
+                                    <div class="controls">
+                                        @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "29", Text = "上传", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.ShenQingRenYinHangDuiZhangDan });}
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">
+                                        抵押物资料（土地证、房产证、评估报告）</label>
+                                    <div class="controls">
+                                        @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "30", Text = "上传", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.DiYaWuZhiLiao });}
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">
+                                        公司实际经营者及主要股东个人财产清单及相关产权证书复印件</label>
+                                    <div class="controls">
+                                        @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "31", Text = "上传", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.CaiChanQingDan });}
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">
+                                        关联公司资料</label>
+                                    <div class="controls">
+                                        @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "32", Text = "上传", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.GuanLianGongSiZiLiao });}
+                                    </div>
+                                </div>
+                                
+                                <div class="control-group">
+                                    <label class="control-label">
                                         其他附件</label>
                                     <div class="controls">
-                                        @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "2", Text = "附件管理", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.Unknown });}
+                                        @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "50", Text = "附件管理", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.Unknown });}
                                     </div>
                                 </div>
                                 <div class="form-actions">
                                     <button type="submit" class="btn blue">
                                         保存</button>
-                                    <button type="button" class="btn">
+                                    @if (Model.Status == 0)
+                                    { 
+                                        @Ajax.ActionLink("审核通过", "ChangeStatus", "Company", new { id = Model.ID, status = 1 }, new AjaxOptions { UpdateTargetId = "alert" }, new { @class = "btn red" }, true, false)@:
+                                        @Ajax.ActionLink("审核不通过", "ChangeStatus", "Company", new { id = Model.ID, status = 2 }, new AjaxOptions { UpdateTargetId = "alert" }, new { @class = "btn red" }, true, false)
+                                    }
+                                    else if (Model.Status == 1)
+                                    { 
+                                        @Ajax.ActionLink("审核不通过", "ChangeStatus", "Company", new { id = Model.ID, status = 2 }, new AjaxOptions { UpdateTargetId = "alert" }, new { @class = "btn red" }, true, false)
+                                    }
+                                    else
+                                    { 
+                                        @Ajax.ActionLink("审核通过", "ChangeStatus", "Company", new { id = Model.ID, status = 1 }, new AjaxOptions { UpdateTargetId = "alert" }, new { @class = "btn red" }, true, false)
+                                    }
+                                    <button type="button" class="btn" onclick="location.href='@Url.Action("Index", "Company")'">
                                         返回</button>@Html.HiddenFor(a => a.ID)
                                 </div>
                             }

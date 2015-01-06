@@ -36,7 +36,6 @@
                         <div class="portlet-body form">
                             @using (Ajax.BeginForm("Add", "Company", new AjaxOptions() { UpdateTargetId = "alert" }, new { @class = "form-horizontal" }))
                             {
-                                @Html.ValidationSummary()
                                 <div class="control-group">
                                     <label class="control-label">
                                         公司名称</label>
@@ -186,7 +185,7 @@
                                 <div class="form-actions">
                                     <button type="submit" class="btn blue">
                                         保存</button>
-                                    <button type="button" class="btn">
+                                    <button type="button" class="btn" onclick="location.href='@ViewBag.BackUrl'">
                                         返回</button>
                                 </div>
                             }
@@ -269,7 +268,7 @@
                                 <div class="form-actions">
                                     <button type="submit" class="btn blue">
                                         保存</button>
-                                    <button type="button" class="btn">
+                                    <button type="button" class="btn" onclick="location.href='@Url.Action("Index", "Company")'">
                                         返回</button>
                                 </div>
                             }

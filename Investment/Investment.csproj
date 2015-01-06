@@ -118,6 +118,7 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CompanyController.cs" />
     <Compile Include="Controllers\ExitController.cs" />
+    <Compile Include="Controllers\FinancingController.cs" />
     <Compile Include="Controllers\GroupAccountController.cs" />
     <Compile Include="Controllers\GroupProfileController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -1061,6 +1062,13 @@
     <Content Include="Views\Attachment\Manage.cshtml" />
     <Content Include="Views\Company\Edit.cshtml" />
     <Content Include="Views\Attachment\SingleManage.cshtml" />
+    <Content Include="Views\Company\Financing.cshtml" />
+    <Content Include="Views\Company\AddFinancing.cshtml" />
+    <Content Include="Views\Company\EditFinancing.cshtml" />
+    <Content Include="Views\Attachment\ViewOffice.cshtml" />
+    <Content Include="Views\Financing\Index.cshtml" />
+    <Content Include="Views\Financing\IndexAll.cshtml" />
+    <Content Include="Views\Financing\Detail.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

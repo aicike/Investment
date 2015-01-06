@@ -26,5 +26,22 @@ namespace Investment.Models
         public int TableId { get; set; }
 
         public EnumAttachmentType? EnumAttachmentType { get; set; }
+
+        private bool isEnabled = true;
+
+        /// <summary>
+        /// 是否启用（默认启用）
+        /// </summary>
+        public bool IsEnabled
+        {
+            get
+            {
+                return isEnabled;
+            }
+            set
+            {
+                isEnabled = value;
+            }
+        }
     }
 }

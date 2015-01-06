@@ -36,7 +36,7 @@ namespace Business
                 attachment_YingYeZhiZhao.EnumAttachmentType = (int)attachment_YingYeZhiZhao.EnumAttachmentType;
                 attachment_YingYeZhiZhao.TableName = SystemConst.TableName.Company;
                 attachment_YingYeZhiZhao.TableID = company.ID;
-                result = attachmentModel.CopyAttachment_Company(company.ID, attachment_YingYeZhiZhao);
+                result = attachmentModel.CopyAttachment_Company(company.ID, attachment_YingYeZhiZhao, "/Base");
             }
             return result;
         }
@@ -48,7 +48,7 @@ namespace Business
         /// <param name="attachment_YingYeZhiZhao">营业执照附件</param>
         /// <param name="deleteFileNameNumbers">需要删除的文件</param>
         /// <returns></returns>
-        public Result Edit(Company company)
+        public new Result Edit(Company company)
         {
             if (string.IsNullOrEmpty(company.Name) || string.IsNullOrEmpty(company.Address) || string.IsNullOrEmpty(company.ChengLiShiJianJiYingYeQiXian) ||
                    company.ZhuCheZiJin <= 0 || company.ShiShouZiBen <= 0 || company.ZiChanZongE <= 0 || company.FuZhaiZongE <= 0 || company.ZhuYingYeWuShouRu <= 0 || company.JingLiRun <= 0 ||
@@ -83,6 +83,12 @@ namespace Business
             return result;
         }
 
+        /// <summary>
+        /// 上传附件(公司基本信息附件)
+        /// </summary>
+        /// <param name="companyID"></param>
+        /// <param name="attachmentList"></param>
+        /// <returns></returns>
         public Result UploadAttachment(int companyID, List<Attachment> attachmentList)
         {
             Result result = new Result();
@@ -91,8 +97,41 @@ namespace Business
                 AttachmentModel attachmentModel = new AttachmentModel();
                 foreach (Attachment item in attachmentList)
                 {
-                    result = attachmentModel.CopyAttachment_Company(companyID, item);
+                    result = attachmentModel.CopyAttachment_Company(companyID, item, "/Base");
                 }
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// 审批是否通过
+        /// </summary>
+        public void ChangeStatus(int id, int status)
+        {
+            string sql = "UPDATE dbo.Company SET Status=" + status + " WHERE ID=" + id;
+            int i = base.SqlExecute(sql);
+        }
+
+        /// <summary>
+        /// 检查是否有业务数据引用，有的话无法删除。
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="ownerID"></param>
+        /// <returns></returns>
+        public Result Delete_Check(int id, int ownerID)
+        {
+            Result result = new Result();
+            var hasObj = List().Any(a => a.ID == id && a.OwnerID == ownerID);
+            if (hasObj)
+            {
+                //检查业务数据引用，引用了无法删除
+                result = base.Delete(id);
+                if (result.HasError) {
+                    result.Error = "该数据已经使用，无法删除。";
+                }
+            }
+            else {
+                result.Error = "未找到该数据，无法删除。";
             }
             return result;
         }

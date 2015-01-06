@@ -1,0 +1,40 @@
+﻿@{
+    ViewBag.Title = "ViewOffice";
+    Layout = null;
+    
+}
+<html>
+<head>
+    <style>
+        body
+        {
+            margin:0px;
+            }
+    </style>
+    <script>
+        function getClientHeight() {
+            if (document.documentElement) {
+                return document.documentElement.clientHeight;
+            } else {
+                return document.body.clientHeight;
+            }
+        };
+
+        function resize() {
+
+            var iframeDOM = document.getElementById("previewframe");
+            if (iframeDOM) {
+                var contentHeight = getClientHeight() ;
+                if (contentHeight > 400) {
+                    iframeDOM.style.height = (contentHeight - 1) + "px";
+                }
+            }
+        }
+        window.onresize = resize;
+    </script>
+</head>
+<body onload="resize()">
+    <iframe id="previewframe" src="@ViewBag.Url" style="width:100%; height:100*;border:0" onload="this.height=this.contentWindow.document.body.scrollHeight">
+    </iframe>
+</body>
+</html>

@@ -48,15 +48,18 @@
             this._htmlAttributes = htmlAttributes;
         }
 
-        internal PagerBuilder(HtmlHelper helper, string actionName, string controllerName, int totalPageCount, int pageIndex, PagerOptions pagerOptions, string routeName, System.Web.Routing.RouteValueDictionary routeValues, IDictionary<string, object> htmlAttributes) : this(helper, null, actionName, controllerName, totalPageCount, pageIndex, pagerOptions, routeName, routeValues, null, htmlAttributes)
+        internal PagerBuilder(HtmlHelper helper, string actionName, string controllerName, int totalPageCount, int pageIndex, PagerOptions pagerOptions, string routeName, System.Web.Routing.RouteValueDictionary routeValues, IDictionary<string, object> htmlAttributes)
+            : this(helper, null, actionName, controllerName, totalPageCount, pageIndex, pagerOptions, routeName, routeValues, null, htmlAttributes)
         {
         }
 
-        internal PagerBuilder(AjaxHelper helper, string actionName, string controllerName, int totalPageCount, int pageIndex, PagerOptions pagerOptions, string routeName, System.Web.Routing.RouteValueDictionary routeValues, AjaxOptions ajaxOptions, IDictionary<string, object> htmlAttributes) : this(null, helper, actionName, controllerName, totalPageCount, pageIndex, pagerOptions, routeName, routeValues, ajaxOptions, htmlAttributes)
+        internal PagerBuilder(AjaxHelper helper, string actionName, string controllerName, int totalPageCount, int pageIndex, PagerOptions pagerOptions, string routeName, System.Web.Routing.RouteValueDictionary routeValues, AjaxOptions ajaxOptions, IDictionary<string, object> htmlAttributes)
+            : this(null, helper, actionName, controllerName, totalPageCount, pageIndex, pagerOptions, routeName, routeValues, ajaxOptions, htmlAttributes)
         {
         }
 
-        internal PagerBuilder(HtmlHelper helper, string actionName, string controllerName, int totalPageCount, int pageIndex, PagerOptions pagerOptions, string routeName, System.Web.Routing.RouteValueDictionary routeValues, AjaxOptions ajaxOptions, IDictionary<string, object> htmlAttributes) : this(helper, null, actionName, controllerName, totalPageCount, pageIndex, pagerOptions, routeName, routeValues, ajaxOptions, htmlAttributes)
+        internal PagerBuilder(HtmlHelper helper, string actionName, string controllerName, int totalPageCount, int pageIndex, PagerOptions pagerOptions, string routeName, System.Web.Routing.RouteValueDictionary routeValues, AjaxOptions ajaxOptions, IDictionary<string, object> htmlAttributes)
+            : this(helper, null, actionName, controllerName, totalPageCount, pageIndex, pagerOptions, routeName, routeValues, ajaxOptions, htmlAttributes)
         {
         }
 
@@ -70,7 +73,7 @@
             {
                 if (ajax != null)
                 {
-                    actionName = (string) ajax.ViewContext.RouteData.Values["action"];
+                    actionName = (string)ajax.ViewContext.RouteData.Values["action"];
                 }
                 else
                 {
@@ -205,7 +208,7 @@
         {
             int num;
             ViewContext context = this._msAjaxPaging ? this._ajax.ViewContext : this._html.ViewContext;
-            if (int.TryParse((string) context.HttpContext.Items["_MvcPager_ControlIndex"], out num))
+            if (int.TryParse((string)context.HttpContext.Items["_MvcPager_ControlIndex"], out num))
             {
                 num++;
             }
@@ -406,6 +409,12 @@
             {
                 return this.CreateWrappedPagerElement(item, string.Format("<a disabled=\"disabled\">{0}</a>", item.Text));
             }
+            #region 解决"下一页"显示样式Bug
+            if (item.Text == "上一页" && string.IsNullOrEmpty(str))
+            {
+                return this.CreateWrappedPagerElement(item, string.Format("<a disabled=\"disabled\">{0}</a>", item.Text));
+            }
+            #endregion
             return this.CreateWrappedPagerElement(item, string.IsNullOrEmpty(str) ? this._html.Encode(item.Text) : string.Format("<a href='{0}'>{1}</a>", str, item.Text));
         }
 
@@ -554,7 +563,7 @@
             }
             builder2.MergeAttributes<string, object>(this._htmlAttributes, true);
             string pagerScript = string.Empty;
-            if (this._pagerOptions.UseJqueryAjax && (((string) this._html.ViewContext.HttpContext.Items["_MvcPager_CheckjQueryScript"]) != "1"))
+            if (this._pagerOptions.UseJqueryAjax && (((string)this._html.ViewContext.HttpContext.Items["_MvcPager_CheckjQueryScript"]) != "1"))
             {
                 pagerScript = "if(typeof(jQuery)==\"undefined\"){alert(\"未检测到jQuery脚本库，ASP.NET MvcPager无法实现jQuery Ajax分页！\");}";
                 this._html.ViewContext.HttpContext.Items["_MvcPager_CheckjQueryScript"] = "1";
@@ -572,7 +581,7 @@
             {
                 pagerScript = "<script language=\"javascript\" type=\"text/javascript\">" + pagerScript + "</script>";
             }
-            return MvcHtmlString.Create(pagerScript + builder2.ToString((TagRenderMode) TagRenderMode.Normal));
+            return MvcHtmlString.Create(pagerScript + builder2.ToString((TagRenderMode)TagRenderMode.Normal));
         }
     }
 }

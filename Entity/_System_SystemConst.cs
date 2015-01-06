@@ -41,6 +41,8 @@ namespace Entity
         public class TableName
         {
             public const string Company = "Company";
+
+            public const string Financing = "Financing";
         }
     }
 
