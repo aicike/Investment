@@ -22,9 +22,16 @@ namespace Entity
         public int Status { get; set; }
 
         /// <summary>
+        /// 平台负责人ID
+        /// </summary>
+        public int? OwnerID { get; set; }
+
+        public virtual GroupAccount Owner { get; set; }
+
+        /// <summary>
         /// 信息是否齐全
         /// </summary>
-        public bool IsComplete { get; set; } 
+        public bool IsComplete { get; set; }
 
         /// <summary>
         /// 客户名称
@@ -93,6 +100,12 @@ namespace Entity
         public double ZhuYingYeWuShouRu { get; set; }
 
         /// <summary>
+        /// 主营业务
+        /// </summary>
+        [Display(Name = "主营业务")]
+        public double ZhuYingYeWu { get; set; }
+
+        /// <summary>
         /// 净利润
         /// </summary>
         [Display(Name = "净利润")]
@@ -121,6 +134,12 @@ namespace Entity
         /// </summary>
         [Display(Name = "股权结构")]
         public string GuQuanJieGou { get; set; }
+
+        /// <summary>
+        /// 实际控制人
+        /// </summary>
+        [Display(Name = "实际控制人")]
+        public string ShiJiKongZhiRen { get; set; }
 
         /// <summary>
         /// 实际控制人信用记录
@@ -188,12 +207,19 @@ namespace Entity
         [Display(Name = "营业执照")]
         public string YingYeZhiZhao { get; set; }
 
-        
+
         /// <summary>
         /// 经营范围
         /// </summary>
         [Display(Name = "经营范围")]
         public string JingYingFanWei { get; set; }
+
+        /// <summary>
+        /// 贷款卡
+        /// </summary>
+        [Display(Name = "贷款卡")]
+        public string DaiKuanKa { get; set; }
+
 
         //----------------------子表------------------------------------------
         /// <summary>
@@ -202,6 +228,10 @@ namespace Entity
         public virtual ICollection<CompanyAccount> CompanyAccount { get; set; }
 
         public virtual ICollection<CompanyLoan> CompanyLoans { get; set; }
+
+        public virtual ICollection<CompanyRelation> CompanyRelations { get; set; }
+
+        public virtual ICollection<Financing> Financings { get; set; }
 
     }
 }

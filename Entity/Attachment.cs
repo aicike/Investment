@@ -48,5 +48,10 @@ namespace Entity
         /// 附件格式
         /// </summary>
         public int EnumAttachmentFormat { get; set; }
+
+        /// <summary>
+        /// 删除状态：0 未删除   1删除
+        /// </summary>
+        public int Status { get; set; }
     }
 }

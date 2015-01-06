@@ -75,7 +75,7 @@ namespace System
             }
             else
             {
-                return path.Substring(path.LastIndexOf('.'));
+                return path.Substring(path.LastIndexOf('.')).ToLower();
             }
         }
 

@@ -8,6 +8,7 @@ using System.IO;
 using System.Drawing;
 using Investment.Controllers;
 using Entity;
+using Entity.Enum;
 
 namespace Investment.Controllers
 {
@@ -50,6 +51,99 @@ namespace Investment.Controllers
                 return "false";
             }
         }
+
+
+        /// <summary>
+        /// 多文件上传附件通用方法
+        /// </summary>
+        [HttpPost]
+        public string UploadAttachment(int enumAttachmentType, string table, int tableID)
+        {
+            if (Request.Files.Count > 0)
+            {
+                //获取临时文件夹
+                var Paths = ToolImage.GetTemporaryPath();
+                Common con = new Common();
+                var token = DateTime.Now.ToString("yyyyMMddHHmmss");
+                string suffix = Request.Files[0].FileName.GetFileSuffix();
+                var LastName = token + con.CreateRandom("", 5) + suffix;
+                //图片显示界面
+                var ImagePath = Paths[0] + "/" + LastName; //网页路径
+                var mapePath = Paths[1] + "/" + LastName;  //物理路径
+                Request.Files[0].SaveAs(mapePath);
+                Attachment attachment = new Attachment();
+                attachment.FileName_Number = LastName;
+                attachment.FileName = Request.Files[0].FileName;
+                attachment.FilePath = mapePath;
+                attachment.FileUrl = ImagePath;
+                attachment.EnumAttachmentType = enumAttachmentType;
+                attachment.EnumAttachmentFormat = (int)GetAttachmentFormat(suffix);
+                attachment.TableName = table;
+                attachment.TableID = tableID;
+                return Newtonsoft.Json.JsonConvert.SerializeObject(attachment);
+            }
+            else
+            {
+                return "false";
+            }
+        }
+
+        /// <summary>
+        /// 单文件上传附件通用方法
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        public string UploadAttachment_Single(int enumAttachmentType, string table, int tableID)
+        {
+            if (Request.Files.Count > 0)
+            {
+                //获取临时文件夹
+                var Paths = ToolImage.GetTemporaryPath();
+                Common con = new Common();
+                var token = DateTime.Now.ToString("yyyyMMddHHmmss");
+                string suffix = Request.Files[0].FileName.GetFileSuffix();
+                var LastName = token + con.CreateRandom("", 5) + suffix;
+                //图片显示界面
+                var ImagePath = Paths[0] + "/" + LastName; //网页路径
+                var mapePath = Paths[1] + "/" + LastName;  //物理路径
+                Request.Files[0].SaveAs(mapePath);
+                Attachment attachment = new Attachment();
+                attachment.FileName_Number = LastName;
+                attachment.FileName = Request.Files[0].FileName;
+                attachment.FilePath = mapePath;
+                attachment.FileUrl = ImagePath;
+                attachment.EnumAttachmentType = enumAttachmentType; 
+                attachment.EnumAttachmentFormat = (int)GetAttachmentFormat(suffix);
+                attachment.TableName = table;
+                attachment.TableID = tableID;
+                return Newtonsoft.Json.JsonConvert.SerializeObject(new { jsonrpc = "2.0", result = attachment });
+            }
+            else
+            {
+                return Newtonsoft.Json.JsonConvert.SerializeObject(new { jsonrpc = "2.0", error = "{'code': 103, 'message': '文件上传失败。'}" });
+            }
+        }
+
+        private EnumAttachmentFormat GetAttachmentFormat(string format)
+        {
+            EnumAttachmentFormat f = EnumAttachmentFormat.Other;
+            switch (format)
+            {
+                case ".jpg":
+                case ".jpge":
+                case ".gif":
+                case ".png":
+                case ".bmp":
+                    f = EnumAttachmentFormat.Image;
+                    break;
+                case "doc":
+                case "docx":
+                    f = EnumAttachmentFormat.Office;
+                    break;
+            }
+            return f;
+        }
+
 
         //
         // GET: /Ajax/

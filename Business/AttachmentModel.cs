@@ -19,8 +19,9 @@ namespace Business
         /// </summary>
         /// <param name="companyID">公司ID</param>
         /// <param name="attachment">附件对象</param>
+        /// <param name="subDirectory">子文件夹名称，可为空</param>
         /// <returns></returns>
-        public Result CopyAttachment_Company(int companyID, Attachment attachment)
+        public Result CopyAttachment_Company(int companyID, Attachment attachment,string subDirectory)
         {
             Result result = new Result();
             try
@@ -28,6 +29,10 @@ namespace Business
                 //判断是否有Company目录是否存在
                 string directory_Logic = SystemConst.AttachmentPath.Substring(SystemConst.AttachmentPath.LastIndexOf('/') + 1) + "/" + "Company" + "/" + companyID;
                 string directory_Physics = SystemConst.AttachmentPath + "/" + "Company" + "/" + companyID;
+                if (!string.IsNullOrEmpty(subDirectory)) {
+                    directory_Logic += subDirectory;
+                    directory_Physics += subDirectory;
+                }
                 if (Directory.Exists(directory_Physics) == false)
                 {
                     Directory.CreateDirectory(directory_Physics);
@@ -45,6 +50,26 @@ namespace Business
             catch (Exception ex)
             {
                 result.Error = ex.Message;
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// 正式附件删除（目前只限制于公司基本资料的删除）
+        /// </summary>
+        /// <returns></returns>
+        public Result DeleteAttachment(int tableID, int id)
+        {
+            //找到未删除的该附件
+            var attachment = List().Where(a => a.TableName.Equals(SystemConst.TableName.Company, StringComparison.CurrentCultureIgnoreCase) &&
+                                               a.TableID == tableID &&
+                                               a.ID == id &&
+                                               a.Status == 0).FirstOrDefault();
+            Result result = new Result();
+            if (attachment != null)
+            {
+                attachment.Status = 1;
+                result = Edit(attachment);
             }
             return result;
         }
@@ -81,7 +106,7 @@ namespace Business
         /// <returns></returns>
         public List<Attachment> GetAttachment(string tableName, int tableID)
         {
-            return List().Where(a => a.TableName.Equals(tableName, StringComparison.CurrentCultureIgnoreCase) && a.TableID == tableID).ToList();
+            return List().Where(a => a.TableName.Equals(tableName, StringComparison.CurrentCultureIgnoreCase) && a.TableID == tableID && a.Status == 0).ToList();
         }
     }
 }

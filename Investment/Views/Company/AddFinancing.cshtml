@@ -1,0 +1,179 @@
+﻿@{
+    ViewBag.Title = "新增融资信息";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section scripts{
+    <style>
+        .myLink
+        {
+            cursor: pointer;
+        }
+    </style>
+    <script>
+        $(function () {
+            $("#link_1").click();
+            $("#btnSubmit").click(function () {
+                if (!$("#link_1").parent().hasClass("active")) {
+                    var name = $("#Name").val().trim().length;
+                    var amount = $("#Amount").val().trim().length;
+                    var minTimeLimit = $("#MinTimeLimit").val().trim().length;
+                    var ShouYiLv = $("#ShouYiLv").val().trim().length;
+                    var FinancingCost = $("#FinancingCost").val().trim().length;
+                    var Purpose = $("#Purpose").val().trim().length;
+                    var Repayment = $("#Repayment").val().trim().length;
+                    var ZengXinCuoShi = $("#ZengXinCuoShi").val().trim().length;
+                    var RongZiFangAn = $("#RongZiFangAn").val().trim().length;
+                    if (name == 0 || amount == 0 || minTimeLimit == 0 || ShouYiLv == 0 || FinancingCost == 0 || Purpose == 0 || Repayment == 0 || ZengXinCuoShi == 0 || RongZiFangAn == 0) {
+                        $("#link_1").click();
+                        $("#btnSubmit").click();
+                        return false;
+                    }
+                }
+            });
+        });
+    </script>
+}
+@model Entity.Financing
+<div class="row-fluid">
+    <div class="span12">
+        <div class="tabbable tabbable-custom boxless">
+            @using (Ajax.BeginForm("AddFinancing", "Company", new { page = ViewBag.Page }, new AjaxOptions() { UpdateTargetId = "alert" }, new { @class = "form-horizontal" }))
+            {
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#tab_1" id="link_1" data-toggle="tab">基本信息</a></li>
+                    <li><a class="" href="#tab_2" data-toggle="tab">附件信息</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="tab_1">
+                        <div class="portlet box blue">
+                            <div class="portlet-title">
+                                <div class="caption">
+                                    <i class="icon-reorder"></i>基本信息</div>
+                                <div class="tools">
+                                </div>
+                            </div>
+                            <div class="portlet-body form">
+                                <div class="control-group">
+                                    <label class="control-label">
+                                        项目名称</label>
+                                    <div class="controls">
+                                        @Html.TextBoxFor(a => a.Name, new { @class = "span6 m-wrap" })
+                                        <span class="help-inline">@Html.ValidationMessageFor(a => a.Name)</span>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">
+                                        融资金额（万元）</label>
+                                    <div class="controls">
+                                        @Html.TextBoxFor(a => a.Amount, new { @class = "m-wrap span6" })
+                                        <span class="help-inline">@Html.ValidationMessageFor(a => a.Amount)</span>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">
+                                        融资期限（月）</label>
+                                    <div class="controls">
+                                        @Html.TextBoxFor(a => a.MinTimeLimit, new { @class = "span2 m-wrap" })&nbsp;&nbsp;&nbsp<span
+                                            class="help-inline">-</span>&nbsp;&nbsp;&nbsp;&nbsp;@Html.TextBoxFor(a => a.MaxTimeLimit, new { @class = "span2 m-wrap" })
+                                        <span class="help-inline">@Html.ValidationMessageFor(a => a.MinTimeLimit)</span>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">
+                                        收益率</label>
+                                    <div class="controls">
+                                        @Html.TextBoxFor(a => a.ShouYiLv, new { @class = "m-wrap span4" })
+                                        <label class="radio">
+                                            <div class="radio">
+                                                <span class="checked">
+                                                    <input type="radio" name="ShouYiLvType" value="0" checked=""></span></div>
+                                            月
+                                        </label>
+                                        <label class="radio">
+                                            <div class="radio">
+                                                <span>
+                                                    <input type="radio" name="ShouYiLvType" value="1"></span></div>
+                                            年
+                                        </label>
+                                        <span class="help-inline">@Html.ValidationMessageFor(a => a.ShouYiLv)</span>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">
+                                        融资成本</label>
+                                    <div class="controls">
+                                        @Html.TextBoxFor(a => a.FinancingCost, new { @class = "span6 m-wrap" })
+                                        <span class="help-inline">@Html.ValidationMessageFor(a => a.FinancingCost)</span>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">
+                                        融资用途</label>
+                                    <div class="controls">
+                                        @Html.TextAreaFor(a => a.Purpose, new { @class = "span6 m-wrap" })
+                                        <span class="help-inline">@Html.ValidationMessageFor(a => a.Purpose)</span>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">
+                                        还款来源</label>
+                                    <div class="controls">
+                                        @Html.TextAreaFor(a => a.Repayment, new { @class = "span6 m-wrap" })
+                                        <span class="help-inline">@Html.ValidationMessageFor(a => a.Repayment)</span>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">
+                                        增信措施</label>
+                                    <div class="controls">
+                                        @Html.TextAreaFor(a => a.ZengXinCuoShi, new { @class = "span6 m-wrap" })
+                                        <span class="help-inline">@Html.ValidationMessageFor(a => a.ZengXinCuoShi)</span>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">
+                                        融资方案</label>
+                                    <div class="controls">
+                                        @Html.TextAreaFor(a => a.RongZiFangAn, new { @class = "span6 m-wrap" })
+                                        <span class="help-inline">@Html.ValidationMessageFor(a => a.RongZiFangAn)</span>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">
+                                        备注</label>
+                                    <div class="controls">
+                                        @Html.TextAreaFor(a => a.Remark, new { @class = "span6 m-wrap" })
+                                        <span class="help-inline">@Html.ValidationMessageFor(a => a.Remark)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane " id="tab_2">
+                        <div class="portlet box blue">
+                            <div class="portlet-title">
+                                <div class="caption">
+                                    <i class="icon-reorder"></i>附件信息</div>
+                                <div class="tools">
+                                </div>
+                            </div>
+                            <div class="portlet-body form">
+                                <div class="control-group">
+                                    <label class="control-label">
+                                        附件</label>
+                                    <div class="controls">
+                                        @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "1", Text = "附件管理", Table = Entity.SystemConst.TableName.Financing, EnumAttachmentType = Entity.Enum.EnumAttachmentType.RongZiXinXiFuJian });}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn blue" id="btnSubmit">
+                        保存</button>
+                    <button type="button" class="btn" onclick="location.href='@ViewBag.BackUrl'">
+                        返回</button><input type="hidden" id="CompanyID" name="CompanyID" value="@ViewBag.CompanyID" />
+                </div>
+            }
+        </div>
+    </div>
+</div>

@@ -1,0 +1,107 @@
+﻿@{
+    ViewBag.Title = "融资信息列表";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section scripts{
+}
+@model PagedList<Entity.Financing>
+<div class="row-fluid">
+    <div class="span12">
+        <div>
+        </div>
+        @using (Html.BeginForm("Index", "Financing", new { id = 1 }))
+        {
+            <table style="width: 100%; margin-top: 20px; margin-bottom: 20px;">
+                <tr>
+                    <td style="width: 100px;">
+                        项目名称
+                    </td>
+                    <td>
+                        <input type="text" class="span6" name="Name" id="Name" style="margin-bottom: 0px" />
+                    </td>
+                    <td style="width: 100px;">
+                        <input type="submit" value="查询" class="btn blue" />
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+            </table>
+        }
+        <div class="portlet box blue" style="margin-top: 10px;">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-cogs"></i>融资信息列表
+                </div>
+                <div class="tools">
+                </div>
+            </div>
+            <div class="portlet-body">
+                <table class="table table-bordered table-hover" id="table_company">
+                    <thead>
+                        <tr>
+                            <th>
+                                项目名称
+                            </th>
+                            <th>
+                                融资金额
+                            </th>
+                            <th>
+                                融资期限
+                            </th>
+                            <th>
+                                融资成本
+                            </th>
+                            <th style="width: 20%">
+                                操作
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @item.Name
+                                </td>
+                                <td>
+                                    @item.Amount
+                                </td>
+                                <td>
+                                    @if (item.MaxTimeLimit != 0)
+                                    {
+                                        @:@item.MinTimeLimit + @item.MaxTimeLimit
+                                    }
+                                    else
+                                    {
+                                        @item.MinTimeLimit
+                                    }
+                                </td>
+                                <td>
+                                    @item.FinancingCost
+                                </td>
+                                <td>
+                                    @Html.ActionLink("详细", "Detail", "Financing", new { id = item.ID }, null, true)
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <div class="pagination">
+                    @Html.Pager(Model, new PagerOptions
+                       {
+                           PageIndexParameterName = "ID",
+                           CurrentPagerItemWrapperFormatString = "<li class=\"disabled\"><a>{0}</a></li>",
+                           NumericPagerItemWrapperFormatString = "<li>{0}</li>",
+                           NavigationPagerItemWrapperFormatString = "<li>{0}</li>",
+                           CssClass = "",
+                           SeparatorHtml = "",
+                           AutoHide = false,
+                           PageIndexOutOfRangeErrorMessage = "页面错误。",
+                           ShowFirstLast = false,
+                           ContainerTagName = "ul"
+                       })
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

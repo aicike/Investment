@@ -1,13 +1,19 @@
 ﻿@{
     ViewBag.Title = "Manage";
     Layout = null;
+    var ac = ViewBag.AC as Investment.Models.AttachmentControl;
 }
 @{Html.AddStyle(Url.Content("/Scripts/uploadify/uploadify.css"));}
 @{Html.AddJavaScript(Url.Content("/Scripts/uploadify/jquery.uploadify.js"));}
-@{Html.AddJavaScript(Url.Content("/Scripts/Attachment.js"));}
+@{Html.AddJavaScript(Url.Content("/Attachment/GetJS?formID=" + ac.ID + "&enumAttachmentType=" + (int)ac.EnumAttachmentType) + "&table=" + ac.Table + "&tableID=" + ac.TableId);}
 @model List<Entity.Attachment>
-<span class="help-inline"><a class="blue" data-toggle="modal" href="#responsive">[管理附件]</a></span>
-<div id="responsive" class="modal hide fade" tabindex="-1">
+<span class="help-inline"><a class="blue" data-toggle="modal" href="#responsive_@ac.ID">
+    [管理附件]</a>
+    @if (Model.Count > 0)
+    { 
+        @:（@(Model.Count)个）
+                            }<label id="label_new_attachment_@ac.ID"></label></span>
+<div id="responsive_@ac.ID" class="modal hide fade" tabindex="-1" data-width="800">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
         </button>
@@ -16,16 +22,39 @@
     </div>
     <div class="modal-body">
         <div class="row-fluid">
-            <div class="span12" style="max-height: 600px; min-height: 300px; overflow-y: scroll">
-                <div class="control-group">
-                    <input id="file_upload_zhengben" name="file_upload" type="file" multiple="false" />
-                    <input id="hidYingYeZhiZhao_zhengben" name="hidYingYeZhiZhao" type="hidden" />
-                </div>
-                @foreach (var item in Model)
-                {
-                    <div>
-                        @item.FileName</div>
+            <div class="span12" style="max-height: 600px; min-height: 300px; overflow-y: auto">
+                @if (ac.IsEnabled)
+                { 
+                    <div class="control-group">
+                        <input id="file_upload_attachment_@ac.ID" name="file_upload_attachment_@ac.ID" type="file" multiple="false" />
+                        <input id="hid_attachment_@ac.ID" name="hid_attachment_@ac.ID" type="hidden" />
+                    </div>
+                    <h4>
+                        新附件</h4>
+                    <div class="control-group" style="border: 1px solid #EFEFEF; min-height: 100px; padding: 5px;"
+                    id="div_newAttachment_@ac.ID">
+                    </div>       
                 }
+                <h4>
+                    已有附件@(Model.Count)个</h4>
+                <div class="control-group" style="border: 1px solid #EFEFEF; min-height: 100px; padding: 5px;">
+                    @foreach (var item in Model)
+                    {
+                        <div>
+                            <span class="inline pull-left">@item.FileName</span>
+                            @if (ac.IsEnabled)
+                            {
+                                <a style="cursor: pointer;margin-left:10px;" class="inline pull-right link_delete_old_attachment_@(ac.ID)" tid='@item.TableID' link_id='@item.ID'>
+                                    删除</a>}
+                            <a href="@Url.Action("Download", "Attachment", new { id = item.ID })" target="_blank" style="cursor: pointer; margin-left: 10px;" class="inline pull-right">
+                                下载</a> <a href="@Url.Action("ViewOffice", "Attachment", new { url = item.FileUrl })" target="_blank" style="cursor: pointer; margin-left: 10px;" class="inline pull-right">
+                                    预览</a>
+                            <div style="clear: both">
+                            </div>
+                        </div>
+                        
+                    }
+                </div>
             </div>
         </div>
     </div>

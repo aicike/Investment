@@ -95,6 +95,25 @@ namespace System.Web.Mvc.Html
             return ajaxHelper.ActionLink(linkText, actionName, controllerName, routeValues, ajaxOptions);
         }
 
+        public static MvcHtmlString ActionLink(this AjaxHelper ajaxHelper, string linkText, string actionName, string controllerName, object routeValues, AjaxOptions ajaxOptions, object htmlAttributes, bool isCheckPermissions, bool isShowText = false)
+        {
+            if (isCheckPermissions)
+            {
+                if (!CheckHasPermissions(ajaxHelper.ViewContext, actionName, controllerName, routeValues))
+                {
+                    if (isShowText)
+                    {
+                        return MvcHtmlString.Create(linkText);
+                    }
+                    else
+                    {
+                        return MvcHtmlString.Empty;
+                    }
+                }
+            }
+            return ajaxHelper.ActionLink(linkText, actionName, controllerName, routeValues,ajaxOptions,htmlAttributes);
+        }
+
         #endregion
     }
 }
