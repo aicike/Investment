@@ -38,32 +38,36 @@
                                 <label class="control-label">
                                     项目名称</label>
                                 <div class="controls">
-                                    @Model.Name
+                                    @Html.TextBoxFor(a => a.Name, new { @class = "span6 m-wrap" ,@readonly="readonly" })
+                                    <span class="help-inline">@Html.ValidationMessageFor(a => a.Name)</span>
                                 </div>
                             </div>
                             <div class="control-group">
                                 <label class="control-label">
                                     融资金额（万元）</label>
                                 <div class="controls">
-                                    @Model.Amount
+                                    @Html.TextBoxFor(a => a.Amount, new { @class = "m-wrap span6", @readonly = "readonly" })
+                                    <span class="help-inline">@Html.ValidationMessageFor(a => a.Amount)</span>
                                 </div>
                             </div>
                             <div class="control-group">
                                 <label class="control-label">
                                     融资期限（月）</label>
                                 <div class="controls">
-                                    @Model.MinTimeLimit&nbsp;&nbsp;&nbsp<span class="help-inline">-</span>&nbsp;&nbsp;&nbsp;&nbsp;@Model.MaxTimeLimit
+                                    @Html.TextBoxFor(a => a.MinTimeLimit, new { @class = "span2 m-wrap", @readonly = "readonly" })&nbsp;&nbsp;&nbsp<span
+                                        class="help-inline">-</span>&nbsp;&nbsp;&nbsp;&nbsp;@Html.TextBoxFor(a => a.MaxTimeLimit, new { @class = "span2 m-wrap", @readonly = "readonly" })
+                                    <span class="help-inline">@Html.ValidationMessageFor(a => a.MinTimeLimit)</span>
                                 </div>
                             </div>
                             <div class="control-group">
                                 <label class="control-label">
                                     收益率</label>
                                 <div class="controls">
-                                    @Model.ShouYiLv
+                                    @Html.TextBoxFor(a => a.ShouYiLv, new { @class = "m-wrap span4", @readonly = "readonly" })
                                     <label class="radio">
                                         <div class="radio">
                                             <span class="checked">
-                                                <input type="radio" name="ShouYiLvType" value="0" checked=""></span></div>
+                                                <input type="radio" name="ShouYiLvType" value="0" checked="" ></span></div>
                                         月
                                     </label>
                                     <label class="radio">
@@ -72,48 +76,55 @@
                                                 <input type="radio" name="ShouYiLvType" value="1"></span></div>
                                         年
                                     </label>
+                                    <span class="help-inline">@Html.ValidationMessageFor(a => a.ShouYiLv)</span>
                                 </div>
                             </div>
                             <div class="control-group">
                                 <label class="control-label">
                                     融资成本</label>
                                 <div class="controls">
-                                    @Model.FinancingCost
+                                    @Html.TextBoxFor(a => a.FinancingCost, new { @class = "span6 m-wrap", @readonly = "readonly" })
+                                    <span class="help-inline">@Html.ValidationMessageFor(a => a.FinancingCost)</span>
                                 </div>
                             </div>
                             <div class="control-group">
                                 <label class="control-label">
                                     融资用途</label>
                                 <div class="controls">
-                                    @Model.Purpose
+                                    @Html.TextAreaFor(a => a.Purpose, new { @class = "span6 m-wrap", @readonly = "readonly" })
+                                    <span class="help-inline">@Html.ValidationMessageFor(a => a.Purpose)</span>
                                 </div>
                             </div>
                             <div class="control-group">
                                 <label class="control-label">
                                     还款来源</label>
                                 <div class="controls">
-                                    @Model.Repayment
+                                    @Html.TextAreaFor(a => a.Repayment, new { @class = "span6 m-wrap", @readonly = "readonly" })
+                                    <span class="help-inline">@Html.ValidationMessageFor(a => a.Repayment)</span>
                                 </div>
                             </div>
                             <div class="control-group">
                                 <label class="control-label">
                                     增信措施</label>
                                 <div class="controls">
-                                    @Model.ZengXinCuoShi
+                                    @Html.TextAreaFor(a => a.ZengXinCuoShi, new { @class = "span6 m-wrap", @readonly = "readonly" })
+                                    <span class="help-inline">@Html.ValidationMessageFor(a => a.ZengXinCuoShi)</span>
                                 </div>
                             </div>
                             <div class="control-group">
                                 <label class="control-label">
                                     融资方案</label>
                                 <div class="controls">
-                                    @Model.RongZiFangAn
+                                    @Html.TextAreaFor(a => a.RongZiFangAn, new { @class = "span6 m-wrap", @readonly = "readonly" })
+                                    <span class="help-inline">@Html.ValidationMessageFor(a => a.RongZiFangAn)</span>
                                 </div>
                             </div>
                             <div class="control-group">
                                 <label class="control-label">
                                     备注</label>
                                 <div class="controls">
-                                    @Model.Remark
+                                    @Html.TextAreaFor(a => a.Remark, new { @class = "span6 m-wrap", @readonly = "readonly" })
+                                    <span class="help-inline">@Html.ValidationMessageFor(a => a.Remark)</span>
                                 </div>
                             </div>
                         </div>
