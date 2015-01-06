@@ -19,128 +19,129 @@
 <div class="row-fluid">
     <div class="span12">
         <div class="tabbable tabbable-custom boxless">
-                <ul class="nav nav-tabs">
-                    <li class="active"><a href="#tab_1" id="link_1" data-toggle="tab">基本信息</a></li>
-                    <li><a class="" href="#tab_2" data-toggle="tab">附件信息</a></li>
-                </ul>
-                <div class="tab-content">
-                    <div class="tab-pane active" id="tab_1">
-                        <div class="portlet box blue">
-                            <div class="portlet-title">
-                                <div class="caption">
-                                    <i class="icon-reorder"></i>基本信息</div>
-                                <div class="tools">
+            <form action="#" class="form-horizontal">
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#tab_1" id="link_1" data-toggle="tab">基本信息</a></li>
+                <li><a class="" href="#tab_2" data-toggle="tab">附件信息</a></li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane active" id="tab_1">
+                    <div class="portlet box blue">
+                        <div class="portlet-title">
+                            <div class="caption">
+                                <i class="icon-reorder"></i>基本信息</div>
+                            <div class="tools">
+                            </div>
+                        </div>
+                        <div class="portlet-body form">
+                            <div class="control-group">
+                                <label class="control-label">
+                                    项目名称</label>
+                                <div class="controls">
+                                    @Model.Name
                                 </div>
                             </div>
-                            <div class="portlet-body form">
-                                <div class="control-group">
-                                    <label class="control-label">
-                                        项目名称</label>
-                                    <div class="controls">
-                                        @Model.Name
-                                    </div>
+                            <div class="control-group">
+                                <label class="control-label">
+                                    融资金额（万元）</label>
+                                <div class="controls">
+                                    @Model.Amount
                                 </div>
-                                <div class="control-group">
-                                    <label class="control-label">
-                                        融资金额（万元）</label>
-                                    <div class="controls">
-                                        @Model.Amount
-                                    </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">
+                                    融资期限（月）</label>
+                                <div class="controls">
+                                    @Model.MinTimeLimit&nbsp;&nbsp;&nbsp<span class="help-inline">-</span>&nbsp;&nbsp;&nbsp;&nbsp;@Model.MaxTimeLimit
                                 </div>
-                                <div class="control-group">
-                                    <label class="control-label">
-                                        融资期限（月）</label>
-                                    <div class="controls">
-                                        @Model.MinTimeLimit&nbsp;&nbsp;&nbsp<span
-                                            class="help-inline">-</span>&nbsp;&nbsp;&nbsp;&nbsp;@Model.MaxTimeLimit
-                                    </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">
+                                    收益率</label>
+                                <div class="controls">
+                                    @Model.ShouYiLv
+                                    <label class="radio">
+                                        <div class="radio">
+                                            <span class="checked">
+                                                <input type="radio" name="ShouYiLvType" value="0" checked=""></span></div>
+                                        月
+                                    </label>
+                                    <label class="radio">
+                                        <div class="radio">
+                                            <span>
+                                                <input type="radio" name="ShouYiLvType" value="1"></span></div>
+                                        年
+                                    </label>
                                 </div>
-                                <div class="control-group">
-                                    <label class="control-label">
-                                        收益率</label>
-                                    <div class="controls">
-                                        @Model.ShouYiLv
-                                        <label class="radio">
-                                            <div class="radio">
-                                                <span class="checked">
-                                                    <input type="radio" name="ShouYiLvType" value="0" checked=""></span></div>
-                                            月
-                                        </label>
-                                        <label class="radio">
-                                            <div class="radio">
-                                                <span>
-                                                    <input type="radio" name="ShouYiLvType" value="1"></span></div>
-                                            年
-                                        </label>
-                                    </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">
+                                    融资成本</label>
+                                <div class="controls">
+                                    @Model.FinancingCost
                                 </div>
-                                <div class="control-group">
-                                    <label class="control-label">
-                                        融资成本</label>
-                                    <div class="controls">
-                                        @Model.FinancingCost
-                                    </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">
+                                    融资用途</label>
+                                <div class="controls">
+                                    @Model.Purpose
                                 </div>
-                                <div class="control-group">
-                                    <label class="control-label">
-                                        融资用途</label>
-                                    <div class="controls">
-                                        @Model.Purpose
-                                    </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">
+                                    还款来源</label>
+                                <div class="controls">
+                                    @Model.Repayment
                                 </div>
-                                <div class="control-group">
-                                    <label class="control-label">
-                                        还款来源</label>
-                                    <div class="controls">
-                                        @Model.Repayment
-                                    </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">
+                                    增信措施</label>
+                                <div class="controls">
+                                    @Model.ZengXinCuoShi
                                 </div>
-                                <div class="control-group">
-                                    <label class="control-label">
-                                        增信措施</label>
-                                    <div class="controls">
-                                        @Model.ZengXinCuoShi
-                                    </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">
+                                    融资方案</label>
+                                <div class="controls">
+                                    @Model.RongZiFangAn
                                 </div>
-                                <div class="control-group">
-                                    <label class="control-label">
-                                        融资方案</label>
-                                    <div class="controls">
-                                        @Model.RongZiFangAn
-                                    </div>
-                                </div>
-                                <div class="control-group">
-                                    <label class="control-label">
-                                        备注</label>
-                                    <div class="controls">
-                                        @Model.Remark
-                                    </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">
+                                    备注</label>
+                                <div class="controls">
+                                    @Model.Remark
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="tab-pane " id="tab_2">
-                        <div class="portlet box blue">
-                            <div class="portlet-title">
-                                <div class="caption">
-                                    <i class="icon-reorder"></i>附件信息</div>
-                                <div class="tools">
-                                </div>
-                            </div>
-                            <div class="portlet-body form">
-                                <div class="control-group">
-                                    <label class="control-label">
-                                        附件</label>
-                                    <div class="controls">
-                                        @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "1", Text = "附件管理", Table = Entity.SystemConst.TableName.Financing, EnumAttachmentType = Entity.Enum.EnumAttachmentType.RongZiXinXiFuJian ,IsEnabled=false});}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <button type="button" class="btn" onclick="location.href='@ViewBag.BackUrl'">
-                        返回</button>
                 </div>
+                <div class="tab-pane " id="tab_2">
+                    <div class="portlet box blue">
+                        <div class="portlet-title">
+                            <div class="caption">
+                                <i class="icon-reorder"></i>附件信息</div>
+                            <div class="tools">
+                            </div>
+                        </div>
+                        <div class="portlet-body form">
+                            <div class="control-group">
+                                <label class="control-label">
+                                    附件</label>
+                                <div class="controls">
+                                    @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "1", Text = "附件管理", Table = Entity.SystemConst.TableName.Financing, EnumAttachmentType = Entity.Enum.EnumAttachmentType.RongZiXinXiFuJian, IsEnabled = false });}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="btn" onclick="location.href='@ViewBag.BackUrl'">
+                    返回</button>
+            </div>
+            </form>
         </div>
     </div>
 </div>
