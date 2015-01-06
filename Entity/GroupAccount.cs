@@ -69,5 +69,17 @@ namespace Entity
 
         public virtual ICollection<RoleAccount> RoleAccounts { get; set; }
 
+        //-------------子表----------------------------
+        /// <summary>
+        /// 职位与员工中间表
+        /// </summary>
+        public virtual ICollection<Position_Account> Position_Account { get; set; }
+
+        /// <summary>
+        /// 审批人表
+        /// </summary>
+        public virtual ICollection<WorkFlowApprovalManager> WorkFlowApprovalManager { get; set; }
+
+
     }
 }

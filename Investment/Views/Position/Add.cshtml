@@ -1,0 +1,46 @@
+﻿@{
+    ViewBag.Title = "职位管理-添加机构";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section scripts{
+}
+@model Entity.Position
+<div class="row-fluid">
+    <div class="span12" style="width: 100%">
+        <div class="portlet box blue">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-cogs"></i>职位管理-添加职位
+                </div>
+                <div class="tools">
+                </div>
+            </div>
+            <div class="portlet-body">
+                @using (Ajax.BeginForm("Add", "Position", new AjaxOptions() { UpdateTargetId = "alert" }))
+                {
+                    <button class="btn blue" onclick="GetRole()" type="submit">
+                        添加</button>
+                    <a href="@Url.Action("Index", "Position")" class="btn blue" style="">返回</a><br />
+                    <br />
+                    <input type="hidden" name="Roles" id="Roles" />
+                    <table class="table table-hover" style="">
+                        <tr>
+                            <td style="width: 120px">
+                                职位名称：
+                            </td>
+                            <td  >@Html.TextBoxFor(a => a.Name)
+                            </td>
+                            <td>@Html.ValidationMessageFor(a => a.Name)
+                            </td>
+                        </tr>
+                    </table>
+                    <button class="btn blue" onclick="GetRole()" type="submit">
+                        添加</button>
+                    <a href="@Url.Action("Index", "Position")" class="btn blue" style="">返回</a><br />
+                   
+                }
+            </div>
+        </div>
+    </div>
+</div>

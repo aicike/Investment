@@ -17,6 +17,10 @@ namespace EF
         public DbSet<Group> Group { get; set; }
         public DbSet<GroupAccount> GroupAccount { get; set; }
         public DbSet<Attachment> Attachment { get; set; }
+        public DbSet<Mechanism> Mechanism { get; set; }
+        public DbSet<WorkFlowManager> WorkFlowManager { get; set; }
+
+        
 
         //数据库生成的其他设置
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -26,7 +30,6 @@ namespace EF
             modelBuilder.Configurations.Add(new RoleAccountMap());
             modelBuilder.Configurations.Add(new RoleMenuMap());
             modelBuilder.Configurations.Add(new RoleOptionMap());
-            
         }
     }
 }

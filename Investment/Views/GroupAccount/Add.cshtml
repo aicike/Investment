@@ -2,15 +2,22 @@
     ViewBag.Title = "账号管理-添加账号";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var Role = ViewBag.Role as List<Entity.Role>;
+    var Position = ViewBag.Position as List<Entity.Position>;
+    
 }
 @section scripts{
 <script>
-    function GetRole() {
+    function GetRoleAndPosition() {
         var Roleid = "";
         $("input[name='CK_Role']:checked").each(function (i, e) {
             Roleid = Roleid + $(this).val() + ",";
         });
         $("#Roles").val(Roleid);
+        var PositionID = "";
+        $("input[name='CK_Position']:checked").each(function (i, e) {
+            PositionID = PositionID + $(this).val() + ",";
+        });
+        $("#Positions").val(PositionID);
     }
 </script>
     <style>
@@ -36,12 +43,13 @@
             <div class="portlet-body">
                 @using (Ajax.BeginForm("Add", "GroupAccount", new AjaxOptions() { UpdateTargetId = "alert" }))
                 {
-                    <button class="btn blue" onclick="GetRole()" type="submit">
+                    <button class="btn blue" onclick="GetRoleAndPosition()" type="submit">
                         添加</button>
                     <a href="@Url.Action("Index", "GroupAccount")" class="btn blue" style="">
                         返回</a><br />
                     <br />
                     <input type="hidden" name="Roles" id="Roles"/>
+                    <input type="hidden" name="Positions" id="Positions"/>
                     <table class="table table-hover" style="">
                         <tr>
                             <td style="width: 120px">
@@ -96,9 +104,25 @@
                             </td>
                             <td>
                             </td>
+                        </tr>  <tr>
+                            <td style="width: 120px">
+                                职位：
+                            </td>
+                            <td>
+                                @foreach (var item in Position)
+                                {
+                                    <label class="checkbox line">
+                                        <input type="checkbox" value="@item.ID" name= "CK_Position" />
+                                        @item.Name
+                                    </label>
+
+                                }
+                            </td>
+                            <td>
+                            </td>
                         </tr>
                     </table>
-                    <button class="btn blue"  onclick="GetRole()" type="submit">
+                    <button class="btn blue"  onclick="GetRoleAndPosition()" type="submit">
                         添加</button>
                     <a href="@Url.Action("Index", "GroupAccount")" class="btn blue" style="">
                         返回</a><br />

@@ -1,0 +1,50 @@
+﻿@{
+    ViewBag.Title = "职位管理";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@section scripts{
+}
+@model List<Entity.Position>
+
+<div class="row-fluid">
+    <div class="span12" style="width: 100%">
+        <a href="@Url.Action("Add", "Position")" class="btn blue" style=" width:100px">添加职位</a><br />
+        <br />
+        <div class="portlet box blue">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-cogs"></i>职位列表
+                </div>
+                <div class="tools">
+                </div>
+            </div>
+            <div class="portlet-body">
+                <table class="table table-hover">
+                    <tr>
+                        <th>
+                            职位名称
+                        </th>
+                        <th style="width: 20%">
+                            操作
+                        </th>
+                    </tr>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @item.Name
+                            </td>
+                            <td>
+                                <a href="@Url.Action("Edit", "Position", new { ID = item.ID })">修改</a> 
+                                @Ajax.ActionLink("删除", "Delete", "Position", new { ID = item.ID }, new AjaxOptions() { UpdateTargetId = "alert", OnBegin = "return AppDelete('你确定要删除吗?','" + Url.Action("Delete", "Position", new { ID = item.ID }) + "',null)" })
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+

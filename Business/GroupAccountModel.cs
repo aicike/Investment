@@ -141,5 +141,34 @@ namespace Business
             return result;
         }
 
+        /// <summary>
+        /// 模糊查询用户
+        /// </summary>
+        /// <param name="str">姓名 职位 </param>
+        /// <returns></returns>
+        public List<_GroupAccount> GetInfo_BYStr(string str)
+        {
+            var list = List().Where(a => a.ID != 1 && (a.Name.Contains(str) || a.Position_Account.Any(b => b.Position.Name.Contains(str)))).ToList();
+            List<_GroupAccount> gaList = new List<_GroupAccount>();
+            foreach (var item in list)
+            {
+                _GroupAccount ga = new _GroupAccount();
+                ga.ID = item.ID;
+                ga.Name = item.Name;
+                ga.Phone = item.Phone;
+                ga.Email = item.Email;
+                List<Position> psList = new List<Position>();
+                foreach (var item2 in item.Position_Account)
+                {
+                    Position p = new Position();
+                    p.Name = item2.Position.Name;
+                    p.ID = item2.Position.ID;
+                    psList.Add(p);
+                }
+                ga.Positions = psList;
+                gaList.Add(ga);
+            }
+            return gaList;
+        }
     }
 }

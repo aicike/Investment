@@ -1,21 +1,31 @@
 ﻿@{
     ViewBag.Title = "账号管理-修改账号";
     Layout = "~/Views/Shared/_Layout.cshtml";
-     var Role = ViewBag.Role as List<Entity.Role>;
+    var Role = ViewBag.Role as List<Entity.Role>;
     //现有权限
     var RoleS = ViewBag.RoleS as List<int>;
+
+    var Position = ViewBag.Position as List<Entity.Position>;
+    //现有权限
+    var PositionS = ViewBag.PositionS as List<int>;
 }
 @section scripts{
     <script>
         $(function () {
 
         });
-        function GetRole() {
+        function GetRoleAndPosition() {
             var Roleid = "";
             $("input[name='CK_Role']:checked").each(function (i, e) {
                 Roleid = Roleid + $(this).val() + ",";
             });
             $("#Roles").val(Roleid);
+
+            var Positionid = "";
+            $("input[name='CK_Position']:checked").each(function (i, e) {
+                Positionid = Positionid + $(this).val() + ",";
+            });
+            $("#Positions").val(Positionid);
         }
     </script>
     <style>
@@ -40,12 +50,12 @@
             <div class="portlet-body">
                 @using (Ajax.BeginForm("Edit", "GroupAccount", new AjaxOptions() { UpdateTargetId = "alert" }))
                 {
-                    <button class="btn blue" onclick="GetRole()" type="submit">
+                    <button class="btn blue" onclick="GetRoleAndPosition()" type="submit">
                         保存</button>
-                    <a href="@Url.Action("Index", "GroupAccount")" class="btn blue" style="">
-                        返回</a><br />
+                    <a href="@Url.Action("Index", "GroupAccount")" class="btn blue" style="">返回</a><br />
                     <br />
                     <input type="hidden" name="Roles" id="Roles" />
+                    <input type="hidden" name="Positions" id="Positions" />
                     <table class="table table-hover" style="">
                         <tr>
                             <td style="width: 120px">
@@ -119,15 +129,39 @@
                             <td>
                             </td>
                         </tr>
+                        <tr>
+                            <td style="width: 120px">
+                                职位：
+                            </td>
+                            <td>
+                                @foreach (var item in Position)
+                                {
+                                    if (PositionS.Contains(item.ID))
+                                    {
+                                    <label class="checkbox line">
+                                        <input type="checkbox" value="@item.ID"   checked="checked"  name= "CK_Position" />
+                                        @item.Name
+                                    </label>
+                                    }
+                                    else
+                                    { 
+                                    <label class="checkbox line">
+                                        <input type="checkbox" value="@item.ID" name= "CK_Position" />
+                                        @item.Name
+                                    </label>
+                                    }
+                                }
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
                     </table>
-                    <button class="btn blue" onclick="GetRole()" type="submit">
+                    <button class="btn blue" onclick="GetRoleAndPosition()" type="submit">
                         保存</button>
-                    <a href="@Url.Action("Index", "GroupAccount")" class="btn blue" style="">
-                        返回</a><br />
+                    <a href="@Url.Action("Index", "GroupAccount")" class="btn blue" style="">返回</a><br />
                    
                 }
             </div>
         </div>
     </div>
 </div>
-

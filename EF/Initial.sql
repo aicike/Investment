@@ -47,7 +47,26 @@ SET IDENTITY_INSERT [dbo].[GroupAccount] ON
 INSERT [dbo].[GroupAccount] ([ID], [GroupID], [AccountNumber], [AccountPwd], [Name], [Phone], [Email]) VALUES (1, 1, N'zhaoheng', N'm8YlpCH5g1U=', N'zhaoheng', N'zhaoheng', N'zhaoheng')
 SET IDENTITY_INSERT [dbo].[GroupAccount] OFF
 
+/***流程分类***/
+SET IDENTITY_INSERT [dbo].[WorkFlowManager] ON
+INSERT [dbo].[WorkFlowManager] ([ID], [Name], [IsEnable]) VALUES (1, '大型企业或另类融资顾问业务','True')
+INSERT [dbo].[WorkFlowManager] ([ID], [Name], [IsEnable]) VALUES (2, '中小企业融资顾问业务','True')
+INSERT [dbo].[WorkFlowManager] ([ID], [Name], [IsEnable]) VALUES (3, '小微企业融资顾问业务','True')
+INSERT [dbo].[WorkFlowManager] ([ID], [Name], [IsEnable]) VALUES (4, '自有资金业务','True')
+SET IDENTITY_INSERT [dbo].[WorkFlowManager] OFF
 
+
+/***流程节点***/
+SET IDENTITY_INSERT [dbo].[WorkFlowNodeManager] ON
+INSERT [dbo].[WorkFlowNodeManager] ([ID], [Name], [Remark],[IsSinceApproval],[Controllers],[Acction]) VALUES (1, '融资立项初审','无','False','','')
+INSERT [dbo].[WorkFlowNodeManager] ([ID], [Name], [Remark],[IsSinceApproval],[Controllers],[Acction]) VALUES (2, '项目立项','无','False','','')
+INSERT [dbo].[WorkFlowNodeManager] ([ID], [Name], [Remark],[IsSinceApproval],[Controllers],[Acction]) VALUES (3, '签署协议','无','True','','')
+INSERT [dbo].[WorkFlowNodeManager] ([ID], [Name], [Remark],[IsSinceApproval],[Controllers],[Acction]) VALUES (4, '协议确认','无','False','','')
+INSERT [dbo].[WorkFlowNodeManager] ([ID], [Name], [Remark],[IsSinceApproval],[Controllers],[Acction]) VALUES (5, '调查辅导','无','True','','')
+INSERT [dbo].[WorkFlowNodeManager] ([ID], [Name], [Remark],[IsSinceApproval],[Controllers],[Acction]) VALUES (6, '机构对接','无','False','','')
+INSERT [dbo].[WorkFlowNodeManager] ([ID], [Name], [Remark],[IsSinceApproval],[Controllers],[Acction]) VALUES (7, '落实放款','无','False','','')
+INSERT [dbo].[WorkFlowNodeManager] ([ID], [Name], [Remark],[IsSinceApproval],[Controllers],[Acction]) VALUES (8, '确认收取费用','无','False','','')
+SET IDENTITY_INSERT [dbo].[WorkFlowNodeManager] OFF
 /****** Object:  Table [dbo].[Company]    Script Date: 11/27/2014 14:40:46 ******/
 
 

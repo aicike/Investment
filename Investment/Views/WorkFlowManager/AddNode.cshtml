@@ -1,0 +1,287 @@
+﻿@{
+    ViewBag.Title = ViewBag.WorkFlowName + "-添加审批节点";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var Nodes = ViewBag.Nodes as List<Entity.WorkFlowNodeManager>;
+}
+@section scripts
+{
+    <style>
+        
+    </style>
+    <script>
+        $(function () {
+             //选择节点
+            $("input[name='NodeID']").change(function(){
+                 var ISSince = $(this).attr("_IsSince");
+                 $("#WorkFlowNodeManagerID").val($(this).val());
+                 if(ISSince=="True")
+                 {
+                    $("#trFZR").hide();
+                    $("#WorkFlowNodeISSince").val("True");
+                 }
+                 else
+                 {
+                    $("#trFZR").show();
+                    $("#WorkFlowNodeISSince").val("False");
+                 }
+            });
+           
+        });
+
+        function checkSub()
+        {
+            if($("input[name='NodeID']:checked").length<=0)
+            {
+                JMessage("请选择节点",true);
+                return false;
+            }
+            if($("#WorkFlowNodeISSince").val()=="False")
+            {
+                var cnt = $("div[name='divFZR']").length;
+                if(cnt<=0)
+                {
+                    JMessage("请选择节点负责人",true);
+                    return false;
+                }
+                var aids = "";
+                var pids = "";
+                $("div[name='divFZR']").each(function(i,e){
+                    var aid=$(this).attr("_accountid");
+                    var pid=$(this).attr("_positionid");
+                    aids = aids + aid+",";
+                    pids = pids + pid+",";
+                });
+                $("#AccountIDs").val(aids);
+                $("#PositionIDs").val(pids);
+             }
+            
+            return true;
+        }
+   
+
+        //移除负责人
+        function DelFZR(div) {
+            $(div).parent().remove();
+        }
+
+        //选择负责人
+        function CheckFZR(a,Accountid)
+        {
+            var sel_pid = $(a).parent().parent().children().eq(1).find("select").val();
+            var sel_name = $(a).parent().parent().children().eq(0).text()+"("+$(a).parent().parent().children().eq(1).find("select").find("option:selected").text()+")";
+            if(sel_pid==0)
+            {
+                JMessage("请选择职位",true);
+                return false;
+            }
+            $(".close").click();
+            var data = "<div name='divFZR' _accountid='"+Accountid+"' _positionid='"+sel_pid+"' style='margin-top:8px'>"
+                      +sel_name+"<a onclick='DelFZR(this)' style='cursor: pointer' title='移除'><i class='icon-remove-sign'></i></a></div>";
+            $("#divFzrList").append(data);
+
+        }
+
+        //查询负责人
+        function SelFZR() {
+           
+            
+            var Str = $("#Sel_FZR").val();
+            var Url = "@Url.Action("GetAccountList", "WorkFlowManager")";
+            if(Str!="")
+            {
+                $("#div_isNull").hide();
+                $("#tab_Account").hide();
+                $("#div_ImgDD").show();
+                $.ajax({
+                    type: "post",//使用get方法访问后台
+                    dataType: "json",//返回json格式的数据
+                    url:Url,//要访问的后台地址
+                    data: "Str=" + Str,//要发送的数据
+                    complete :function(){
+                         $("#div_ImgDD").hide();
+                    },//AJAX请求完成执行
+                    success: function(msg){//msg为返回的数据，在这里做数据绑定
+                        if(msg!=""&&msg!=undefined)
+                        {
+                        
+                            $("#div_isNull").hide();
+                            $("#tab_Account").show();
+                            var dataTitle="<tr><td>姓名</td><td>职位(当前节点所扮演的角色)</td><td>操作</td></tr>"
+                                $("#tab_Account").find("tr").remove();
+                                 $("#tab_Account").append(dataTitle);
+                            $.each(msg, function(i, n){
+                                //alert(n.ID);
+                                var data ="<tr><td>"+n.Name+"</td><td> <select name='Sel_Pos' class='small m-wrap'><option value='0'>请选择</option>";
+                                for(var i=0;i<n.Positions.length;i++)
+                                {
+                                    data =data+"<option value="+n.Positions[i].ID+">"+n.Positions[i].Name+"</option>";
+                                }
+                                data=data+"</select> </td><td><a onclick='CheckFZR(this,"+n.ID+")' class='btn blue' >选择</a></td></tr>"
+
+                               
+                                $("#tab_Account").append(data);
+                              
+
+                            });
+                        }
+                        else
+                        {
+                            $("#tab_Account").hide();
+                            $("#div_isNull").show();
+                        }
+                    }
+                
+                });
+            }
+        }
+
+    </script>
+}
+@model Entity.WorkFlow_Node
+<div class="row-fluid">
+    <div class="span12" style="width: 100%">
+        <div class="portlet box blue">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-cogs"></i>@ViewBag.WorkFlowName-添加审批节点
+                </div>
+                <div class="tools">
+                </div>
+            </div>
+            <div class="portlet-body " >
+                @using (Ajax.BeginForm("AddNode", "WorkFlowManager", new AjaxOptions() { UpdateTargetId = "alert" }, new { @class = "disabled" }))
+                {
+                    <button class="btn blue" type="submit" onclick="return checkSub()">
+                        添加</button>
+                    <a href="@Url.Action("SetNodeList", "WorkFlowManager", new { WorkFlowID = ViewBag.WorkFlowID })" class="btn blue" style="">
+                        返回</a><br />
+                    <br />
+                    <input type="hidden" name="Roles" id="Roles" />
+                    <table class="table table-hover" style="">
+                        <tr>
+                            <td style="width: 120px">
+                                节点：
+                            </td>
+                            <td>
+                                <div class="controls">
+                                    @foreach (var item in Nodes)
+                                    {
+                                        <label class="radio">
+                                            <input type="radio"  name="NodeID" value="@item.ID" _IsSince="@item.IsSinceApproval.ToString()" />
+                                            @item.Name (@item.Remark)
+                                        </label>
+                                    }
+                                </div>
+                                <input type="hidden" id="WorkFlowManagerID" name="WorkFlowManagerID" value="@ViewBag.WorkFlowID"/>
+                                <input type="hidden" id="AccountIDs" name="AccountIDs" />
+                                <input type="hidden" id="PositionIDs" name="PositionIDs" />
+                                <input type="hidden" id="WorkFlowNodeManagerID" name="WorkFlowNodeManagerID" />
+                                <input type="hidden" id="WorkFlowNodeISSince" name="WorkFlowNodeISSince" />
+                            </td>
+                            <td>@*@Html.ValidationMessageFor(a => a.Name)*@
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                排序：
+                            </td>
+                            <td>
+                                <select id="Order" name="Order" class="small m-wrap">
+                                    @for (int i = 1; i <= ViewBag.Order; i++)
+                                    {
+                                        if (i == ViewBag.Order)
+                                        { 
+                                        <option value="@i" selected="selected">@i</option>
+                                        }
+                                        else
+                                        { 
+                                        <option value="@i">@i</option>
+                                        }
+                                    }
+                                </select>
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                        <tr id="trFZR">
+                            <td>
+                                负责人：
+                            </td>
+                            <td>
+                                <a data-toggle="modal" href="#responsive" style="">添加负责人</a>
+                                <div id="divFzrList">
+                                </div>
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                    </table>
+                    <button class="btn blue" type="submit" onclick="return checkSub()">
+                        添加</button>
+                    <a href="@Url.Action("SetNodeList", "WorkFlowManager", new { WorkFlowID = ViewBag.WorkFlowID })" class="btn blue" style="">
+                        返回</a><br />
+                   
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<div class="portlet-body form">
+    <div id="responsive" class="modal hide fade" tabindex="-1" data-width="570">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+            </button>
+            <h3>
+                人员查找</h3>
+        </div>
+        <div class="modal-body" style="min-height: 350px">
+            <div class="row-fluid">
+                <div class="span12">
+                    <div class="input-icon left">
+                        <i class="icon-search"></i>
+                        <input id="Sel_FZR" type="text" onkeyup="SelFZR()" class="span12 m-wrap" placeholder="人员姓名、职位" />
+                    </div>
+                    <table id="tab_Account" style="display: none" class="table table-hover">
+                        <tr>
+                            <th>
+                                姓名
+                            </th>
+                            <th>
+                                职位(当前节点所扮演的角色)
+                            </th>
+                            <th>
+                                操作
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>
+                                pgmas斯蒂芬
+                            </td>
+                            <td>
+                                <select name="Sel_Pos" class="small m-wrap">
+                                    <option value="0">请选择</option>
+                                    <option value="1">法务</option>
+                                    <option value="2">财务间法务</option>
+                                </select>
+                            </td>
+                            <td>
+                                <a onclick="CheckFZR(this,1)" class="btn blue" style="">选择</a>
+                            </td>
+                        </tr>
+                    </table>
+                    <div id="div_isNull" style="font-size: 24px; color: Gray; text-align: center; width: 100%;
+                        margin-top: 100px; display: none">
+                        未查询到数据</div>
+                    <div id="div_ImgDD" style="font-size: 24px; color: Gray; text-align: center; width: 100%;
+                        margin-top: 100px; display: none">
+                        <img src="@Url.Content("/Image/DD.gif")" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" data-dismiss="modal" class="btn">
+                关闭</button>
+        </div>
+    </div>
+</div>

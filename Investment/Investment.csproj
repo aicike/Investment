@@ -42,6 +42,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -121,8 +122,12 @@
     <Compile Include="Controllers\GroupAccountController.cs" />
     <Compile Include="Controllers\GroupProfileController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InfoMatchingController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\MechanismController.cs" />
+    <Compile Include="Controllers\PositionController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
+    <Compile Include="Controllers\WorkFlowManagerController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -198,6 +203,13 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Image\404.jpg" />
+    <Content Include="Image\Bg_1.png" />
+    <Content Include="Image\DD.gif" />
+    <Content Include="Image\default_Avatar.png" />
+    <Content Include="Image\logo.png" />
+    <Content Include="Image\Logo_144.png" />
+    <Content Include="Image\touzilLogo.jpg" />
     <Content Include="media\css\about-us.css" />
     <Content Include="media\css\animate.css" />
     <Content Include="media\css\blog.css" />
@@ -995,6 +1007,16 @@
     <Content Include="Views\Company\Add.cshtml" />
     <Content Include="Views\Attachment\Manage.cshtml" />
     <Content Include="Views\Company\Edit.cshtml" />
+    <Content Include="Views\Mechanism\Index.cshtml" />
+    <Content Include="Views\Mechanism\Add.cshtml" />
+    <Content Include="Views\Mechanism\Edit.cshtml" />
+    <Content Include="Views\Position\Index.cshtml" />
+    <Content Include="Views\Position\Add.cshtml" />
+    <Content Include="Views\Position\Edit.cshtml" />
+    <Content Include="Views\WorkFlowManager\Index.cshtml" />
+    <Content Include="Views\WorkFlowManager\SetNodeList.cshtml" />
+    <Content Include="Views\WorkFlowManager\AddNode.cshtml" />
+    <Content Include="Views\WorkFlowManager\EditNode.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -1012,7 +1034,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>59413</DevelopmentServerPort>
+          <DevelopmentServerPort>10368</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

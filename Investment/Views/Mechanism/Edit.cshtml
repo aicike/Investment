@@ -1,0 +1,56 @@
+﻿@{
+    ViewBag.Title = "机构管理-修改机构";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section scripts{
+}
+@model Entity.Mechanism
+<div class="row-fluid">
+    <div class="span12" style="width: 100%">
+        <div class="portlet box blue">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-cogs"></i>机构管理-修改机构
+                </div>
+                <div class="tools">
+                </div>
+            </div>
+            <div class="portlet-body">
+                @using (Ajax.BeginForm("Edit", "Mechanism", new AjaxOptions() { UpdateTargetId = "alert" }))
+                {
+                    <button class="btn blue" onclick="GetRole()" type="submit">
+                        保存</button>
+                    <a href="@Url.Action("Index", "Mechanism")" class="btn blue" style="">返回</a><br />
+                    <br />
+                    <input type="hidden" name="Roles" id="Roles" />
+                    <table class="table table-hover" style="">
+                        <tr>
+                            <td style="width: 120px">
+                                机构名称：
+                            </td>
+                            <td>@Html.TextBoxFor(a => a.Name)
+                                @Html.HiddenFor(a => a.ID)
+                                <input type="hidden" value="@ViewBag.CID" name="CompanyID" style="width: 300px"/>
+                            </td>
+                            <td>@Html.ValidationMessageFor(a => a.Name)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 120px">
+                                备注：
+                            </td>
+                            <td>@Html.TextAreaFor(a => a.Remark)
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                    </table>
+                    <button class="btn blue" onclick="GetRole()" type="submit">
+                        保存</button>
+                    <a href="@Url.Action("Index", "Mechanism")" class="btn blue" style="">返回</a><br />
+                   
+                }
+            </div>
+        </div>
+    </div>
+</div>

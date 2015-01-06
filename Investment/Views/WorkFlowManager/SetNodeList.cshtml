@@ -1,0 +1,80 @@
+﻿@{
+    ViewBag.Title = Model.Name + "-流程节点设置";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section scripts{
+}
+@model Entity.WorkFlowManager
+<div class="row-fluid">
+    <div class="span12" style="width: 100%">
+        <a href="@Url.Action("AddNode", "WorkFlowManager", new { WorkFlowID = Model.ID })" class="btn blue" style="">
+            添加节点</a> <a href="@Url.Action("Index", "WorkFlowManager")" class="btn blue" style="">
+                返回</a>
+        <br />
+        <br />
+        <div class="portlet box blue">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-cogs"></i>@Model.Name-流程节点列表
+                </div>
+                <div class="tools">
+                </div>
+            </div>
+            <div class="portlet-body">
+                <table class="table table-bordered table-hover">
+                    <tr>
+                        <th>
+                            节点名称
+                        </th>
+                        <th>
+                            负责人
+                        </th>
+                        <th>
+                            节点排序
+                        </th>
+                        <th style="width: 20%">
+                            操作
+                        </th>
+                    </tr>
+                    @foreach (var item in Model.WorkFlow_Node.OrderBy(a => a.Order))
+                    {
+                        <tr>
+                            <td>
+                                @item.WorkFlowNodeManager.Name
+                            </td>
+                            <td>
+                                @if (item.WorkFlowApprovalManager.ToList().Count <= 0)
+                                {
+                                    @:自审批 
+                                }
+                                else
+                                {
+                                    for (int i = 0; i < item.WorkFlowApprovalManager.ToList().Count; i++)
+                                    {
+                                        if (i == item.WorkFlowApprovalManager.ToList().Count - 1)
+                                        {
+                                    @item.WorkFlowApprovalManager.ToList()[i].GroupAccount.Name@:（@(item.WorkFlowApprovalManager.ToList()[i].Position.Name)）
+                                    }
+                                        else
+                                        { 
+                                    @item.WorkFlowApprovalManager.ToList()[i].GroupAccount.Name@:（@(item.WorkFlowApprovalManager.ToList()[i].Position.Name)）<br/>
+                                                                    }
+                                    }
+                                }
+                            </td>
+                            <td>
+                                @item.Order
+                            </td>
+                            <td>
+                                <a href="@Url.Action("EditNode", "WorkFlowManager", new { WorkFlowID = item.WorkFlowManagerID,W_NID=item.ID })">
+                                    修改</a> 
+                                    @Ajax.ActionLink("删除", "Delete", "WorkFlowManager", new { workFlow_nodeID = item.ID, WorkFlowID = item.WorkFlowManagerID }, new AjaxOptions() { UpdateTargetId = "alert", OnBegin = "return AppDelete('确定删除?')" }, true)
+
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
