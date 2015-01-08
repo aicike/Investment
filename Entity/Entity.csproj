@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApprovalRecord.cs" />
     <Compile Include="Attachment.cs" />
     <Compile Include="Company.cs" />
     <Compile Include="CompanyAccount.cs" />
@@ -49,6 +50,7 @@
     <Compile Include="CompanyRelation.cs" />
     <Compile Include="Enum\EnumAttachmentFormat.cs" />
     <Compile Include="Financing.cs" />
+    <Compile Include="MechanismProducts.cs" />
     <Compile Include="Relation.cs" />
     <Compile Include="Enum\EnumAttachmentType.cs" />
     <Compile Include="Mechanism.cs" />
@@ -63,8 +65,11 @@
     <Compile Include="Menu.cs" />
     <Compile Include="Role.cs" />
     <Compile Include="RoleOption.cs" />
+    <Compile Include="WorkFlow.cs" />
     <Compile Include="WorkFlowApprovalManager.cs" />
+    <Compile Include="WorkFlowLog.cs" />
     <Compile Include="WorkFlowManager.cs" />
+    <Compile Include="WorkFlowMechanismProduct.cs" />
     <Compile Include="WorkFlowNodeManager.cs" />
     <Compile Include="WorkFlow_Node.cs" />
     <Compile Include="_GroupAccount.cs" />

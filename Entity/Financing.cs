@@ -135,5 +135,9 @@ namespace Entity
         public int WorkFlowManagerID { get; set; }
 
         public virtual WorkFlowManager WorkFlowManager { get; set; }
+        /// <summary>
+        /// 流程表
+        /// </summary>
+        public virtual ICollection<WorkFlow> WorkFlow { get; set; }
     }
 }

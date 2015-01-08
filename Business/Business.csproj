@@ -60,6 +60,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApprovalRecordModel.cs" />
     <Compile Include="AttachmentModel.cs" />
     <Compile Include="BaseModel.cs" />
     <Compile Include="Commons\Common.cs" />
@@ -71,10 +72,12 @@
     <Compile Include="CompanyAccountModel.cs" />
     <Compile Include="CompanyModel.cs" />
     <Compile Include="EFModel.cs" />
-     <Compile Include="FinancingModel.cs" />
+    <Compile Include="FinancingModel.cs" />
+    <Compile Include="MechanismProductsModel.cs" />
     <Compile Include="PositionModel.cs" />
     <Compile Include="Position_AccountModel.cs" />
     <Compile Include="WorkFlowApprovalManagerModel.cs" />
+    <Compile Include="WorkFlowLogModel.cs" />
     <Compile Include="WorkFlowManagerModel.cs" />
     <Compile Include="GroupAccountModel.cs" />
     <Compile Include="MechanismModel.cs" />
@@ -86,6 +89,8 @@
     <Compile Include="RoleModel.cs" />
     <Compile Include="RoleOptionModel.cs" />
     <Compile Include="SqlHelper.cs" />
+    <Compile Include="WorkFlowMechanismProductModel.cs" />
+    <Compile Include="WorkFlowModel.cs" />
     <Compile Include="WorkFlowNodeManagerModel.cs" />
     <Compile Include="WorkFlow_NodeModel.cs" />
   </ItemGroup>

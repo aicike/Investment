@@ -126,6 +126,7 @@
     <Compile Include="Controllers\InfoMatchingController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MechanismController.cs" />
+    <Compile Include="Controllers\MechanismProductsController.cs" />
     <Compile Include="Controllers\PositionController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\WorkFlowManagerController.cs" />
@@ -1092,7 +1093,8 @@
     <Content Include="Views\Financing\Index.cshtml" />
     <Content Include="Views\Financing\IndexAll.cshtml" />
     <Content Include="Views\Financing\Detail.cshtml" />
-    <Content Include="Views\WorkFlow_Form_Financing\Index.cshtml" />
+    <Content Include="Views\MechanismProducts\Add.cshtml" />
+    <Content Include="Views\MechanismProducts\Edit.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

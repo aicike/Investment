@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations;
 namespace Entity
 {
     /// <summary>
-    /// 流程管理表
+    /// 流程分类管理表
     /// </summary>
     public class WorkFlowManager:BaseEntity
     {
@@ -37,5 +37,10 @@ namespace Entity
         public virtual ICollection<WorkFlow_Node> WorkFlow_Node { get; set; }
 
         public virtual ICollection<Financing> Financings { get; set; }
+		
+        /// <summary>
+        /// 流程表
+        /// </summary>
+        public virtual ICollection<WorkFlow> WorkFlow { get; set; }
     }
 }
