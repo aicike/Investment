@@ -80,7 +80,10 @@ namespace Entity
         /// </summary>
         public virtual ICollection<WorkFlowApprovalManager> WorkFlowApprovalManager { get; set; }
 
- 		public virtual ICollection<Company> Companys { get; set; }
+        public virtual ICollection<Company> Companys { get; set; }
 
+        public virtual ICollection<Financing> Financings_A { get; set; }
+
+        public virtual ICollection<Financing> Financings_B { get; set; }
     }
 }

@@ -53,6 +53,7 @@ namespace Investment.Controllers
         public ActionResult Detail(int id)
         {
             FinancingModel fm = new FinancingModel();
+            //todo:此处需要判断是否有权限
             var obj = fm.Get(id);
             return View(obj);
         }

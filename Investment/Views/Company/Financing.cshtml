@@ -9,7 +9,10 @@
 <div class="row-fluid">
     <div class="span12">
         <div>
+            @if (ViewBag.LoginUesrID == company.OwnerID)
+            {
             @Html.ActionLink("新增融资信息", "AddFinancing", "Company", new { companyID = company.ID, page = ViewBag.Page }, new { @class = "btn blue" }, true)
+            }
             @Html.ActionLink("返回", "Index", "Company", new { id = ViewBag.Page }, new { @class = "btn blue" })
         </div>
         @using (Html.BeginForm("Financing", "Company", new { id = 1, companyID = company.ID, page = ViewBag.Page }))
@@ -84,8 +87,11 @@
                                 </td>
                                 <td>
                                     @Html.ActionLink("详细", "Detail", "Financing", new { id = item.ID }, null, true)
-                                    @Html.ActionLink("修改", "EditFinancing", "Company", new { id = item.ID, companyID = company.ID, page = ViewBag.Page }, null, true)
-                                    @Ajax.ActionLink("删除", "DeleteFinancing", "Company", new { id = item.ID, companyID = company.ID, page = ViewBag.Page }, new AjaxOptions() { UpdateTargetId = "alert", OnBegin = "return AppDelete('确定删除?删除此项将会删除其关联的所有数据！','" + Url.Action("Delete", "Company", new { id = item.ID }) + "',null)" }, true)
+                                    @if (ViewBag.LoginUesrID == item.Owner_A_ID)
+                                    { 
+                                        @Html.ActionLink("修改", "EditFinancing", "Company", new { id = item.ID, companyID = company.ID, page = ViewBag.Page }, null, true)@:
+                                        @Ajax.ActionLink("删除", "DeleteFinancing", "Company", new { id = item.ID, companyID = company.ID, page = ViewBag.Page }, new AjaxOptions() { UpdateTargetId = "alert", OnBegin = "return AppDelete('确定删除?删除此项将会删除其关联的所有数据！','" + Url.Action("Delete", "Company", new { id = item.ID }) + "',null)" }, true)
+                                    }
                                 </td>
                             </tr>
                         }
@@ -93,18 +99,18 @@
                 </table>
                 <div class="pagination">
                     @Html.Pager(Model, new PagerOptions
-                       {
-                           PageIndexParameterName = "ID",
-                           CurrentPagerItemWrapperFormatString = "<li class=\"disabled\"><a>{0}</a></li>",
-                           NumericPagerItemWrapperFormatString = "<li>{0}</li>",
-                           NavigationPagerItemWrapperFormatString = "<li>{0}</li>",
-                           CssClass = "",
-                           SeparatorHtml = "",
-                           AutoHide = false,
-                           PageIndexOutOfRangeErrorMessage = "页面错误。",
-                           ShowFirstLast = false,
-                           ContainerTagName = "ul"
-                       })
+               {
+                   PageIndexParameterName = "ID",
+                   CurrentPagerItemWrapperFormatString = "<li class=\"disabled\"><a>{0}</a></li>",
+                   NumericPagerItemWrapperFormatString = "<li>{0}</li>",
+                   NavigationPagerItemWrapperFormatString = "<li>{0}</li>",
+                   CssClass = "",
+                   SeparatorHtml = "",
+                   AutoHide = false,
+                   PageIndexOutOfRangeErrorMessage = "页面错误。",
+                   ShowFirstLast = false,
+                   ContainerTagName = "ul"
+               })
                 </div>
             </div>
         </div>

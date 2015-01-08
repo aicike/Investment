@@ -35,5 +35,7 @@ namespace Entity
         /// 流程与节点中间表
         /// </summary>
         public virtual ICollection<WorkFlow_Node> WorkFlow_Node { get; set; }
+
+        public virtual ICollection<Financing> Financings { get; set; }
     }
 }

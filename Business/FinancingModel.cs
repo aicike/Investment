@@ -52,7 +52,7 @@ namespace Business
         public Result Delete_Check(int id, int ownerID)
         {
             Result result = new Result();
-            var hasObj = List().Any(a => a.ID == id && a.Company.OwnerID == ownerID);
+            var hasObj = List().Any(a => a.ID == id && a.Owner_A_ID== ownerID);
             if (hasObj)
             {
                 //检查业务数据引用，引用了无法删除

@@ -1,0 +1,280 @@
+﻿@{
+    Layout = null;
+}
+@model Entity.Financing
+<style>
+    .td_title
+    {
+        text-align: center !important;
+        background-color: #f9f9f9;
+    }
+</style>
+<div class="span12" style="margin-left: 0px">
+    <table class="table table-bordered dataTable">
+        <tr>
+            <td colspan="4" class="td_title" style="font-weight: bold">
+                项目基本信息
+            </td>
+        </tr>
+        <tr>
+            <td class="span2 td_title">
+                项目名称
+            </td>
+            <td class="span4">
+                @Model.Name
+            </td>
+            <td class="span2 td_title">
+                业务来源
+            </td>
+            <td class="span4">
+                @Model.BusinessResource
+            </td>
+        </tr>
+        <tr>
+            <td class="span2 td_title">
+                项目类型
+            </td>
+            <td class="span4">
+                @Model.WorkFlowManager.Name
+            </td>
+            <td class="span2 td_title">
+                项目经理
+            </td>
+            <td class="span4">
+                @if (Model.Owner_A != null)
+                { 
+                    @Model.Owner_A.Name
+                }
+            </td>
+        </tr>
+        <tr>
+            <td class="span2 td_title">
+                参会人员
+            </td>
+            <td class="span10" colspan="3">
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4" class="td_title" style="font-weight: bold">
+                融资信息
+            </td>
+        </tr>
+        <tr>
+            <td class="span2 td_title">
+                融资金额（万元）
+            </td>
+            <td class="span4">
+                @Model.Amount
+            </td>
+            <td class="span2 td_title">
+                融资期限（月）
+            </td>
+            <td class="span4">
+                @if (Model.MaxTimeLimit != 0)
+                {
+                    @:@Model.MinTimeLimit + @Model.MaxTimeLimit
+                }
+                else
+                {
+                    @Model.MinTimeLimit
+                }
+            </td>
+        </tr>
+        <tr>
+            <td class="span2 td_title">
+                融资成本
+            </td>
+            <td class="span4">
+                @Model.FinancingCost
+            </td>
+            <td class="span2 td_title">
+                资金用途
+            </td>
+            <td class="span4">
+                @Model.Purpose
+            </td>
+        </tr>
+        <tr>
+            <td class="span2 td_title">
+                还款来源
+            </td>
+            <td class="span10" colspan="3">
+                @Model.Repayment
+            </td>
+        </tr>
+        <tr>
+            <td class="span2 td_title">
+                融资标的
+            </td>
+            <td class="span10" colspan="3">
+                @Model.RongZiBiaoDi
+            </td>
+        </tr>
+        <tr>
+            <td class="span2 td_title">
+                增信措施
+            </td>
+            <td class="span10" colspan="3">
+                @Model.ZengXinCuoShi
+            </td>
+        </tr>
+        <tr>
+            <td class="span2 td_title">
+                融资方案
+            </td>
+            <td class="span10" colspan="3">
+                @Model.RongZiFangAn
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4" class="td_title" style="font-weight: bold">
+                企业基本信息
+            </td>
+        </tr>
+        <tr>
+            <td class="span2 td_title">
+                企业名称
+            </td>
+            <td class="span4">
+                @Model.Company.Name
+            </td>
+            <td class="span2 td_title">
+                企业性质
+            </td>
+            <td class="span4">
+                @Model.Company.QiYeXingZhi
+            </td>
+        </tr>
+        <tr>
+            <td class="span2 td_title">
+                成立时间
+            </td>
+            <td class="span4">
+                @Model.Company.SetUpTime
+            </td>
+            <td class="span2 td_title">
+                企业资质
+            </td>
+            <td class="span4">
+                @Model.Company.QiYeZiZhi
+            </td>
+        </tr>
+        <tr>
+            <td class="span2 td_title">
+                注册资本（万元）
+            </td>
+            <td class="span4">
+                @Model.Company.ZhuCheZiJin
+            </td>
+            <td class="span2 td_title">
+                实收资本（万元）
+            </td>
+            <td class="span4">
+                @Model.Company.ShiShouZiBen
+            </td>
+        </tr>
+        <tr>
+            <td class="span2 td_title">
+                法定代表人
+            </td>
+            <td class="span4">
+                @Model.Company.FaDingDaiBiaoRen
+            </td>
+            <td class="span2 td_title">
+                实际控制人
+            </td>
+            <td class="span4">
+                @Model.Company.ShiJiKongZhiRen
+            </td>
+        </tr>
+        <tr>
+            <td class="span2 td_title">
+                企业地址
+            </td>
+            <td class="span10" colspan="3">
+                @Model.Company.Address
+            </td>
+        </tr>
+        <tr>
+            <td class="span2 td_title">
+                主营业务
+            </td>
+            <td class="span10" colspan="3">
+                @Model.Company.ZhuYingYeWu
+            </td>
+        </tr>
+        <tr>
+            <td class="span2 td_title">
+                关联企业
+            </td>
+            <td class="span10" colspan="3">
+                @Model.Company.GuanLianGongSi
+            </td>
+        </tr>
+        <tr>
+            <td class="span2 td_title">
+                股权结构
+            </td>
+            <td class="span10" colspan="3">
+                @Model.Company.GuQuanJieGou
+            </td>
+        </tr>
+        <tr>
+            <td class="span2 td_title">
+                信用记录
+            </td>
+            <td class="span10" colspan="3">
+                @Model.Company.ShiJiKongZhiRenXinYongJiLu
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4" class="td_title" style="font-weight: bold">
+                财务信息
+            </td>
+        </tr>
+        <tr>
+            <td class="span2 td_title">
+                资产总额（万元）
+            </td>
+            <td class="span4">
+                @Model.Company.ZiChanZongE
+            </td>
+            <td class="span2 td_title">
+                负债总额（万元）
+            </td>
+            <td class="span4">
+                @Model.Company.FuZhaiZongE
+            </td>
+        </tr>
+        <tr>
+            <td class="span2 td_title">
+                收入（万元）
+            </td>
+            <td class="span4">
+                @Model.Company.ZhuYingYeWuShouRu
+            </td>
+            <td class="span2 td_title">
+                成本（万元）
+            </td>
+            <td class="span4">
+                @Model.Company.ChengBen
+            </td>
+        </tr>
+        <tr>
+            <td class="span2 td_title">
+                净利润（万元）
+            </td>
+            <td class="span10" colspan="3">
+                @Model.Company.JingLiRun
+            </td>
+        </tr>
+        <tr>
+            <td class="span2 td_title">
+                金融机构借贷信息
+            </td>
+            <td class="span10" colspan="3">
+                @Model.Company.MuQianDaiKuanDanBaoZhiXingQingKuang
+            </td>
+        </tr>
+    </table>
+</div>

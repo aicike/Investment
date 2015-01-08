@@ -76,13 +76,13 @@
                                     else if (item.Status == 2)
                                     { 
                                         @:未通过
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    }
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                }
                                 </td>
                                 <td>
                                     @Html.ActionLink("详细", "Detail", "Company", new { id = item.ID }, null, true)
                                     @Html.ActionLink("修改", "Edit", "Company", new { id = item.ID }, null, true)
                                     @Ajax.ActionLink("删除", "Delete", "Company", new { id = item.ID }, new AjaxOptions() { UpdateTargetId = "alert", OnBegin = "return AppDelete('确定删除?删除此项将会删除其关联的所有数据！')" }, true)
-                                    @Html.ActionLink("融资信息", "Financing", "Company", new { companyID = item.ID, page =Model.CurrentPageIndex }, null, true)
+                                    @Html.ActionLink("融资信息", "Financing", "Company", new { companyID = item.ID, page = Model.CurrentPageIndex }, null, true)
                                 </td>
                             </tr>
                         }
@@ -90,18 +90,18 @@
                 </table>
                 <div class="pagination">
                     @Html.Pager(Model, new PagerOptions
-                       {
-                           PageIndexParameterName = "ID",
-                           CurrentPagerItemWrapperFormatString = "<li class=\"disabled\"><a>{0}</a></li>",
-                           NumericPagerItemWrapperFormatString = "<li>{0}</li>",
-                           NavigationPagerItemWrapperFormatString = "<li>{0}</li>",
-                           CssClass = "",
-                           SeparatorHtml = "",
-                           AutoHide = false,
-                           PageIndexOutOfRangeErrorMessage = "页面错误。",
-                           ShowFirstLast = false,
-                           ContainerTagName = "ul"
-                       })
+               {
+                   PageIndexParameterName = "ID",
+                   CurrentPagerItemWrapperFormatString = "<li class=\"disabled\"><a>{0}</a></li>",
+                   NumericPagerItemWrapperFormatString = "<li>{0}</li>",
+                   NavigationPagerItemWrapperFormatString = "<li>{0}</li>",
+                   CssClass = "",
+                   SeparatorHtml = "",
+                   AutoHide = false,
+                   PageIndexOutOfRangeErrorMessage = "页面错误。",
+                   ShowFirstLast = false,
+                   ContainerTagName = "ul"
+               })
                 </div>
             </div>
         </div>

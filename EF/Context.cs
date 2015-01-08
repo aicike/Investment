@@ -30,6 +30,7 @@ namespace EF
             modelBuilder.Configurations.Add(new RoleAccountMap());
             modelBuilder.Configurations.Add(new RoleMenuMap());
             modelBuilder.Configurations.Add(new RoleOptionMap());
+            modelBuilder.Configurations.Add(new FinancingMap());
         }
     }
 }

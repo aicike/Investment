@@ -18,6 +18,23 @@ namespace Entity
         public virtual Company Company { get; set; }
 
         /// <summary>
+        /// 项目负责人A角色
+        /// </summary>
+        public int? Owner_A_ID { get; set; }
+        public virtual GroupAccount Owner_A { get; set; }
+
+        /// <summary>
+        /// 项目负责人B角色
+        /// </summary>
+        public int? Owner_B_ID { get; set; }
+        public virtual GroupAccount Owner_B { get; set; }
+
+        /// <summary>
+        /// 融资信息状态   0：未进行   1：进行中   2：已结束
+        /// </summary>
+        public int Status { get; set; }
+
+        /// <summary>
         /// 融资项目名称
         /// </summary>
         [Display(Name = "项目名称")]
@@ -102,5 +119,21 @@ namespace Entity
         /// </summary>
         [Display(Name = "备注")]
         public string Remark { get; set; }
+
+        /// <summary>
+        /// 业务来源
+        /// </summary>
+        [Required(ErrorMessage = "请输入业务来源")]
+        public string BusinessResource { get; set; }
+
+        /// <summary>
+        /// 项目类型
+        /// </summary>
+        [Display(Name = "项目类型")]
+        [Required(ErrorMessage = "请选择项目类型")]
+        [RegularExpression(@"\d+", ErrorMessage = "请选择项目类型")]
+        public int WorkFlowManagerID { get; set; }
+
+        public virtual WorkFlowManager WorkFlowManager { get; set; }
     }
 }
