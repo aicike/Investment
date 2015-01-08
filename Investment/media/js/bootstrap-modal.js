@@ -136,9 +136,10 @@
 				this.$element
 					.css('margin-top', 0)
 					.addClass('modal-overflow');
-			} else {
+			} 
+else {
 				this.$element
-					.css('margin-top', 0 - this.$element.height() / 2)
+					.css('margin-top', 0 /**- this.$element.height() / 2**/)
 					.removeClass('modal-overflow');
 			}
 		},

@@ -82,5 +82,16 @@ namespace Entity
 
  		public virtual ICollection<Company> Companys { get; set; }
 
+        /// <summary>
+        /// 流程表
+        /// </summary>
+        public virtual ICollection<WorkFlow> WorkFlow { get; set; }
+
+        /// <summary>
+        /// 审批记录表
+        /// </summary>
+        public virtual ICollection<ApprovalRecord> ApprovalRecord { get; set; }
+        
+
     }
 }

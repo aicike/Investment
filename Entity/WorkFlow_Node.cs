@@ -38,7 +38,10 @@ namespace Entity
         /// </summary>
         public virtual ICollection<WorkFlowApprovalManager> WorkFlowApprovalManager { get; set; }
 
-        
+        /// <summary>
+        /// 流程表
+        /// </summary>
+        public virtual ICollection<WorkFlow> WorkFlow { get; set; }
 
     }
 }

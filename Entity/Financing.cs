@@ -102,5 +102,12 @@ namespace Entity
         /// </summary>
         [Display(Name = "备注")]
         public string Remark { get; set; }
+
+
+        //-----------------子表
+        /// <summary>
+        /// 流程表
+        /// </summary>
+        public virtual ICollection<WorkFlow> WorkFlow { get; set; }
     }
 }

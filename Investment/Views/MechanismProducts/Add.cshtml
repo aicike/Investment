@@ -1,0 +1,73 @@
+﻿@{
+    ViewBag.Title = ViewBag.MName + "-添加产品";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section scripts{
+}
+@model Entity.MechanismProducts
+<div class="row-fluid">
+    <div class="span12" style="width: 100%">
+
+        <div class="portlet box blue">
+
+            <div class="portlet-title">
+
+                <div class="caption">
+                    <i class="icon-cogs"></i>@(ViewBag.MName)-添加产品
+                </div>
+                <div class="tools">
+                </div>
+            </div>
+            
+                    
+            <div class="portlet-body form">
+                @using (Ajax.BeginForm("Add", "MechanismProducts", new AjaxOptions() { UpdateTargetId = "alert" }, new { @class = "form-horizontal" }))
+                {
+                        <button class="btn blue" onclick="GetRole()" type="submit">
+                        添加</button>
+                    <a href="@Url.Action("Index", "MechanismProducts", new { MID = ViewBag.MID })" class="btn blue" style="">
+                        返回</a><br />
+                    <br />
+                    
+                    <div class="control-group">
+                        <label class="control-label">
+                            产品名称:</label>
+                        <div class="controls">
+                           @Html.TextBoxFor(a => a.Name, new { @class = "span6 m-wrap" })
+                           <input type="hidden" name= "MechanismID" value="@ViewBag.MID" />
+                            <span class="help-inline">@Html.ValidationMessageFor(a => a.Name)</span>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">
+                            最高贷款额度（万）:</label>
+                        <div class="controls">
+                           @Html.TextBoxFor(a => a.MaxQuota, new { @class = "span6 m-wrap" })
+                            <span class="help-inline">@Html.ValidationMessageFor(a => a.MaxQuota)</span>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">
+                            是否启用:</label>
+                        <div class="controls">
+                             <select name="IsEnable" class="small m-wrap">
+                                    <option value="True">启用</option>
+                                    <option value="False">禁用</option>
+                                </select>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">
+                            备注:</label>
+                        <div class="controls">
+                          @Html.TextAreaFor(a => a.Remark, new { @class = "span6 m-wrap" })
+                            <span class="help-inline">@Html.ValidationMessageFor(a => a.Remark)</span>
+                        </div>
+                    </div>
+
+                   
+                }
+            </div>
+        </div>
+    </div>
+</div>
