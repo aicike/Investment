@@ -129,7 +129,6 @@
     <Compile Include="Controllers\MechanismProductsController.cs" />
     <Compile Include="Controllers\PositionController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
-    <Compile Include="Controllers\WorkFlowController.cs" />
     <Compile Include="Controllers\WorkFlowManagerController.cs" />
     <Compile Include="Controllers\WorkFlow_Form_FinancingController.cs" />
     <Compile Include="Global.asax.cs">
@@ -1005,6 +1004,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="File\" />
     <Folder Include="Scripts\ueditor\net\upload\" />
   </ItemGroup>
   <ItemGroup>
@@ -1094,13 +1094,12 @@
     <Content Include="Views\Attachment\ViewOffice.cshtml" />
     <Content Include="Views\Financing\Index.cshtml" />
     <Content Include="Views\Financing\IndexAll.cshtml" />
-<Content Include="Views\Financing\Detail.cshtml" />
-    <Content Include="Views\MechanismProducts\Index.cshtml" />
     <Content Include="Views\MechanismProducts\Add.cshtml" />
     <Content Include="Views\MechanismProducts\Edit.cshtml" />
-    <Content Include="Views\WorkFlow\Preview.cshtml" />
- <Content Include="Views\WorkFlow_Form_Financing\Index.cshtml" />
+    <Content Include="Views\WorkFlow_Form_Financing\Index.cshtml" />
+    <Content Include="Views\Financing\Detail.cshtml" />
     <Content Include="Views\WorkFlow_Form_Financing\RightOption.cshtml" />
+    <Content Include="Views\MechanismProducts\Index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
