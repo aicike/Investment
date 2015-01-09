@@ -2,12 +2,64 @@
     ViewBag.Title = "Preview";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@section scripts{
+<script>
+
+    $(function () {
+        SetFC();
+        $("#_Title").hide();
+    });
+
+    function SetFC() {
+        var scrolltop = $(document).scrollTop();
+        var buttom = $(document).height() - $(window).height();
+        var mainwidth = $("#TabMain").width() - 12;
+        if ((buttom - scrolltop) <= 60) {
+            $("#div_FC").removeClass("Float_div");
+            $("#div_FC").addClass("Floaty_div");
+
+        }
+        else {
+            $("#div_FC").addClass("Float_div");
+            $("#div_FC").width(mainwidth + "px");
+            $("#div_FC").removeClass("Floaty_div");
+        }
+    }
+
+    window.onscroll = function () {
+        SetFC();
+    };
+    window.onresize = function () {
+        SetFC();
+    };
+</script>
+<style>
+    .Float_div
+    {
+        position: fixed;
+        bottom: 0;
+        margin-bottom: 10px;
+        background: url('/media/image/fancybox_overlay.png');
+        padding: 5px;
+       
+    }
+    .Floaty_div
+    {
+        margin-bottom: 25px;
+        width: 100%;
+        padding: 5px;
+    }
+</style>
+}
+
+
 <div class="row-fluid">
-    <div class="span12">
-        <table align="center" style="width: 100%">
+    <div class="span12" style=" margin-top:50px;" >
+        @{Html.RenderAction("RightOption", "WorkFlow_Form_Financing", new { financingID = 2, workflowID = 1 });}
+        <table id="TabMain" align="center" style="width: 100%; margin-bottom: 20px;">
             <tr>
                 <td>
-                    <table style="width: 100%; line-height:30px">
+                    <table style="width: 100%; line-height: 30px">
                         <tr>
                             <td colspan="2" align="center">
                                 <span style="font-weight: bold; font-size: 24px">中小企业融资顾问业务</span>
@@ -17,7 +69,7 @@
                             <td>
                                 申请日期：2015-01-01
                             </td>
-                            <td style=" text-align:right">
+                            <td style="text-align: right">
                                 单号：ZXR20150101001
                             </td>
                         </tr>
@@ -26,14 +78,29 @@
             </tr>
             <tr>
                 <td>
-                  @{Html.RenderAction("Index", "WorkFlow_Form_Financing", new { financingID = 1, workflowID =1});}
+                    @{Html.RenderAction("Index", "WorkFlow_Form_Financing", new { financingID = ViewBag.financingID, workflowID = 1 });}
                 </td>
             </tr>
-             <tr>
+            <tr>
                 <td>
-                  @{Html.RenderAction("Index", "WorkFlow_Form_Financing", new { financingID = 1, workflowID =1});}
+                   
+                </td>
+            </tr>
+            <tr>
+                <td>
+                 
                 </td>
             </tr>
         </table>
+           <div id="div_FC" class="Float_div control-group" >
+                        <table align="center">
+                            <tr>
+                                <td>
+                                    <a  href="#" class="btn blue">生成待定业务单</a>
+                                     <a href="@Url.Action("Index", "Mechanism")" class="btn blue" style="width:80px">返回</a>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
     </div>
 </div>

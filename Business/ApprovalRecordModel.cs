@@ -11,5 +11,15 @@ namespace Business
     /// </summary>
     public class ApprovalRecordModel : BaseModel<ApprovalRecord>
     {
+        /// <summary>
+        /// 查询审批记录 根据流程
+        /// </summary>
+        /// <param name="WorkFlowID"></param>
+        /// <returns></returns>
+        public List<ApprovalRecord> GetInfo_byWorkFlow(int WorkFlowID)
+        {
+            var list = List().Where(a=>a.WorkFlowID==WorkFlowID).OrderBy(a=>a.Date).ToList();
+            return list;
+        }
     }
 }
