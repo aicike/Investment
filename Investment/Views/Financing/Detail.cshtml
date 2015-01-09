@@ -24,6 +24,11 @@
                 <button type="button" class="btn" onclick="location.href='@ViewBag.BackUrl'">
                     返回</button></div>
             @{Html.RenderAction("Index", "WorkFlow_Form_Financing", new { financingID = 4, workflowID =1});}
+            <div class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix alert alert-info" role="complementary" style="padding-right:14px;right:5px;">
+                <div><a href="#" class="alert-link">公司详细信息</a></div>
+                <div><a href="#" class="alert-link">融资详细信息</a></div>
+            </div>
+
 
             <div class="portlet box blue">
                 <div class="portlet-title">

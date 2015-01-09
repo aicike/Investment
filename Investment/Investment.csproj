@@ -1092,9 +1092,10 @@
     <Content Include="Views\Attachment\ViewOffice.cshtml" />
     <Content Include="Views\Financing\Index.cshtml" />
     <Content Include="Views\Financing\IndexAll.cshtml" />
-    <Content Include="Views\Financing\Detail.cshtml" />
     <Content Include="Views\MechanismProducts\Add.cshtml" />
     <Content Include="Views\MechanismProducts\Edit.cshtml" />
+    <Content Include="Views\WorkFlow_Form_Financing\Index.cshtml" />
+    <Content Include="Views\Financing\Detail.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
