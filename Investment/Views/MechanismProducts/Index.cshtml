@@ -53,15 +53,16 @@
                             <td>
                                 @if (item.IsEnable)
                                 {
-                                    <span style=" color:Red">禁用</span>
+                                     @:正常
                                 }
                                 else
                                 { 
-                                    @:正常
+                                <span style=" color:Red">禁用</span>
+                                   
                                 }
                             </td>
                             <td>
-                                <a href="@Url.Action("Edit", "Mechanism", new { ID = item.ID })">修改</a> 
+                                <a href="@Url.Action("Edit", "MechanismProducts", new { MID = ViewBag.MID, MPID = item.ID })">修改</a> 
                             </td>
                         </tr>
                     }

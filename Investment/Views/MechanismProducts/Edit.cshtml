@@ -3,6 +3,12 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @section scripts{
+<script>
+    $(function () {
+        var IsEnable = "@Model.IsEnable";
+        $("#IsEnable").val(IsEnable);
+    });
+</script>
 }
 @model Entity.MechanismProducts
 <div class="row-fluid">
@@ -21,10 +27,10 @@
             
                     
             <div class="portlet-body form">
-                @using (Ajax.BeginForm("Add", "MechanismProducts", new AjaxOptions() { UpdateTargetId = "alert" }, new { @class = "form-horizontal" }))
+                @using (Ajax.BeginForm("Edit", "MechanismProducts", new AjaxOptions() { UpdateTargetId = "alert" }, new { @class = "form-horizontal" }))
                 {
                         <button class="btn blue" onclick="GetRole()" type="submit">
-                        添加</button>
+                        保存</button>
                     <a href="@Url.Action("Index", "MechanismProducts", new { MID = ViewBag.MID })" class="btn blue" style="">
                         返回</a><br />
                     <br />
@@ -34,6 +40,9 @@
                             产品名称:</label>
                         <div class="controls">
                            @Html.TextBoxFor(a => a.Name, new { @class = "span6 m-wrap" })
+                           @Html.HiddenFor(a => a.ID)
+                           @Html.HiddenFor(a => a.MechanismID)
+                           @Html.HiddenFor(a => a.MechanismName)
                             <span class="help-inline">@Html.ValidationMessageFor(a => a.Name)</span>
                         </div>
                     </div>
@@ -49,7 +58,7 @@
                         <label class="control-label">
                             是否启用:</label>
                         <div class="controls">
-                             <select name="IsEnable" class="small m-wrap">
+                             <select id="IsEnable" name="IsEnable" class="small m-wrap">
                                     <option value="True">启用</option>
                                     <option value="False">禁用</option>
                                 </select>

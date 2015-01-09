@@ -51,10 +51,6 @@
     <Compile Include="Mapping\RoleMenuMap.cs" />
     <Compile Include="Mapping\RoleOptionMap.cs" />
     <Compile Include="Mapping\RoleAccountMap.cs" />
-    <Compile Include="Migrations\201501080737422_Update34.cs" />
-    <Compile Include="Migrations\201501080737422_Update34.Designer.cs">
-      <DependentUpon>201501080737422_Update34.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\201501090210094_update.cs" />
     <Compile Include="Migrations\201501090210094_update.Designer.cs">
       <DependentUpon>201501090210094_update.cs</DependentUpon>
@@ -75,14 +71,9 @@
   <ItemGroup>
     <Content Include="Initial.sql" />
   </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201501080737422_Update34.resx">
-      <DependentUpon>201501080737422_Update34.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201501090210094_update.resx">
       <DependentUpon>201501090210094_update.cs</DependentUpon>
     </EmbeddedResource>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

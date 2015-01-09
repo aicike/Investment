@@ -1,0 +1,39 @@
+﻿@{
+    ViewBag.Title = "Preview";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row-fluid">
+    <div class="span12">
+        <table align="center" style="width: 100%">
+            <tr>
+                <td>
+                    <table style="width: 100%; line-height:30px">
+                        <tr>
+                            <td colspan="2" align="center">
+                                <span style="font-weight: bold; font-size: 24px">中小企业融资顾问业务</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                申请日期：2015-01-01
+                            </td>
+                            <td style=" text-align:right">
+                                单号：ZXR20150101001
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                  @{Html.RenderAction("Index", "WorkFlow_Form_Financing", new { financingID = 1, workflowID =1});}
+                </td>
+            </tr>
+             <tr>
+                <td>
+                  @{Html.RenderAction("Index", "WorkFlow_Form_Financing", new { financingID = 1, workflowID =1});}
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

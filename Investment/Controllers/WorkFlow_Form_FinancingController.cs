@@ -36,8 +36,7 @@ namespace Investment.Controllers
             }
             return PartialView(financing);
         }
-
-        /// <summary>
+/// <summary>
         /// 右侧操作控件
         /// </summary>
         /// <returns></returns>
@@ -68,6 +67,16 @@ namespace Investment.Controllers
             }
             ViewBag.FinancingID = financingID;
             ViewBag.CompanyID = companyID;
+            return PartialView();
+        }
+		
+        /// <summary>
+        /// 审批记录控件
+        /// </summary>
+        /// <param name="WrokFlowID"></param>
+        /// <returns></returns>
+        public ActionResult ApprovalRecord(int WrokFlowID)
+        {
             return PartialView();
         }
 

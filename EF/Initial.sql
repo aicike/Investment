@@ -75,3 +75,51 @@ SET IDENTITY_INSERT [dbo].[WorkFlowNodeManager] OFF
 
 
 /****** Object:  Table [dbo].[CompanyAccount]    Script Date: 11/27/2014 14:40:46 ******/
+/**生成流程单号函数 @prefix 流程前缀 @digit位数 @WorkFlowManagerID流程类别ID**/
+GO
+Create function GetWorkFlowNumber(@prefix varchar(10),@digit int,@WorkFlowManagerID int)
+returns varchar(100)
+as
+begin
+	declare @predate varchar(12)= convert(varchar(50),getdate(),112)
+	declare @Number varchar(100) = UPPER(@prefix)+@predate
+
+	declare @Prefixcnt int = DATALENGTH(@prefix)
+	declare @MaxNumber varchar(100) 
+	select @MaxNumber =Max(Number) from dbo.WorkFlow where WorkFlowManagerID= @WorkFlowManagerID and Number like '%'+@Number+'%'  
+	
+	declare @lasNum varchar(50)='0'
+	if(@MaxNumber is null)
+		begin
+			declare @i int = 1
+			while @i<@digit
+				begin
+					if(@i=@digit-1)
+						begin
+							set @lasNum =@lasNum+'1'
+						end
+					else
+						begin
+							set @lasNum =@lasNum+'0'
+						end
+					
+					set @i=@i+1
+				end
+			set @Number = @Number+@lasNum
+		end
+	else
+		begin
+			declare @lastNumber int = replace(@MaxNumber,@Number,'')
+			set @lastNumber = @lastNumber+1
+			declare @l int = 1
+			while @l<(@digit-DATALENGTH(convert(varchar(10),@lastNumber)))
+				begin
+					set @lasNum ='0'+@lasNum
+					set @l=@l+1
+				end
+			set @Number = @Number+@lasNum+convert(varchar(10),@lastNumber)
+		end
+	return @Number
+end
+
+GO
