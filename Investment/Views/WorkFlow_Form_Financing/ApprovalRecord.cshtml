@@ -1,0 +1,70 @@
+﻿@{
+    ViewBag.Title = "ApprovalRecord";
+}
+@model List<Entity.ApprovalRecord>
+<div class="span12" style="margin-left: 0px">
+    <table class="table table-bordered dataTable">
+        <tr>
+            <td colspan="6" class="td_title" style="font-weight: bold; text-align: left !important;">
+                审批记录
+            </td>
+        </tr>
+        <tr>
+            <th>
+                操作日期
+            </th>
+            <th>
+                节点名称
+            </th>
+            <th>
+                审批角色
+            </th>
+            <th>
+                审批人
+            </th>
+            <th>
+                操作
+            </th>
+            <th width="30%">
+                审批意见
+            </th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                   @item.Date.ToString("YYYY-MM-dd HH:mm")
+                </td>
+                <td>
+                   @item.NodeName
+                </td>
+                <td>
+                   @item.AccountPosition
+                </td>
+                <td>
+                   @item.AccountName
+                </td>
+                <td>
+                   @switch (item.Operation)
+                   { 
+                       case 0:
+                           @:提交申请
+                           break;
+                       case 1:
+                           @:通过
+                           break;
+                       case 2:
+                           @:不通过
+                           break;
+                       case 3:
+                           @:驳回
+                           break;
+                   }
+                </td>
+                <td>
+                    @item.Opinion
+                </td>
+            </tr>
+        }
+    </table>
+</div>
