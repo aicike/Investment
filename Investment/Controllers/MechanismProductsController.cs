@@ -93,10 +93,10 @@ namespace Investment.Controllers
         public ActionResult Edit(MechanismProducts mechanismProducts)
         {
             MechanismProductsModel mpModel = new MechanismProductsModel();
-            var result = mpModel.Add(mechanismProducts);
+            var result = mpModel.Edit(mechanismProducts);
             if (result.HasError)
             {
-                return JavaScript("JMessage('添加失败 请稍后再试',true)");
+                return JavaScript("JMessage('修改失败 请稍后再试',true)");
 
             }
             return JavaScript("window.location.href='" + Url.Action("Index", "MechanismProducts", new { MID = mechanismProducts.MechanismID }) + "'");
