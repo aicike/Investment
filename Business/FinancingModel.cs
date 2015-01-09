@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Entity;
+using System.Runtime.Serialization;
+using System.IO;
 
 namespace Business
 {
@@ -16,7 +18,7 @@ namespace Business
         public Result Add(Financing financing, List<Attachment> attachments)
         {
             Result result = base.Add(financing);
-            if (result.HasError == false && attachments!=null)
+            if (result.HasError == false && attachments != null)
             {
                 AttachmentModel attachmentModel = new AttachmentModel();
                 foreach (Attachment item in attachments)
@@ -31,7 +33,7 @@ namespace Business
         public Result Edit(Financing financing, List<Attachment> attachments)
         {
             Result result = base.Edit(financing);
-            if (result.HasError==false&&attachments!=null)
+            if (result.HasError == false && attachments != null)
             {
                 AttachmentModel attachmentModel = new AttachmentModel();
                 foreach (Attachment item in attachments)
@@ -52,7 +54,7 @@ namespace Business
         public Result Delete_Check(int id, int ownerID)
         {
             Result result = new Result();
-            var hasObj = List().Any(a => a.ID == id && a.Owner_A_ID== ownerID);
+            var hasObj = List().Any(a => a.ID == id && a.Owner_A_ID == ownerID);
             if (hasObj)
             {
                 //检查业务数据引用，引用了无法删除

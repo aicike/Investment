@@ -251,5 +251,7 @@ namespace Entity
 
         public virtual ICollection<Financing> Financings { get; set; }
 
+        public virtual ICollection<WorkFlow> WorkFlows { get; set; }
+
     }
 }

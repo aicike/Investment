@@ -19,6 +19,9 @@ namespace EF
         public DbSet<Attachment> Attachment { get; set; }
         public DbSet<Mechanism> Mechanism { get; set; }
         public DbSet<WorkFlowManager> WorkFlowManager { get; set; }
+        public DbSet<Financing> Financings { get; set; }
+        public DbSet<MechanismProducts> MechanismProducts { get; set; }
+        
 
         
 

@@ -37,6 +37,12 @@ namespace Entity
         public virtual Financing Financing { get; set; }
 
         /// <summary>
+        /// 公司ID
+        /// </summary>
+        public int CompanyID { get; set; }
+        public virtual Company Company { get; set; }
+
+        /// <summary>
         /// 项目负责人ID
         /// </summary>
         [Display(Name = "项目负责人ID")]
