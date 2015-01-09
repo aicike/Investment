@@ -36,6 +36,8 @@ namespace Entity
         /// </summary>
         public virtual ICollection<WorkFlow_Node> WorkFlow_Node { get; set; }
 
+        public virtual ICollection<Financing> Financings { get; set; }
+		
         /// <summary>
         /// 流程表
         /// </summary>

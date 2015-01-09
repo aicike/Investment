@@ -7,12 +7,14 @@
 @{Html.AddJavaScript(Url.Content("/Scripts/uploadify/jquery.uploadify.js"));}
 @{Html.AddJavaScript(Url.Content("/Attachment/GetJS?formID=" + ac.ID + "&enumAttachmentType=" + (int)ac.EnumAttachmentType) + "&table=" + ac.Table + "&tableID=" + ac.TableId);}
 @model List<Entity.Attachment>
+<style>
+</style>
 <span class="help-inline"><a class="blue" data-toggle="modal" href="#responsive_@ac.ID">
     [管理附件]</a>
     @if (Model.Count > 0)
     { 
         @:（@(Model.Count)个）
-                            }<label id="label_new_attachment_@ac.ID"></label></span>
+                                        }<label id="label_new_attachment_@ac.ID"></label></span>
 <div id="responsive_@ac.ID" class="modal hide fade" tabindex="-1" data-width="800">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">

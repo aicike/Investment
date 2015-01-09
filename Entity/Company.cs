@@ -100,6 +100,12 @@ namespace Entity
         public double ZhuYingYeWuShouRu { get; set; }
 
         /// <summary>
+        /// 成本
+        /// </summary>
+        [Display(Name = "成本")]
+        public double ChengBen { get; set; }
+
+        /// <summary>
         /// 主营业务
         /// </summary>
         [Display(Name = "主营业务")]
@@ -139,6 +145,7 @@ namespace Entity
         /// 实际控制人
         /// </summary>
         [Display(Name = "实际控制人")]
+        [Required(ErrorMessage = "请输入实际控制人")]
         public string ShiJiKongZhiRen { get; set; }
 
         /// <summary>
@@ -199,6 +206,7 @@ namespace Entity
         /// 企业性质
         /// </summary>
         [Display(Name = "企业性质")]
+        [Required(ErrorMessage = "请输入企业性质")]
         public string QiYeXingZhi { get; set; }
 
         /// <summary>
@@ -220,6 +228,15 @@ namespace Entity
         [Display(Name = "贷款卡")]
         public string DaiKuanKa { get; set; }
 
+        [Display(Name = "企业资质")]
+        [Required(ErrorMessage = "请输入企业资质")]
+        public string QiYeZiZhi { get; set; }
+
+        /// <summary>
+        /// 关联公司
+        /// </summary>
+        [Display(Name = "关联公司")]
+        public string GuanLianGongSi { get; set; }
 
         //----------------------子表------------------------------------------
         /// <summary>

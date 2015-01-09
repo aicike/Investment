@@ -9,7 +9,7 @@
     <div class="span12">
         <div>
         </div>
-        @using (Html.BeginForm("Index", "Financing", new { id = 1 }))
+        @using (Html.BeginForm("IndexAll", "Financing", new { id = 1 }))
         {
             <table style="width: 100%; margin-top: 20px; margin-bottom: 20px;">
                 <tr>
@@ -39,19 +39,31 @@
                 <table class="table table-bordered table-hover" id="table_company">
                     <thead>
                         <tr>
-                            <th>
+                            <th style="width: 200px;">
                                 项目名称
                             </th>
-                            <th>
-                                融资金额
+                            <th style="width: 130px;">
+                                公司名称
                             </th>
-                            <th>
-                                融资期限
+                            <th style="width: 80px;">
+                                融资金额（万元）
                             </th>
-                            <th>
+                            <th style="width: 80px;">
+                                融资期限（月）
+                            </th>
+                            <th style="width: 80px;">
                                 融资成本
                             </th>
-                            <th style="width: 20%">
+                            <th style="width: 130px;">
+                                项目类型
+                            </th>
+                            <th style="width: 8px;">
+                                项目经理
+                            </th>
+                            <th style="width: 80px;">
+                                状态
+                            </th>
+                            <th style="width: 80px;">
                                 操作
                             </th>
                         </tr>
@@ -64,13 +76,16 @@
                                     @item.Name
                                 </td>
                                 <td>
+                                    @item.Company.Name
+                                </td>
+                                <td>
                                     @item.Amount
                                 </td>
                                 <td>
                                     @if (item.MaxTimeLimit != 0)
                                     {
                                         @:@item.MinTimeLimit + @item.MaxTimeLimit
-                                    }
+                                                                            }
                                     else
                                     {
                                         @item.MinTimeLimit
@@ -78,6 +93,26 @@
                                 </td>
                                 <td>
                                     @item.FinancingCost
+                                </td>
+                                <td>
+                                    @(item.WorkFlowManager == null ? "-" : @item.WorkFlowManager.Name)
+                                </td>
+                                <td>
+                                    @(item.Owner_A == null ? "-" : @item.Owner_A.Name)
+                                </td>
+                                <td>
+                                    @switch (item.Status)
+                                    {
+                                        case 0:
+                                        @:未进行
+                                                break;
+                                        case 1:
+                                        @:进行中
+                                                break;
+                                        case 2:
+                                        @:已完成
+                                                                                                                        break;
+                                    }
                                 </td>
                                 <td>
                                     @Html.ActionLink("详细", "Detail", "Financing", new { id = item.ID }, null, true)

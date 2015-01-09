@@ -21,8 +21,8 @@ namespace Investment.Controllers
             {
                 objs = objs.Where(a => a.Name.Contains(Name));
             }
-            var list = objs.ToPagedList(id ?? 1, 15);
-            //var list = cm.List().Where(a=>a.OwnerID==LoginAccount.UserID).ToPagedList(id ?? 1, 15);
+            //var list = objs.ToPagedList(id ?? 1, 15);
+            var list = cm.List().Where(a => a.OwnerID == LoginAccount.UserID).ToPagedList(id ?? 1, 15);
             return View(list);
         }
 
@@ -37,6 +37,7 @@ namespace Investment.Controllers
         {
             CompanyModel companyModel = new CompanyModel();
             company.OwnerID = LoginAccount.UserID;
+            company.Status = 2;
             Result result = companyModel.Add(company, null);
             if (result.HasError)
             {
@@ -58,6 +59,10 @@ namespace Investment.Controllers
             Result result = null;
             CompanyModel companyModel = new CompanyModel();
             result = companyModel.Edit(company);
+            if (result.HasError == false)
+            {
+                result = EditAttachment(company);
+            }
             if (result.HasError)
             {
                 return JavaScript("JMessage('" + result.Error + "',true)");
@@ -68,8 +73,7 @@ namespace Investment.Controllers
             }
         }
 
-        [HttpPost]
-        public ActionResult EditAttachment(Company company)
+        private Result EditAttachment(Company company)
         {
             List<Attachment> attachmentList = new List<Attachment>();
 
@@ -273,14 +277,7 @@ namespace Investment.Controllers
             }
             CompanyModel companyModel = new CompanyModel();
             Result result = companyModel.UploadAttachment(company.ID, attachmentList);
-            if (result.HasError)
-            {
-                return JavaScript("JMessage('" + result.Error + "',true)");
-            }
-            else
-            {
-                return JavaScript("JMessage('保存成功！',false,true);");
-            }
+            return result;
         }
 
         public ActionResult ChangeStatus(int id, int status)
@@ -301,6 +298,11 @@ namespace Investment.Controllers
             return "<script>window.location.href='" + Url.Action("Index", "Company") + "';</script>";
         }
 
+        public ActionResult Detail(int id)
+        {
+            return View();
+        }
+
         #endregion
 
         #region 融资信息
@@ -312,14 +314,17 @@ namespace Investment.Controllers
             (company != null).NotAuthorizedPage();
             ViewBag.Company = company;
             ViewBag.Page = page;
+            ViewBag.LoginUesrID = LoginAccount.UserID;
             FinancingModel fm = new FinancingModel();
 
-            var objs = fm.GetByCompanyID(companyID);
+            var objs = fm.GetByCompanyID(companyID).Where(a => (a.Owner_A_ID == LoginAccount.UserID || a.Owner_B_ID == LoginAccount.UserID));
 
             if (!string.IsNullOrEmpty(Name))
             {
                 objs = objs.Where(a => a.Name.Contains(Name));
             }
+
+
             var list = objs.ToPagedList(id ?? 1, 15);
             return View(list);
         }
@@ -328,6 +333,14 @@ namespace Investment.Controllers
         {
             ViewBag.CompanyID = companyID;
             ViewBag.Page = page;
+
+            WorkFlowManagerModel wfmm = new WorkFlowManagerModel();
+            var wfms = wfmm.List().OrderBy(a => a.ID).ToList();
+            List<SelectListItem> newList = new List<SelectListItem>();
+            var wfm_list = new SelectList(wfms, "ID", "Name");
+            newList.Add(new SelectListItem { Text = "请选择项目类型", Value = "select", Selected = true });
+            newList.AddRange(wfm_list);
+            ViewData["wfm"] = newList;
             return View();
         }
 
@@ -342,12 +355,13 @@ namespace Investment.Controllers
             {
                 attachments = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Attachment>>(RongZiXinXiFuJian);
             }
+            financing.Owner_A_ID = LoginAccount.UserID;
             Result result = fm.Add(financing, attachments);
             if (result.HasError)
             {
                 return JavaScript("JMessage('" + result.Error + "',true)");
             }
-            return JavaScript("window.location.href='" + Url.Action("Financing", "Company", new { companyID = financing.CompanyID, page =page}) + "'");
+            return JavaScript("window.location.href='" + Url.Action("Financing", "Company", new { companyID = financing.CompanyID, page = page }) + "'");
         }
 
         public ActionResult EditFinancing(int id, int companyID, int page)
@@ -356,6 +370,16 @@ namespace Investment.Controllers
             var financing = fm.Get(id);
             (financing.CompanyID == companyID).NotAuthorizedPage();
             ViewBag.Page = page;
+
+
+            WorkFlowManagerModel wfmm = new WorkFlowManagerModel();
+            var wfms = wfmm.List().OrderBy(a=>a.ID).ToList();
+            List<SelectListItem> newList = new List<SelectListItem>();
+            var wfm_list = new SelectList(wfms, "ID", "Name");
+            newList.Add(new SelectListItem { Text = "请选择项目类型", Value = "select", Selected = true });
+            newList.AddRange(wfm_list);
+            ViewData["wfm"] = newList;
+
             return View(financing);
         }
 
@@ -378,7 +402,7 @@ namespace Investment.Controllers
             return JavaScript("window.location.href='" + Url.Action("Financing", "Company", new { companyID = financing.CompanyID, page = page }) + "'");
         }
 
-        public string DeleteFinancing(int id,int companyID,int page)
+        public string DeleteFinancing(int id, int companyID, int page)
         {
             FinancingModel fm = new FinancingModel();
             var result = fm.Delete_Check(id, LoginAccount.UserID);

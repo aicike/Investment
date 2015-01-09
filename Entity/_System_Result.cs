@@ -28,7 +28,7 @@ namespace Entity
             {
                 if (!string.IsNullOrEmpty(value))
                 {
-                    HasError = true; error = value;
+                    HasError = true; error = value.Replace("\r\n", "");
                 }
             }
         }
