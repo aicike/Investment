@@ -2,7 +2,6 @@
 SET IDENTITY_INSERT [dbo].[Menu] ON
 
 --集团
-
 INSERT [dbo].[Menu] ([ID], [Area], [Controller], [Action], [Name], [ShowName], [Order], [ParentMenuID],AccountType) VALUES (11, NULL, 'Home', 'Home', N'客户管理', N'客户管理', 1, NULL,0)
 INSERT [dbo].[Menu] ([ID], [Area], [Controller], [Action], [Name], [ShowName], [Order], [ParentMenuID],AccountType) VALUES (1101, NULL, 'Company', 'Index', N'客户管理', N'客户管理', 1, 11,0)
 INSERT [dbo].[Menu] ([ID], [Area], [Controller], [Action], [Name], [ShowName], [Order], [ParentMenuID],AccountType) VALUES (1102, NULL, 'Financing', 'Index', N'融资信息列表', N'融资信息列表', 2, 11,0)
@@ -32,6 +31,7 @@ INSERT [dbo].[Menu] ([ID], [Area], [Controller], [Action], [Name], [ShowName], [
 INSERT [dbo].[Menu] ([ID], [Area], [Controller], [Action], [Name], [ShowName], [Order], [ParentMenuID],AccountType) VALUES (6102, NULL, 'Position', 'Index', N'职位管理', N'职位管理', 2, 61,0)
 INSERT [dbo].[Menu] ([ID], [Area], [Controller], [Action], [Name], [ShowName], [Order], [ParentMenuID],AccountType) VALUES (6103, NULL, 'GroupAccount', 'Index', N'人员管理', N'人员管理', 3, 61,0)
 INSERT [dbo].[Menu] ([ID], [Area], [Controller], [Action], [Name], [ShowName], [Order], [ParentMenuID],AccountType) VALUES (6104, NULL, 'WorkFlowManager', 'Index', N'流程配置', N'流程配置', 4, 61,0)
+
 
 SET IDENTITY_INSERT [dbo].[Menu] OFF
 
