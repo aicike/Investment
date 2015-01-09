@@ -33,10 +33,17 @@ namespace Investment.Controllers
             {
                 FinancingModel fm = new FinancingModel();
                 financing = fm.Get(financingID);
-
-
             }
             return PartialView(financing);
+        }
+
+        /// <summary>
+        /// 右侧操作控件
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult RightOption(int financingID, int? workflowID)
+        {
+            return PartialView();
         }
 
     }

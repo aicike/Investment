@@ -109,7 +109,8 @@ namespace Entity
         /// 主营业务
         /// </summary>
         [Display(Name = "主营业务")]
-        public double ZhuYingYeWu { get; set; }
+        [Required(ErrorMessage = "请输入主营业务")]
+        public string ZhuYingYeWu { get; set; }
 
         /// <summary>
         /// 净利润
