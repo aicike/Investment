@@ -1099,7 +1099,6 @@
     <Content Include="Views\MechanismProducts\Edit.cshtml" />
     <Content Include="Views\WorkFlow\Preview.cshtml" />
  <Content Include="Views\WorkFlow_Form_Financing\Index.cshtml" />
-    <Content Include="Views\Financing\Detail.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

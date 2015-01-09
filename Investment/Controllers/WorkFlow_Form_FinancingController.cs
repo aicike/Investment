@@ -39,5 +39,15 @@ namespace Investment.Controllers
             return PartialView(financing);
         }
 
+        /// <summary>
+        /// 审批记录控件
+        /// </summary>
+        /// <param name="WrokFlowID"></param>
+        /// <returns></returns>
+        public ActionResult ApprovalRecord(int WrokFlowID)
+        {
+            return PartialView();
+        }
+
     }
 }
