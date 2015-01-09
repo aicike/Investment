@@ -23,13 +23,8 @@
             <div style="margin-bottom: 20px;">
                 <button type="button" class="btn" onclick="location.href='@ViewBag.BackUrl'">
                     返回</button></div>
-            @{Html.RenderAction("Index", "WorkFlow_Form_Financing", new { financingID = 4, workflowID =1});}
-            <div class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix alert alert-info" role="complementary" style="padding-right:14px;right:5px;">
-                <div><a href="#" class="alert-link">公司详细信息</a></div>
-                <div><a href="#" class="alert-link">融资详细信息</a></div>
-            </div>
-
-
+            @{Html.RenderAction("Index", "WorkFlow_Form_Financing", new { financingID = 4, workflowID = 1 });}
+            @{Html.RenderAction("RightOption", "WorkFlow_Form_Financing", new { financingID = 4 });}
             <div class="portlet box blue">
                 <div class="portlet-title">
                     <div class="caption">
@@ -46,6 +41,7 @@
                                 <div class="controls">
                                     @if (Model.Owner_A != null)
                                     { 
+
                                         <span class="help-inline">@Model.Owner_A.Name</span>
                                     }
                                 </div>
@@ -58,6 +54,7 @@
                                 <div class="controls">
                                     @if (Model.Owner_B != null)
                                     { 
+
                                         <span class="help-inline">@Model.Owner_B.Name</span>
                                     }
                                 </div>
@@ -71,12 +68,15 @@
                                     @switch (Model.Status)
                                     {
                                         case 0:
+
                                         <span class="help-inline">未进行</span>
                                             break;
                                         case 1:
+
                                         <span class="help-inline">进行中</span>
                                             break;
                                         case 2:
+
                                         <span class="help-inline">已完成</span>
                                             break;
                                     }

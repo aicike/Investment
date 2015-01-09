@@ -145,6 +145,7 @@
       <DependentUpon>imageUp.ashx</DependentUpon>
     </Compile>
     <Compile Include="Scripts\ueditor\net\Uploader.cs" />
+    <Compile Include="Controllers\ControlController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -1099,6 +1100,7 @@
     <Content Include="Views\MechanismProducts\Edit.cshtml" />
     <Content Include="Views\WorkFlow\Preview.cshtml" />
  <Content Include="Views\WorkFlow_Form_Financing\Index.cshtml" />
+    <Content Include="Views\WorkFlow_Form_Financing\RightOption.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
