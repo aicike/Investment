@@ -22,12 +22,6 @@ namespace Entity
         [Display(Name = "流程编号")]
         public string Number { get; set; }
 
-        /// <summary>
-        /// 流程分类表ID
-        /// </summary>
-        [Display(Name = "流程分类表ID")]
-        public int WorkFlowManagerID { get; set; }
-        public virtual WorkFlowManager WorkFlowManager { get; set; }
 
         /// <summary>
         /// 融资意向表ID

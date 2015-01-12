@@ -38,9 +38,5 @@ namespace Entity
 
         public virtual ICollection<Financing> Financings { get; set; }
 		
-        /// <summary>
-        /// 流程表
-        /// </summary>
-        public virtual ICollection<WorkFlow> WorkFlow { get; set; }
     }
 }
