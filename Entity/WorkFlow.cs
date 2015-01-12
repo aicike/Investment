@@ -43,13 +43,6 @@ namespace Entity
         public virtual Company Company { get; set; }
 
         /// <summary>
-        /// 项目负责人ID
-        /// </summary>
-        [Display(Name = "项目负责人ID")]
-        public int GroupAccountID { get; set; }
-        public virtual GroupAccount GroupAccount { get; set; }
-
-        /// <summary>
         /// 表单数据 JSON
         /// </summary>
         [Display(Name = "表单数据 JSON")]
@@ -58,7 +51,7 @@ namespace Entity
         /// <summary>
         /// 状态 0草稿，1进行中，2已完成，3未通过
         /// </summary>
-        [Display(Name = "项目负责人ID")]
+        [Display(Name = "状态")]
         public int State { get; set; }
 
         /// <summary>

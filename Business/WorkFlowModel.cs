@@ -11,7 +11,34 @@ namespace Business
     /// </summary>
     public class WorkFlowModel : BaseModel<WorkFlow>
     {
-        public string Get_To_Json(int id)
+        /// <summary>
+        /// 根据负责人ID 和 状态 获取列表
+        /// </summary>
+        /// <param name="state">状态 0草稿，1进行中，2已完成，3未通过</param>
+        /// <param name="groupAccountID"></param>
+        /// <returns></returns>
+        public IQueryable<WorkFlow> GetListByState(int state, int groupAccountID)
+        {
+            return List().Where(a => a.State == state && a.Financing.Owner_A_ID == groupAccountID);
+        }
+
+        /// <summary>
+        /// 我的申请
+        /// </summary>
+        /// <returns></returns>
+        public IQueryable<WorkFlow> GetMyApplication(int groupUserID)
+        {
+            var list= List().Where(a => a.Financing.Owner_A_ID == groupUserID);
+            return list;
+        }
+
+
+        /// <summary>
+        /// 根据流程ID获取 融资信息、公司信息的 json数据
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public string Get_To_Json_Financing(int id)
         {
             var obj = Get(id);//工作流程表
 
