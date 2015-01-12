@@ -26,9 +26,43 @@ namespace Business
         /// 我的申请
         /// </summary>
         /// <returns></returns>
-        public IQueryable<WorkFlow> GetMyApplication(int groupUserID)
+        public IQueryable<WorkFlow> GetMyApplication(int groupAccountID)
         {
-            var list= List().Where(a => a.Financing.Owner_A_ID == groupUserID);
+            var list = List().Where(a => a.Financing.Owner_A_ID == groupAccountID);
+            return list;
+        }
+
+        /// <summary>
+        /// 我的待办
+        /// </summary>
+        /// <param name="groupAccountID"></param>
+        /// <returns></returns>
+        public IQueryable<WorkFlow> GetBacklog(int groupAccountID)
+        {
+            var list = List().Where(a => a.ApprovalRecord.Any(b => b.Operation == -1 && b.GroupAccountID == groupAccountID));
+            return list;
+        }
+
+        /// <summary>
+        /// 我的已办
+        /// </summary>
+        /// <param name="groupAccountID"></param>
+        /// <returns></returns>
+        public IQueryable<WorkFlow> GetHistory(int groupAccountID)
+        {
+            var list = List().Where(a => a.ApprovalRecord.Any(b => (b.Operation == 1 || b.Operation == 2 || b.Operation == 3) && b.GroupAccountID == groupAccountID));
+            return list;
+        }
+
+
+        /// <summary>
+        /// 我的辅助
+        /// </summary>
+        /// <param name="groupAccountID"></param>
+        /// <returns></returns>
+        public IQueryable<WorkFlow> GetAssist(int groupAccountID)
+        {
+            var list = List().Where(a => a.Financing.Owner_B_ID==groupAccountID);
             return list;
         }
 

@@ -33,6 +33,44 @@ namespace Investment.Controllers
             return View(list);
         }
 
+        /// <summary>
+        /// 我的待办列表
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Backlog(int? id)
+        {
+            WorkFlowModel wfm = new WorkFlowModel();
+            var objs = wfm.GetBacklog(LoginAccount.UserID);
+            var list = objs.ToPagedList(id ?? 1, 15);
+            return View(list);
+        }
+
+        /// <summary>
+        /// 我的已办列表
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult History(int? id)
+        {
+            WorkFlowModel wfm = new WorkFlowModel();
+            var objs = wfm.GetHistory(LoginAccount.UserID);
+            var list = objs.ToPagedList(id ?? 1, 15);
+            return View(list);
+        }
+
+        /// <summary>
+        /// 辅助项目
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Assist(int? id)
+        {
+            WorkFlowModel wfm = new WorkFlowModel();
+            var objs = wfm.GetAssist(LoginAccount.UserID);
+            var list = objs.ToPagedList(id ?? 1, 15);
+            return View(list);
+        }
+
+
+
 
 
         #region 预览界面

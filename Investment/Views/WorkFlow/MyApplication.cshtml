@@ -19,14 +19,20 @@
                 <table class="table table-bordered table-hover" id="table_company">
                     <thead>
                         <tr>
-                            <th style="width: 80px;">
+                            <th style="width: 100px;">
                                 编号
                             </th>
                             <th style="width: 200px;">
                                 项目名称
                             </th>
-                            <th>
+                            <th style="width: 80px;">
                                 状态
+                            </th>
+                            <th style="width: 100px;">
+                                当前节点
+                            </th>
+                            <th style="width: 100px;">
+                                当前审批人
                             </th>
                             <th style="width: 80px">
                                 操作
@@ -44,31 +50,27 @@
                                     @item.Financing.Name
                                 </td>
                                 <td>
-                                    @item.Financing.Amount
-                                </td>
-                                <td>
-                                    @if (item.Financing.MaxTimeLimit != 0)
+                                    @switch (item.State)
                                     {
-                                        @:@item.Financing.MinTimeLimit + @item.Financing.MaxTimeLimit
-                                                                            }
-                                    else
-                                    {
-                                        @item.Financing.MinTimeLimit
+                                        case 0:
+                                        @:草稿
+                                                break;
+                                        case 1:
+                                        @:进行中
+                                                break;
+                                        case 2:
+                                        @:已完成
+                                                break;
+                                        case 3:
+                                        @:未通过
+                                               break;
                                     }
                                 </td>
                                 <td>
-                                    @item.Financing.FinancingCost
+                                    @item.WorkFlow_Node.WorkFlowNodeManager.Name
                                 </td>
                                 <td>
-                                    @item.WorkFlowManager.Name
-                                </td>
-                                <td>
-                                    @foreach (var p in item.WorkFlowMechanismProduct)
-                                    {
-                                        <div>
-                                            @p.MechanismProducts.Name
-                                        </div>
-                                    }
+                                    item.ApprovalRecord.Where(a=>a.Operation==-1).ToList().ConvertToString(",");
                                 </td>
                                 <td>
                                     @Html.ActionLink("详细", "Detail", "Company", new { id = item.ID }, null, true)

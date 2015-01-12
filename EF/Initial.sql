@@ -18,7 +18,7 @@ INSERT [dbo].[Menu] ([ID], [Area], [Controller], [Action], [Name], [ShowName], [
 
 INSERT [dbo].[Menu] ([ID], [Area], [Controller], [Action], [Name], [ShowName], [Order], [ParentMenuID],AccountType) VALUES (41, NULL, 'Home', 'Home', N'项目管理', N'项目管理', 4, NULL,0)
 INSERT [dbo].[Menu] ([ID], [Area], [Controller], [Action], [Name], [ShowName], [Order], [ParentMenuID],AccountType) VALUES (4101, NULL, 'WorkFlow', 'Pending', N'待定业务', N'待定业务', 1, 41,0)
-INSERT [dbo].[Menu] ([ID], [Area], [Controller], [Action], [Name], [ShowName], [Order], [ParentMenuID],AccountType) VALUES (4102, NULL, 'Home', 'Home', N'我的申请', N'我的申请', 2, 41,0)
+INSERT [dbo].[Menu] ([ID], [Area], [Controller], [Action], [Name], [ShowName], [Order], [ParentMenuID],AccountType) VALUES (4102, NULL, 'WorkFlow', 'MyApplication', N'我的申请', N'我的申请', 2, 41,0)
 INSERT [dbo].[Menu] ([ID], [Area], [Controller], [Action], [Name], [ShowName], [Order], [ParentMenuID],AccountType) VALUES (4103, NULL, 'Home', 'Home', N'我的待办', N'我的待办', 3, 41,0)
 INSERT [dbo].[Menu] ([ID], [Area], [Controller], [Action], [Name], [ShowName], [Order], [ParentMenuID],AccountType) VALUES (4104, NULL, 'Home', 'Home', N'我的已办', N'我的已办', 4, 41,0)
 INSERT [dbo].[Menu] ([ID], [Area], [Controller], [Action], [Name], [ShowName], [Order], [ParentMenuID],AccountType) VALUES (4105, NULL, 'Home', 'Home', N'辅助项目', N'辅助项目', 5, 41,0)
@@ -79,6 +79,7 @@ SET IDENTITY_INSERT [dbo].[WorkFlowNodeManager] OFF
 
 /****** Object:  Table [dbo].[CompanyAccount]    Script Date: 11/27/2014 14:40:46 ******/
 /**生成流程单号函数 @prefix 流程前缀 @digit位数 @WorkFlowManagerID流程类别ID**/
+
 GO
 Create function GetWorkFlowNumber(@prefix varchar(10),@digit int,@WorkFlowManagerID int)
 returns varchar(100)
@@ -124,5 +125,3 @@ begin
 		end
 	return @Number
 end
-
-GO
