@@ -80,7 +80,7 @@ SET IDENTITY_INSERT [dbo].[WorkFlowNodeManager] OFF
 /****** Object:  Table [dbo].[CompanyAccount]    Script Date: 11/27/2014 14:40:46 ******/
 /**生成流程单号函数 @prefix 流程前缀 @digit位数 @WorkFlowManagerID流程类别ID**/
 GO
-Create function GetWorkFlowNumber(@prefix varchar(10),@digit int,@WorkFlowManagerID int)
+Create function GetWorkFlowNumber(@prefix varchar(10),@digit int)
 returns varchar(100)
 as
 begin
@@ -89,7 +89,7 @@ begin
 
 	declare @Prefixcnt int = DATALENGTH(@prefix)
 	declare @MaxNumber varchar(100) 
-	select @MaxNumber =Max(Number) from dbo.WorkFlow where WorkFlowManagerID= @WorkFlowManagerID and Number like '%'+@Number+'%'  
+	select @MaxNumber =Max(Number) from dbo.WorkFlow where  Number like '%'+@Number+'%'  
 	
 	declare @lasNum varchar(50)='0'
 	if(@MaxNumber is null)

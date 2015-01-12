@@ -26,7 +26,9 @@ namespace Investment.Controllers
         {
             ViewBag.financingID = financingID;
             ViewBag.Products = Products;
-            return View();
+            FinancingModel FModel = new FinancingModel();
+            var financing = FModel.Get(financingID);
+            return View(financing);
         }
 
         /// <summary>
@@ -47,11 +49,10 @@ namespace Investment.Controllers
                 WorkFlowModel WFModel = new WorkFlowModel();
                 WorkFlow workflow = new WorkFlow();
                 workflow.BeginDate = DateTime.Now;
-                workflow.FinancingID = 1;
+                workflow.FinancingID = financingID;
                 workflow.FormJson = "";
-                workflow.GroupAccountID = LoginAccount.UserID;
                 workflow.State = 0;
-                workflow.WorkFlowManagerID = financing.WorkFlowManagerID;
+                workflow.CompanyID = financing.CompanyID;
                 result = WFModel.Add(workflow);
             }
             if (result.HasError)
@@ -66,5 +67,29 @@ namespace Investment.Controllers
         }
         #endregion
 
+
+        #region 待定业务单界面
+        /// <summary>
+        /// 待定义务页面
+        /// </summary>
+        /// <param name="WorkFlowID"></param>
+        /// <returns></returns>
+        public ActionResult Pending(int WorkFlowID)
+        {
+            WorkFlowModel WFModel = new WorkFlowModel();
+            var item = WFModel.Get(WorkFlowID);
+            return View(item);
+        }
+
+        /// <summary>
+        /// 提交申请
+        /// </summary>
+        /// <param name="WorkFlowID"></param>
+        /// <returns></returns>
+        public ActionResult SetSubmitForm(int WorkFlowID)
+        {
+            return JavaScript("window.location.href='" + Url.Action("Pending", "WorkFlow") + "'");
+        }
+        #endregion
     }
 }

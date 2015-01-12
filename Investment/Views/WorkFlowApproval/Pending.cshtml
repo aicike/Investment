@@ -1,8 +1,7 @@
 ﻿@{
     ViewBag.Title = "待定业务单";
-    Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@model Entity.Financing
+@model Entity.WorkFlow
 @section scripts{
     <script>
 
@@ -53,14 +52,22 @@
 }
 <div class="row-fluid">
     <div class="span12" style="margin-top: 50px;">
-        @{Html.RenderAction("RightOption", "WorkFlow_Form_Financing", new { financingID = 2, workflowID = 1 });}
+        @{Html.RenderAction("RightOption", "WorkFlow_Form_Financing", new { financingID = Model.FinancingID, workflowID = Model.ID });}
         <table id="TabMain" align="center" style="width: 100%; margin-bottom: 20px;">
             <tr>
                 <td>
                     <table style="width: 100%; line-height: 30px">
                         <tr>
                             <td colspan="2" align="center">
-                                <span style="font-weight: bold; font-size: 24px">@Model.WorkFlowManager.Name</span>
+                                <span style="font-weight: bold; font-size: 24px">@Model.Financing.WorkFlowManager.Name</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                申请日期：2015-01-01
+                            </td>
+                            <td style="text-align: right">
+                                单号：ZXR20150101001
                             </td>
                         </tr>
                     </table>
@@ -68,7 +75,7 @@
             </tr>
             <tr>
                 <td>
-                    @{Html.RenderAction("Index", "WorkFlow_Form_Financing", new { financingID = ViewBag.financingID, workflowID = 1 });}
+                    @{Html.RenderAction("Index", "WorkFlow_Form_Financing", new { financingID = Model.FinancingID, workflowID = Model.ID });}
                 </td>
             </tr>
             <tr>
@@ -80,15 +87,16 @@
                 </td>
             </tr>
         </table>
-        @using (Ajax.BeginForm("SetPendingForm", "WorkFlowApproval", new { financingID = ViewBag.financingID, Products = ViewBag.Products }, new AjaxOptions() { UpdateTargetId = "alert" }))
+        @using (Ajax.BeginForm("SetSubmitForm", "WorkFlowApproval", new { workflowID = Model.ID }, new AjaxOptions() { UpdateTargetId = "alert" }))
         {
             <div id="div_FC" class="Float_div control-group">
                 <table align="center">
                     <tr>
                         <td>
                             <button class="btn blue" type="submit">
-                                生成待定业务单</button>
-                            <a href="@Url.Action("Index", "Mechanism")" class="btn blue" style="width:80px">返回</a>
+                                提交业务申请</button>
+                                <a href="@Url.Action("Pending", "WorkFlow")" class="btn blue" style="width:80px">删除待定单</a>
+                            <a href="@Url.Action("Pending", "WorkFlow")" class="btn blue" style="width:80px">返回</a>
                         </td>
                     </tr>
                 </table>
@@ -96,3 +104,4 @@
         }
     </div>
 </div>
+

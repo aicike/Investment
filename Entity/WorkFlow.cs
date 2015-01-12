@@ -62,7 +62,7 @@ namespace Entity
         /// 当前节点ID（流程与节点中间表）
         /// </summary>
         [Display(Name = "当前节点（流程与节点中间表）")]
-        public int WorkFlow_NodeID { get; set; }
+        public int? WorkFlow_NodeID { get; set; }
         public virtual WorkFlow_Node WorkFlow_Node { get; set; }
 
 

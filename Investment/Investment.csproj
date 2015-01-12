@@ -1008,7 +1008,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="File\" />
     <Folder Include="Scripts\ueditor\net\upload\" />
-    <Folder Include="Views\WorkFlow\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -1104,9 +1103,10 @@
     <Content Include="Views\WorkFlow_Form_Financing\RightOption.cshtml" />
     <Content Include="Views\MechanismProducts\Index.cshtml" />
     <Content Include="Views\WorkFlow_Form_Financing\ApprovalRecord.cshtml" />
-<Content Include="Views\WorkFlowApproval\Preview.cshtml" />
+    <Content Include="Views\WorkFlowApproval\Preview.cshtml" />
     <Content Include="Views\WorkFlow\Pending.cshtml" />
     <Content Include="Views\WorkFlow\MyApplication.cshtml" />
+    <Content Include="Views\WorkFlowApproval\Pending.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
