@@ -18,13 +18,12 @@
 @model Entity.Financing
 <div class="row-fluid">
     <div class="span12">
+        @{Html.RenderAction("RightOption", "WorkFlow_Form_Financing", new { financingID = 4 });}
         <div class="tabbable tabbable-custom boxless">
             <form action="#" class="form-horizontal">
             <div style="margin-bottom: 20px;">
                 <button type="button" class="btn" onclick="location.href='@ViewBag.BackUrl'">
                     返回</button></div>
-            @{Html.RenderAction("Index", "WorkFlow_Form_Financing", new { financingID = 4, workflowID = 1 });}
-            @{Html.RenderAction("RightOption", "WorkFlow_Form_Financing", new { financingID = 4 });}
             <div class="portlet box blue">
                 <div class="portlet-title">
                     <div class="caption">

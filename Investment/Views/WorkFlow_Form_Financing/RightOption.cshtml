@@ -4,11 +4,10 @@
 <div class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix alert alert-info"
     role="complementary" style="padding-right: 14px; right: 5px;">
     <div>
-        <a href="#" class="alert-link">公司详细信息</a></div>
+        <a href="@Url.Action("Detail", "Company", new { id = ViewBag.CompanyID })" target="_blank" class="alert-link">公司详细信息</a></div>
     <div style="margin-top: 8px">
-        <a href="@Url.Action("Detail", "Financing", new { id = 4 })" class="alert-link">融资详细信息</a></div>
-    <div style="margin-top: 8px">
-        <a href="#" class="alert-link">机构产品信息</a></div>
+        <a href="@Url.Action("Detail", "Financing", new { id = ViewBag.FinancingID })"  target="_blank" class="alert-link">
+            融资详细信息</a></div>
     <div style="margin-top: 8px">
         <a class="back-to-top" href="#top">返回顶部</a></div>
 </div>

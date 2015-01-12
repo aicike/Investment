@@ -1,0 +1,104 @@
+﻿@{
+    ViewBag.Title = "待定业务列表";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section scripts{
+}
+@model PagedList<Entity.WorkFlow>
+<div class="row-fluid">
+    <div class="span12">
+        <div class="portlet box blue" style="margin-top: 10px;">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-cogs"></i>待定业务列表
+                </div>
+                <div class="tools">
+                </div>
+            </div>
+            <div class="portlet-body">
+                <table class="table table-bordered table-hover" id="table_company">
+                    <thead>
+                        <tr>
+                            <th style="width: 200px;">
+                                项目名称
+                            </th>
+                            <th style="width: 80px;">
+                                融资金额（万元）
+                            </th>
+                            <th style="width: 80px;">
+                                融资期限（月）
+                            </th>
+                            <th style="width: 80px;">
+                                融资成本
+                            </th>
+                            <th style="width: 130px;">
+                                项目类型
+                            </th>
+                            <th style="width: 130px;">
+                                融资产品
+                            </th>
+                            <th style="width: 80px">
+                                操作
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @item.Financing.Name
+                                </td>
+                                <td>
+                                    @item.Financing.Amount
+                                </td>
+                                <td>
+                                    @if (item.Financing.MaxTimeLimit != 0)
+                                    {
+                                        @:@item.Financing.MinTimeLimit + @item.Financing.MaxTimeLimit
+                                                                            }
+                                    else
+                                    {
+                                        @item.Financing.MinTimeLimit
+                                    }
+                                </td>
+                                <td>
+                                    @item.Financing.FinancingCost
+                                </td>
+                                <td>
+                                    @item.WorkFlowManager.Name
+                                </td>
+                                <td>
+                                    @foreach (var p in item.WorkFlowMechanismProduct)
+                                    {
+                                        <div>
+                                            @p.MechanismProducts.Name
+                                        </div>
+                                    }
+                                </td>
+                                <td>
+                                    @Html.ActionLink("详细", "Detail", "Company", new { id = item.ID }, null, true)
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <div class="pagination">
+                    @Html.Pager(Model, new PagerOptions
+               {
+                   PageIndexParameterName = "ID",
+                   CurrentPagerItemWrapperFormatString = "<li class=\"disabled\"><a>{0}</a></li>",
+                   NumericPagerItemWrapperFormatString = "<li>{0}</li>",
+                   NavigationPagerItemWrapperFormatString = "<li>{0}</li>",
+                   CssClass = "",
+                   SeparatorHtml = "",
+                   AutoHide = false,
+                   PageIndexOutOfRangeErrorMessage = "页面错误。",
+                   ShowFirstLast = false,
+                   ContainerTagName = "ul"
+               })
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

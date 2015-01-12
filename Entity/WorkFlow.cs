@@ -22,12 +22,6 @@ namespace Entity
         [Display(Name = "流程编号")]
         public string Number { get; set; }
 
-        /// <summary>
-        /// 流程分类表ID
-        /// </summary>
-        [Display(Name = "流程分类表ID")]
-        public int WorkFlowManagerID { get; set; }
-        public virtual WorkFlowManager WorkFlowManager { get; set; }
 
         /// <summary>
         /// 融资意向表ID
@@ -37,11 +31,10 @@ namespace Entity
         public virtual Financing Financing { get; set; }
 
         /// <summary>
-        /// 项目负责人ID
+        /// 公司ID
         /// </summary>
-        [Display(Name = "项目负责人ID")]
-        public int GroupAccountID { get; set; }
-        public virtual GroupAccount GroupAccount { get; set; }
+        public int CompanyID { get; set; }
+        public virtual Company Company { get; set; }
 
         /// <summary>
         /// 表单数据 JSON
@@ -52,7 +45,7 @@ namespace Entity
         /// <summary>
         /// 状态 0草稿，1进行中，2已完成，3未通过
         /// </summary>
-        [Display(Name = "项目负责人ID")]
+        [Display(Name = "状态")]
         public int State { get; set; }
 
         /// <summary>

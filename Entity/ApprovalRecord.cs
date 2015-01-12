@@ -52,13 +52,13 @@ namespace Entity
         public string Opinion { get; set; }
 
         /// <summary>
-        /// 审批操作 0提交申请,1通过，2不通过，3驳回
+        /// 审批操作 -1未操作，0提交申请,1通过，2不通过，3驳回
         /// </summary>
         public int Operation { get; set; }
 
         /// <summary>
         /// 审批日期
         /// </summary>
-        public DateTime Date { get; set; }
+        public DateTime? Date { get; set; }
     }
 }

@@ -324,7 +324,6 @@ namespace Investment.Controllers
                 objs = objs.Where(a => a.Name.Contains(Name));
             }
 
-
             var list = objs.ToPagedList(id ?? 1, 15);
             return View(list);
         }
