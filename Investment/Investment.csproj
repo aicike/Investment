@@ -129,6 +129,7 @@
     <Compile Include="Controllers\MechanismProductsController.cs" />
     <Compile Include="Controllers\PositionController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
+    <Compile Include="Controllers\WorkFlowApprovalController.cs" />
     <Compile Include="Controllers\WorkFlowController.cs" />
     <Compile Include="Controllers\WorkFlowManagerController.cs" />
     <Compile Include="Controllers\WorkFlow_Form_FinancingController.cs" />
@@ -1006,6 +1007,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Scripts\ueditor\net\upload\" />
+    <Folder Include="Views\WorkFlow\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -1098,10 +1100,10 @@
     <Content Include="Views\MechanismProducts\Index.cshtml" />
     <Content Include="Views\MechanismProducts\Add.cshtml" />
     <Content Include="Views\MechanismProducts\Edit.cshtml" />
-    <Content Include="Views\WorkFlow\Preview.cshtml" />
     <Content Include="Views\WorkFlow_Form_Financing\Index.cshtml" />
     <Content Include="Views\WorkFlow_Form_Financing\RightOption.cshtml" />
     <Content Include="Views\WorkFlow_Form_Financing\ApprovalRecord.cshtml" />
+    <Content Include="Views\WorkFlowApproval\Preview.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
