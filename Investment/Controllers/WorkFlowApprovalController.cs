@@ -169,6 +169,8 @@ namespace Investment.Controllers
         /// <returns></returns>
         public ActionResult Agree(int WorkFlowID, string Opinion)
         {
+            WorkFlowModel wfm = new WorkFlowModel();
+            wfm.WorkFlow_Agree(WorkFlowID, LoginAccount.UserID, Opinion);
             return View();
         }
 
@@ -178,6 +180,8 @@ namespace Investment.Controllers
         /// <returns></returns>
         public ActionResult Disagree(int WorkFlowID, string Opinion)
         {
+            WorkFlowModel wfm = new WorkFlowModel();
+            wfm.WorkFlow_Disagree(WorkFlowID, LoginAccount.UserID, Opinion);
             return View();
         }
 
@@ -187,6 +191,8 @@ namespace Investment.Controllers
         /// <returns></returns>
         public ActionResult Reject(int WorkFlowID, string Opinion)
         {
+            WorkFlowModel wfm = new WorkFlowModel();
+            wfm.WorkFlow_Reject(WorkFlowID, LoginAccount.UserID, 1,Opinion);
             return View();
         }
 
