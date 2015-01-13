@@ -87,7 +87,31 @@ namespace Investment.Controllers
         /// <returns></returns>
         public ActionResult SetSubmitForm(int WorkFlowID)
         {
+            WorkFlowModel WKModel = new WorkFlowModel();
+            var result = WKModel.SubWorkFlow(WorkFlowID, LoginAccount.UserID);
+            if (result.HasError)
+            {
+                return JavaScript("JMessage('" + result.Error + "',true)");
+            }
             return JavaScript("window.location.href='" + Url.Action("Pending", "WorkFlow") + "'");
+        }
+
+        /// <summary>
+        /// 删除待定单
+        /// </summary>
+        /// <param name="WorkFlowID"></param>
+        /// <returns></returns>
+        public string DeletePeding(int WorkFlowID)
+        {
+            WorkFlowModel WKModel = new WorkFlowModel();
+            var result = WKModel.Delete(WorkFlowID);
+            if (result.HasError)
+            {
+                return "<script>JMessage('" + result.Error + "',true)</script>";
+
+            }
+            return "<script>window.location.href='" + Url.Action("Pending", "WorkFlow") + "';</script>";
+
         }
         #endregion
 

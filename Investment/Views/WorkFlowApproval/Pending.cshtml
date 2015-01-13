@@ -95,7 +95,9 @@
                         <td>
                             <button class="btn blue" type="submit">
                                 提交业务申请</button>
-                                <a href="@Url.Action("Pending", "WorkFlow")" class="btn blue" style="width:80px">删除待定单</a>
+
+                                 @Ajax.ActionLink("删除", "Delete", "WorkFlowApproval", new { workFlow_nodeID = item.ID, WorkFlowID = item.WorkFlowManagerID }, new AjaxOptions() { UpdateTargetId = "alert", OnBegin = "return AppDelete('确定删除?')" }, true)
+                                <a href="@Url.Action("Pending", "WorkFlow", new { WorkFlowID=Model.ID})" class="btn blue" style="width:80px">删除待定单</a>
                             <a href="@Url.Action("Pending", "WorkFlow")" class="btn blue" style="width:80px">返回</a>
                         </td>
                     </tr>
