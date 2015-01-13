@@ -73,6 +73,7 @@ INSERT [dbo].[WorkFlowNodeManager] ([ID], [Name], [Remark],[IsSinceApproval],[Co
 INSERT [dbo].[WorkFlowNodeManager] ([ID], [Name], [Remark],[IsSinceApproval],[Controllers],[Acction]) VALUES (6, '机构对接','无','False','','')
 INSERT [dbo].[WorkFlowNodeManager] ([ID], [Name], [Remark],[IsSinceApproval],[Controllers],[Acction]) VALUES (7, '落实放款','无','False','','')
 INSERT [dbo].[WorkFlowNodeManager] ([ID], [Name], [Remark],[IsSinceApproval],[Controllers],[Acction]) VALUES (8, '确认收取费用','无','False','','')
+INSERT [dbo].[WorkFlowNodeManager] ([ID], [Name], [Remark],[IsSinceApproval],[Controllers],[Acction]) VALUES (9, '提交申请','无','True','','')
 SET IDENTITY_INSERT [dbo].[WorkFlowNodeManager] OFF
 /****** Object:  Table [dbo].[Company]    Script Date: 11/27/2014 14:40:46 ******/
 

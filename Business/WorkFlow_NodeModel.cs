@@ -86,6 +86,31 @@ namespace Business
             return result;
         }
 
+        /// <summary>
+        /// 根据流程类型ID 与order 查找数据
+        /// </summary>
+        /// <param name="WorkFlowManagerID">流程类型ID</param>
+        /// <param name="order">排序</param>
+        /// <returns></returns>
+        public WorkFlow_Node Getwork_node(int WorkFlowManagerID, int order)
+        {
+            var item = base.List().Where(a => a.Order == order && a.WorkFlowManagerID == WorkFlowManagerID).FirstOrDefault();
+            return item;
+        }
 
+        /// <summary>
+        /// 根据流程类型ID 与 中间表ID 查找下一节点
+        /// </summary>
+        /// <param name="WorkFlowManagerID"></param>
+        /// <param name="WorkFlow_NodeID"></param>
+        /// <returns></returns>
+        public WorkFlow_Node GetNextWorkFlow_Node(int WorkFlowManagerID,int WorkFlow_NodeID)
+        {
+            //获取当前节点
+            var thisitem = base.Get(WorkFlow_NodeID);
+            int order = thisitem.Order + 1;
+            var nextItem = base.List().Where(a => a.WorkFlowManagerID == WorkFlowManagerID && a.Order == order).FirstOrDefault();
+            return nextItem;
+        }
     }
 }
