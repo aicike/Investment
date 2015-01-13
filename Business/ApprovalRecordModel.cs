@@ -111,5 +111,24 @@ namespace Business
             string sql = string.Format("delete ApprovalRecord where WorkFlowID={0} and Operation=-1",WorkFlowID);
             int cnt = base.SqlExecute(sql);
         }
+
+        /// <summary>
+        /// 查询是否当前流程审批人
+        /// </summary>
+        /// <param name="WorkFlowID"></param>
+        /// <param name="GroupAccountID"></param>
+        /// <returns></returns>
+        public bool SelIsCurrentApproval(int WorkFlowID, int GroupAccountID)
+        {
+            var list = base.List().Where(a=>a.WorkFlowID==WorkFlowID&&a.Operation==-1&&a.GroupAccountID==GroupAccountID).ToList();
+            if (list.Count > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }

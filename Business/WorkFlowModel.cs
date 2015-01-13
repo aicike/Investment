@@ -113,8 +113,8 @@ namespace Business
                     var workflow = base.Get(WorkFlowID);
                     //生成单号
                     Commons.Common com = new Commons.Common();
-                    var number = com.SqlQuery<string>("select GetWorkFlowNumber('ZH',3)").ToString();
-                    workflow.Number = number;
+                    var number = com.SqlQuery<string>("select dbo.GetWorkFlowNumber('ZH',3)");
+                    workflow.Number = number.FirstOrDefault();
                     workflow.State = 1;
                     //查找下一节点
                     WorkFlow_NodeModel w_nModel = new WorkFlow_NodeModel();
