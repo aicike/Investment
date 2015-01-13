@@ -115,12 +115,15 @@ namespace Investment.Controllers
         }
         #endregion
 
+        #region 审批节点
+
         #region 融资立项初审
 
         public ActionResult RongZiLiXiangChuShen(int WorkFlowID)
         {
             WorkFlowModel WFModel = new WorkFlowModel();
             var item = WFModel.Get(WorkFlowID);
+            CheckGroupAccount(item);
             return View(item);
         }
 
@@ -128,36 +131,94 @@ namespace Investment.Controllers
 
         #region 项目立项
 
+        public ActionResult XiangMuLiXiang(int WorkFlowID)
+        {
+            WorkFlowModel WFModel = new WorkFlowModel();
+            var item = WFModel.Get(WorkFlowID);
+            CheckGroupAccount(item);
+            return View(item);
+        }
 
         #endregion
 
         #region 签署协议
 
+        public ActionResult QianShuXieYi(int WorkFlowID)
+        {
+            WorkFlowModel WFModel = new WorkFlowModel();
+            var item = WFModel.Get(WorkFlowID);
+            CheckGroupAccount(item);
+            return View(item);
+        }
 
         #endregion
 
         #region 协议确认
 
+        public ActionResult XieYiQueRen(int WorkFlowID)
+        {
+            WorkFlowModel WFModel = new WorkFlowModel();
+            var item = WFModel.Get(WorkFlowID);
+            CheckGroupAccount(item);
+            return View(item);
+        }
 
         #endregion
 
         #region 调查辅导
 
+        public ActionResult DiaoChaFuDao(int WorkFlowID)
+        {
+            WorkFlowModel WFModel = new WorkFlowModel();
+            var item = WFModel.Get(WorkFlowID);
+            CheckGroupAccount(item);
+            return View(item);
+        }
 
         #endregion
 
         #region 机构对接
 
+        public ActionResult JiGouDuiJie(int WorkFlowID)
+        {
+            WorkFlowModel WFModel = new WorkFlowModel();
+            var item = WFModel.Get(WorkFlowID);
+            CheckGroupAccount(item);
+            return View(item);
+        }
 
         #endregion
 
         #region 落实放款
 
+        public ActionResult LuoShiFangKuan(int WorkFlowID)
+        {
+            WorkFlowModel WFModel = new WorkFlowModel();
+            var item = WFModel.Get(WorkFlowID);
+            CheckGroupAccount(item);
+            return View(item);
+        }
 
         #endregion
 
         #region 确认收取费用
 
+        public ActionResult QueRenShouQuFeiYong(int WorkFlowID)
+        {
+            WorkFlowModel WFModel = new WorkFlowModel();
+            var item = WFModel.Get(WorkFlowID);
+            CheckGroupAccount(item);
+            return View(item);
+        }
+
+        #endregion
+
+        /// <summary>
+        /// 检查是否有权限查看此页面
+        /// </summary>
+        private void CheckGroupAccount(WorkFlow wf) {
+            wf.ApprovalRecord.Any(a => a.Operation == -1 && a.GroupAccountID == LoginAccount.UserID).NotAuthorizedPage();
+        }
 
         #endregion
 
