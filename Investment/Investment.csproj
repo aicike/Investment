@@ -207,6 +207,7 @@
     <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="error.html" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Image\404.jpg" />
@@ -1110,6 +1111,9 @@
     <Content Include="Views\WorkFlow\History.cshtml" />
     <Content Include="Views\WorkFlow\Assist.cshtml" />
     <Content Include="Views\WorkFlowApproval\Pending.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\WorkFlow\List.cshtml" />
+    <Content Include="Views\Company\Detail.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

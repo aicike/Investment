@@ -28,7 +28,7 @@ namespace Business
         /// <returns></returns>
         public IQueryable<WorkFlow> GetMyApplication(int groupAccountID)
         {
-            var list = List().Where(a => a.Financing.Owner_A_ID == groupAccountID);
+            var list = List().Where(a => a.Financing.Owner_A_ID == groupAccountID&&a.State!=0);
             return list;
         }
 
@@ -54,7 +54,6 @@ namespace Business
             return list;
         }
 
-
         /// <summary>
         /// 我的辅助
         /// </summary>
@@ -63,6 +62,17 @@ namespace Business
         public IQueryable<WorkFlow> GetAssist(int groupAccountID)
         {
             var list = List().Where(a => a.Financing.Owner_B_ID==groupAccountID);
+            return list;
+        }
+
+        /// <summary>
+        /// 项目列表
+        /// </summary>
+        /// <param name="groupAccountID"></param>
+        /// <returns></returns>
+        public IQueryable<WorkFlow> GetList()
+        {
+            var list = List().Where(a => a.State != 0);
             return list;
         }
 

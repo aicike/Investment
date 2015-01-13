@@ -300,7 +300,9 @@ namespace Investment.Controllers
 
         public ActionResult Detail(int id)
         {
-            return View();
+            CompanyModel companyModel = new CompanyModel();
+            var company = companyModel.Get(id);
+            return View(company);
         }
 
         #endregion

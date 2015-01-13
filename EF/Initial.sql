@@ -19,10 +19,10 @@ INSERT [dbo].[Menu] ([ID], [Area], [Controller], [Action], [Name], [ShowName], [
 INSERT [dbo].[Menu] ([ID], [Area], [Controller], [Action], [Name], [ShowName], [Order], [ParentMenuID],AccountType) VALUES (41, NULL, 'Home', 'Home', N'项目管理', N'项目管理', 4, NULL,0)
 INSERT [dbo].[Menu] ([ID], [Area], [Controller], [Action], [Name], [ShowName], [Order], [ParentMenuID],AccountType) VALUES (4101, NULL, 'WorkFlow', 'Pending', N'待定业务', N'待定业务', 1, 41,0)
 INSERT [dbo].[Menu] ([ID], [Area], [Controller], [Action], [Name], [ShowName], [Order], [ParentMenuID],AccountType) VALUES (4102, NULL, 'WorkFlow', 'MyApplication', N'我的申请', N'我的申请', 2, 41,0)
-INSERT [dbo].[Menu] ([ID], [Area], [Controller], [Action], [Name], [ShowName], [Order], [ParentMenuID],AccountType) VALUES (4103, NULL, 'Home', 'Home', N'我的待办', N'我的待办', 3, 41,0)
-INSERT [dbo].[Menu] ([ID], [Area], [Controller], [Action], [Name], [ShowName], [Order], [ParentMenuID],AccountType) VALUES (4104, NULL, 'Home', 'Home', N'我的已办', N'我的已办', 4, 41,0)
-INSERT [dbo].[Menu] ([ID], [Area], [Controller], [Action], [Name], [ShowName], [Order], [ParentMenuID],AccountType) VALUES (4105, NULL, 'Home', 'Home', N'辅助项目', N'辅助项目', 5, 41,0)
-INSERT [dbo].[Menu] ([ID], [Area], [Controller], [Action], [Name], [ShowName], [Order], [ParentMenuID],AccountType) VALUES (4106, NULL, 'Home', 'Home', N'项目列表', N'项目列表', 6, 41,0)
+INSERT [dbo].[Menu] ([ID], [Area], [Controller], [Action], [Name], [ShowName], [Order], [ParentMenuID],AccountType) VALUES (4103, NULL, 'WorkFlow', 'Backlog', N'我的待办', N'我的待办', 3, 41,0)
+INSERT [dbo].[Menu] ([ID], [Area], [Controller], [Action], [Name], [ShowName], [Order], [ParentMenuID],AccountType) VALUES (4104, NULL, 'WorkFlow', 'History', N'我的已办', N'我的已办', 4, 41,0)
+INSERT [dbo].[Menu] ([ID], [Area], [Controller], [Action], [Name], [ShowName], [Order], [ParentMenuID],AccountType) VALUES (4105, NULL, 'WorkFlow', 'Assist', N'辅助项目', N'辅助项目', 5, 41,0)
+INSERT [dbo].[Menu] ([ID], [Area], [Controller], [Action], [Name], [ShowName], [Order], [ParentMenuID],AccountType) VALUES (4106, NULL, 'WorkFlow', 'List', N'项目列表', N'项目列表', 6, 41,0)
 
 INSERT [dbo].[Menu] ([ID], [Area], [Controller], [Action], [Name], [ShowName], [Order], [ParentMenuID],AccountType) VALUES (51, NULL, 'GroupProfile', 'ProFile', N'账号管理', N'账号管理', 5, NULL,0)
 

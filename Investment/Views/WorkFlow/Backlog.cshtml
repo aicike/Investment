@@ -26,6 +26,9 @@
                                 项目名称
                             </th>
                             <th style="width: 80px;">
+                                申请时间
+                            </th>
+                            <th style="width: 80px;">
                                 状态
                             </th>
                             <th style="width: 100px;">
@@ -48,6 +51,9 @@
                                 </td>
                                 <td>
                                     @item.Financing.Name
+                                </td>
+                                <td>
+                                    @item.BeginDate.ToString("yyyy/MM/dd")
                                 </td>
                                 <td>
                                     @switch (item.State)

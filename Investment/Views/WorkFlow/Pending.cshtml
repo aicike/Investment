@@ -31,6 +31,9 @@
                             <th style="width: 80px;">
                                 融资成本
                             </th>
+                            <th style="width: 80px;">
+                                申请时间
+                            </th>
                             <th style="width: 130px;">
                                 项目类型
                             </th>
@@ -63,10 +66,13 @@
                                     @item.Financing.FinancingCost
                                 </td>
                                 <td>
-                                    @(item.Financing.WorkFlowManager==null?"":item.Financing.WorkFlowManager.Name)
-                                </td>=
+                                    @item.BeginDate.ToString("yyyy/MM/dd")
+                                </td>
                                 <td>
-                                    @Html.ActionLink("详细", "Detail", "Company", new { id = item.ID }, null, true)
+                                    @(item.Financing.WorkFlowManager==null?"":item.Financing.WorkFlowManager.Name)
+                                </td>
+                                <td>
+                                    @Html.ActionLink("详细", "Pending", "WorkFlowApproval", new { WorkFlowID = item.ID }, null, true)
                                 </td>
                             </tr>
                         }

@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "修改客户";
+    ViewBag.Title = "客户信息";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @section scripts{
@@ -16,21 +16,6 @@
             @using (Ajax.BeginForm("Edit", "Company", new AjaxOptions() { UpdateTargetId = "alert" }, new { @class = "form-horizontal" }))
             {
                 <div style="margin-bottom: 20px;">
-                    <button type="submit" class="btn blue">
-                        保存</button>
-                    @if (Model.Status == 0)
-                    { 
-                        @Ajax.ActionLink("审核通过", "ChangeStatus", "Company", new { id = Model.ID, status = 1 }, new AjaxOptions { UpdateTargetId = "alert" }, new { @class = "btn red" }, true, false)@:
-                        @Ajax.ActionLink("审核不通过", "ChangeStatus", "Company", new { id = Model.ID, status = 2 }, new AjaxOptions { UpdateTargetId = "alert" }, new { @class = "btn red" }, true, false)
-                    }
-                    else if (Model.Status == 1)
-                    { 
-                        @Ajax.ActionLink("审核不通过", "ChangeStatus", "Company", new { id = Model.ID, status = 2 }, new AjaxOptions { UpdateTargetId = "alert" }, new { @class = "btn red" }, true, false)
-                    }
-                    else
-                    { 
-                        @Ajax.ActionLink("审核通过", "ChangeStatus", "Company", new { id = Model.ID, status = 1 }, new AjaxOptions { UpdateTargetId = "alert" }, new { @class = "btn red" }, true, false)
-                    }
                     <button type="button" class="btn" onclick="location.href='@Url.Action("Index", "Company")'">
                         返回</button>@Html.HiddenFor(a => a.ID)@Html.HiddenFor(a => a.OwnerID)
                 </div>
@@ -48,7 +33,7 @@
                                         <label class="control-label">
                                             公司名称</label>
                                         <div class="controls">
-                                            @Html.TextBoxFor(a => a.Name, new { @class = "span6 m-wrap" })
+                                            @Html.TextBoxFor(a => a.Name, new { @class = "span6 m-wrap", @readonly = "readonly" })
                                             <span class="help-inline">@Html.ValidationMessageFor(a => a.Name)</span>
                                         </div>
                                     </div>
@@ -56,7 +41,7 @@
                                         <label class="control-label">
                                             详细地址</label>
                                         <div class="controls">
-                                            @Html.TextBoxFor(a => a.Address, new { @class = "m-wrap span6" })
+                                            @Html.TextBoxFor(a => a.Address, new { @class = "m-wrap span6", @readonly = "readonly" })
                                             <span class="help-inline">@Html.ValidationMessageFor(a => a.Address)</span>
                                         </div>
                                     </div>
@@ -64,7 +49,7 @@
                                         <label class="control-label">
                                             法定代表人</label>
                                         <div class="controls">
-                                            @Html.TextBoxFor(a => a.FaDingDaiBiaoRen, new { @class = "span6 m-wrap" })
+                                            @Html.TextBoxFor(a => a.FaDingDaiBiaoRen, new { @class = "span6 m-wrap", @readonly = "readonly" })
                                             <span class="help-inline">@Html.ValidationMessageFor(a => a.FaDingDaiBiaoRen)</span>
                                         </div>
                                     </div>
@@ -72,7 +57,7 @@
                                         <label class="control-label">
                                             实际控制人</label>
                                         <div class="controls">
-                                            @Html.TextBoxFor(a => a.ShiJiKongZhiRen, new { @class = "span6 m-wrap" })
+                                            @Html.TextBoxFor(a => a.ShiJiKongZhiRen, new { @class = "span6 m-wrap", @readonly = "readonly" })
                                             <span class="help-inline">@Html.ValidationMessageFor(a => a.ShiJiKongZhiRen)</span>
                                         </div>
                                     </div>
@@ -80,7 +65,7 @@
                                         <label class="control-label">
                                             成立时间</label>
                                         <div class="controls">
-                                            @Html.TextBox("SetUpTime", @Model.SetUpTime.ToString("yyyy/MM/dd"), new { @class = "m-wrap span6", placeholder = "年/月/日 （如：2014/05/01）" })
+                                            @Html.TextBox("SetUpTime", @Model.SetUpTime.ToString("yyyy/MM/dd"), new { @class = "m-wrap span6", placeholder = "年/月/日 （如：2014/05/01）", @readonly = "readonly" })
                                             <span class="help-inline">@Html.ValidationMessageFor(a => a.SetUpTime)</span>
                                         </div>
                                     </div>
@@ -88,7 +73,7 @@
                                         <label class="control-label">
                                             企业性质</label>
                                         <div class="controls">
-                                            @Html.TextBoxFor(a => a.QiYeXingZhi, new { @class = "m-wrap span6" })
+                                            @Html.TextBoxFor(a => a.QiYeXingZhi, new { @class = "m-wrap span6", @readonly = "readonly" })
                                             <span class="help-inline">@Html.ValidationMessageFor(a => a.QiYeXingZhi)</span>
                                         </div>
                                     </div>
@@ -96,7 +81,7 @@
                                         <label class="control-label">
                                             企业资质</label>
                                         <div class="controls">
-                                            @Html.TextBoxFor(a => a.QiYeZiZhi, new { @class = "m-wrap span6" })
+                                            @Html.TextBoxFor(a => a.QiYeZiZhi, new { @class = "m-wrap span6", @readonly = "readonly" })
                                             <span class="help-inline">@Html.ValidationMessageFor(a => a.QiYeZiZhi)</span>
                                         </div>
                                     </div>
@@ -104,7 +89,7 @@
                                         <label class="control-label">
                                             主营业务</label>
                                         <div class="controls">
-                                            @Html.TextBoxFor(a => a.ZhuYingYeWu, new { @class = "m-wrap span6" })
+                                            @Html.TextBoxFor(a => a.ZhuYingYeWu, new { @class = "m-wrap span6", @readonly = "readonly" })
                                             <span class="help-inline">@Html.ValidationMessageFor(a => a.ZhuYingYeWu)</span>
                                         </div>
                                     </div>
@@ -114,7 +99,7 @@
                                                 <label class="control-label">
                                                     注册资本（万元）</label>
                                                 <div class="controls">
-                                                    @Html.TextBoxFor(a => a.ZhuCheZiJin, new { @class = "m-wrap span12" })
+                                                    @Html.TextBoxFor(a => a.ZhuCheZiJin, new { @class = "m-wrap span12", @readonly = "readonly" })
                                                     <span class="help-block">@Html.ValidationMessageFor(a => a.ZhuCheZiJin)</span>
                                                 </div>
                                             </div>
@@ -124,7 +109,7 @@
                                                 <label class="control-label">
                                                     实收资本（万元）</label>
                                                 <div class="controls">
-                                                    @Html.TextBoxFor(a => a.ShiShouZiBen, new { @class = "m-wrap span12" })
+                                                    @Html.TextBoxFor(a => a.ShiShouZiBen, new { @class = "m-wrap span12", @readonly = "readonly" })
                                                     <span class="help-block">@Html.ValidationMessageFor(a => a.ShiShouZiBen)</span>
                                                 </div>
                                             </div>
@@ -134,7 +119,7 @@
                                                 <label class="control-label">
                                                     资产总额（万元）</label>
                                                 <div class="controls">
-                                                    @Html.TextBoxFor(a => a.ZiChanZongE, new { @class = "m-wrap span12" })
+                                                    @Html.TextBoxFor(a => a.ZiChanZongE, new { @class = "m-wrap span12", @readonly = "readonly" })
                                                     <span class="help-block">@Html.ValidationMessageFor(a => a.ZiChanZongE)</span>
                                                 </div>
                                             </div>
@@ -144,7 +129,7 @@
                                                 <label class="control-label">
                                                     负债总额（万元）</label>
                                                 <div class="controls">
-                                                    @Html.TextBoxFor(a => a.FuZhaiZongE, new { @class = "m-wrap span12" })
+                                                    @Html.TextBoxFor(a => a.FuZhaiZongE, new { @class = "m-wrap span12", @readonly = "readonly" })
                                                     <span class="help-block">@Html.ValidationMessageFor(a => a.FuZhaiZongE)</span>
                                                 </div>
                                             </div>
@@ -156,7 +141,7 @@
                                                 <label class="control-label">
                                                     主营业务收入（万元）</label>
                                                 <div class="controls">
-                                                    @Html.TextBoxFor(a => a.ZhuYingYeWuShouRu, new { @class = "m-wrap span12" })
+                                                    @Html.TextBoxFor(a => a.ZhuYingYeWuShouRu, new { @class = "m-wrap span12", @readonly = "readonly" })
                                                     <span class="help-block">@Html.ValidationMessageFor(a => a.ZhuYingYeWuShouRu)</span>
                                                 </div>
                                             </div>
@@ -166,7 +151,7 @@
                                                 <label class="control-label">
                                                     成本（万元）</label>
                                                 <div class="controls">
-                                                    @Html.TextBoxFor(a => a.ChengBen, new { @class = "m-wrap span12" })
+                                                    @Html.TextBoxFor(a => a.ChengBen, new { @class = "m-wrap span12", @readonly = "readonly" })
                                                     <span class="help-block">@Html.ValidationMessageFor(a => a.ChengBen)</span>
                                                 </div>
                                             </div>
@@ -176,7 +161,7 @@
                                                 <label class="control-label">
                                                     净利润（万元）</label>
                                                 <div class="controls">
-                                                    @Html.TextBoxFor(a => a.JingLiRun, new { @class = "m-wrap span12" })
+                                                    @Html.TextBoxFor(a => a.JingLiRun, new { @class = "m-wrap span12", @readonly = "readonly" })
                                                     <span class="help-block">@Html.ValidationMessageFor(a => a.JingLiRun)</span>
                                                 </div>
                                             </div>
@@ -186,7 +171,7 @@
                                                 <label class="control-label">
                                                     或有负债（万元）</label>
                                                 <div class="controls">
-                                                    @Html.TextBoxFor(a => a.HuoYouFuZhai, new { @class = "m-wrap span12" })
+                                                    @Html.TextBoxFor(a => a.HuoYouFuZhai, new { @class = "m-wrap span12", @readonly = "readonly" })
                                                     <span class="help-block">@Html.ValidationMessageFor(a => a.HuoYouFuZhai)</span>
                                                 </div>
                                             </div>
@@ -196,7 +181,7 @@
                                         <label class="control-label">
                                             股权结构</label>
                                         <div class="controls">
-                                            @Html.TextAreaFor(a => a.GuQuanJieGou, new { @class = "span6 m-wrap" })
+                                            @Html.TextAreaFor(a => a.GuQuanJieGou, new { @class = "span6 m-wrap", @readonly = "readonly" })
                                             <span class="help-inline">@Html.ValidationMessageFor(a => a.GuQuanJieGou)</span>
                                         </div>
                                     </div>
@@ -204,7 +189,7 @@
                                         <label class="control-label">
                                             信用记录</label>
                                         <div class="controls">
-                                            @Html.TextAreaFor(a => a.ShiJiKongZhiRenXinYongJiLu, new { @class = "span6 m-wrap" })
+                                            @Html.TextAreaFor(a => a.ShiJiKongZhiRenXinYongJiLu, new { @class = "span6 m-wrap", @readonly = "readonly" })
                                             <span class="help-inline">@Html.ValidationMessageFor(a => a.ShiJiKongZhiRenXinYongJiLu)</span>
                                         </div>
                                     </div>
@@ -212,7 +197,7 @@
                                         <label class="control-label">
                                             金融机构借贷信息</label>
                                         <div class="controls">
-                                            @Html.TextAreaFor(a => a.MuQianDaiKuanDanBaoZhiXingQingKuang, new { @class = "span6 m-wrap" })
+                                            @Html.TextAreaFor(a => a.MuQianDaiKuanDanBaoZhiXingQingKuang, new { @class = "span6 m-wrap", @readonly = "readonly" })
                                             <span class="help-inline">@Html.ValidationMessageFor(a => a.MuQianDaiKuanDanBaoZhiXingQingKuang)</span>
                                         </div>
                                     </div>
@@ -220,7 +205,7 @@
                                         <label class="control-label">
                                             贷款卡</label>
                                         <div class="controls">
-                                            @Html.TextBoxFor(a => a.DaiKuanKa, new { @class = "span6 m-wrap" })
+                                            @Html.TextBoxFor(a => a.DaiKuanKa, new { @class = "span6 m-wrap", @readonly = "readonly" })
                                             <span class="help-inline">@Html.ValidationMessageFor(a => a.DaiKuanKa)</span>
                                         </div>
                                     </div>
@@ -228,7 +213,7 @@
                                         <label class="control-label">
                                             关联企业</label>
                                         <div class="controls">
-                                            @Html.TextBoxFor(a => a.GuanLianGongSi, new { @class = "span6 m-wrap" })
+                                            @Html.TextBoxFor(a => a.GuanLianGongSi, new { @class = "span6 m-wrap", @readonly = "readonly" })
                                             <span class="help-inline">@Html.ValidationMessageFor(a => a.GuanLianGongSi)</span>
                                         </div>
                                     </div>
@@ -244,12 +229,12 @@
                                         <div class="controls">
                                             <div>
                                                 <span class="help-inline">
-                                                    @{Html.RenderAction("SingleManage", "Attachment", new Investment.Models.AttachmentControl { ID = "1", Text = "[正面上传]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.FaRen1 });}
+                                                    @{Html.RenderAction("SingleManage", "Attachment", new Investment.Models.AttachmentControl { ID = "1",IsEnabled=false , Text = "[正面上传]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.FaRen1 });}
                                                 </span>
                                             </div>
                                             <div>
                                                 <span class="help-inline">
-                                                    @{Html.RenderAction("SingleManage", "Attachment", new Investment.Models.AttachmentControl { ID = "2", Text = "[反面上传]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.FaRen2 });}
+                                                    @{Html.RenderAction("SingleManage", "Attachment", new Investment.Models.AttachmentControl { ID = "2", IsEnabled = false, Text = "[反面上传]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.FaRen2 });}
                                                 </span>
                                             </div>
                                             <div id="filelist">
@@ -262,12 +247,12 @@
                                         <div class="controls">
                                             <div id="container">
                                                 <span class="help-inline">
-                                                    @{Html.RenderAction("SingleManage", "Attachment", new Investment.Models.AttachmentControl { ID = "3", Text = "[正本上传]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.YingYeZhiZhao1 });}
+                                                    @{Html.RenderAction("SingleManage", "Attachment", new Investment.Models.AttachmentControl { ID = "3", IsEnabled = false, Text = "[正本上传]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.YingYeZhiZhao1 });}
                                                 </span>
                                             </div>
                                             <div>
                                                 <span class="help-inline">
-                                                    @{Html.RenderAction("SingleManage", "Attachment", new Investment.Models.AttachmentControl { ID = "4", Text = "[副本上传]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.YingYeZhiZhao2 });}
+                                                    @{Html.RenderAction("SingleManage", "Attachment", new Investment.Models.AttachmentControl { ID = "4", IsEnabled = false, Text = "[副本上传]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.YingYeZhiZhao2 });}
                                                 </span>
                                             </div>
                                         </div>
@@ -278,12 +263,12 @@
                                         <div class="controls">
                                             <div>
                                                 <span class="help-inline">
-                                                    @{Html.RenderAction("SingleManage", "Attachment", new Investment.Models.AttachmentControl { ID = "5", Text = "[正本上传]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.ZuZhiJiGouDaiMa1 });}
+                                                    @{Html.RenderAction("SingleManage", "Attachment", new Investment.Models.AttachmentControl { ID = "5", IsEnabled = false, Text = "[正本上传]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.ZuZhiJiGouDaiMa1 });}
                                                 </span>
                                             </div>
                                             <div>
                                                 <span class="help-inline">
-                                                    @{Html.RenderAction("SingleManage", "Attachment", new Investment.Models.AttachmentControl { ID = "6", Text = "[副本上传]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.ZuZhiJiGouDaiMa2 });}
+                                                    @{Html.RenderAction("SingleManage", "Attachment", new Investment.Models.AttachmentControl { ID = "6", IsEnabled = false, Text = "[副本上传]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.ZuZhiJiGouDaiMa2 });}
                                                 </span>
                                             </div>
                                         </div>
@@ -294,12 +279,12 @@
                                         <div class="controls">
                                             <div>
                                                 <span class="help-inline">
-                                                    @{Html.RenderAction("SingleManage", "Attachment", new Investment.Models.AttachmentControl { ID = "7", Text = "[正本上传]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.ShuiWu1 });}
+                                                    @{Html.RenderAction("SingleManage", "Attachment", new Investment.Models.AttachmentControl { ID = "7", IsEnabled = false, Text = "[正本上传]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.ShuiWu1 });}
                                                 </span>
                                             </div>
                                             <div>
                                                 <span class="help-inline">
-                                                    @{Html.RenderAction("SingleManage", "Attachment", new Investment.Models.AttachmentControl { ID = "8", Text = "[副本上传]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.ShuiWu2 });}
+                                                    @{Html.RenderAction("SingleManage", "Attachment", new Investment.Models.AttachmentControl { ID = "8", IsEnabled = false, Text = "[副本上传]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.ShuiWu2 });}
                                                 </span>
                                             </div>
                                         </div>
@@ -310,7 +295,7 @@
                                         <div class="controls">
                                             <div>
                                                 <span class="help-inline">
-                                                    @{Html.RenderAction("SingleManage", "Attachment", new Investment.Models.AttachmentControl { ID = "9", Text = "[上传]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.DaiKuanKa });}
+                                                    @{Html.RenderAction("SingleManage", "Attachment", new Investment.Models.AttachmentControl { ID = "9", IsEnabled = false, Text = "[上传]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.DaiKuanKa });}
                                                 </span>
                                             </div>
                                         </div>
@@ -319,7 +304,7 @@
                                         <label class="control-label">
                                             开户许可证、信用代码证</label>
                                         <div class="controls">
-                                            @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "10", Text = "附件管理", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.KaiHuXuKe_XinYongDaiMa });}
+                                            @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "10", IsEnabled = false, Text = "附件管理", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.KaiHuXuKe_XinYongDaiMa });}
                                         </div>
                                     </div>
                                     <div class="control-group">
@@ -328,7 +313,7 @@
                                         <div class="controls">
                                             <div>
                                                 <span class="help-inline">
-                                                    @{Html.RenderAction("SingleManage", "Attachment", new Investment.Models.AttachmentControl { ID = "11", Text = "[上传]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.YanZhiZhengShu });}
+                                                    @{Html.RenderAction("SingleManage", "Attachment", new Investment.Models.AttachmentControl { ID = "11", IsEnabled = false, Text = "[上传]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.YanZhiZhengShu });}
                                                 </span>
                                             </div>
                                         </div>
@@ -337,14 +322,14 @@
                                         <label class="control-label">
                                             公司章程及修正案</label>
                                         <div class="controls">
-                                            @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "12", Text = "附件管理", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.GongSiZhangChengJiXiuZhengAn });}
+                                            @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "12", IsEnabled = false, Text = "附件管理", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.GongSiZhangChengJiXiuZhengAn });}
                                         </div>
                                     </div>
                                     <div class="control-group">
                                         <label class="control-label">
                                             验资报告、历次变更时的验资报告</label>
                                         <div class="controls">
-                                            @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "13", Text = "附件管理", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.YanZiBaoGao });}
+                                            @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "13", IsEnabled = false, Text = "附件管理", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.YanZiBaoGao });}
                                         </div>
                                     </div>
                                     <div class="control-group">
@@ -353,7 +338,7 @@
                                         <div class="controls">
                                             <div>
                                                 <span class="help-inline">
-                                                    @{Html.RenderAction("SingleManage", "Attachment", new Investment.Models.AttachmentControl { ID = "14", Text = "[上传]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.GongShangJiBenXinXiChaXunDan });}
+                                                    @{Html.RenderAction("SingleManage", "Attachment", new Investment.Models.AttachmentControl { ID = "14", IsEnabled = false, Text = "[上传]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.GongShangJiBenXinXiChaXunDan });}
                                                 </span>
                                             </div>
                                         </div>
@@ -362,7 +347,7 @@
                                         <label class="control-label">
                                             法人及股东身份证</label>
                                         <div class="controls">
-                                            @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "15", Text = "附件管理", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.FaRenJiGuDongShenFenZheng });}
+                                            @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "15", IsEnabled = false, Text = "附件管理", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.FaRenJiGuDongShenFenZheng });}
                                         </div>
                                     </div>
                                     <div class="control-group">
@@ -371,7 +356,7 @@
                                         <div class="controls">
                                             <div>
                                                 <span class="help-inline">
-                                                    @{Html.RenderAction("SingleManage", "Attachment", new Investment.Models.AttachmentControl { ID = "16", Text = "[上传]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.GaoGuanJianLi });}
+                                                    @{Html.RenderAction("SingleManage", "Attachment", new Investment.Models.AttachmentControl { ID = "16", IsEnabled = false, Text = "[上传]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.GaoGuanJianLi });}
                                                 </span>
                                             </div>
                                         </div>
@@ -380,21 +365,21 @@
                                         <label class="control-label">
                                             项目相关批文</label>
                                         <div class="controls">
-                                            @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "17", Text = "附件管理", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.XiangMuXiangGuanPiWen });}
+                                            @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "17", IsEnabled = false, Text = "附件管理", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.XiangMuXiangGuanPiWen });}
                                         </div>
                                     </div>
                                     <div class="control-group">
                                         <label class="control-label">
                                             可行性报告</label>
                                         <div class="controls">
-                                            @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "18", Text = "附件管理", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.KeXingXingBaoGao });}
+                                            @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "18", IsEnabled = false, Text = "附件管理", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.KeXingXingBaoGao });}
                                         </div>
                                     </div>
                                     <div class="control-group">
                                         <label class="control-label">
                                             项目简介及效果图</label>
                                         <div class="controls">
-                                            @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "19", Text = "附件管理", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.XiangMuJianJieJiXiaoGuoTu });}
+                                            @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "19", IsEnabled = false, Text = "附件管理", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.XiangMuJianJieJiXiaoGuoTu });}
                                         </div>
                                     </div>
                                     <div class="control-group">
@@ -403,7 +388,7 @@
                                         <div class="controls">
                                             <div>
                                                 <span class="help-inline">
-                                                    @{Html.RenderAction("SingleManage", "Attachment", new Investment.Models.AttachmentControl { ID = "20", Text = "[上传]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.GaoGuanJianLi });}
+                                                    @{Html.RenderAction("SingleManage", "Attachment", new Investment.Models.AttachmentControl { ID = "20", IsEnabled = false, Text = "[上传]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.GaoGuanJianLi });}
                                                 </span>
                                             </div>
                                         </div>
@@ -414,7 +399,7 @@
                                         <div class="controls">
                                             <div>
                                                 <span class="help-inline">
-                                                    @{Html.RenderAction("SingleManage", "Attachment", new Investment.Models.AttachmentControl { ID = "21", Text = "[上传]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.RongZhiShenQingShuJiHuanKuanJiHuaShu });}
+                                                    @{Html.RenderAction("SingleManage", "Attachment", new Investment.Models.AttachmentControl { ID = "21", IsEnabled = false, Text = "[上传]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.RongZhiShenQingShuJiHuanKuanJiHuaShu });}
                                                 </span>
                                             </div>
                                         </div>
@@ -423,84 +408,84 @@
                                         <label class="control-label">
                                             五证</label>
                                         <div class="controls">
-                                            @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "22", Text = "附件管理", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.WuZheng });}
+                                            @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "22", IsEnabled = false, Text = "附件管理", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.WuZheng });}
                                         </div>
                                     </div>
                                     <div class="control-group">
                                         <label class="control-label">
                                             公司近三年及当年财务报表和审批报告</label>
                                         <div class="controls">
-                                            @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "23", Text = "附件管理", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.GongSiJinSanNianJiDangNianCaiWuBaoBiaoHeShenJiBaoGao });}
+                                            @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "23", IsEnabled = false, Text = "附件管理", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.GongSiJinSanNianJiDangNianCaiWuBaoBiaoHeShenJiBaoGao });}
                                         </div>
                                     </div>
                                     <div class="control-group">
                                         <label class="control-label">
                                             二级科目明细</label>
                                         <div class="controls">
-                                            @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "24", Text = "[上传]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.ErJiKeMuMingXi });}
+                                            @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "24", IsEnabled = false, Text = "[上传]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.ErJiKeMuMingXi });}
                                         </div>
                                     </div>
                                     <div class="control-group">
                                         <label class="control-label">
                                             公司最近一年的增值税、营业税、所得税纳税申请表和纳税凭证复印件</label>
                                         <div class="controls">
-                                            @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "25", Text = "[上传]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.ZengZhiShui_YingYeShui_SuoDeShui });}
+                                            @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "25", IsEnabled = false, Text = "[上传]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.ZengZhiShui_YingYeShui_SuoDeShui });}
                                         </div>
                                     </div>
                                     <div class="control-group">
                                         <label class="control-label">
                                             公司贷款明细，包含借款主体、期限、金额、方式、抵押或担保情况、到期日、贷款银行等，并提供贷款合同复印件</label>
                                         <div class="controls">
-                                            @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "26", Text = "[上传]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.GongSiDaiKuanMingXi });}
+                                            @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "26", IsEnabled = false, Text = "[上传]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.GongSiDaiKuanMingXi });}
                                         </div>
                                     </div>
                                     <div class="control-group">
                                         <label class="control-label">
                                             施工合同</label>
                                         <div class="controls">
-                                            @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "27", Text = "[上传]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.ShiGongHeTong });}
+                                            @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "27", IsEnabled = false, Text = "[上传]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.ShiGongHeTong });}
                                         </div>
                                     </div>
                                     <div class="control-group">
                                         <label class="control-label">
                                             销售明细</label>
                                         <div class="controls">
-                                            @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "28", Text = "[上传]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.XiaoShouMingXi });}
+                                            @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "28", IsEnabled = false, Text = "[上传]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.XiaoShouMingXi });}
                                         </div>
                                     </div>
                                     <div class="control-group">
                                         <label class="control-label">
                                             申请人的所有账号近一年的银行对账单</label>
                                         <div class="controls">
-                                            @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "29", Text = "上传", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.ShenQingRenYinHangDuiZhangDan });}
+                                            @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "29", IsEnabled = false, Text = "上传", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.ShenQingRenYinHangDuiZhangDan });}
                                         </div>
                                     </div>
                                     <div class="control-group">
                                         <label class="control-label">
                                             抵押物资料（土地证、房产证、评估报告）</label>
                                         <div class="controls">
-                                            @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "30", Text = "上传", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.DiYaWuZhiLiao });}
+                                            @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "30", IsEnabled = false, Text = "上传", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.DiYaWuZhiLiao });}
                                         </div>
                                     </div>
                                     <div class="control-group">
                                         <label class="control-label">
                                             公司实际经营者及主要股东个人财产清单及相关产权证书复印件</label>
                                         <div class="controls">
-                                            @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "31", Text = "上传", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.CaiChanQingDan });}
+                                            @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "31", IsEnabled = false, Text = "上传", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.CaiChanQingDan });}
                                         </div>
                                     </div>
                                     <div class="control-group">
                                         <label class="control-label">
                                             关联公司资料</label>
                                         <div class="controls">
-                                            @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "32", Text = "上传", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.GuanLianGongSiZiLiao });}
+                                            @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "32", IsEnabled = false, Text = "上传", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.GuanLianGongSiZiLiao });}
                                         </div>
                                     </div>
                                     <div class="control-group">
                                         <label class="control-label">
                                             其他附件</label>
                                         <div class="controls">
-                                            @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "50", Text = "附件管理", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.Unknown });}
+                                            @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "50", IsEnabled = false, Text = "附件管理", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.Unknown });}
                                         </div>
                                     </div>
                                 </div>
