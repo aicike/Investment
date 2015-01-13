@@ -26,6 +26,9 @@
                                 项目名称
                             </th>
                             <th style="width: 80px;">
+                                申请时间
+                            </th>
+                            <th style="width: 80px;">
                                 状态
                             </th>
                             <th style="width: 100px;">
@@ -50,6 +53,9 @@
                                     @item.Financing.Name
                                 </td>
                                 <td>
+                                    @item.BeginDate.ToString("yyyy/MM/dd")
+                                </td>
+                                <td>
                                     @switch (item.State)
                                     {
                                         case 0:
@@ -63,14 +69,13 @@
                                                 break;
                                         case 3:
                                         @:未通过
-                                               break;
+                                                                                   break;
                                     }
                                 </td>
                                 <td>
                                     @item.WorkFlow_Node.WorkFlowNodeManager.Name
                                 </td>
-                                <td>
-                                    item.ApprovalRecord.Where(a=>a.Operation==-1).ToList().ConvertToString(",");
+                                <td>@item.ApprovalRecord.Where(a => a.Operation == -1).Select(a=>a.GroupAccount.Name).ToList().ConvertToString(",");
                                 </td>
                                 <td>
                                     @Html.ActionLink("详细", "Detail", "Company", new { id = item.ID }, null, true)

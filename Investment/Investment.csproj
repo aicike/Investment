@@ -207,6 +207,7 @@
     <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="error.html" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Image\404.jpg" />
@@ -993,6 +994,7 @@
     <Content Include="Scripts\uploadify\uploadify.css" />
     <Content Include="Scripts\uploadify\uploadify.swf" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="Scripts\CommitOpinion.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -1110,6 +1112,11 @@
     <Content Include="Views\WorkFlow\History.cshtml" />
     <Content Include="Views\WorkFlow\Assist.cshtml" />
     <Content Include="Views\WorkFlowApproval\Pending.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\WorkFlow\List.cshtml" />
+    <Content Include="Views\Company\Detail.cshtml" />
+    <Content Include="Views\WorkFlowApproval\RongZiLiXiangChuShen.cshtml" />
+    <Content Include="Views\WorkFlow_Form_Financing\CommitOpinion.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

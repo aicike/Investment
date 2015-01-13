@@ -69,12 +69,16 @@ namespace Investment.Controllers
             return View(list);
         }
 
-
-
-
-
-       
-
-
+        /// <summary>
+        /// 项目列表
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult List(int? id)
+        {
+            WorkFlowModel wfm = new WorkFlowModel();
+            var objs = wfm.GetList();
+            var list = objs.ToPagedList(id ?? 1, 15);
+            return View(list);
+        }
     }
 }

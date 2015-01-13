@@ -13,6 +13,9 @@ namespace Investment.Controllers
     /// </summary>
     public class WorkFlow_Form_FinancingController : Controller
     {
+        /// <summary>
+        /// 表单
+        /// </summary>
         public ActionResult Index(int financingID, int? workflowID)
         {
             Financing financing = null;
@@ -36,6 +39,7 @@ namespace Investment.Controllers
             }
             return PartialView(financing);
         }
+
         /// <summary>
         /// 右侧操作控件
         /// </summary>
@@ -83,5 +87,13 @@ namespace Investment.Controllers
             return PartialView(list);
         }
 
+        /// <summary>
+        /// 提交记录
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult CommitOpinion(int WorkFlowID)
+        {
+            return PartialView(WorkFlowID);
+        }
     }
 }

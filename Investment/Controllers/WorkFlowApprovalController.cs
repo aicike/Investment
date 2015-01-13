@@ -67,7 +67,6 @@ namespace Investment.Controllers
         }
         #endregion
 
-
         #region 待定业务单界面
         /// <summary>
         /// 待定义务页面
@@ -115,5 +114,90 @@ namespace Investment.Controllers
 
         }
         #endregion
+
+        #region 融资立项初审
+
+        public ActionResult RongZiLiXiangChuShen(int WorkFlowID)
+        {
+            WorkFlowModel WFModel = new WorkFlowModel();
+            var item = WFModel.Get(WorkFlowID);
+            return View(item);
+        }
+
+        #endregion
+
+        #region 项目立项
+
+
+        #endregion
+
+        #region 签署协议
+
+
+        #endregion
+
+        #region 协议确认
+
+
+        #endregion
+
+        #region 调查辅导
+
+
+        #endregion
+
+        #region 机构对接
+
+
+        #endregion
+
+        #region 落实放款
+
+
+        #endregion
+
+        #region 确认收取费用
+
+
+        #endregion
+
+        #region 审批操作（同意，不同意，驳回）
+
+        /// <summary>
+        /// 同意
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Agree(int WorkFlowID, string Opinion)
+        {
+            WorkFlowModel wfm = new WorkFlowModel();
+            wfm.WorkFlow_Agree(WorkFlowID, LoginAccount.UserID, Opinion);
+            return View();
+        }
+
+        /// <summary>
+        /// 不同意
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Disagree(int WorkFlowID, string Opinion)
+        {
+            WorkFlowModel wfm = new WorkFlowModel();
+            wfm.WorkFlow_Disagree(WorkFlowID, LoginAccount.UserID, Opinion);
+            return View();
+        }
+
+        /// <summary>
+        /// 驳回
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Reject(int WorkFlowID, string Opinion)
+        {
+            WorkFlowModel wfm = new WorkFlowModel();
+            wfm.WorkFlow_Reject(WorkFlowID, LoginAccount.UserID, 1,Opinion);
+            return View();
+        }
+
+        #endregion
+
+
     }
 }

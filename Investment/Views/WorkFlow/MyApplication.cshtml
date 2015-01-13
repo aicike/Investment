@@ -10,7 +10,7 @@
         <div class="portlet box blue" style="margin-top: 10px;">
             <div class="portlet-title">
                 <div class="caption">
-                    <i class="icon-cogs"></i>我的申请列表
+                    <i class="icon-cogs"></i>项目列表
                 </div>
                 <div class="tools">
                 </div>
@@ -24,6 +24,9 @@
                             </th>
                             <th style="width: 200px;">
                                 项目名称
+                            </th>
+                            <th style="width: 80px;">
+                                申请时间
                             </th>
                             <th style="width: 80px;">
                                 状态
@@ -50,6 +53,9 @@
                                     @item.Financing.Name
                                 </td>
                                 <td>
+                                    @item.BeginDate.ToString("yyyy/MM/dd")
+                                </td>
+                                <td>
                                     @switch (item.State)
                                     {
                                         case 0:
@@ -63,14 +69,14 @@
                                                 break;
                                         case 3:
                                         @:未通过
-                                               break;
+                                                                                    break;
                                     }
                                 </td>
                                 <td>
                                     @item.WorkFlow_Node.WorkFlowNodeManager.Name
                                 </td>
                                 <td>
-                                    item.ApprovalRecord.Where(a=>a.Operation==-1).ToList().ConvertToString(",");
+                                    @item.ApprovalRecord.Where(a => a.Operation == -1).Select(a=>a.GroupAccount.Name).ToList().ConvertToString(",");
                                 </td>
                                 <td>
                                     @Html.ActionLink("详细", "Detail", "Company", new { id = item.ID }, null, true)
