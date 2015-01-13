@@ -33,33 +33,36 @@
         {
             <tr>
                 <td>
-                   @item.Date.ToString("YYYY-MM-dd HH:mm")
+                    @if (item.Date.HasValue)
+                    { 
+                        @item.Date.Value.ToString("YYYY-MM-dd HH:mm")
+                    }
                 </td>
                 <td>
-                   @item.NodeName
+                    @item.NodeName
                 </td>
                 <td>
-                   @item.AccountPosition
+                    @item.AccountPosition
                 </td>
                 <td>
-                   @item.AccountName
+                    @item.AccountName
                 </td>
                 <td>
-                   @switch (item.Operation)
-                   { 
-                       case 0:
-                           @:提交申请
+                    @switch (item.Operation)
+                    {
+                        case 0:
+                        @:提交申请
                            break;
-                       case 1:
-                           @:通过
+                        case 1:
+                        @:通过
                            break;
-                       case 2:
-                           @:不通过
+                        case 2:
+                        @:不通过
                            break;
-                       case 3:
-                           @:驳回
-                           break;
-                   }
+                        case 3:
+                        @:驳回
+                                               break;
+                    }
                 </td>
                 <td>
                     @item.Opinion

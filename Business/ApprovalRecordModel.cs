@@ -18,7 +18,7 @@ namespace Business
         /// <returns></returns>
         public List<ApprovalRecord> GetInfo_byWorkFlow(int WorkFlowID)
         {
-            var list = List().Where(a=>a.WorkFlowID==WorkFlowID).OrderBy(a=>a.Date).ToList();
+            var list = List().Where(a => a.WorkFlowID == WorkFlowID && a.Operation != -1).OrderBy(a => a.Date).ToList();
             return list;
         }
     }
