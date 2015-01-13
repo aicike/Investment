@@ -1117,6 +1117,13 @@
     <Content Include="Views\Company\Detail.cshtml" />
     <Content Include="Views\WorkFlowApproval\RongZiLiXiangChuShen.cshtml" />
     <Content Include="Views\WorkFlow_Form_Financing\CommitOpinion.cshtml" />
+    <Content Include="Views\WorkFlowApproval\XiangMuLiXiang.cshtml" />
+    <None Include="Views\WorkFlowApproval\QianShuXieYi.cshtml" />
+    <None Include="Views\WorkFlowApproval\QueRenShouQuFeiYong.cshtml" />
+    <None Include="Views\WorkFlowApproval\XieYiQueRen.cshtml" />
+    <None Include="Views\WorkFlowApproval\DiaoChaFuDao.cshtml" />
+    <None Include="Views\WorkFlowApproval\JiGouDuiJie.cshtml" />
+    <Content Include="Views\WorkFlowApproval\LuoShiFangKuan.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
