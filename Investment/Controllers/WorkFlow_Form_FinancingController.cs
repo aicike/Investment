@@ -95,5 +95,57 @@ namespace Investment.Controllers
         {
             return PartialView(WorkFlowID);
         }
+
+        /// <summary>
+        /// 机构产品信息控件
+        /// </summary>
+        /// <param name="Products">机构产品ID 多个用“，”分割</param>
+        /// <param name="WorkFlowID"></param>
+        /// <returns></returns>
+        public ActionResult MechanismProducts(string Products, int? WorkFlowID)
+        {
+            List<MechanismProducts> mchanismproducts = new List<MechanismProducts>();
+            int Static = 0; // 0待定（预览界面），1进行中，2结束，3放款机构
+            //已生成流程
+            if (WorkFlowID.HasValue)
+            {
+                //查询流程状态
+                WorkFlowModel wfmodel = new WorkFlowModel();
+                var workflow = wfmodel.Get(WorkFlowID.Value);
+                //获取流程对接机构列表
+                WorkFlowMechanismProductModel wmpModel = new WorkFlowMechanismProductModel();
+                var workflowmchanismproducts = wmpModel.GetInfo_ByWorkFlowID(WorkFlowID.Value);
+
+                foreach (var item in workflowmchanismproducts)
+                {
+                    //流程结束 取快照
+                    if (workflow.State == 2 || workflow.State == 3)
+                    {
+                        MechanismProducts mp = Newtonsoft.Json.JsonConvert.DeserializeObject<MechanismProducts>(item.FormJson);
+                        mp.State = item.State;
+                        mchanismproducts.Add(mp);
+                    }
+                    else
+                    {
+                        var mp = item.MechanismProducts;
+                        mp.State = item.State;
+                        mchanismproducts.Add(mp);
+                    }
+                    //return Newtonsoft.Json.JsonConvert.SerializeObject(list);
+
+                }
+
+            }
+            else
+            {
+                //机构ID集合
+                var pros = Products.Split(',').Select(a => int.Parse(a)).ToArray();
+                //获取机构列表信息
+                MechanismProductsModel mpModel = new MechanismProductsModel();
+                mchanismproducts = mpModel.GetList_ByIDS(pros);
+            }
+
+            return PartialView(mchanismproducts);
+        }
     }
 }

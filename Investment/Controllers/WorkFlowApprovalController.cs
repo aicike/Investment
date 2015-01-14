@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Business;
 using Entity;
+using System.Transactions;
 
 namespace Investment.Controllers
 {
@@ -42,18 +43,35 @@ namespace Investment.Controllers
             Result result = new Result();
             lock (LockObj)
             {
-                //融资意向
-                FinancingModel FModel = new FinancingModel();
-                var financing = FModel.Get(financingID);
-                //流程数据
-                WorkFlowModel WFModel = new WorkFlowModel();
-                WorkFlow workflow = new WorkFlow();
-                workflow.BeginDate = DateTime.Now;
-                workflow.FinancingID = financingID;
-                workflow.FormJson = "";
-                workflow.State = 0;
-                workflow.CompanyID = financing.CompanyID;
-                result = WFModel.Add(workflow);
+                using (TransactionScope scope = new TransactionScope())
+                {
+                    //融资意向
+                    FinancingModel FModel = new FinancingModel();
+                    var financing = FModel.Get(financingID);
+                    //流程数据
+                    WorkFlowModel WFModel = new WorkFlowModel();
+                    WorkFlow workflow = new WorkFlow();
+                    workflow.BeginDate = DateTime.Now;
+                    workflow.FinancingID = financingID;
+                    workflow.FormJson = "";
+                    workflow.State = 0;
+                    workflow.CompanyID = financing.CompanyID;
+                    result = WFModel.Add(workflow);
+                    //添加流程机构信息
+                    WorkFlowMechanismProductModel wmpModel = new WorkFlowMechanismProductModel();
+                    //机构ID集合
+                    var pros = Products.Split(',').Select(a => int.Parse(a)).ToArray();
+                    foreach (var item in pros)
+                    {
+                        WorkFlowMechanismProduct wmp = new WorkFlowMechanismProduct();
+                        wmp.WorkFlowID = workflow.ID;
+                        wmp.State = 0;
+                        wmp.MechanismProductsID = item;
+                        wmp.FormJson = "";
+                        wmpModel.Add(wmp);
+                    }
+                    scope.Complete();
+                }
             }
             if (result.HasError)
             {
@@ -112,6 +130,20 @@ namespace Investment.Controllers
             }
             return "<script>window.location.href='" + Url.Action("Pending", "WorkFlow") + "';</script>";
 
+        }
+        #endregion
+
+        #region 查看流程表单界面
+        /// <summary>
+        /// 查看流程表单界面
+        /// </summary>
+        /// <param name="WorkFlowID"></param>
+        /// <returns></returns>
+        public ActionResult SelInfoPath(int WorkFlowID)
+        {
+            WorkFlowModel WKModel = new WorkFlowModel();
+            var item = WKModel.Get(WorkFlowID);
+            return View(item);
         }
         #endregion
 
@@ -216,7 +248,8 @@ namespace Investment.Controllers
         /// <summary>
         /// 检查是否有权限查看此页面
         /// </summary>
-        private void CheckGroupAccount(WorkFlow wf) {
+        private void CheckGroupAccount(WorkFlow wf)
+        {
             wf.ApprovalRecord.Any(a => a.Operation == -1 && a.GroupAccountID == LoginAccount.UserID).NotAuthorizedPage();
         }
 
@@ -253,7 +286,7 @@ namespace Investment.Controllers
         public ActionResult Reject(int WorkFlowID, string Opinion)
         {
             WorkFlowModel wfm = new WorkFlowModel();
-            wfm.WorkFlow_Reject(WorkFlowID, LoginAccount.UserID, 1,Opinion);
+            wfm.WorkFlow_Reject(WorkFlowID, LoginAccount.UserID, 1, Opinion);
             return View();
         }
 

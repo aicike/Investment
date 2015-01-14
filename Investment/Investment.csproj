@@ -1117,9 +1117,11 @@
     <Content Include="Views\Company\Detail.cshtml" />
     <Content Include="Views\WorkFlowApproval\RongZiLiXiangChuShen.cshtml" />
     <Content Include="Views\WorkFlow_Form_Financing\CommitOpinion.cshtml" />
+    <Content Include="Views\WorkFlow_Form_Financing\MechanismProducts.cshtml" />
     <Content Include="Views\WorkFlowApproval\XiangMuLiXiang.cshtml" />
     <None Include="Views\WorkFlowApproval\QianShuXieYi.cshtml" />
     <None Include="Views\WorkFlowApproval\QueRenShouQuFeiYong.cshtml" />
+    <Content Include="Views\WorkFlowApproval\SelInfoPath.cshtml" />
     <None Include="Views\WorkFlowApproval\XieYiQueRen.cshtml" />
     <None Include="Views\WorkFlowApproval\DiaoChaFuDao.cshtml" />
     <None Include="Views\WorkFlowApproval\JiGouDuiJie.cshtml" />

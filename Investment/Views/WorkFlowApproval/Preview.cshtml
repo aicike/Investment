@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "待定业务单";
+    ViewBag.Title = "待定业务单-预览";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @model Entity.Financing
@@ -73,6 +73,7 @@
             </tr>
             <tr>
                 <td>
+                    @{Html.RenderAction("MechanismProducts", "WorkFlow_Form_Financing", new { Products = ViewBag.Products});}
                 </td>
             </tr>
             <tr>
