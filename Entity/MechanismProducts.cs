@@ -58,6 +58,10 @@ namespace Entity
         /// </summary>
         public virtual ICollection<WorkFlowMechanismProduct> WorkFlowMechanismProduct { get; set; }
 
-        
+        //不在数据库中生成
+        /// <summary>
+        /// 状态 0待定中，1进行中，2结束，3放款机构
+        /// </summary>
+        public int State { get; set; }
     }
 }

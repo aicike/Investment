@@ -36,6 +36,9 @@ namespace Entity
         [Display(Name = "机构数据 JSON")]
         public string FormJson { get; set; }
 
-
+        /// <summary>
+        /// 状态 0待定中，1进行中，2结束，3放款机构
+        /// </summary>
+        public int State { get; set; }
     }
 }

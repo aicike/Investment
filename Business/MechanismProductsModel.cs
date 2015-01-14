@@ -21,5 +21,16 @@ namespace Business
             var list = List().Where(a=>a.MechanismID==MID).ToList();
             return list;
         }
+
+        /// <summary>
+        /// 根据多个机构ID 获取产品列表信息
+        /// </summary>
+        /// <param name="PIDS"></param>
+        /// <returns></returns>
+        public List<MechanismProducts> GetList_ByIDS(int[] PIDS)
+        {
+            var list = List().Where(a=>PIDS.Contains(a.ID)).ToList();
+            return list;
+        }
     }
 }

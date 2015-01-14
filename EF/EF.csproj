@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="Context.cs" />
     <Compile Include="Mapping\FinancingMap.cs" />
+    <Compile Include="Mapping\MechanismProductsMap.cs" />
     <Compile Include="Mapping\RoleMenuMap.cs" />
     <Compile Include="Mapping\RoleOptionMap.cs" />
     <Compile Include="Mapping\RoleAccountMap.cs" />
