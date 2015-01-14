@@ -43,7 +43,7 @@ namespace Entity
         /// <summary>
         /// 视图方法
         /// </summary>
-        public string Acction { get; set; }
+        public string Action { get; set; }
 
 
         //-------------子表----------------------------
