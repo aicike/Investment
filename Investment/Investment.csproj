@@ -1117,6 +1117,7 @@
     <Content Include="Views\Company\Detail.cshtml" />
     <Content Include="Views\WorkFlowApproval\RongZiLiXiangChuShen.cshtml" />
     <Content Include="Views\WorkFlow_Form_Financing\CommitOpinion.cshtml" />
+    <Content Include="Views\WorkFlow_Form_Financing\MechanismProducts.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

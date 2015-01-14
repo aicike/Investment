@@ -95,5 +95,17 @@ namespace Investment.Controllers
         {
             return PartialView(WorkFlowID);
         }
+
+        /// <summary>
+        /// 机构产品信息
+        /// </summary>
+        /// <param name="Products"></param>
+        /// <param name="WorkFlowID"></param>
+        /// <returns></returns>
+        public ActionResult MechanismProducts(int Products, int? WorkFlowID)
+        {
+
+            return PartialView();
+        }
     }
 }
