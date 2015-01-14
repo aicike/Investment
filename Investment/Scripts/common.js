@@ -35,4 +35,18 @@ $(function () {
     }
     $("a[mid='" + _menuID + "']").parents(".myli").addClass("active");
     $("a[mid='" + _menuID + "']").parent().addClass("active");
+
+    $("form").attr("data-ajax-complete", "close_submit_div()");
+    $("form").attr("data-ajax-complete", "open_submit_div()");
 });
+
+function close_modal_div() {
+    var id = $(".submitDiv").attr("elementID");
+    $(".submitDiv").remove();
+    $(".submitbtn").removeClass("disabled").removeAttr("disabled");
+}
+function open_modal_div() {
+    var submitDiv = $("<div class='modal-backdrop fade in submitDiv' style='z-index: 10049;'></div>");
+    $("body").append(submitDiv);
+    $(".submitbtn").addClass("disabled").attr("disabled", "disabled");
+}
