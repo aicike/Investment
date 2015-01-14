@@ -36,10 +36,20 @@ $(function () {
     $("a[mid='" + _menuID + "']").parents(".myli").addClass("active");
     $("a[mid='" + _menuID + "']").parent().addClass("active");
 
-    $("form").attr("data-ajax-complete", "close_submit_div()");
-    $("form").attr("data-ajax-complete", "open_submit_div()");
+    //处理双击问题
+    $("form").attr("data-ajax-complete", "close_modal_div()");
+    $("form").attr("data-ajax-begin", "open_modal_div()");
+    $(":button:enabled,a:enabled").addClass("submitBtn").click(function () {
+        var obj= $(this);
+        obj.addClass("disabled").attr("disabled", "disabled");
+        var resetfun = function () {
+            obj.removeClass("disabled").removeAttr("disabled");
+        }
+        window.setTimeout(resetfun(), 3000);
+    });
 });
 
+//处理双击问题
 function close_modal_div() {
     var id = $(".submitDiv").attr("elementID");
     $(".submitDiv").remove();

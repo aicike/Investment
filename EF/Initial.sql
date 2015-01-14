@@ -6,13 +6,11 @@ INSERT [dbo].[Menu] ([ID], [Area], [Controller], [Action], [Name], [ShowName], [
 INSERT [dbo].[Menu] ([ID], [Area], [Controller], [Action], [Name], [ShowName], [Order], [ParentMenuID],AccountType) VALUES (1101, NULL, 'Company', 'Index', N'客户管理', N'客户管理', 1, 11,0)
 INSERT [dbo].[Menu] ([ID], [Area], [Controller], [Action], [Name], [ShowName], [Order], [ParentMenuID],AccountType) VALUES (1102, NULL, 'Financing', 'Index', N'融资信息列表', N'融资信息列表', 2, 11,0)
 INSERT [dbo].[Menu] ([ID], [Area], [Controller], [Action], [Name], [ShowName], [Order], [ParentMenuID],AccountType) VALUES (1103, NULL, 'Financing', 'IndexALL', N'融资信息列表（全）', N'融资信息列表（全）', 3, 11,0)
---INSERT [dbo].[Menu] ([ID], [Area], [Controller], [Action], [Name], [ShowName], [Order], [ParentMenuID],AccountType) VALUES (14, NULL, 'Home', 'Home', N'客户融资记录', N'客户融资记录', 3, 11,0)
 
 INSERT [dbo].[Menu] ([ID], [Area], [Controller], [Action], [Name], [ShowName], [Order], [ParentMenuID],AccountType) VALUES (21, NULL, 'Home', 'Home', N'机构管理', N'机构管理', 2, NULL,0)
 INSERT [dbo].[Menu] ([ID], [Area], [Controller], [Action], [Name], [ShowName], [Order], [ParentMenuID],AccountType) VALUES (2101, NULL, 'Mechanism', 'Index', N'机构管理', N'机构管理', 1, 21,0)
 INSERT [dbo].[Menu] ([ID], [Area], [Controller], [Action], [Name], [ShowName], [Order], [ParentMenuID],AccountType,IsShow) VALUES (210101, NULL, 'MechanismProducts', 'Index', N'机构产品列表', N'机构产品列表', 1, 2101,0,0)
 INSERT [dbo].[Menu] ([ID], [Area], [Controller], [Action], [Name], [ShowName], [Order], [ParentMenuID],AccountType) VALUES (2102, NULL, 'Home', 'Home', N'机构产品列表', N'机构产品列表', 2, 21,0)
---INSERT [dbo].[Menu] ([ID], [Area], [Controller], [Action], [Name], [ShowName], [Order], [ParentMenuID],AccountType) VALUES (24, NULL, 'Home', 'Home', N'机构放贷记录', N'机构放贷记录', 3, 21,0)
 
 INSERT [dbo].[Menu] ([ID], [Area], [Controller], [Action], [Name], [ShowName], [Order], [ParentMenuID],AccountType) VALUES (31, NULL, 'InfoMatching', 'Index', N'借贷匹配', N'借贷匹配', 3, NULL,0)
 
@@ -37,6 +35,44 @@ INSERT [dbo].[Menu] ([ID], [Area], [Controller], [Action], [Name], [ShowName], [
 SET IDENTITY_INSERT [dbo].[Menu] OFF
 
 /****** Object:  Table [dbo].[MenuOption]    Script Date: 12/05/2014 12:46:05 ******/
+--客户、融资信息管理
+INSERT INTO dbo.MenuOption(MenuID ,Name ,Controller ,[Action] ,[Order]) VALUES  ( 1101 ,N'新增客户' , N'Company' , N'Add' , 1)
+INSERT INTO dbo.MenuOption(MenuID ,Name ,Controller ,[Action] ,[Order]) VALUES  ( 1101 ,N'详细' , N'Company' , N'Detail' , 2)
+INSERT INTO dbo.MenuOption(MenuID ,Name ,Controller ,[Action] ,[Order]) VALUES  ( 1101 ,N'修改' , N'Company' , N'Edit' , 3)
+INSERT INTO dbo.MenuOption(MenuID ,Name ,Controller ,[Action] ,[Order]) VALUES  ( 1101 ,N'删除' , N'Company' , N'Delete' , 4)
+INSERT INTO dbo.MenuOption(MenuID ,Name ,Controller ,[Action] ,[Order]) VALUES  ( 1101 ,N'融资信息列表' , N'Company' , N'Financing' , 5)
+INSERT INTO dbo.MenuOption(MenuID ,Name ,Controller ,[Action] ,[Order]) VALUES  ( 1101 ,N'新增融资信息' , N'Company' , N'AddFinancing' , 6)
+INSERT INTO dbo.MenuOption(MenuID ,Name ,Controller ,[Action] ,[Order]) VALUES  ( 1101 ,N'查看融资信息' , N'Financing' , N'Detail' , 7)
+INSERT INTO dbo.MenuOption(MenuID ,Name ,Controller ,[Action] ,[Order]) VALUES  ( 1101 ,N'修改融资信息' , N'Company' , N'EditFinancing' , 8)
+INSERT INTO dbo.MenuOption(MenuID ,Name ,Controller ,[Action] ,[Order]) VALUES  ( 1101 ,N'删除融资信息' , N'Company' , N'DeleteFinancing' , 9)
+--查看融资详细
+INSERT INTO dbo.MenuOption(MenuID ,Name ,Controller ,[Action] ,[Order]) VALUES  ( 1102 ,N'详细' , N'Financing' , N'Detail' , 1)
+--查看融资详细
+INSERT INTO dbo.MenuOption(MenuID ,Name ,Controller ,[Action] ,[Order]) VALUES  ( 1103 ,N'详细' , N'Financing' , N'Detail' , 1)
+--机构、产品管理
+INSERT INTO dbo.MenuOption(MenuID ,Name ,Controller ,[Action] ,[Order]) VALUES  ( 2101 ,N'添加' , N'Mechanism' , N'Add' , 1)
+INSERT INTO dbo.MenuOption(MenuID ,Name ,Controller ,[Action] ,[Order]) VALUES  ( 2101 ,N'修改' , N'Mechanism' , N'Edit' , 2)
+INSERT INTO dbo.MenuOption(MenuID ,Name ,Controller ,[Action] ,[Order]) VALUES  ( 2101 ,N'机构产品列表' , N'MechanismProducts' , N'Index' , 3)
+INSERT INTO dbo.MenuOption(MenuID ,Name ,Controller ,[Action] ,[Order]) VALUES  ( 2101 ,N'新增机构产品' , N'MechanismProducts' , N'Add' , 4)
+INSERT INTO dbo.MenuOption(MenuID ,Name ,Controller ,[Action] ,[Order]) VALUES  ( 2101 ,N'修改机构产品' , N'MechanismProducts' , N'Edit' , 5)
+--项目管理
+
+--角色管理
+INSERT INTO dbo.MenuOption(MenuID ,Name ,Controller ,[Action] ,[Order]) VALUES  ( 6101 ,N'新增' , N'Role' , N'Add' , 1)
+INSERT INTO dbo.MenuOption(MenuID ,Name ,Controller ,[Action] ,[Order]) VALUES  ( 6101 ,N'修改' , N'Role' , N'Edit' , 2)
+INSERT INTO dbo.MenuOption(MenuID ,Name ,Controller ,[Action] ,[Order]) VALUES  ( 6101 ,N'删除' , N'Role' , N'Delete' ,3)
+INSERT INTO dbo.MenuOption(MenuID ,Name ,Controller ,[Action] ,[Order]) VALUES  ( 6101 ,N'分配权限' , N'Role' , N'RoleMenu' , 4)
+
+--职位管理
+INSERT INTO dbo.MenuOption(MenuID ,Name ,Controller ,[Action] ,[Order]) VALUES  ( 6102 ,N'新增' , N'Role' , N'Add' , 1)
+INSERT INTO dbo.MenuOption(MenuID ,Name ,Controller ,[Action] ,[Order]) VALUES  ( 6102 ,N'修改' , N'Role' , N'Edit' , 2)
+INSERT INTO dbo.MenuOption(MenuID ,Name ,Controller ,[Action] ,[Order]) VALUES  ( 6102 ,N'删除' , N'Role' , N'Delete' ,3)
+
+--人员管理
+INSERT INTO dbo.MenuOption(MenuID ,Name ,Controller ,[Action] ,[Order]) VALUES  ( 6103 ,N'新增' , N'GroupAccount' , N'Add' , 1)
+INSERT INTO dbo.MenuOption(MenuID ,Name ,Controller ,[Action] ,[Order]) VALUES  ( 6103 ,N'修改' , N'GroupAccount' , N'Edit' , 2)
+
+
 
 
 

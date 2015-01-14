@@ -72,7 +72,7 @@
                                     @(item.Financing.WorkFlowManager==null?"":item.Financing.WorkFlowManager.Name)
                                 </td>
                                 <td>
-                                    @Html.ActionLink("详细", "Pending", "WorkFlowApproval", new { WorkFlowID = item.ID }, null, true)
+                                    @Html.ActionLink("详细", "Pending", "WorkFlowApproval", new { WorkFlowID = item.ID }, null)
                                 </td>
                             </tr>
                         }

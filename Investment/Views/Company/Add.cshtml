@@ -21,7 +21,7 @@
 <div class="row-fluid">
     <div class="span12">
         <div class="tabbable tabbable-custom boxless">
-            @using (Ajax.BeginForm("Add", "Company", new AjaxOptions() { UpdateTargetId = "alert" }, new { @class = "form-horizontal" }))
+            @using (Ajax.BeginForm("Add", "Company", new AjaxOptions() { UpdateTargetId = "alert" ,OnBegin="aa"}, new { @class = "form-horizontal" }))
             {
                 <div style="margin-bottom: 20px;">
                     <button type="submit" class="btn blue submitbtn">

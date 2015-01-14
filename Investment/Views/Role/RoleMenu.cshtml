@@ -96,7 +96,8 @@
                                                 <label for="option_@option.ID" style="display: inline">@option.Name</label>
                                             </li>
                                         }
-                                        @foreach (var subMenu in menu.Menus)
+                                        @{var sumMenus = menu.Menus.OrderBy(a => a.Order);}
+                                        @foreach (var subMenu in sumMenus)
                                         {
                                             if (subMenu.IsShow.HasValue && subMenu.IsShow.Value == false)
                                             {
@@ -113,6 +114,21 @@
                                                 }
                                                 <label for="menu_@subMenu.ID" style="display: inline">@subMenu.Name</label></span>
                                                 <ul>
+                                                    @foreach (var option in subMenu.MenuOptions)
+                                                    {
+                                                        <li><span style="font-size: 14px;" class="sp_title">
+                                                            @if (currentRoleOptionList.Contains(option.ID))
+                                                            {
+                                                                <input type="checkbox" id="option_@option.ID" name="checkboxOption" value="@option.ID" checked="checked"/>
+                                                            }
+                                                            else
+                                                            {
+                                                                <input type="checkbox" id="option_@option.ID" name="checkboxOption" value="@option.ID"/>
+                                                            }
+                                                            <label for="option_@option.ID" style="display: inline">@option.Name</label>
+                                                        </li>
+                                                    }
+
                                                     @foreach (var menu3 in subMenu.Menus)
                                                     {
                                                         if (menu3.IsShow.HasValue && menu3.IsShow.Value == false)
