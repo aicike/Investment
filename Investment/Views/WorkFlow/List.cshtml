@@ -37,9 +37,6 @@
                             <th style="width: 100px;">
                                 当前审批人
                             </th>
-                            <th style="width: 80px">
-                                操作
-                            </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -47,7 +44,7 @@
                         {
                             <tr>
                                 <td>
-                                    @item.Number
+                                    @Html.ActionLink(@item.Number, "SelInfoPath", "WorkFlowApproval", new { WorkFlowID = item.ID }, null)
                                 </td>
                                 <td>
                                     @item.Financing.Name
@@ -75,10 +72,7 @@
                                 <td>
                                     @item.WorkFlow_Node.WorkFlowNodeManager.Name
                                 </td>
-                                <td>@item.ApprovalRecord.Where(a => a.Operation == -1).Select(a=>a.GroupAccount.Name).ToList().ConvertToString(",")
-                                </td>
-                                <td>
-                                    @Html.ActionLink("详细", "Detail", "Company", new { id = item.ID }, null, false)
+                                <td>@item.ApprovalRecord.Where(a => a.Operation == -1).Select(a => a.GroupAccount.Name).ToList().ConvertToString(",")
                                 </td>
                             </tr>
                         }
