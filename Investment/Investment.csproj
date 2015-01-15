@@ -129,6 +129,7 @@
     <Compile Include="Controllers\MechanismProductsController.cs" />
     <Compile Include="Controllers\PositionController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
+    <Compile Include="Controllers\ToLoanMatchingController.cs" />
     <Compile Include="Controllers\WorkFlowApprovalController.cs" />
     <Compile Include="Controllers\WorkFlowController.cs" />
     <Compile Include="Controllers\WorkFlowManagerController.cs" />
@@ -1120,6 +1121,7 @@
     <Content Include="Views\WorkFlow_Form_Financing\MechanismProducts.cshtml" />
     <Content Include="Views\WorkFlowApproval\XiangMuLiXiang.cshtml" />
     <Content Include="Views\Attachment\Index.cshtml" />
+    <Content Include="Views\MechanismProducts\SelAll.cshtml" />
     <None Include="Views\WorkFlowApproval\QianShuXieYi.cshtml" />
     <None Include="Views\WorkFlowApproval\QueRenShouQuFeiYong.cshtml" />
     <Content Include="Views\WorkFlowApproval\SelInfoPath.cshtml" />

@@ -143,6 +143,7 @@ namespace Investment.Controllers
         {
             WorkFlowModel WKModel = new WorkFlowModel();
             var item = WKModel.Get(WorkFlowID);
+            ViewBag.financingID = item.FinancingID;
             return View(item);
         }
         #endregion

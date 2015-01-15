@@ -101,5 +101,29 @@ namespace Investment.Controllers
             }
             return JavaScript("window.location.href='" + Url.Action("Index", "MechanismProducts", new { MID = mechanismProducts.MechanismID }) + "'");
         }
+
+        /// <summary>
+        /// 所有机构产品列表
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="Name"></param>
+        /// <returns></returns>
+        public ActionResult SelAll(int? id, string Name)
+        {
+            MechanismProductsModel mpModel = new MechanismProductsModel();
+
+            var mplist = mpModel.List();
+            if(!string.IsNullOrEmpty(Name))
+            {
+                if(Name.Trim().Length>0)
+                {
+                    mplist = mplist.Where(a=>a.Name.Contains(Name));
+                    ViewBag.Name = Name;
+                }
+            }
+            var pagelist = mplist.ToPagedList(id ?? 1, 15);
+
+            return View(pagelist);
+        }
     }
 }

@@ -32,5 +32,16 @@ namespace Business
             var list = List().Where(a=>PIDS.Contains(a.ID)).ToList();
             return list;
         }
+
+        /// <summary>
+        /// 查询所有产品数据 模糊查询
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public List<MechanismProducts> GetAllList_ByName(string name)
+        {
+            var list = List().Where(a => a.Name.Contains(name)).ToList();
+            return list;
+        }
     }
 }

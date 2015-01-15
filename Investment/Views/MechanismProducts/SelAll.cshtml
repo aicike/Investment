@@ -1,0 +1,99 @@
+﻿@{
+    ViewBag.Title = "机构产品列表";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section scripts{
+<script>
+    $(function () {
+        $("#Name").val("@ViewBag.Name");
+    });
+</script>
+}
+@model PagedList<Entity.MechanismProducts>
+<div class="row-fluid">
+    <div class="span12" style="width: 100%">
+        <div class="portlet box blue">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-cogs"></i>机构产品列表
+                </div>
+                <div class="tools">
+                </div>
+            </div>
+            <div class="portlet-body">
+                @using (Html.BeginForm("selall", "MechanismProducts", new { id = 1 }, FormMethod.Get))
+                {
+                    <table class="" style=" width:100%">
+                        <tr>
+                            <td width="150px">
+                                产品名称:
+                            </td>
+                            <td>
+                                <input type="text" id="Name" name="Name" class="span6" />
+                            </td>
+                            <td>
+                                <input type="submit" value="查询" class="btn blue" />
+                            </td>
+                        </tr>
+                    </table>
+                }
+                <table class="table table-bordered table-hover">
+                    <tr>
+                        <th>
+                            产品名称
+                        </th>
+                        <th>
+                            最高贷款额度（万）
+                        </th>
+                        <th>
+                            备注
+                        </th>
+                        <th>
+                            状态
+                        </th>
+                    </tr>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @item.Name
+                            </td>
+                            <td>
+                                @item.MaxQuota
+                            </td>
+                            <td>
+                                @item.Remark
+                            </td>
+                            <td>
+                                @if (item.IsEnable)
+                                {
+                                    @:正常
+                                }
+                                else
+                                { 
+                                    <span style="color: Red">禁用</span>
+                                   
+                                }
+                            </td>
+                        </tr>
+                    }
+                </table>
+                <div class="pagination">
+                    @Html.Pager(Model, new PagerOptions
+               {
+                   PageIndexParameterName = "ID",
+                   CurrentPagerItemWrapperFormatString = "<li class=\"disabled\"><a>{0}</a></li>",
+                   NumericPagerItemWrapperFormatString = "<li>{0}</li>",
+                   NavigationPagerItemWrapperFormatString = "<li>{0}</li>",
+                   CssClass = "",
+                   SeparatorHtml = "",
+                   AutoHide = false,
+                   PageIndexOutOfRangeErrorMessage = "页面错误。",
+                   ShowFirstLast = false,
+                   ContainerTagName = "ul"
+               })
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
