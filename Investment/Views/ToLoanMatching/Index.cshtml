@@ -1,0 +1,93 @@
+﻿@{
+    ViewBag.Title = "借贷匹配";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section scripts{
+    <script type="text/javascript">
+        jQuery.fn.rowspan = function (colIdx) { //封装的一个JQuery小插件 
+            return this.each(function () {
+                var that;
+                $('tr', this).each(function (row) {
+                    $('td:eq(' + colIdx + ')', this).filter(':visible').each(function (col) {
+                        if (that != null && $(this).html() == $(that).html()) {
+                            rowspan = $(that).attr("rowSpan");
+                            if (rowspan == undefined) {
+                                $(that).attr("rowSpan", 1);
+                                rowspan = $(that).attr("rowSpan");
+                            }
+                            rowspan = Number(rowspan) + 1;
+                            $(that).attr("rowSpan", rowspan);
+                            $(this).hide();
+                        }
+                        else {
+                            that = this;
+                        } 
+                    });
+                });
+            });
+        }
+        $(function () {
+            $("#Matching").rowspan(0); //传入的参数是对应的列数从0开始，哪一列有相同的内容就输入对应的列数值 
+            $("#Matching").rowspan(2);
+        }); 
+    </script>
+}
+@model PagedList<Entity.FinancingMatching>
+<div class="row-fluid">
+    <div class="span12" style="width: 100%">
+        <div class="portlet box blue">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-cogs"></i>借贷匹配列表
+                </div>
+                <div class="tools">
+                </div>
+            </div>
+            <div class="portlet-body">
+                <table id="Matching" class="table table-bordered">
+                    <tr>
+                        <th>
+                            融资意向
+                        </th>
+                        <th>
+                            机构产品名称
+                        </th>
+                        <th>
+                            操作
+                        </th>
+                    </tr>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td style="text-align: center; vertical-align: inherit">
+                                @item.FName
+                            </td>
+                            <td>
+                                @item.MName
+                            </td>
+                            <td style="text-align: center; vertical-align: inherit">
+                                <a href="@Url.Action("Preview", "WorkFlowApproval", new { financingID = item.FID })">
+                                    待定单预览</a>
+                            </td>
+                        </tr>
+                    }
+                </table>
+                <div class="pagination">
+                    @Html.Pager(Model, new PagerOptions
+               {
+                   PageIndexParameterName = "ID",
+                   CurrentPagerItemWrapperFormatString = "<li class=\"disabled\"><a>{0}</a></li>",
+                   NumericPagerItemWrapperFormatString = "<li>{0}</li>",
+                   NavigationPagerItemWrapperFormatString = "<li>{0}</li>",
+                   CssClass = "",
+                   SeparatorHtml = "",
+                   AutoHide = false,
+                   PageIndexOutOfRangeErrorMessage = "页面错误。",
+                   ShowFirstLast = false,
+                   ContainerTagName = "ul"
+               })
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

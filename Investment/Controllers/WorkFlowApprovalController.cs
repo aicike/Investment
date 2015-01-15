@@ -21,14 +21,20 @@ namespace Investment.Controllers
         /// 预览界面
         /// </summary>
         /// <param name="financingID">融资意向</param>
-        /// <param name="Products">对接机构 数据结构1,2,3</param>
         /// <returns></returns>
-        public ActionResult Preview(int financingID, string Products)
+        public ActionResult Preview(int financingID)
         {
             ViewBag.financingID = financingID;
-            ViewBag.Products = Products;
             FinancingModel FModel = new FinancingModel();
             var financing = FModel.Get(financingID);
+            //获取匹配机构
+            MechanismProductsModel MPModel = new MechanismProductsModel();
+            var MatchingProduct = MPModel.GetInfo_Matching(financingID);
+            ViewBag.MatchingProduct = MatchingProduct;
+            //获取所有机构
+            var AllProduct = MPModel.GetAllInfo();
+            ViewBag.AllProduct = AllProduct;
+
             return View(financing);
         }
 
@@ -60,6 +66,7 @@ namespace Investment.Controllers
                     //添加流程机构信息
                     WorkFlowMechanismProductModel wmpModel = new WorkFlowMechanismProductModel();
                     //机构ID集合
+                    Products = Products.TrimEnd(',');
                     var pros = Products.Split(',').Select(a => int.Parse(a)).ToArray();
                     foreach (var item in pros)
                     {
@@ -122,7 +129,15 @@ namespace Investment.Controllers
         public string DeletePeding(int WorkFlowID)
         {
             WorkFlowModel WKModel = new WorkFlowModel();
-            var result = WKModel.Delete(WorkFlowID);
+            WorkFlowMechanismProductModel wmpmodel = new WorkFlowMechanismProductModel();
+            Result result = new Result();
+            result = wmpmodel.DelInfo_BYWorkFlowID(WorkFlowID);
+            if (result.HasError)
+            {
+                return "<script>JMessage('删除机构产品时出错，请联系管理员！',true)</script>";
+
+            }
+            result = WKModel.Delete(WorkFlowID);
             if (result.HasError)
             {
                 return "<script>JMessage('" + result.Error + "',true)</script>";
