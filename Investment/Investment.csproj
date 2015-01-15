@@ -1124,6 +1124,7 @@
     <Content Include="Views\Attachment\Index.cshtml" />
     <Content Include="Views\MechanismProducts\SelAll.cshtml" />
     <Content Include="Views\Shared\_Layout_noMenu.cshtml" />
+    <Content Include="Views\ToLoanMatching\Index.cshtml" />
     <None Include="Views\WorkFlowApproval\QianShuXieYi.cshtml" />
     <None Include="Views\WorkFlowApproval\QueRenShouQuFeiYong.cshtml" />
     <Content Include="Views\WorkFlowApproval\SelInfoPath.cshtml" />

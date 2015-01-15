@@ -43,5 +43,30 @@ namespace Business
             var list = List().Where(a => a.Name.Contains(name)).ToList();
             return list;
         }
+
+        /// <summary>
+        /// 根据意向ID 匹配产品
+        /// </summary>
+        /// <param name="FinancingID"></param>
+        /// <returns></returns>
+        public List<MechanismProducts> GetInfo_Matching(int FinancingID)
+        {
+            var list = List().Where(a=>a.IsEnable==true).ToList();
+            return list;
+        }
+
+        /// <summary>
+        /// 获取所有未禁用产品
+        /// </summary>
+        /// <param name="FinancingID"></param>
+        /// <returns></returns>
+        public List<MechanismProducts> GetAllInfo()
+        {
+            var list = List().Where(a => a.IsEnable == true).ToList();
+            return list;
+        }
+
+
+
     }
 }

@@ -50,6 +50,7 @@
     <Compile Include="CompanyRelation.cs" />
     <Compile Include="Enum\EnumAttachmentFormat.cs" />
     <Compile Include="Financing.cs" />
+    <Compile Include="FinancingMatching.cs" />
     <Compile Include="MechanismProducts.cs" />
     <Compile Include="Relation.cs" />
     <Compile Include="Enum\EnumAttachmentType.cs" />

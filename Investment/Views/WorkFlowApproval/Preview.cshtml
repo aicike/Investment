@@ -1,6 +1,9 @@
 ﻿@{
     ViewBag.Title = "待定业务单-预览";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var MatchingProduct = ViewBag.MatchingProduct as List<Entity.MechanismProducts>;
+    var AllProduct = ViewBag.AllProduct as List<Entity.MechanismProducts>;
+
 }
 @model Entity.Financing
 @section scripts{
@@ -9,6 +12,7 @@
         $(function () {
             SetFC();
             $("#_Title").hide();
+            $("#link_1").click();
         });
 
         function SetFC() {
@@ -33,6 +37,25 @@
         window.onresize = function () {
             SetFC();
         };
+
+        function CkbSub() {
+            var product = "";
+            if ($('input[name="CK_Product"]:checked').length == 0) {
+                JMessage("请选择对接机构", true);
+                return false;
+            }
+            $('input[name="CK_Product"]:checked').each(function () {
+                product = product + $(this).val() + ",";
+            });
+            $("#Products").val(product);
+            return true;
+        }
+        function Ck_XXK() {
+            $('input[name="CK_Product"]:checked').each(function () {
+                $(this).attr("checked", false);
+                $(this).parent().removeClass("checked");
+            });
+        }
     </script>
     <style>
         .Float_div
@@ -53,7 +76,7 @@
 }
 <div class="row-fluid">
     <div class="span12" style="margin-top: 50px;">
-        @{Html.RenderAction("RightOption", "WorkFlow_Form_Financing", new { financingID = 2, workflowID = 1 });}
+        @{Html.RenderAction("RightOption", "WorkFlow_Form_Financing", new { financingID = ViewBag.financingID, companyID = Model.CompanyID });}
         <table id="TabMain" align="center" style="width: 100%; margin-bottom: 20px;">
             <tr>
                 <td>
@@ -73,7 +96,76 @@
             </tr>
             <tr>
                 <td>
-                    @{Html.RenderAction("MechanismProducts", "WorkFlow_Form_Financing", new { Products = ViewBag.Products});}
+                    <div class="tabbable tabbable-custom">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a href="#tab_1" id="link_1" data-toggle="tab" onclick="Ck_XXK()">
+                                匹配成功的产品</a></li>
+                            <li><a class="" href="#tab_2" data-toggle="tab" onclick="Ck_XXK()">所有产品</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="tab_1">
+                                <div class="span12" style="margin-left: 0px">
+                                    <table class="table table-bordered dataTable">
+                                        <tr>
+                                            <td colspan="6" class="td_title" style="font-weight: bold; text-align: left !important;">
+                                                选择对接机构
+                                            </td>
+                                        </tr>
+                                        @for (int i = 0; i < MatchingProduct.Count; i++)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    <label class="checkbox line">
+                                                        <input type="checkbox" value="@MatchingProduct[i].ID" name="CK_Product" />
+                                                        @MatchingProduct[i].Name
+                                                    </label>
+                                                </td>
+                                                <td>
+                                                    @if (i != MatchingProduct.Count - 1)
+                                                    {
+                                                        i++;
+                                                        <label class="checkbox line">
+                                                            <input type="checkbox" value="@MatchingProduct[i].ID" name="CK_Product" />
+                                                            @MatchingProduct[i].Name
+                                                        </label>
+                                                    }
+                                                </td>
+                                            </tr>
+                                        }
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="tab-pane " id="tab_2">
+                                <table class="table table-bordered dataTable">
+                                    <tr>
+                                        <td colspan="6" class="td_title" style="font-weight: bold; text-align: left !important;">
+                                            选择对接机构
+                                        </td>
+                                    </tr>
+                                      @for (int i = 0; i < AllProduct.Count; i++)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    <label class="checkbox line">
+                                                        <input type="checkbox" value="@MatchingProduct[i].ID" name="CK_Product" />
+                                                        @MatchingProduct[i].Name
+                                                    </label>
+                                                </td>
+                                                <td>
+                                                    @if (i != AllProduct.Count - 1)
+                                                    {
+                                                        i++;
+                                                        <label class="checkbox line">
+                                                            <input type="checkbox" value="@MatchingProduct[i].ID" name="CK_Product" />
+                                                            @MatchingProduct[i].Name
+                                                        </label>
+                                                    }
+                                                </td>
+                                            </tr>
+                                        }
+                                </table>
+                            </div>
+                        </div>
                 </td>
             </tr>
             <tr>
@@ -87,9 +179,11 @@
                 <table align="center">
                     <tr>
                         <td>
-                            <button class="btn blue" type="submit">
+                            <input type="hidden" id="Products" name="Products" />
+                            <button class="btn blue" type="submit" onclick="return CkbSub()">
                                 生成待定业务单</button>
-                            <a href="@Url.Action("Index", "Mechanism")" class="btn blue" style="width:80px">返回</a>
+                            <a href="@Url.Action("Index", "ToLoanMatching")" class="btn blue" style="width:80px">
+                                返回</a>
                         </td>
                     </tr>
                 </table>
