@@ -44,7 +44,7 @@
                         {
                             <tr>
                                 <td>
-                                    @Html.ActionLink(@item.Number, "SelInfoPath", "WorkFlowApproval", new { WorkFlowID = item.ID }, null)
+                                    @Html.ActionLink(@item.Number, "SelInfoPath", "WorkFlowApproval", new { WorkFlowID = item.ID }, new { target = "_blank" })
                                 </td>
                                 <td>
                                     @item.Financing.Name
