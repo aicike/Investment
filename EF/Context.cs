@@ -35,6 +35,8 @@ namespace EF
             modelBuilder.Configurations.Add(new RoleOptionMap());
             modelBuilder.Configurations.Add(new FinancingMap());
             modelBuilder.Configurations.Add(new MechanismProductsMap());
+            modelBuilder.Configurations.Add(new AttachmentMap());
+            
         }
     }
 }

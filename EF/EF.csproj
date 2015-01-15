@@ -52,6 +52,7 @@
     <Compile Include="Mapping\RoleMenuMap.cs" />
     <Compile Include="Mapping\RoleOptionMap.cs" />
     <Compile Include="Mapping\RoleAccountMap.cs" />
+    <Compile Include="Mapping\AttachmentMap.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

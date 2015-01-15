@@ -41,7 +41,7 @@ namespace Investment.Controllers
         }
 
         /// <summary>
-        /// 右侧操作控件
+        /// 右侧操作控件(1:workflowID   2:financingID,companyID)
         /// </summary>
         /// <returns></returns>
         public ActionResult RightOption(int? workflowID, int? financingID, int? companyID)

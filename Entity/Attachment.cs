@@ -45,6 +45,11 @@ namespace Entity
         public int EnumAttachmentType { get; set; }
 
         /// <summary>
+        /// 附件业务分类(业务字段，不会在数据库中生成)
+        /// </summary>
+        public string EnumAttachmentType_str { get; set; }
+
+        /// <summary>
         /// 附件格式
         /// </summary>
         public int EnumAttachmentFormat { get; set; }

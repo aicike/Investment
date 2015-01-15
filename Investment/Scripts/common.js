@@ -1,5 +1,5 @@
 ﻿
-function JMessage(msg, isError, isRefresh,refresh_url) {
+function JMessage(msg, isError, isRefresh, refresh_url) {
     $('#jmessage').html(msg);
     if (isError != undefined && isError == true) {
         $('#jmessage').showTopbarMessage({ background: "#f00", close: 3000 });
@@ -29,18 +29,21 @@ function AppDelete(msg, url, fun) {
 }
 
 $(function () {
-    $(".active").removeClass("active");
-    if (_menuID == undefined) {
-        _menuID = 0;
-    }
-    $("a[mid='" + _menuID + "']").parents(".myli").addClass("active");
-    $("a[mid='" + _menuID + "']").parent().addClass("active");
+    try {
+        $(".active").removeClass("active");
+        if (_menuID == undefined) {
+            _menuID = 0;
+        }
+        $("a[mid='" + _menuID + "']").parents(".myli").addClass("active");
+        $("a[mid='" + _menuID + "']").parent().addClass("active");
+    } catch (e) {
 
+    }
     //处理双击问题
     $("form").attr("data-ajax-complete", "close_modal_div()");
     $("form").attr("data-ajax-begin", "open_modal_div()");
     $(":button:enabled,a:enabled").addClass("submitBtn").click(function () {
-        var obj= $(this);
+        var obj = $(this);
         obj.addClass("disabled").attr("disabled", "disabled");
         var resetfun = function () {
             obj.removeClass("disabled").removeAttr("disabled");
@@ -60,3 +63,28 @@ function open_modal_div() {
     $("body").append(submitDiv);
     $(".submitbtn").addClass("disabled").attr("disabled", "disabled");
 }
+
+
+//单元格合并
+jQuery.fn.rowspan = function (colIdx) { //封装的一个JQuery小插件 
+    return this.each(function () {
+        var that;
+        $('tr', this).each(function (row) {
+            $('td:eq(' + colIdx + ')', this).filter(':visible').each(function (col) {
+                if (that != null && $(this).html() == $(that).html()) {
+                    rowspan = $(that).attr("rowSpan");
+                    if (rowspan == undefined) {
+                        $(that).attr("rowSpan", 1);
+                        rowspan = $(that).attr("rowSpan");
+                    }
+                    rowspan = Number(rowspan) + 1;
+                    $(that).attr("rowSpan", rowspan);
+                    $(this).hide();
+                }
+                else {
+                    that = this;
+                }
+            });
+        });
+    });
+} 

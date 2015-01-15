@@ -116,28 +116,18 @@ namespace Business
         /// </summary>
         /// <param name="list"></param>
         /// <returns></returns>
-        public List<Attachment> GetAttachment(List<AttachmentSel> list)
+        public List<Attachment> GetAttachment(List<AttachmentSel> objs)
         {
-            IQueryable<Attachment> query = null;
-            foreach (var item in list)
+            List<Attachment> list = new List<Attachment>();
+            foreach (var item in objs)
             {
-                if (query == null)
+                var obj = List().Where(a => a.Status == 0).Where(a => a.TableName == item.TableName && a.TableID == item.TableID).ToList();
+                if (obj != null && obj.Count > 0)
                 {
-                    query = List().Where(a => a.Status == 0).Where(a => a.TableName == item.TableName && a.TableID == item.TableID);
-                }
-                else
-                {
-                    query = query.Union(List().Where(a => a.Status == 0).Where(a => a.TableName == item.TableName && a.TableID == item.TableID));
+                    list.AddRange(obj);
                 }
             }
-            if (query == null)
-            {
-                return null;
-            }
-            else
-            {
-                return query.ToList();
-            }
+            return list.OrderBy(a => a.EnumAttachmentType).ToList();
         }
 
     }

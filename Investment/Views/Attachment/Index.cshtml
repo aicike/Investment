@@ -1,6 +1,73 @@
 ﻿@{
     ViewBag.Title = "附件信息";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_Layout_noMenu.cshtml";
 }
+@section scripts{
+    <script>
+        $(function () {
+            $("#table_attachment").rowspan(0); //传入的参数是对应的列数从0开始，哪一列有相同的内容就输入对应的列数值
+        }); 
+    </script>
+}
+@model List<Entity.Attachment>
+<div class="row-fluid">
+    <div class="span12">
+        <div>
+            @*@Html.ActionLink("全部下载", "Add", "Company", null, new { @class = "btn blue" }, true)*@
+        </div>
+        <div class="portlet box blue" style="margin-top: 10px;">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-cogs"></i>附件列表
+                </div>
+                <div class="tools">
+                </div>
+            </div>
+            <div class="portlet-body">
+                <table class="table table-bordered table-hover" id="table_attachment">
+                    <thead>
+                        <tr>
+                            <th style="width: 250px;">
+                                分类
+                            </th>
+                            <th style="width: 500px;">
+                                附件名称
+                            </th>
+                            <th style="width: 100px;">
+                                操作
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td style="vertical-align: inherit">
+                                    @item.EnumAttachmentType_str
+                                </td>
+                                <td>
+                                    @item.FileName
+                                </td>
+                                <td>
+                                    @if (item.EnumAttachmentFormat == (int)Entity.Enum.EnumAttachmentFormat.Image)
+                                    {
+                                        <a href="@item.FileUrl" target="_blank">预览</a>
+                                    }
+                                    else if (item.EnumAttachmentFormat == (int)Entity.Enum.EnumAttachmentFormat.Office)
+                                    { 
+                                        @Html.ActionLink("预览", "ViewOffice", "Attachment", new { url = item.FileUrl }, new { target = "_blank" }, false)
+                                    }
+                                    else
+                                    {
 
-<h2>Index</h2>
+                                    }
+                                    @Html.ActionLink("下载", "Download", "Attachment", new { id = item.ID }, null, false)
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

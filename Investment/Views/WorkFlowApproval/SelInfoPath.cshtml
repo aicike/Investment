@@ -5,7 +5,7 @@
 @model Entity.WorkFlow
 <div class="row-fluid">
     <div class="span12" style="margin-top: 50px;">
-        @{Html.RenderAction("RightOption", "WorkFlow_Form_Financing", new { financingID = 2, workflowID = 1 });}
+        @{Html.RenderAction("RightOption", "WorkFlow_Form_Financing", new { workflowID =@Model.ID });}
         <table id="TabMain" align="center" style="width: 100%; margin-bottom: 20px;">
             <tr>
                 <td>
