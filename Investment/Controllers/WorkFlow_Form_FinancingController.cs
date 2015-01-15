@@ -71,6 +71,10 @@ namespace Investment.Controllers
             }
             ViewBag.FinancingID = financingID;
             ViewBag.CompanyID = companyID;
+            List<AttachmentSel> sel = new List<AttachmentSel>();
+            sel.Add(new AttachmentSel() { TableName = SystemConst.TableName.Company, TableID = companyID.Value });
+            sel.Add(new AttachmentSel() { TableName = SystemConst.TableName.Financing, TableID = financingID.Value });
+            ViewBag.Sel_Str = Newtonsoft.Json.JsonConvert.SerializeObject(sel);
             return PartialView();
         }
 
@@ -132,9 +136,7 @@ namespace Investment.Controllers
                         mchanismproducts.Add(mp);
                     }
                     //return Newtonsoft.Json.JsonConvert.SerializeObject(list);
-
                 }
-
             }
             else
             {

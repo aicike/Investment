@@ -136,8 +136,12 @@ namespace Investment.Controllers
                 case ".bmp":
                     f = EnumAttachmentFormat.Image;
                     break;
-                case "doc":
-                case "docx":
+                case ".doc":
+                case ".docx":
+                case ".xls":
+                case ".xlsx":
+                case ".ppt":
+                case ".pptx":
                     f = EnumAttachmentFormat.Office;
                     break;
             }

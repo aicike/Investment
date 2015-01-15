@@ -18,7 +18,7 @@
                 <div style="margin-bottom: 20px;">
                     <button type="submit" class="btn blue">
                         保存</button>
-                    @if (Model.Status == 0)
+                   @* @if (Model.Status == 0)
                     { 
                         @Ajax.ActionLink("审核通过", "ChangeStatus", "Company", new { id = Model.ID, status = 1 }, new AjaxOptions { UpdateTargetId = "alert" }, new { @class = "btn red" }, true, false)@:
                         @Ajax.ActionLink("审核不通过", "ChangeStatus", "Company", new { id = Model.ID, status = 2 }, new AjaxOptions { UpdateTargetId = "alert" }, new { @class = "btn red" }, true, false)
@@ -30,7 +30,7 @@
                     else
                     { 
                         @Ajax.ActionLink("审核通过", "ChangeStatus", "Company", new { id = Model.ID, status = 1 }, new AjaxOptions { UpdateTargetId = "alert" }, new { @class = "btn red" }, true, false)
-                    }
+                    }*@
                     <button type="button" class="btn" onclick="location.href='@Url.Action("Index", "Company")'">
                         返回</button>@Html.HiddenFor(a => a.ID)@Html.HiddenFor(a => a.OwnerID)
                 </div>

@@ -21,7 +21,7 @@ namespace Business
         /// <param name="attachment">附件对象</param>
         /// <param name="subDirectory">子文件夹名称，可为空</param>
         /// <returns></returns>
-        public Result CopyAttachment_Company(int companyID, Attachment attachment,string subDirectory)
+        public Result CopyAttachment_Company(int companyID, Attachment attachment, string subDirectory)
         {
             Result result = new Result();
             try
@@ -29,7 +29,8 @@ namespace Business
                 //判断是否有Company目录是否存在
                 string directory_Logic = SystemConst.AttachmentPath.Substring(SystemConst.AttachmentPath.LastIndexOf('/') + 1) + "/" + "Company" + "/" + companyID;
                 string directory_Physics = SystemConst.AttachmentPath + "/" + "Company" + "/" + companyID;
-                if (!string.IsNullOrEmpty(subDirectory)) {
+                if (!string.IsNullOrEmpty(subDirectory))
+                {
                     directory_Logic += subDirectory;
                     directory_Physics += subDirectory;
                 }
@@ -108,5 +109,36 @@ namespace Business
         {
             return List().Where(a => a.TableName.Equals(tableName, StringComparison.CurrentCultureIgnoreCase) && a.TableID == tableID && a.Status == 0).ToList();
         }
+
+
+        /// <summary>
+        /// 根据List<AttachmentSel>获取附件列表
+        /// </summary>
+        /// <param name="list"></param>
+        /// <returns></returns>
+        public List<Attachment> GetAttachment(List<AttachmentSel> list)
+        {
+            IQueryable<Attachment> query = null;
+            foreach (var item in list)
+            {
+                if (query == null)
+                {
+                    query = List().Where(a => a.Status == 0).Where(a => a.TableName == item.TableName && a.TableID == item.TableID);
+                }
+                else
+                {
+                    query = query.Union(List().Where(a => a.Status == 0).Where(a => a.TableName == item.TableName && a.TableID == item.TableID));
+                }
+            }
+            if (query == null)
+            {
+                return null;
+            }
+            else
+            {
+                return query.ToList();
+            }
+        }
+
     }
 }

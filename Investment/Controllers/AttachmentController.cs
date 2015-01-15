@@ -13,10 +13,25 @@ namespace Investment.Controllers
 {
     public class AttachmentController : Controller
     {
-        public ActionResult Index()
+        #region 全部附件展示
+
+        public ActionResult Index(string Sel_Str)
         {
-            return View();
+            List<Attachment> list = null;
+            var sel = Newtonsoft.Json.JsonConvert.DeserializeObject<List<AttachmentSel>>(Sel_Str);
+            if (sel != null)
+            {
+                AttachmentModel attachmentModel = new AttachmentModel();
+                list = attachmentModel.GetAttachment(sel);
+            }
+            else
+            {
+                list = new List<Attachment>();
+            }
+            return View(list);
         }
+
+        #endregion
 
         #region 多文件
 
@@ -229,5 +244,6 @@ namespace Investment.Controllers
         }
 
         #endregion
+
     }
 }

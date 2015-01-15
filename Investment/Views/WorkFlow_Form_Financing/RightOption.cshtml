@@ -9,5 +9,8 @@
         <a href="@Url.Action("Detail", "Financing", new { id = ViewBag.FinancingID })"  target="_blank" class="alert-link">
             融资详细信息</a></div>
     <div style="margin-top: 8px">
+        <a href="@Url.Action("Index", "Attachment", new { id = ViewBag.FinancingID, Sel_Str = ViewBag.Sel_Str })"  target="_blank" class="alert-link">
+            附件信息</a></div>
+    <div style="margin-top: 8px">
         <a class="back-to-top" href="#top">返回顶部</a></div>
 </div>

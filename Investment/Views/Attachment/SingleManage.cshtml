@@ -6,18 +6,30 @@
 @model Entity.Attachment
 @{Html.AddJavaScript(Url.Content("/Scripts/plupload-2.0.0/js/plupload.full.min.js"));}
 @{Html.AddJavaScript(Url.Content("/Attachment/GetJS_Single?formID=" + ac.ID + "&enumAttachmentType=" + (int)ac.EnumAttachmentType) + "&table=" + ac.Table + "&tableID=" + ac.TableId);}
-<a style="margin-right:10px;cursor:pointer;" id="link_single_@ac.ID">@ac.Text</a><span id="span_single_@ac.ID">
+@if (ac.IsEnabled)
+{ 
+    <a style="margin-right:10px;cursor:pointer;" id="link_single_@ac.ID">@ac.Text</a>    
+}<span id="span_single_@ac.ID">
     @if (Model != null)
     {
         if (Model.EnumAttachmentFormat == (int)Entity.Enum.EnumAttachmentFormat.Image)
         { 
-        <a href="javascript:;" class="inline popovers" data-trigger="hover" data-placement="bottom" data-html="true" data-content="<img style='max-width:400px;max-height:400px' src='@Model.FileUrl'></img>" data-original-title="">@Model.FileName</a><a style="cursor: pointer;margin-left:20px;" class="inline link_delete_attachment_single_old_@ac.ID" tid='@Model.TableID' link_id='@Model.ID'>
-            删除</a>    
+        <a href="@Model.FileUrl" target="_blank" class="inline popovers" data-trigger="hover" data-placement="bottom" data-html="true" data-content="<img style='max-width:400px;max-height:400px' src='@Model.FileUrl'></img>" data-original-title="">@Model.FileName</a>
+        }
+        else if (Model.EnumAttachmentFormat == (int)Entity.Enum.EnumAttachmentFormat.Office)
+        { 
+        <a href="@Url.Action("ViewOffice", "Attachment", new { url = Model.FileUrl })" target="_blank" class="inline popovers" data-trigger="hover" data-placement="bottom" data-html="true"
+            data-content="点击进行预览" data-original-title="">@Model.FileName</a>
         }
         else
         { 
-        <a href="javascript:;" class="inline popovers" data-trigger="hover" data-placement="bottom" data-html="true" data-content="无预览内容" data-original-title="">@Model.FileName</a><a style="cursor: pointer;margin-left:20px;" class="inline link_delete_attachment_single_old_@ac.ID" tid='@Model.TableID' link_id='@Model.ID'>
-            删除</a>    
+        <a href="javascript:" class="inline popovers" data-trigger="hover" data-placement="bottom"
+            data-html="true" data-content="无预览内容" data-original-title="">@Model.FileName</a>
+        }
+        if (ac.IsEnabled)
+        { 
+            <a style="cursor: pointer;margin-left:20px;" class="inline link_delete_attachment_single_old_@ac.ID"
+            tid='@Model.TableID' link_id='@Model.ID'> 删除</a>    
         }
     }
 </span>

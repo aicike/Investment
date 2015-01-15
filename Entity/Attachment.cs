@@ -54,4 +54,20 @@ namespace Entity
         /// </summary>
         public int Status { get; set; }
     }
+
+    /// <summary>
+    /// 所有附件查询时用到的类
+    /// </summary>
+    public class AttachmentSel
+    {
+        /// <summary>
+        /// 附件对象表
+        /// </summary>
+        public string TableName { get; set; }
+
+        /// <summary>
+        /// 附件对象ID
+        /// </summary>
+        public int TableID { get; set; }
+    }
 }

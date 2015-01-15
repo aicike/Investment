@@ -37,7 +37,7 @@ namespace Investment.Controllers
         {
             CompanyModel companyModel = new CompanyModel();
             company.OwnerID = LoginAccount.UserID;
-            company.Status = 2;
+            company.Status = 1;
             Result result = companyModel.Add(company, null);
             if (result.HasError)
             {

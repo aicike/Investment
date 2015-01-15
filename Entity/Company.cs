@@ -17,7 +17,7 @@ namespace Entity
         public int ID { get; set; }
 
         /// <summary>
-        /// 状态：0未审核   1:审核不通过    2:审核不通过
+        /// 状态：0未审核   1:审核通过    2:审核不通过
         /// </summary>
         public int Status { get; set; }
 
