@@ -76,6 +76,11 @@ namespace Entity
         /// 流程对应产品信息表
         /// </summary>
         public virtual ICollection<WorkFlowMechanismProduct> WorkFlowMechanismProduct { get; set; }
+
+        /// <summary>
+        /// 工作日志
+        /// </summary>
+        public virtual ICollection<WorkLog> WorkLogs { get; set; }
         
     }
 }

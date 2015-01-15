@@ -69,6 +69,7 @@ namespace Investment.Controllers
                     companyID = wf.CompanyID;
                 }
             }
+            ViewBag.workflowID = workflowID;
             ViewBag.FinancingID = financingID;
             ViewBag.CompanyID = companyID;
             List<AttachmentSel> sel = new List<AttachmentSel>();

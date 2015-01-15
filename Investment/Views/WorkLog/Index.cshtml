@@ -1,0 +1,72 @@
+﻿@{
+    ViewBag.Title = "工作日志";
+    Layout = "~/Views/Shared/_Layout_noMenu.cshtml";
+    var workflow = ViewBag.workflow as Entity.WorkFlow;
+    var list = ViewBag.List as List<Entity.WorkLog>;
+}
+@model Entity.WorkLog
+<div class="row-fluid">
+    <div class="span12">
+        @if (ViewBag.hasGroupAccount)
+        { 
+            <div>
+                @using (Ajax.BeginForm("Add", "WorkLog", new { hasGroupAccount = ViewBag.hasGroupAccount }, new AjaxOptions() { UpdateTargetId = "alert" }, new { @class = "form-horizontal" }))
+                {
+                    <input type="submit" value="填写工作日志" class="btn blue" />
+                    <div style="margin-top: 10px;">
+                        @Html.TextAreaFor(a => a.Log, new { @class = "m-wrap span6", rows = "5" })
+                        @Html.ValidationMessageFor(a => a.Log)@Html.HiddenFor(a => a.WorkFlowID)
+                    </div>
+                }
+            </div>
+        }
+        <div class="portlet box blue" style="margin-top: 10px;">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-cogs"></i>融资项目：@workflow.Financing.Name
+                </div>
+                <div class="tools">
+                </div>
+            </div>
+            <div class="portlet-body">
+                <table class="table table-bordered table-hover" id="table_company">
+                    <thead>
+                        <tr>
+                            <th style="width: 100px;">
+                                时间
+                            </th>
+                            <th style="width: 450px;">
+                                内容
+                            </th>
+                            @if (ViewBag.hasGroupAccount)
+                            { 
+                                <th style="width: 80px;">
+                                    操作
+                                </th>
+                            }
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in list)
+                        {
+                            <tr>
+                                <td>
+                                    @item.LogDate.ToString("yyyy/MM/dd hh:mm")
+                                </td>
+                                <td>
+                                    @item.Log
+                                </td>
+                                @if (ViewBag.hasGroupAccount)
+                                { 
+                                    <td>
+                                        @Ajax.ActionLink("删除", "Delete", "WorkLog", new { id = item.ID, workFlowID = item.WorkFlowID, hasGroupAccount = ViewBag.hasGroupAccount }, new AjaxOptions() { UpdateTargetId = "alert", OnBegin = "return AppDelete('确定删除?删除此项将会删除其关联的所有数据！')" }, true)
+                                    </td>
+                                }
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

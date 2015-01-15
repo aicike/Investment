@@ -94,6 +94,7 @@
     <Compile Include="WorkFlowModel.cs" />
     <Compile Include="WorkFlowNodeManagerModel.cs" />
     <Compile Include="WorkFlow_NodeModel.cs" />
+    <Compile Include="WorkLogModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EF\EF.csproj">

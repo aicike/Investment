@@ -72,6 +72,7 @@
     <Compile Include="WorkFlowMechanismProduct.cs" />
     <Compile Include="WorkFlowNodeManager.cs" />
     <Compile Include="WorkFlow_Node.cs" />
+    <Compile Include="WorkLog.cs" />
     <Compile Include="_GroupAccount.cs" />
     <Compile Include="_Session_LoginUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

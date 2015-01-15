@@ -90,6 +90,7 @@ namespace Entity
         /// 审批记录表
         /// </summary>
         public virtual ICollection<ApprovalRecord> ApprovalRecord { get; set; }
-        
+
+        public virtual ICollection<WorkLog> WorkLogs { get; set; }
     }
 }
