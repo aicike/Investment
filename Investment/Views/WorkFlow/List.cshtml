@@ -72,7 +72,14 @@
                                 <td>
                                     @item.WorkFlow_Node.WorkFlowNodeManager.Name
                                 </td>
-                                <td>@item.ApprovalRecord.Where(a => a.Operation == -1).Select(a => a.GroupAccount.Name).ToList().ConvertToString(",")
+                                <td>
+                                    @{
+                                    var ars = item.ApprovalRecord.Where(a => a.Operation == -1).ToList();
+                                    }
+                                    @foreach (var ar in ars)
+                                    {
+                                        @:@ar.AccountPosition：@ar.AccountName
+                                                                        }
                                 </td>
                             </tr>
                         }

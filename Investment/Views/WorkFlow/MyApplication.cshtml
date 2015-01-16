@@ -69,14 +69,20 @@
                                                 break;
                                         case 3:
                                         @:未通过
-                                                                                                                                                                                                                                                                        break;
+                                                                                                                                                                                                                                                                                                            break;
                                     }
                                 </td>
                                 <td>
                                     @item.WorkFlow_Node.WorkFlowNodeManager.Name
                                 </td>
                                 <td>
-                                    @item.ApprovalRecord.Where(a => a.Operation == -1).Select(a => a.GroupAccount.Name).ToList().ConvertToString(",")
+                                    @{
+                                    var ars = item.ApprovalRecord.Where(a => a.Operation == -1).ToList();
+                                    }
+                                    @foreach (var ar in ars)
+                                    {
+                                        @:@ar.AccountPosition：@ar.AccountName
+                                                                        }
                                 </td>
                                 <td>
                                     @Html.ActionLink("工作日志", "Index", "WorkLog", new { workFlowID = item.ID, hasGroupAccount = true }, new { target = "_blank" }, false)

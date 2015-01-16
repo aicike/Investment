@@ -32,13 +32,12 @@
                         @Ajax.ActionLink("审核通过", "ChangeStatus", "Company", new { id = Model.ID, status = 1 }, new AjaxOptions { UpdateTargetId = "alert" }, new { @class = "btn red" }, true, false)
                     }*@
                     <button type="button" class="btn" onclick="location.href='@Url.Action("Index", "Company")'">
-                        返回</button>@Html.HiddenFor(a => a.ID)@Html.HiddenFor(a => a.OwnerID)
+                        返回</button>@Html.HiddenFor(a => a.ID)@Html.HiddenFor(a => a.OwnerID)@Html.HiddenFor(a => a.Status)
                 </div>
                 <div class="tabbable tabbable-custom">
                     <ul class="nav nav-tabs">
                         <li class="active"><a href="#tab_1" id="link_1" data-toggle="tab">基本信息</a></li>
                         <li><a class="" href="#tab_2" data-toggle="tab">附件信息</a></li>
-                        <li><a class="" href="#tab_3" data-toggle="tab">融资信息</a></li>
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane active" id="tab_1">
@@ -503,12 +502,6 @@
                                             @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "50", Text = "附件管理", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.Unknown });}
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tab-pane " id="tab_3">
-                            <div class="portlet box">
-                                <div class="portlet-body form">
                                 </div>
                             </div>
                         </div>
