@@ -51,7 +51,9 @@ namespace Business
         /// <returns></returns>
         public List<MechanismProducts> GetInfo_Matching(int FinancingID)
         {
-            var list = List().Where(a=>a.IsEnable==true).ToList();
+            FinancingModel fmodel = new FinancingModel();
+            var f = fmodel.Get(FinancingID);
+            var list = List().Where(a=>a.IsEnable==true&&a.MaxQuota>=f.Amount).ToList();
             return list;
         }
 
