@@ -280,8 +280,8 @@ namespace Investment.Controllers
         public ActionResult Agree(int WorkFlowID, string Opinion)
         {
             WorkFlowModel wfm = new WorkFlowModel();
-            wfm.WorkFlow_Agree(WorkFlowID, LoginAccount.UserID, Opinion);
-            return View();
+            var result= wfm.WorkFlow_Agree(WorkFlowID, LoginAccount.UserID, Opinion);
+            return Json(result);
         }
 
         /// <summary>
@@ -291,19 +291,19 @@ namespace Investment.Controllers
         public ActionResult Disagree(int WorkFlowID, string Opinion)
         {
             WorkFlowModel wfm = new WorkFlowModel();
-            wfm.WorkFlow_Disagree(WorkFlowID, LoginAccount.UserID, Opinion);
-            return View();
+            var result = wfm.WorkFlow_Disagree(WorkFlowID, LoginAccount.UserID, Opinion);
+            return Json(result);
         }
 
         /// <summary>
         /// 驳回
         /// </summary>
         /// <returns></returns>
-        public ActionResult Reject(int WorkFlowID, string Opinion)
+        public ActionResult Reject(int WorkFlowID, string Opinion,int Node)
         {
             WorkFlowModel wfm = new WorkFlowModel();
-            wfm.WorkFlow_Reject(WorkFlowID, LoginAccount.UserID, 1, Opinion);
-            return View();
+            var result = wfm.WorkFlow_Reject(WorkFlowID, LoginAccount.UserID, Node, Opinion);
+            return Json(result);
         }
 
         #endregion
