@@ -28,8 +28,8 @@ namespace Web.ueditor.net
             Uploader up = new Uploader();
 
 
-            var account = context.Session[SystemConst.Session.LoginUser] as SessionLoginUser;
-            string path = "/File/Enterprise/" + account.ID + "/";
+            //var account = context.Session["SessionLoginUser"] as SessionLoginUser;
+            string path = "/File/Enterprise/";
 
             info = up.upFile(context, path, filetype, size);                   //获取上传状态
 

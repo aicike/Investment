@@ -48,7 +48,7 @@
                 </div>
             </div>
             <div class="portlet-body">
-                @using (Ajax.BeginForm("Edit", "GroupAccount", new AjaxOptions() { UpdateTargetId = "alert" }))
+                @using (Ajax.BeginForm("Edit", "GroupAccount", new AjaxOptions() { UpdateTargetId = "alert" }, new { @class = "form-horizontal" }))
                 {
                     <button class="btn blue" onclick="GetRoleAndPosition()" type="submit">
                         保存</button>
@@ -56,110 +56,72 @@
                     <br />
                     <input type="hidden" name="Roles" id="Roles" />
                     <input type="hidden" name="Positions" id="Positions" />
-                    <table class="table table-hover" style="">
-                        <tr>
-                            <td style="width: 120px">
-                                登陆账号：
-                            </td>
-                            <td>@Html.TextBoxFor(a => a.AccountNumber, new { @readonly = "readonly" })
-                                @Html.HiddenFor(a => a.GroupID)
-                                @Html.HiddenFor(a => a.ID)
-                                @Html.HiddenFor(a => a.AccountPwd)
-                                @Html.HiddenFor(a => a.HeadPortrait)
-                            </td>
-                            <td>@Html.ValidationMessageFor(a => a.AccountNumber)
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="width: 120px">
-                                姓名：
-                            </td>
-                            <td>@Html.TextBoxFor(a => a.Name)
-                            </td>
-                            <td>@Html.ValidationMessageFor(a => a.Name)
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="width: 120px">
-                                邮箱：
-                            </td>
-                            <td>@Html.TextBoxFor(a => a.Email)
-                            </td>
-                            <td>@Html.ValidationMessageFor(a => a.Email)
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="width: 120px">
-                                电话：
-                            </td>
-                            <td>@Html.TextBoxFor(a => a.Phone)
-                            </td>
-                            <td>@Html.ValidationMessageFor(a => a.Phone)
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="width: 120px">
-                                角色：
-                            </td>
-                            <td>
-                                @foreach (var item in Role)
-                                {
+                    
+                    
+                    <div class="control-group">
+                        <label class="control-label">
+                            登陆账号:</label>
+                        <div class="controls">
+                            @Html.TextBoxFor(a => a.AccountNumber, new { @class = "span6 m-wrap" })
+                            @Html.HiddenFor(a => a.GroupID)
+                            @Html.HiddenFor(a => a.ID)
+                            @Html.HiddenFor(a => a.AccountPwd)
+                            @Html.HiddenFor(a => a.HeadPortrait)
+                            <span class="help-inline">@Html.ValidationMessageFor(a => a.AccountNumber)</span>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">
+                            姓名:</label>
+                        <div class="controls">
+                            @Html.TextBoxFor(a => a.Name, new { @class = "span6 m-wrap" })
+                            <span class="help-inline">@Html.ValidationMessageFor(a => a.Name)</span>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">
+                            邮箱:</label>
+                        <div class="controls">
+                            @Html.TextBoxFor(a => a.Email, new { @class = "span6 m-wrap" })
+                            <span class="help-inline">@Html.ValidationMessageFor(a => a.Email)</span>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">
+                            电话:</label>
+                        <div class="controls">
+                            @Html.TextBoxFor(a => a.Phone, new { @class = "span6 m-wrap" })
+                            <span class="help-inline">@Html.ValidationMessageFor(a => a.Phone)</span>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">
+                            角色:</label>
+                        <div class="controls">
+                            @foreach (var item in Role)
+                            {
+                                <label class="checkbox line">
+                                    <input type="checkbox" value="@item.ID" name= "CK_Role" />
+                                    @item.RoleName
+                                </label>
 
-                                    if (RoleS.Contains(item.ID))
-                                    {
-                                    
-                                    <label class="checkbox line">
-                                        <input type="checkbox" value="@item.ID"  checked="checked" name= "CK_Role" />
-                                        @item.RoleName
-                                    </label>
+                            }
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">
+                            职位:</label>
+                        <div class="controls">
+                            @foreach (var item in Position)
+                            {
+                                <label class="checkbox line">
+                                    <input type="checkbox" value="@item.ID" name= "CK_Position" />
+                                    @item.Name
+                                </label>
 
-                                    }
-                                    else
-                                    {
-                                    <label class="checkbox line">
-                                        <input type="checkbox" value="@item.ID"  name= "CK_Role" />
-                                        @item.RoleName
-                                    </label>
-
-                                    }
-
-
-                                }
-                            </td>
-                            <td>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="width: 120px">
-                                职位：
-                            </td>
-                            <td>
-                                @foreach (var item in Position)
-                                {
-                                    if (PositionS.Contains(item.ID))
-                                    {
-                                    <label class="checkbox line">
-                                        <input type="checkbox" value="@item.ID"   checked="checked"  name= "CK_Position" />
-                                        @item.Name
-                                    </label>
-                                    }
-                                    else
-                                    { 
-                                    <label class="checkbox line">
-                                        <input type="checkbox" value="@item.ID" name= "CK_Position" />
-                                        @item.Name
-                                    </label>
-                                    }
-                                }
-                            </td>
-                            <td>
-                            </td>
-                        </tr>
-                    </table>
-                    <button class="btn blue" onclick="GetRoleAndPosition()" type="submit">
-                        保存</button>
-                    <a href="@Url.Action("Index", "GroupAccount")" class="btn blue" style="">返回</a><br />
-                   
+                            }
+                        </div>
+                    </div>
                 }
             </div>
         </div>

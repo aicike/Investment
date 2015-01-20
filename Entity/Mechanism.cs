@@ -24,9 +24,10 @@ namespace Entity
         public string Name { get; set; }
 
         /// <summary>
-        /// 备注
+        /// 官方网站
         /// </summary>
-        [Display(Name = "备注")]
-        public string Remark { get; set; }
+        [Display(Name = "官方网站")]
+        [RegularExpression(@"(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:/~\+#]*[\w\-\@?^=%&amp;/~\+#])?", ErrorMessage = "请输入正确的网址")]
+        public string WebSite { get; set; }
     }
 }

@@ -578,6 +578,9 @@
     <Content Include="media\js\wysihtml5-0.3.0.js" />
     <Content Include="Scripts\Attachment.js" />
     <Content Include="Scripts\common.js" />
+    <Content Include="Scripts\jcrop\Jcrop.gif" />
+    <Content Include="Scripts\jcrop\jquery.Jcrop.css" />
+    <Content Include="Scripts\jcrop\jquery.Jcrop.js" />
     <Content Include="Scripts\jquery-ui-1.10.3.custom.min.js" />
     <Content Include="Scripts\jquery-ui-1.8.20.js" />
     <Content Include="Scripts\jquery-ui-1.8.20.min.js" />
@@ -1125,6 +1128,7 @@
     <Content Include="Views\MechanismProducts\SelAll.cshtml" />
     <Content Include="Views\Shared\_Layout_noMenu.cshtml" />
     <Content Include="Views\ToLoanMatching\Index.cshtml" />
+    <Content Include="Views\MechanismProducts\GetInfo.cshtml" />
     <None Include="Views\WorkFlowApproval\QianShuXieYi.cshtml" />
     <None Include="Views\WorkFlowApproval\QueRenShouQuFeiYong.cshtml" />
     <Content Include="Views\WorkFlowApproval\SelInfoPath.cshtml" />

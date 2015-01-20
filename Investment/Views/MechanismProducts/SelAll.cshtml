@@ -56,7 +56,14 @@
                     {
                         <tr>
                             <td>
-                                @item.Name
+                                @if (string.IsNullOrEmpty(item.WebSite))
+                                { 
+                                    <span class="tooltips"  data-placement="top" data-original-title="暂无官网">@item.Name</span>
+                                }
+                                else
+                                { 
+                                    <a class="tooltips"  href="@item.WebSite"  target="_blank"  data-placement="top" data-original-title="点击进入官网">@item.Name</a>
+                                }
                             </td>
                             <td>
                                 @item.MaxQuota

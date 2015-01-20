@@ -1,6 +1,7 @@
 ﻿@{
     ViewBag.Title = "职位管理";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
 }
 
 
@@ -10,7 +11,8 @@
 
 <div class="row-fluid">
     <div class="span12" style="width: 100%">
-        <a href="@Url.Action("Add", "Position")" class="btn blue" style=" width:100px">新增职位</a><br />
+      @Html.ActionLink("新增职位", "Add", "Position",null, new { @class = "btn blue" }, true)
+      <br />
         <br />
         <div class="portlet box blue">
             <div class="portlet-title">
@@ -37,8 +39,8 @@
                                 @item.Name
                             </td>
                             <td>
-                                <a href="@Url.Action("Edit", "Position", new { ID = item.ID })">修改</a> 
-                                @Ajax.ActionLink("删除", "Delete", "Position", new { ID = item.ID }, new AjaxOptions() { UpdateTargetId = "alert", OnBegin = "return AppDelete('你确定要删除吗?','" + Url.Action("Delete", "Position", new { ID = item.ID }) + "',null)" })
+                              @Html.ActionLink("修改", "Edit", "Position", new { ID = item.ID }, null, true)
+                                @Ajax.ActionLink("删除", "Delete", "Position", new { ID = item.ID }, new AjaxOptions() { UpdateTargetId = "alert", OnBegin = "return AppDelete('你确定要删除吗?','" + Url.Action("Delete", "Position", new { ID = item.ID }) + "',null)" },true)
                             </td>
                         </tr>
                     }

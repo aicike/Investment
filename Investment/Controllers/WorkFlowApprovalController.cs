@@ -47,38 +47,43 @@ namespace Investment.Controllers
         public ActionResult SetPendingForm(int financingID, string Products)
         {
             Result result = new Result();
-            lock (LockObj)
+
+            using (TransactionScope scope = new TransactionScope())
             {
-                using (TransactionScope scope = new TransactionScope())
+                //查看是否生成待定业务单
+                WorkFlowModel WFModel = new WorkFlowModel();
+                var ispeding = WFModel.GetISCreatePending(financingID);
+                if (ispeding.HasError)
                 {
-                    //融资意向
-                    FinancingModel FModel = new FinancingModel();
-                    var financing = FModel.Get(financingID);
-                    //流程数据
-                    WorkFlowModel WFModel = new WorkFlowModel();
-                    WorkFlow workflow = new WorkFlow();
-                    workflow.BeginDate = DateTime.Now;
-                    workflow.FinancingID = financingID;
-                    workflow.FormJson = "";
-                    workflow.State = 0;
-                    workflow.CompanyID = financing.CompanyID;
-                    result = WFModel.Add(workflow);
-                    //添加流程机构信息
-                    WorkFlowMechanismProductModel wmpModel = new WorkFlowMechanismProductModel();
-                    //机构ID集合
-                    Products = Products.TrimEnd(',');
-                    var pros = Products.Split(',').Select(a => int.Parse(a)).ToArray();
-                    foreach (var item in pros)
-                    {
-                        WorkFlowMechanismProduct wmp = new WorkFlowMechanismProduct();
-                        wmp.WorkFlowID = workflow.ID;
-                        wmp.State = 0;
-                        wmp.MechanismProductsID = item;
-                        wmp.FormJson = "";
-                        wmpModel.Add(wmp);
-                    }
-                    scope.Complete();
+                    return JavaScript("JMessage('" + ispeding.Error+ "',true)");
                 }
+                //融资意向
+                FinancingModel FModel = new FinancingModel();
+                var financing = FModel.Get(financingID);
+                //流程数据
+                WorkFlow workflow = new WorkFlow();
+                workflow.BeginDate = DateTime.Now;
+                workflow.FinancingID = financingID;
+                workflow.FormJson = "";
+                workflow.State = 0;
+                workflow.CompanyID = financing.CompanyID;
+                result = WFModel.Add(workflow);
+                //添加流程机构信息
+                WorkFlowMechanismProductModel wmpModel = new WorkFlowMechanismProductModel();
+                //机构ID集合
+                Products = Products.TrimEnd(',');
+                var pros = Products.Split(',').Select(a => int.Parse(a));
+                foreach (var item in pros)
+                {
+                    WorkFlowMechanismProduct wmp = new WorkFlowMechanismProduct();
+                    wmp.WorkFlowID = workflow.ID;
+                    wmp.State = 0;
+                    wmp.MechanismProductsID = item;
+                    wmp.FormJson = "";
+                    wmpModel.Add(wmp);
+                }
+                scope.Complete();
+
             }
             if (result.HasError)
             {

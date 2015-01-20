@@ -3,10 +3,26 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @section scripts{
+<script src="@Url.Content("/Scripts/ueditor/ueditor.config.js")" type="text/javascript"></script>
+    <script src="@Url.Content("/Scripts/ueditor/ueditor.all.js")" type="text/javascript"></script>
 <script>
     $(function () {
         var IsEnable = "@Model.IsEnable";
         $("#IsEnable").val(IsEnable);
+
+        var ue;
+
+        window.UEDITOR_HOME_URL = "/Scripts/ueditor/";
+        //实例化编辑器
+        var options = {
+            initialFrameWidth: '99%',
+            initialFrameHeight: 280,
+            imageUrl: UEDITOR_HOME_URL + "net/imageUp.ashx",
+            imagePath: "",
+            imageManagerPath: "",
+            initialContent: ""
+        };
+        ue = UE.getEditor('editor', options);
     });
 </script>
 }
@@ -48,6 +64,14 @@
                     </div>
                     <div class="control-group">
                         <label class="control-label">
+                            产品网址:</label>
+                        <div class="controls">
+                           @Html.TextBoxFor(a => a.WebSite, new { @class = "span6 m-wrap", placeholder = "例：http://www.xxx.com" })
+                            <span class="help-inline">@Html.ValidationMessageFor(a => a.WebSite)</span>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">
                             最高贷款额度（万）:</label>
                         <div class="controls">
                            @Html.TextBoxFor(a => a.MaxQuota, new { @class = "span6 m-wrap" })
@@ -66,10 +90,9 @@
                     </div>
                     <div class="control-group">
                         <label class="control-label">
-                            备注:</label>
+                            办理指南:</label>
                         <div class="controls">
-                          @Html.TextAreaFor(a => a.Remark, new { @class = "span6 m-wrap" })
-                            <span class="help-inline">@Html.ValidationMessageFor(a => a.Remark)</span>
+                            <script type="text/plain" id="editor" height="300px" width="280px" name="Remark">@Html.Raw(Model.Remark)</script>
                         </div>
                     </div>
 

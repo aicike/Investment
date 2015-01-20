@@ -53,6 +53,7 @@ namespace Investment.Controllers
         /// <param name="mechanismProducts"></param>
         /// <returns></returns>
         [HttpPost]
+        [ValidateInput(false)]
         public ActionResult Add(MechanismProducts mechanismProducts)
         {
             MechanismProductsModel mpModel = new MechanismProductsModel();
@@ -90,6 +91,7 @@ namespace Investment.Controllers
         /// <param name="mechanismProducts"></param>
         /// <returns></returns>
         [HttpPost]
+        [ValidateInput(false)]
         public ActionResult Edit(MechanismProducts mechanismProducts)
         {
             MechanismProductsModel mpModel = new MechanismProductsModel();
@@ -124,6 +126,22 @@ namespace Investment.Controllers
             var pagelist = mplist.ToPagedList(id ?? 1, 15);
 
             return View(pagelist);
+        }
+
+        /// <summary>
+        /// 查看详细界面
+        /// </summary>
+        /// <param name="MPID">公司产品信息</param>
+        /// <returns></returns>
+        public ActionResult GetInfo(int MPID)
+        {
+            //获取详细
+            MechanismProductsModel mpModel = new MechanismProductsModel();
+            var item = mpModel.Get(MPID);
+            //获取机构
+            MechanismModel mModel = new MechanismModel();
+            ViewBag.Mechanis = mModel.Get(item.MechanismID.Value);
+            return View(item);
         }
     }
 }

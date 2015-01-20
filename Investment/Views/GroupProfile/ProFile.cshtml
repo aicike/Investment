@@ -78,11 +78,12 @@
                         $('#tw').val("0");
                         $('#th').val("0");
                     }
-                    $("#imgSel").attr('src', data);
-                    $("#imgLogo").attr('src', data);
+                    var dataJson = JSON.parse(data)
+                    $("#imgSel").attr('src', dataJson.FileUrl);
+                    $("#imgLogo").attr('src', dataJson.FileUrl);
 
 
-                    $("#ImgPath").val(data);
+                    $("#ImgPath").val(dataJson.FilePath);
 
                     $('#imgSel').Jcrop({
                         onChange: updatePreview,
