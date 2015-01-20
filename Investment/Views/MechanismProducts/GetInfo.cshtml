@@ -1,0 +1,42 @@
+﻿@{
+    ViewBag.Title = Model.Name+"机构产品详细界面";
+    Layout = "~/Views/Shared/_Layout_noMenu.cshtml";
+    var mechanis = ViewBag.Mechanis as Entity.Mechanism;
+}
+@section scripts{
+    <script>
+
+        $(function () {
+            $("#_Title").hide();
+        });
+    </script>
+    <style>
+        img
+        {
+             max-width:100%;  
+            }
+    </style>
+}
+
+@model Entity.MechanismProducts
+<div class="row-fluid">
+    <div class="portlet box blue" style="border-top:1 !important">
+        <div class="portlet-body " style="min-height: 800px">
+            <table style="width: 100%; " class="">
+                <tr>
+                    <td colspan="6" align="center" style="font-size: 24px; font-weight: bold; text-align:center">
+                        @Model.Name
+                    </td>
+                </tr>
+                <tr>
+                    <td style=" ">
+                        所属机构：<a href="@mechanis.WebSite" class="tooltips" data-placement="top" data-original-title="点击查看官方网站"> @mechanis.Name </a>
+                    </td>
+                    <td style=" ">
+                        产品网站地址：@Model.WebSite
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

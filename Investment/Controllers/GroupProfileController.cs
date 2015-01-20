@@ -87,12 +87,12 @@ namespace Investment.Controllers
         public ActionResult UpImage(string ImgPath, int w, int h, int x1, int y1, int tw, int th)
         {
             GroupAccountModel GAModel = new GroupAccountModel();
-            var result = GAModel.Up_Image(Server.MapPath(ImgPath), LoginAccount.UserID, w, h, x1, y1, tw, th);
+            var result = GAModel.Up_Image(ImgPath, LoginAccount.UserID, w, h, x1, y1, tw, th);
             if (result.HasError)
             {
                 return JavaScript("JMessage('上传失败,请重试！',true)");
             }
-            System.IO.File.Delete(Server.MapPath(ImgPath));
+            System.IO.File.Delete(ImgPath);
             LoginAccount.HeadImg = result.Entity.ToString();
             return JavaScript("window.location.href='" + Url.Action("ProFile", "GroupProfile", new { imgIsOk = 1 }) + "'");
         }

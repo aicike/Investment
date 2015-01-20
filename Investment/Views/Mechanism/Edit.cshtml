@@ -16,35 +16,32 @@
                 </div>
             </div>
             <div class="portlet-body">
-                @using (Ajax.BeginForm("Edit", "Mechanism", new AjaxOptions() { UpdateTargetId = "alert" }))
+                @using (Ajax.BeginForm("Edit", "Mechanism", new AjaxOptions() { UpdateTargetId = "alert" }, new { @class = "form-horizontal" }))
                 {
                     <button class="btn blue" onclick="GetRole()" type="submit">
                         保存</button>
                     <a href="@Url.Action("Index", "Mechanism")" class="btn blue" style="">返回</a><br />
                     <br />
                     <input type="hidden" name="Roles" id="Roles" />
-                    <table class="table table-hover" style="">
-                        <tr>
-                            <td style="width: 120px">
-                                机构名称：
-                            </td>
-                            <td>@Html.TextBoxFor(a => a.Name)
+                    
+                            <div class="control-group">
+                        <label class="control-label">
+                            机构名称:</label>
+                        <div class="controls">
+                           @Html.TextBoxFor(a => a.Name, new { @class = "span6 m-wrap" })
                                 @Html.HiddenFor(a => a.ID)
-                                <input type="hidden" value="@ViewBag.CID" name="CompanyID" style="width: 300px"/>
-                            </td>
-                            <td>@Html.ValidationMessageFor(a => a.Name)
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="width: 120px">
-                                备注：
-                            </td>
-                            <td>@Html.TextAreaFor(a => a.Remark)
-                            </td>
-                            <td>
-                            </td>
-                        </tr>
-                    </table>
+                            <span class="help-inline">@Html.ValidationMessageFor(a => a.Name)</span>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">
+                            官方网站地址:</label>
+                        <div class="controls">
+                           @Html.TextBoxFor(a => a.WebSite, new { @class = "span6 m-wrap" })
+                            <span class="help-inline">@Html.ValidationMessageFor(a => a.WebSite)</span>
+                        </div>
+                    </div>
+       
                     <button class="btn blue" onclick="GetRole()" type="submit">
                         保存</button>
                     <a href="@Url.Action("Index", "Mechanism")" class="btn blue" style="">返回</a><br />

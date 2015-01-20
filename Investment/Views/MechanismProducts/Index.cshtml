@@ -8,8 +8,8 @@
 
 <div class="row-fluid">
     <div class="span12" style="width: 100%">
-        <a href="@Url.Action("Add", "MechanismProducts", new { MID = ViewBag.MID })" class="btn blue" style=" width:100px">添加产品</a>
-          <a href="@Url.Action("Index", "Mechanism")" class="btn blue" style=" width:100px">返回</a><br />
+    @Html.ActionLink("添加产品", "Add", "MechanismProducts", new { MID = ViewBag.MID }, new { @class = "btn blue" }, true)
+          <a href="@Url.Action("Index", "Mechanism")" class="btn blue" >返回</a><br />
         <br />
         <div class="portlet box blue">
             <div class="portlet-title">
@@ -42,7 +42,14 @@
                     {
                         <tr>
                             <td>
-                                @item.Name
+                            @if (string.IsNullOrEmpty(item.WebSite))
+                                { 
+                                    <span  class="tooltips" data-placement="top" data-original-title="暂无官网">@item.Name</span>
+                                }
+                                else
+                                { 
+                                    <a  class="tooltips" href="@item.WebSite"  target="_blank"  data-placement="top" data-original-title="点击进入官网">@item.Name</a>
+                                }
                             </td>
                             <td>
                                 @item.MaxQuota
@@ -62,7 +69,7 @@
                                 }
                             </td>
                             <td>
-                                <a href="@Url.Action("Edit", "MechanismProducts", new { MID = ViewBag.MID, MPID = item.ID })">修改</a> 
+                            @Html.ActionLink("修改", "Edit", "MechanismProducts", new { MID = ViewBag.MID, MPID = item.ID }, null, true)
                             </td>
                         </tr>
                     }

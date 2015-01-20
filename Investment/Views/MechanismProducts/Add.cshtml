@@ -3,27 +3,41 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @section scripts{
+    <script src="@Url.Content("/Scripts/ueditor/ueditor.config.js")" type="text/javascript"></script>
+    <script src="@Url.Content("/Scripts/ueditor/ueditor.all.js")" type="text/javascript"></script>
+    <script>
+        $(function () {
+            var ue;
+
+            window.UEDITOR_HOME_URL = "/Scripts/ueditor/";
+            //实例化编辑器
+            var options = {
+                initialFrameWidth: '99%',
+                initialFrameHeight: 280,
+                imageUrl: UEDITOR_HOME_URL + "net/imageUp.ashx",
+                imagePath: "",
+                imageManagerPath: "",
+                initialContent: ""
+            };
+            ue = UE.getEditor('editor', options);
+        });
+    </script>
 }
 @model Entity.MechanismProducts
 <div class="row-fluid">
     <div class="span12" style="width: 100%">
-
         <div class="portlet box blue">
-
             <div class="portlet-title">
-
                 <div class="caption">
                     <i class="icon-cogs"></i>@(ViewBag.MName)-添加产品
                 </div>
                 <div class="tools">
                 </div>
             </div>
-            
-                    
             <div class="portlet-body form">
                 @using (Ajax.BeginForm("Add", "MechanismProducts", new AjaxOptions() { UpdateTargetId = "alert" }, new { @class = "form-horizontal" }))
                 {
-                        <button class="btn blue" onclick="GetRole()" type="submit">
+                    <button class="btn blue"  type="submit">
                         添加</button>
                     <a href="@Url.Action("Index", "MechanismProducts", new { MID = ViewBag.MID })" class="btn blue" style="">
                         返回</a><br />
@@ -33,16 +47,24 @@
                         <label class="control-label">
                             产品名称:</label>
                         <div class="controls">
-                           @Html.TextBoxFor(a => a.Name, new { @class = "span6 m-wrap" })
-                           <input type="hidden" name= "MechanismID" value="@ViewBag.MID" />
+                            @Html.TextBoxFor(a => a.Name, new { @class = "span6 m-wrap" })
+                            <input type="hidden" name= "MechanismID" value="@ViewBag.MID" />
                             <span class="help-inline">@Html.ValidationMessageFor(a => a.Name)</span>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">
+                            产品网址:</label>
+                        <div class="controls">
+                            @Html.TextBoxFor(a => a.WebSite, new { @class = "span6 m-wrap" ,placeholder="例：http://www.xxx.com"})
+                            <span class="help-inline">@Html.ValidationMessageFor(a => a.WebSite)</span>
                         </div>
                     </div>
                     <div class="control-group">
                         <label class="control-label">
                             最高贷款额度（万）:</label>
                         <div class="controls">
-                           @Html.TextBoxFor(a => a.MaxQuota, new { @class = "span6 m-wrap" })
+                            @Html.TextBoxFor(a => a.MaxQuota, new { @class = "span6 m-wrap" })
                             <span class="help-inline">@Html.ValidationMessageFor(a => a.MaxQuota)</span>
                         </div>
                     </div>
@@ -50,18 +72,17 @@
                         <label class="control-label">
                             是否启用:</label>
                         <div class="controls">
-                             <select name="IsEnable" class="small m-wrap">
-                                    <option value="True">启用</option>
-                                    <option value="False">禁用</option>
-                                </select>
+                            <select name="IsEnable" class="small m-wrap">
+                                <option value="True">启用</option>
+                                <option value="False">禁用</option>
+                            </select>
                         </div>
                     </div>
                     <div class="control-group">
                         <label class="control-label">
-                            备注:</label>
+                            办理指南:</label>
                         <div class="controls">
-                          @Html.TextAreaFor(a => a.Remark, new { @class = "span6 m-wrap" })
-                            <span class="help-inline">@Html.ValidationMessageFor(a => a.Remark)</span>
+                             <script type="text/plain" id="editor" height="300px" width="280px" name="Remark"></script>
                         </div>
                     </div>
 

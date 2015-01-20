@@ -108,7 +108,7 @@ namespace Business
         public Result Up_Image(string ImgUrl, int AccountID, int w, int h, int x1, int y1, int tw, int th)
         {
             Result result = new Result();
-            var imagePath = Common.GetAccountPath(AccountID) + "/" + ImgUrl.Substring(ImgUrl.LastIndexOf('\\') + 1);
+            var imagePath = Common.GetAccountPath(AccountID) + "/" + ImgUrl.Substring(ImgUrl.LastIndexOf('/') + 1);
             ToolImage.SuperGetPicThumbnailJT(ImgUrl, HttpContext.Current.Server.MapPath(imagePath), 70, w, h, x1, y1, tw, th, System.Drawing.Drawing2D.SmoothingMode.HighQuality, System.Drawing.Drawing2D.CompositingQuality.HighQuality, System.Drawing.Drawing2D.InterpolationMode.High);
             if (File.Exists(imagePath))
             {

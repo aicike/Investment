@@ -34,7 +34,7 @@ namespace Entity
         public double MaxQuota { get; set; }
 
         /// <summary>
-        /// 备注
+        /// 办理指南
         /// </summary>
         public string Remark { get; set; }
 
@@ -50,6 +50,12 @@ namespace Entity
         public int? MechanismID { get; set; }
         public virtual Mechanism Mechanism { get; set; }
 
+        /// <summary>
+        /// 产品网站
+        /// </summary>
+        [Display(Name = "产品网站")]
+        [RegularExpression(@"(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:/~\+#]*[\w\-\@?^=%&amp;/~\+#])?", ErrorMessage = "请输入正确的网址")]
+        public string WebSite { get; set; }
 
         
         //-------------子表----------------------------
