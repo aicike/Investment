@@ -39,25 +39,24 @@
 @model Entity.GroupAccount
 <div class="row-fluid">
     <div class="span6" style="width: 100%">
-        <div class="portlet box blue">
-            <div class="portlet-title">
-                <div class="caption">
-                    <i class="icon-cogs"></i>修改账号
+        @using (Ajax.BeginForm("Edit", "GroupAccount", new AjaxOptions() { UpdateTargetId = "alert" }, new { @class = "form-horizontal" }))
+        {
+            <div class="myoption">
+                <button class="btn blue" onclick="GetRoleAndPosition()" type="submit">
+                    保存</button>
+                <a href="@Url.Action("Index", "GroupAccount")" class="btn blue" style="">返回</a></div>
+            
+            <div class="portlet box blue">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="icon-cogs"></i>修改账号
+                    </div>
+                    <div class="tools">
+                    </div>
                 </div>
-                <div class="tools">
-                </div>
-            </div>
-            <div class="portlet-body">
-                @using (Ajax.BeginForm("Edit", "GroupAccount", new AjaxOptions() { UpdateTargetId = "alert" }, new { @class = "form-horizontal" }))
-                {
-                    <button class="btn blue" onclick="GetRoleAndPosition()" type="submit">
-                        保存</button>
-                    <a href="@Url.Action("Index", "GroupAccount")" class="btn blue" style="">返回</a><br />
-                    <br />
+                <div class="portlet-body">
                     <input type="hidden" name="Roles" id="Roles" />
                     <input type="hidden" name="Positions" id="Positions" />
-                    
-                    
                     <div class="control-group">
                         <label class="control-label">
                             登陆账号:</label>
@@ -122,8 +121,8 @@
                             }
                         </div>
                     </div>
-                }
+                </div>
             </div>
-        </div>
+        }
     </div>
 </div>

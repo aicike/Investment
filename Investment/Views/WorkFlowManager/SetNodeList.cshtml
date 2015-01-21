@@ -7,17 +7,15 @@
 @model Entity.WorkFlowManager
 <div class="row-fluid">
     <div class="span12" style="width: 100%">
-        <a href="@Url.Action("AddNode", "WorkFlowManager", new { WorkFlowID = Model.ID })" class="btn blue" style="">
-            添加节点</a> <a href="@Url.Action("Index", "WorkFlowManager")" class="btn blue" style="">
-                返回</a>
-        <br />
-        <br />
         <div class="portlet box blue">
             <div class="portlet-title">
                 <div class="caption">
                     <i class="icon-cogs"></i>@Model.Name-流程节点列表
                 </div>
                 <div class="tools">
+                    <a href="@Url.Action("AddNode", "WorkFlowManager", new { WorkFlowID = Model.ID })" style = "color:#FFF">
+                        <i class='icon-plus'></i>&nbsp;添加节点</a> <a href="@Url.Action("Index", "WorkFlowManager")" style = "color:#FFF">
+                            <i class="icon-share-alt"></i>&nbsp;返回</a>
                 </div>
             </div>
             <div class="portlet-body">
@@ -45,7 +43,7 @@
                             <td>
                                 @if (item.WorkFlowApprovalManager.ToList().Count <= 0)
                                 {
-                                    @:自审批 
+                                    @:自审批
                                 }
                                 else
                                 {
@@ -58,7 +56,7 @@
                                         else
                                         { 
                                     @item.WorkFlowApprovalManager.ToList()[i].GroupAccount.Name@:（@(item.WorkFlowApprovalManager.ToList()[i].Position.Name)）<br/>
-                                                                    }
+                                                                                                    }
                                     }
                                 }
                             </td>
@@ -66,10 +64,9 @@
                                 @item.Order
                             </td>
                             <td>
-                                <a href="@Url.Action("EditNode", "WorkFlowManager", new { WorkFlowID = item.WorkFlowManagerID,W_NID=item.ID })">
-                                    修改</a> 
-                                    @Ajax.ActionLink("删除", "Delete", "WorkFlowManager", new { workFlow_nodeID = item.ID, WorkFlowID = item.WorkFlowManagerID }, new AjaxOptions() { UpdateTargetId = "alert", OnBegin = "return AppDelete('确定删除?')" }, true)
-
+                                <a href="@Url.Action("EditNode", "WorkFlowManager", new { WorkFlowID = item.WorkFlowManagerID, W_NID = item.ID })">
+                                    修改</a>
+                                @Ajax.ActionLink("删除", "Delete", "WorkFlowManager", new { workFlow_nodeID = item.ID, WorkFlowID = item.WorkFlowManagerID }, new AjaxOptions() { UpdateTargetId = "alert", OnBegin = "return AppDelete('确定删除?')" }, true)
                             </td>
                         </tr>
                     }

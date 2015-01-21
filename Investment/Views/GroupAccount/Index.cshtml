@@ -7,20 +7,17 @@
 @model List<Entity.GroupAccount>
 <div class="row-fluid">
     <div class="span12" style="width: 100%">
-          @Html.ActionLink("新增账号", "Add", "GroupAccount", null, new { @class = "btn blue" }, true)
-
-<br />
-        <br />
         <div class="portlet box blue">
             <div class="portlet-title">
                 <div class="caption">
                     <i class="icon-cogs"></i>人员列表
                 </div>
                 <div class="tools">
+                    @Html.ActionLink("<i class='icon-plus'></i>&nbsp;新增账号", "Add", "GroupAccount", null, new { style = "color:#FFF" }, true).Html()
                 </div>
             </div>
             <div class="portlet-body">
-                <table class="table table-hover">
+                <table class="table table-bordered table-hover">
                     <tr>
                         <th>
                             头像
@@ -65,14 +62,14 @@
                                 {
                                     if (i == item.RoleAccounts.ToList().Count - 1)
                                     { 
-                                     @(item.RoleAccounts.ToList()[i].Role.RoleName)
+                                    @(item.RoleAccounts.ToList()[i].Role.RoleName)
                                     }
                                     else
                                     { 
-                                     @(item.RoleAccounts.ToList()[i].Role.RoleName)@:、
-                                    }
+                                    @(item.RoleAccounts.ToList()[i].Role.RoleName)@:、
+                                                                    }
                                 }
-                               @* @foreach (var Role in item.RoleAccounts.ToList())
+                                @* @foreach (var Role in item.RoleAccounts.ToList())
                                 {
                                     @(Role.Role.RoleName)@:、
                                 }*@
@@ -82,19 +79,19 @@
                                 {
                                     if (i == item.Position_Account.ToList().Count - 1)
                                     { 
-                                     @(item.Position_Account.ToList()[i].Position.Name)
+                                    @(item.Position_Account.ToList()[i].Position.Name)
                                     }
                                     else
                                     { 
-                                     @(item.Position_Account.ToList()[i].Position.Name)@:、
-                                    }
+                                    @(item.Position_Account.ToList()[i].Position.Name)@:、
+                                                                    }
                                 }
-                                  @*@foreach (var Position in item.Position_Account.ToList())
+                                @*@foreach (var Position in item.Position_Account.ToList())
                                   {
                                     @(Position.Position.Name)@:、
                                  }*@
                             </td>
-                            <td style="width:50px">
+                            <td style="width: 50px">
                                 @Html.ActionLink("修改", "Edit", "GroupAccount", new { GAID = item.ID }, null, true)
                                 @*@Ajax.ActionLink("删除", "Delete", "GroupAccount", new { GAID = item.ID }, new AjaxOptions() { UpdateTargetId = "alert", OnBegin = "return AppDelete('你确定要删除吗?','" + Url.Action("Delete", "GroupAccount", new { GAID = item.ID }) + "',null)" })*@
                             </td>

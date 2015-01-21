@@ -45,23 +45,23 @@
 @model List<Entity.Menu>
 <div class="row-fluid">
     <div class="span12">
-        <div class="portlet box blue">
-            <div class="portlet-title">
-                <div class="caption">
-                    <i class="icon-cogs"></i>分配权限
-                </div>
-                <div class="tools">
-                </div>
+        @using (Ajax.BeginForm("RoleMenu", "Role", new { }, new AjaxOptions() { UpdateTargetId = "alert" }))
+        {
+            <div class="myoption">
+                <button class="btn blue" type="submit">
+                    保存</button>
+                <a href="@Url.Action("Index", "Role")" class="btn blue" style="">返回</a>
             </div>
-            <div class="portlet-body">
-                @using (Ajax.BeginForm("RoleMenu", "Role", new { }, new AjaxOptions() { UpdateTargetId = "alert" }))
-                {
-                    <input  type="hidden" id="hidRoleID" name="hidRoleID" value="@ViewBag.Role.ID"/>
-                    <div style="margin-top: 10px; margin-bottom: 20px;">
-                        <button class="btn blue" type="submit">
-                            保存</button>
-                        <a href="@Url.Action("Index", "Role")" class="btn blue" style="">返回</a>
+            <div class="portlet box blue">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="icon-cogs"></i>分配权限
                     </div>
+                    <div class="tools">
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <input  type="hidden" id="hidRoleID" name="hidRoleID" value="@ViewBag.Role.ID"/>
                     <div>
                         <div id="browser" class="treeview_root">
                             @foreach (var menu in menus_group)
@@ -128,7 +128,6 @@
                                                             <label for="option_@option.ID" style="display: inline">@option.Name</label>
                                                         </li>
                                                     }
-
                                                     @foreach (var menu3 in subMenu.Menus)
                                                     {
                                                         if (menu3.IsShow.HasValue && menu3.IsShow.Value == false)
@@ -172,15 +171,15 @@
                                 </div>
                             }
                         </div>
-                       
                     </div>
-                    <div style="margin-top: 20px;">
-                        <button class="btn blue" type="submit">
-                            保存</button>
-                        <a href="@Url.Action("Index", "Role")" class="btn blue" style="">返回</a>
-                    </div>
-                }
+                </div>
+            </div> 
+            
+            <div class="myoption">
+                <button class="btn blue" type="submit">
+                    保存</button>
+                <a href="@Url.Action("Index", "Role")" class="btn blue" style="">返回</a>
             </div>
-        </div>
+        }
     </div>
 </div>

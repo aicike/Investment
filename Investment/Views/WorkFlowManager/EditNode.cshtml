@@ -143,22 +143,23 @@
 @model Entity.WorkFlow_Node
 <div class="row-fluid">
     <div class="span12" style="width: 100%">
-        <div class="portlet box blue">
-            <div class="portlet-title">
-                <div class="caption">
-                    <i class="icon-cogs"></i>@ViewBag.WorkFlowName-添加审批节点
-                </div>
-                <div class="tools">
-                </div>
+        @using (Ajax.BeginForm("EditNode", "WorkFlowManager", new AjaxOptions() { UpdateTargetId = "alert" }, new { @class = "disabled" }))
+        {
+            <div class="myoption">
+                <button class="btn blue" type="submit" onclick="return checkSub()">
+                    保存</button>
+                <a href="@Url.Action("SetNodeList", "WorkFlowManager", new { WorkFlowID = ViewBag.WorkFlowID })" class="btn blue" style="">
+                    返回</a>
             </div>
-            <div class="portlet-body ">
-                @using (Ajax.BeginForm("EditNode", "WorkFlowManager", new AjaxOptions() { UpdateTargetId = "alert" }, new { @class = "disabled" }))
-                {
-                    <button class="btn blue" type="submit" onclick="return checkSub()">
-                        保存</button>
-                    <a href="@Url.Action("SetNodeList", "WorkFlowManager", new { WorkFlowID = ViewBag.WorkFlowID })" class="btn blue" style="">
-                        返回</a><br />
-                    <br />
+            <div class="portlet box blue">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="icon-cogs"></i>@ViewBag.WorkFlowName-添加审批节点
+                    </div>
+                    <div class="tools">
+                    </div>
+                </div>
+                <div class="portlet-body ">
                     <input type="hidden" name="Roles" id="Roles" />
                     <table class="table table-hover" style="">
                         <tr>
@@ -192,11 +193,11 @@
                                 <input type="hidden" id="PositionIDs" name="PositionIDs" />
                                 @if (Model.WorkFlowNodeManager.IsSinceApproval)
                                 {
-                                    <input type="hidden" id="WorkFlowNodeISSince" name="WorkFlowNodeISSince" value="True"/>
+                                    <input type="hidden" id="WorkFlowNodeISSince" name="WorkFlowNodeISSince" value="True" />
                                 }
                                 else
                                 {
-                                    <input type="hidden" id="WorkFlowNodeISSince" name="WorkFlowNodeISSince"  value="False" />
+                                    <input type="hidden" id="WorkFlowNodeISSince" name="WorkFlowNodeISSince" value="False" />
                                 }
                             </td>
                             <td>@*@Html.ValidationMessageFor(a => a.Name)*@
@@ -244,14 +245,15 @@
                             </td>
                         </tr>
                     </table>
-                    <button class="btn blue" type="submit" onclick="return checkSub()">
-                        保存</button>
-                    <a href="@Url.Action("SetNodeList", "WorkFlowManager", new { WorkFlowID = ViewBag.WorkFlowID })" class="btn blue" style="">
-                        返回</a><br />
-                   
-                }
+                </div>
+            </div>                   
+            <div class="myoption">
+                <button class="btn blue" type="submit" onclick="return checkSub()">
+                    保存</button>
+                <a href="@Url.Action("SetNodeList", "WorkFlowManager", new { WorkFlowID = ViewBag.WorkFlowID })" class="btn blue" style="">
+                    返回</a>
             </div>
-        </div>
+        }
     </div>
 </div>
 <div class="portlet-body form">

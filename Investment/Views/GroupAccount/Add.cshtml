@@ -31,24 +31,24 @@
 @model Entity.GroupAccount
 <div class="row-fluid">
     <div class="span12" style="width: 100%">
-        <div class="portlet box blue">
-            <div class="portlet-title">
-                <div class="caption">
-                    <i class="icon-cogs"></i>新增人员账号
-                </div>
-                <div class="tools">
-                </div>
+        @using (Ajax.BeginForm("Add", "GroupAccount", new AjaxOptions() { UpdateTargetId = "alert" }, new { @class = "form-horizontal" }))
+        {
+            <div class="myoption">
+                <button class="btn blue" onclick="GetRoleAndPosition()" type="submit">
+                    添加</button>
+                <a href="@Url.Action("Index", "GroupAccount")" class="btn blue" style="">返回</a>
             </div>
-            <div class="portlet-body">
-                @using (Ajax.BeginForm("Add", "GroupAccount", new AjaxOptions() { UpdateTargetId = "alert" }, new { @class = "form-horizontal" }))
-                {
-                    <button class="btn blue" onclick="GetRoleAndPosition()" type="submit">
-                        添加</button>
-                    <a href="@Url.Action("Index", "GroupAccount")" class="btn blue" style="">返回</a><br />
-                    <br />
+            <div class="portlet box blue">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="icon-cogs"></i>新增人员账号
+                    </div>
+                    <div class="tools">
+                    </div>
+                </div>
+                <div class="portlet-body">
                     <input type="hidden" name="Roles" id="Roles" />
                     <input type="hidden" name="Positions" id="Positions" />
-                    
                     <div class="control-group">
                         <label class="control-label">
                             登陆账号:</label>
@@ -57,7 +57,7 @@
                             <span class="help-inline">@Html.ValidationMessageFor(a => a.AccountNumber)</span>
                         </div>
                     </div>
-                      <div class="control-group">
+                    <div class="control-group">
                         <label class="control-label">
                             姓名:</label>
                         <div class="controls">
@@ -65,7 +65,7 @@
                             <span class="help-inline">@Html.ValidationMessageFor(a => a.Name)</span>
                         </div>
                     </div>
-                      <div class="control-group">
+                    <div class="control-group">
                         <label class="control-label">
                             邮箱:</label>
                         <div class="controls">
@@ -73,7 +73,7 @@
                             <span class="help-inline">@Html.ValidationMessageFor(a => a.Email)</span>
                         </div>
                     </div>
-                      <div class="control-group">
+                    <div class="control-group">
                         <label class="control-label">
                             电话:</label>
                         <div class="controls">
@@ -81,40 +81,36 @@
                             <span class="help-inline">@Html.ValidationMessageFor(a => a.Phone)</span>
                         </div>
                     </div>
-                      <div class="control-group">
+                    <div class="control-group">
                         <label class="control-label">
                             角色:</label>
                         <div class="controls">
                             @foreach (var item in Role)
-                                {
-                                    <label class="checkbox line">
-                                        <input type="checkbox" value="@item.ID" name= "CK_Role" />
-                                        @item.RoleName
-                                    </label>
+                            {
+                                <label class="checkbox line">
+                                    <input type="checkbox" value="@item.ID" name= "CK_Role" />
+                                    @item.RoleName
+                                </label>
 
-                                }
+                            }
                         </div>
                     </div>
-                      <div class="control-group">
+                    <div class="control-group">
                         <label class="control-label">
                             职位:</label>
                         <div class="controls">
                             @foreach (var item in Position)
-                                {
-                                    <label class="checkbox line">
-                                        <input type="checkbox" value="@item.ID" name= "CK_Position" />
-                                        @item.Name
-                                    </label>
+                            {
+                                <label class="checkbox line">
+                                    <input type="checkbox" value="@item.ID" name= "CK_Position" />
+                                    @item.Name
+                                </label>
 
-                                }
+                            }
                         </div>
                     </div>
-                    
-                    
-         
-                   
-                }
+                </div>
             </div>
-        </div>
+        }
     </div>
 </div>

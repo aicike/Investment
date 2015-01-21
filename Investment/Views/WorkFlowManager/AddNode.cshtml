@@ -4,13 +4,11 @@
     var Nodes = ViewBag.Nodes as List<Entity.WorkFlowNodeManager>;
 }
 @section scripts
-{	
-
-    
-	<!-- END PAGE LEVEL PLUGINS -->
-	<!-- BEGIN PAGE LEVEL SCRIPTS -->
+{
+    <!-- END PAGE LEVEL PLUGINS -->
+    <!-- BEGIN PAGE LEVEL SCRIPTS -->
     <style>
-     
+        
     </style>
     <script>
         $(function () {
@@ -146,22 +144,23 @@
 @model Entity.WorkFlow_Node
 <div class="row-fluid">
     <div class="span12" style="width: 100%">
-        <div class="portlet box blue">
-            <div class="portlet-title">
-                <div class="caption">
-                    <i class="icon-cogs"></i>@ViewBag.WorkFlowName-添加审批节点
+        @using (Ajax.BeginForm("AddNode", "WorkFlowManager", new AjaxOptions() { UpdateTargetId = "alert" }, new { @class = "disabled" }))
+        {
+            <div class="myoption">
+                <button class="btn blue" type="submit" onclick="return checkSub()">
+                    添加</button>
+                <a href="@Url.Action("SetNodeList", "WorkFlowManager", new { WorkFlowID = ViewBag.WorkFlowID })" class="btn blue" style="">
+                    返回</a></div>
+            
+            <div class="portlet box blue">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="icon-cogs"></i>@ViewBag.WorkFlowName-添加审批节点
+                    </div>
+                    <div class="tools">
+                    </div>
                 </div>
-                <div class="tools">
-                </div>
-            </div>
-            <div class="portlet-body " >
-                @using (Ajax.BeginForm("AddNode", "WorkFlowManager", new AjaxOptions() { UpdateTargetId = "alert" }, new { @class = "disabled" }))
-                {
-                    <button class="btn blue" type="submit" onclick="return checkSub()">
-                        添加</button>
-                    <a href="@Url.Action("SetNodeList", "WorkFlowManager", new { WorkFlowID = ViewBag.WorkFlowID })" class="btn blue" style="">
-                        返回</a><br />
-                    <br />
+                <div class="portlet-body ">
                     <input type="hidden" name="Roles" id="Roles" />
                     <table class="table table-hover" style="">
                         <tr>
@@ -222,74 +221,75 @@
                             </td>
                         </tr>
                     </table>
-                    <button class="btn blue" type="submit" onclick="return checkSub()">
-                        添加</button>
-                    <a href="@Url.Action("SetNodeList", "WorkFlowManager", new { WorkFlowID = ViewBag.WorkFlowID })" class="btn blue" style="">
-                        返回</a><br />
-                   
-                }
+                </div>
             </div>
-        </div>
+            <div class="myoption">
+                <button class="btn blue" type="submit" onclick="return checkSub()">
+                    添加</button>
+                <a href="@Url.Action("SetNodeList", "WorkFlowManager", new { WorkFlowID = ViewBag.WorkFlowID })" class="btn blue" style="">
+                    返回</a>
+            </div>
+        }
     </div>
 </div>
 <div class="portlet">
-<div class="portlet-body form">
-    <div id="responsive" class="modal hide fade" tabindex="-1" data-width="970">
-        <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-            </button>
-            <h3>
-                人员查找</h3>
-        </div>
-        <div class="modal-body" style="min-height: 350px">
-            <div class="row-fluid">
-                <div class="span12">
-                    <div class="input-icon left">
-                        <i class="icon-search"></i>
-                        <input id="Sel_FZR" type="text" onkeyup="SelFZR()" class="span12 m-wrap" placeholder="人员姓名、职位" />
-                    </div>
-                    <table id="tab_Account" style="display: none" class="table table-hover">
-                        <tr>
-                            <th>
-                                姓名
-                            </th>
-                            <th>
-                                职位(当前节点所扮演的角色)
-                            </th>
-                            <th>
-                                操作
-                            </th>
-                        </tr>
-                        <tr>
-                            <td>
-                                pgmas斯蒂芬
-                            </td>
-                            <td>
-                                <select name="Sel_Pos" class="small m-wrap">
-                                    <option value="0">请选择</option>
-                                    <option value="1">法务</option>
-                                    <option value="2">财务间法务</option>
-                                </select>
-                            </td>
-                            <td>
-                                <a onclick="CheckFZR(this,1)" class="btn blue" style="">选择</a>
-                            </td>
-                        </tr>
-                    </table>
-                    <div id="div_isNull" style="font-size: 24px; color: Gray; text-align: center; width: 100%;
-                        margin-top: 100px; display: none">
-                        未查询到数据</div>
-                    <div id="div_ImgDD" style="font-size: 24px; color: Gray; text-align: center; width: 100%;
-                        margin-top: 100px; display: none">
-                        <img src="@Url.Content("/Image/DD.gif")" />
+    <div class="portlet-body form">
+        <div id="responsive" class="modal hide fade" tabindex="-1" data-width="970">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                </button>
+                <h3>
+                    人员查找</h3>
+            </div>
+            <div class="modal-body" style="min-height: 350px">
+                <div class="row-fluid">
+                    <div class="span12">
+                        <div class="input-icon left">
+                            <i class="icon-search"></i>
+                            <input id="Sel_FZR" type="text" onkeyup="SelFZR()" class="span12 m-wrap" placeholder="人员姓名、职位" />
+                        </div>
+                        <table id="tab_Account" style="display: none" class="table table-hover">
+                            <tr>
+                                <th>
+                                    姓名
+                                </th>
+                                <th>
+                                    职位(当前节点所扮演的角色)
+                                </th>
+                                <th>
+                                    操作
+                                </th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    pgmas斯蒂芬
+                                </td>
+                                <td>
+                                    <select name="Sel_Pos" class="small m-wrap">
+                                        <option value="0">请选择</option>
+                                        <option value="1">法务</option>
+                                        <option value="2">财务间法务</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <a onclick="CheckFZR(this,1)" class="btn blue" style="">选择</a>
+                                </td>
+                            </tr>
+                        </table>
+                        <div id="div_isNull" style="font-size: 24px; color: Gray; text-align: center; width: 100%;
+                            margin-top: 100px; display: none">
+                            未查询到数据</div>
+                        <div id="div_ImgDD" style="font-size: 24px; color: Gray; text-align: center; width: 100%;
+                            margin-top: 100px; display: none">
+                            <img src="@Url.Content("/Image/DD.gif")" />
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="modal-footer">
-            <button type="button" data-dismiss="modal" class="btn">
-                关闭</button>
+            <div class="modal-footer">
+                <button type="button" data-dismiss="modal" class="btn">
+                    关闭</button>
+            </div>
         </div>
     </div>
-</div>
 </div>

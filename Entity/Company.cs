@@ -42,6 +42,24 @@ namespace Entity
         public string Name { get; set; }
 
         /// <summary>
+        /// 公司网址
+        /// </summary>
+        [Display(Name = "公司网址")]
+        public string WebSite { get; set; }
+
+        /// <summary>
+        /// 公司电话
+        /// </summary>
+        [Display(Name = "公司电话")]
+        public string Phone { get; set; }
+
+        /// <summary>
+        /// 公司传真
+        /// </summary>
+        [Display(Name = "公司传真")]
+        public string Fax { get; set; }
+
+        /// <summary>
         /// 详细地址
         /// </summary>
         [Display(Name = "详细地址")]
