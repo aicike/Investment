@@ -100,10 +100,24 @@
                         <div class="controls">
                             @foreach (var item in Role)
                             {
-                                <label class="checkbox line">
-                                    <input type="checkbox" value="@item.ID" name= "CK_Role" />
-                                    @item.RoleName
-                                </label>
+                                if (RoleS.Contains(item.ID))
+                                    {
+                                    
+                                    <label class="checkbox line">
+                                        <input type="checkbox" value="@item.ID"  checked="checked" name= "CK_Role" />
+                                        @item.RoleName
+                                    </label>
+
+                                    }
+                                else
+                                {
+                                    <label class="checkbox line">
+                                        <input type="checkbox" value="@item.ID"  name= "CK_Role" />
+                                        @item.RoleName
+                                    </label>
+
+                                }
+
 
                             }
                         </div>
@@ -114,10 +128,20 @@
                         <div class="controls">
                             @foreach (var item in Position)
                             {
-                                <label class="checkbox line">
-                                    <input type="checkbox" value="@item.ID" name= "CK_Position" />
-                                    @item.Name
-                                </label>
+                                if (PositionS.Contains(item.ID))
+                                    {
+                                    <label class="checkbox line">
+                                        <input type="checkbox" value="@item.ID"   checked="checked"  name= "CK_Position" />
+                                        @item.Name
+                                    </label>
+                                    }
+                                else
+                                { 
+                                    <label class="checkbox line">
+                                        <input type="checkbox" value="@item.ID" name= "CK_Position" />
+                                        @item.Name
+                                    </label>
+                                }
 
                             }
                         </div>

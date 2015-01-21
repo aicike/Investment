@@ -46,10 +46,10 @@
                             最高贷款额度（万）
                         </th>
                         <th>
-                            备注
+                            状态
                         </th>
                         <th>
-                            状态
+                            操作
                         </th>
                     </tr>
                     @foreach (var item in Model)
@@ -69,9 +69,6 @@
                                 @item.MaxQuota
                             </td>
                             <td>
-                                @item.Remark
-                            </td>
-                            <td>
                                 @if (item.IsEnable)
                                 {
                                     @:正常
@@ -81,6 +78,9 @@
                                     <span style="color: Red">禁用</span>
                                    
                                 }
+                            </td>
+                            <td>
+                                <a href="@Url.Action("GetInfo", "MechanismProducts", new { MPID =item.ID})" target="_blank">查看详细</a>
                             </td>
                         </tr>
                     }

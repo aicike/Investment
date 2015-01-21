@@ -105,6 +105,27 @@ namespace Business
             return json;
         }
 
+        /// <summary>
+        /// 根据流程ID 存储产品快照
+        /// </summary>
+        /// <param name="WorkFlowID">流程ID</param>
+        /// <returns></returns>
+        public Result Get_To_Json_Product(int WorkFlowID)
+        {
+            Result result = new Result();
+            //获取流程中选择的机构
+            WorkFlowMechanismProductModel WFMPModel = new WorkFlowMechanismProductModel();
+            var wfmps = WFMPModel.GetInfo_ByWorkFlowID(WorkFlowID);
+            MechanismProductsModel mpModel = new MechanismProductsModel();
+            //生成快照
+            foreach (var item in wfmps)
+            {
+                var mp = mpModel.Get(item.MechanismProductsID);
+                item.FormJson = Newtonsoft.Json.JsonConvert.SerializeObject(mp);
+                WFMPModel.Edit(item);
+            }
+            return result;
+        }
 
         /// <summary>
         /// 提交申请
@@ -192,14 +213,17 @@ namespace Business
                     {
                         //更改流程状态
                         workflow.State = 2;//已完成
+                        //生成意向快照
+                        workflow.FormJson = Get_To_Json_Financing(WorkFlowID);
                         base.Edit(workflow);
+                        //生成产品快照
+                        Get_To_Json_Product(WorkFlowID);
                         //更改融资意向状态
                         FinancingModel FModel = new FinancingModel();
                         var financing = FModel.Get(workflow.FinancingID);
                         financing.Status = 2;
                         FModel.Edit(financing);
-                        //生成快照
-
+                        
                     }
                     else
                     {
@@ -232,7 +256,11 @@ namespace Business
                 var workflow = base.Get(WorkFlowID);
                 //更新流程状态
                 workflow.State = 3;
+                //生成意向快照
+                workflow.FormJson = Get_To_Json_Financing(WorkFlowID);
                 base.Edit(workflow);
+                //生成产品快照
+                Get_To_Json_Product(WorkFlowID);
                 //更新审批记录
                 ARModel.UPDApprovedInfo(WorkFlowID, GroupAccountID, Content,2);
                 //删除多余记录
@@ -242,9 +270,7 @@ namespace Business
                 var financing = FModel.Get(workflow.FinancingID);
                 financing.Status = 0;
                 FModel.Edit(financing);
-                //生成快照
                 
-
                 scope.Complete();
             }
             return result;

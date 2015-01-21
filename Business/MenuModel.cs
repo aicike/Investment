@@ -74,6 +74,7 @@ namespace Business
             var menu = roleMenuModel.List().Where(a => roleID.Contains(a.RoleID) &&
                                                        ((area != null && a.Menu.Area != null && a.Menu.Area.Equals(area, StringComparison.CurrentCultureIgnoreCase)) || (area == null && a.Menu.Area == null)) &&
                                                        (a.Menu.Controller != null && a.Menu.Controller.Equals(controller, StringComparison.CurrentCultureIgnoreCase))).Select(a => a.Menu).FirstOrDefault();
+            
 
             if (menu == null) { return false; }
 

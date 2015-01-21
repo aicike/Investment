@@ -1,0 +1,117 @@
+﻿@{
+    ViewBag.Title = Model.WorkFlow_Node.WorkFlowNodeManager.Name;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model Entity.WorkFlow
+@section scripts{
+    <script>
+
+        $(function () {
+            SetFC();
+            $("#_Title").hide();
+        });
+
+        function SetFC() {
+            var scrolltop = $(document).scrollTop();
+            var buttom = $(document).height() - $(window).height();
+            var mainwidth = $("#TabMain").width() - 12;
+            if ((buttom - scrolltop) <= 60) {
+                $("#div_FC").removeClass("Float_div");
+                $("#div_FC").addClass("Floaty_div");
+
+            }
+            else {
+                $("#div_FC").addClass("Float_div");
+                $("#div_FC").width(mainwidth + "px");
+                $("#div_FC").removeClass("Floaty_div");
+            }
+        }
+
+        window.onscroll = function () {
+            SetFC();
+        };
+        window.onresize = function () {
+            SetFC();
+        };
+    </script>
+    <style>
+        .Float_div
+        {
+            position: fixed;
+            bottom: 0;
+            margin-bottom: 10px;
+            background: url('/media/image/fancybox_overlay.png');
+            padding: 5px;
+        }
+        .Floaty_div
+        {
+            margin-bottom: 25px;
+            width: 100%;
+            padding: 5px;
+        }
+    </style>
+}
+<div class="row-fluid">
+    <div class="span12" style="margin-top: 50px;">
+        @{Html.RenderAction("RightOption", "WorkFlow_Form_Financing", new { workflowID =@Model.ID });}
+        <table id="TabMain" align="center" style="width: 100%; margin-bottom: 20px;">
+            <tr>
+                <td>
+                    <table style="width: 100%; line-height: 30px">
+                        <tr>
+                            <td colspan="2" align="center">
+                                <span style="font-weight: bold; font-size: 24px">@Model.Financing.WorkFlowManager.Name</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                申请日期：@Model.BeginDate.ToString("yyyy/MM/dd")
+                            </td>
+                            <td style="text-align: right">
+                                单号：@Model.Number
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @{Html.RenderAction("Index", "WorkFlow_Form_Financing", new { financingID = Model.financingID, workflowID = Model.ID });}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @{Html.RenderAction("MechanismProducts", "WorkFlow_Form_Financing", new { Products = "", WorkFlowID= Model.ID});}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @{Html.RenderAction("ApprovalRecord", "WorkFlow_Form_Financing", new { WorkFlowID = Model.ID });}
+                </td>
+            </tr>
+        </table>
+       @* <div id="div_FC" class="Float_div control-group">
+            <table align="center">
+                <tr>
+                    <td>
+                        <a href="@Url.Action("Index", "Mechanism")" class="btn blue" style="width:80px">返回</a>
+                    </td>
+                </tr>
+            </table>
+        </div>*@
+         <div id="div_FC" class="Float_div control-group">
+            <table align="center">
+                <tr>
+                    <td>
+                        <a class="btn green" style="width: 80px" data-toggle="modal" href="#responsive_approvalrecord1">
+                            同意</a> <a  href="#responsive_approvalrecord2" data-toggle="modal" class="btn blue" style="width:80px;margin-left:15px;">
+                                驳回</a> <a  href="#responsive_approvalrecord3" data-toggle="modal" class="btn red" style="width:80px;margin-left:15px;">
+                                    不同意</a> <a href="@Url.Action("Pending", "WorkFlow")" class="btn" style="width:80px;margin-left:15px;">
+                                        返回</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+

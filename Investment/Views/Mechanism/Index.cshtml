@@ -46,8 +46,7 @@
                                 }
                             </td>
                             <td>
-                                @Html.ActionLink("点击进入", "Index", "MechanismProducts", new { MID = item.ID }, null, true)
-                                <a href="@Url.Action("", "", new { MID = item.ID })"></a>
+                                @Html.ActionLink("点击进入", "Index", "MechanismProducts", new { MID = item.ID }, null)
                             </td>
                             <td>
                                 @Html.ActionLink("修改", "Edit", "Mechanism", new { id = item.ID }, null, true)

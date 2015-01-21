@@ -29,12 +29,9 @@
                             最高贷款额度（万）
                         </th>
                         <th>
-                            备注
-                        </th>
-                        <th>
                             状态
                         </th>
-                        <th style="width: 80px">
+                        <th style="">
                             操作
                         </th>
                     </tr>
@@ -55,9 +52,6 @@
                                 @item.MaxQuota
                             </td>
                             <td>
-                                @item.Remark
-                            </td>
-                            <td>
                                 @if (item.IsEnable)
                                 {
                                      @:正常
@@ -69,6 +63,7 @@
                                 }
                             </td>
                             <td>
+                               <a href="@Url.Action("GetInfo", "MechanismProducts", new { MPID =item.ID})" target="_blank">查看详细</a>
                             @Html.ActionLink("修改", "Edit", "MechanismProducts", new { MID = ViewBag.MID, MPID = item.ID }, null, true)
                             </td>
                         </tr>
