@@ -39,7 +39,7 @@
         <div class="tabbable tabbable-custom boxless">
             @using (Ajax.BeginForm("EditFinancing", "Company", new { page = ViewBag.Page }, new AjaxOptions() { UpdateTargetId = "alert" }, new { @class = "form-horizontal" }))
             {
-                <div style="margin-bottom: 20px;">
+                <div class="myoption">
                     <button type="submit" class="btn blue" id="btnSubmit">
                         保存</button>
                     <button type="button" class="btn" onclick="location.href='@ViewBag.BackUrl'">

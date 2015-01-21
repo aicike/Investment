@@ -11,21 +11,23 @@
         </div>
         @using (Html.BeginForm("Index", "Financing", new { id = 1 }))
         {
-            <table style="width: 100%; margin-top: 20px; margin-bottom: 20px;">
-                <tr>
-                    <td style="width: 100px;">
-                        项目名称
-                    </td>
-                    <td>
-                        <input type="text" class="span6" name="Name" id="Name" style="margin-bottom: 0px" />
-                    </td>
-                    <td style="width: 100px;">
-                        <input type="submit" value="查询" class="btn blue" />
-                    </td>
-                    <td>
-                    </td>
-                </tr>
-            </table>
+            <div class="myoption">
+                <table style="width: 100%;">
+                    <tr>
+                        <td style="width: 100px;">
+                            项目名称
+                        </td>
+                        <td>
+                            <input type="text" class="span6" name="Name" id="Name" style="margin-bottom: 0px" />
+                        </td>
+                        <td style="width: 100px;">
+                            <input type="submit" value="查询" class="btn blue" />
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                </table>
+            </div>
         }
         <div class="portlet box blue" style="margin-top: 10px;">
             <div class="portlet-title">
@@ -85,7 +87,7 @@
                                     @if (item.MaxTimeLimit != 0)
                                     {
                                         @:@item.MinTimeLimit + @item.MaxTimeLimit
-                                    }
+                                                                            }
                                     else
                                     {
                                         @item.MinTimeLimit
@@ -111,7 +113,7 @@
                                                 break;
                                         case 2:
                                         @:已完成
-                                                break;
+                                                                                    break;
                                     }
                                 </td>
                                 <td>

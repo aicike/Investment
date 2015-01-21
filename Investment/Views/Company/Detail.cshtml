@@ -15,7 +15,7 @@
         <div class="tabbable tabbable-custom boxless">
             @using (Ajax.BeginForm("Edit", "Company", new AjaxOptions() { UpdateTargetId = "alert" }, new { @class = "form-horizontal" }))
             {
-                <div style="margin-bottom: 20px;">
+                <div class="myoption">
                     <button type="button" class="btn" onclick="location.href='@Url.Action("Index", "Company")'">
                         返回</button>@Html.HiddenFor(a => a.ID)@Html.HiddenFor(a => a.OwnerID)
                 </div>
@@ -228,7 +228,7 @@
                                         <div class="controls">
                                             <div>
                                                 <span class="help-inline">
-                                                    @{Html.RenderAction("SingleManage", "Attachment", new Investment.Models.AttachmentControl { ID = "1",IsEnabled=false , Text = "[正面上传]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.FaRen1 });}
+                                                    @{Html.RenderAction("SingleManage", "Attachment", new Investment.Models.AttachmentControl { ID = "1", IsEnabled = false, Text = "[正面上传]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.FaRen1 });}
                                                 </span>
                                             </div>
                                             <div>

@@ -50,6 +50,11 @@ $(function () {
         }
         window.setTimeout(resetfun(), 3000);
     });
+
+    //处理内容页面最小高度问题
+    var windowHeight = document.body.scrollHeight;
+    var contentHeight = windowHeight - 80;
+    $(".page-content").css("min-height", contentHeight);
 });
 
 //处理双击问题

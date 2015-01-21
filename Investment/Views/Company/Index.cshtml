@@ -7,33 +7,33 @@
 @model PagedList<Entity.Company>
 <div class="row-fluid">
     <div class="span12">
-        <div>
-            @Html.ActionLink("新增客户", "Add", "Company", null, new { @class = "btn blue" }, true)
-        </div>
         @using (Html.BeginForm("Index", "Company", new { id = 1 }))
         {
-            <table style="width: 100%; margin-top: 20px; margin-bottom: 20px;">
-                <tr>
-                    <td style="width: 100px;">
-                        客户名称
-                    </td>
-                    <td>
-                        <input type="text" class="span6" name="Name" id="Name" style="margin-bottom: 0px" />
-                    </td>
-                    <td style="width: 100px;">
-                        <input type="submit" value="查询" class="btn blue" />
-                    </td>
-                    <td>
-                    </td>
-                </tr>
-            </table>
+            <div class="myoption">
+                <table style="width: 100%; ">
+                    <tr>
+                        <td style="width: 100px;">
+                            客户名称
+                        </td>
+                        <td>
+                            <input type="text" class="span6" name="Name" id="Name" style="margin-bottom: 0px" />
+                        </td>
+                        <td style="width: 100px;">
+                            <input type="submit" value="查询" class="btn blue" />
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                </table>
+            </div>
         }
-        <div class="portlet box blue" style="margin-top: 10px;">
+        <div class="portlet box blue">
             <div class="portlet-title">
                 <div class="caption">
-                    <i class="icon-cogs"></i>客户列表
+                    客户列表
                 </div>
                 <div class="tools">
+                    @Html.ActionLink("<i class='icon-plus'></i>&nbsp;新增客户", "Add", "Company", null, new { @class = "", style = "color:#FFF" }, true).Html()
                 </div>
             </div>
             <div class="portlet-body">
@@ -76,7 +76,7 @@
                                     else if (item.Status == 2)
                                     { 
                                         @:未通过
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                }
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            }
                                 </td>
                                 <td>
                                     @Html.ActionLink("详细", "Detail", "Company", new { id = item.ID }, null, true)

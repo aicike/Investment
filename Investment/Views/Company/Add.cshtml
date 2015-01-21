@@ -23,14 +23,14 @@
         <div class="tabbable tabbable-custom boxless">
             @using (Ajax.BeginForm("Add", "Company", new AjaxOptions() { UpdateTargetId = "alert" }, new { @class = "form-horizontal" }))
             {
-                <div style="margin-bottom: 20px;">
-                    <button type="submit" class="btn blue submitbtn">
-                        保存</button>
-                    <button type="button" class="btn" onclick="location.href='@ViewBag.BackUrl'">
-                        返回</button>
+                <div class="myoption">
+                    <div>
+                        <button type="submit" class="btn blue submitbtn">
+                            保存</button>
+                        <button type="button" class="btn" onclick="location.href='@ViewBag.BackUrl'">
+                            返回</button>
+                    </div>
                 </div>
-                
-                
                 <div class="tabbable tabbable-custom">
                     <ul class="nav nav-tabs">
                         <li class="active"><a href="#tab_1" id="link_1" data-toggle="tab">基本信息</a></li>

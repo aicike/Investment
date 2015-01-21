@@ -115,5 +115,14 @@ namespace System.Web.Mvc.Html
         }
 
         #endregion
+
+        #region Html编码
+        
+        public static IHtmlString Html(this MvcHtmlString str)
+        {
+            return new HtmlString(HttpUtility.HtmlDecode(str.ToString()));
+        }
+
+        #endregion
     }
 }
