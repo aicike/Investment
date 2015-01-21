@@ -26,23 +26,22 @@
 @model Entity.MechanismProducts
 <div class="row-fluid">
     <div class="span12" style="width: 100%">
-        <div class="portlet box blue">
-            <div class="portlet-title">
-                <div class="caption">
-                    <i class="icon-cogs"></i>@(ViewBag.MName)-添加产品
+        @using (Ajax.BeginForm("Add", "MechanismProducts", new AjaxOptions() { UpdateTargetId = "alert" }, new { @class = "form-horizontal" }))
+        {
+            <div class="myoption">
+                <button class="btn blue" type="submit">
+                    添加</button>
+                <a href="@Url.Action("Index", "MechanismProducts", new { MID = ViewBag.MID })" class="btn blue" style="">
+                    返回</a></div>
+            <div class="portlet box blue">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="icon-cogs"></i>@(ViewBag.MName)-添加产品
+                    </div>
+                    <div class="tools">
+                    </div>
                 </div>
-                <div class="tools">
-                </div>
-            </div>
-            <div class="portlet-body form">
-                @using (Ajax.BeginForm("Add", "MechanismProducts", new AjaxOptions() { UpdateTargetId = "alert" }, new { @class = "form-horizontal" }))
-                {
-                    <button class="btn blue"  type="submit">
-                        添加</button>
-                    <a href="@Url.Action("Index", "MechanismProducts", new { MID = ViewBag.MID })" class="btn blue" style="">
-                        返回</a><br />
-                    <br />
-                    
+                <div class="portlet-body form">
                     <div class="control-group">
                         <label class="control-label">
                             产品名称:</label>
@@ -56,7 +55,7 @@
                         <label class="control-label">
                             产品网址:</label>
                         <div class="controls">
-                            @Html.TextBoxFor(a => a.WebSite, new { @class = "span6 m-wrap" ,placeholder="例：http://www.xxx.com"})
+                            @Html.TextBoxFor(a => a.WebSite, new { @class = "span6 m-wrap", placeholder = "例：http://www.xxx.com" })
                             <span class="help-inline">@Html.ValidationMessageFor(a => a.WebSite)</span>
                         </div>
                     </div>
@@ -82,13 +81,11 @@
                         <label class="control-label">
                             办理指南:</label>
                         <div class="controls">
-                             <script type="text/plain" id="editor" height="300px" width="280px" name="Remark"></script>
+                            <script type="text/plain" id="editor" height="300px" width="280px" name="Remark"></script>
                         </div>
                     </div>
-
-                   
-                }
-            </div>
-        </div>
+                </div>
+            </div> 
+        }
     </div>
 </div>

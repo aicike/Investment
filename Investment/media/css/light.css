@@ -14,14 +14,14 @@ Page header
 .header .navbar-inner {
   filter: none !important;
   background-image: none !important;
-  background-color: #434343 !important;
+  background-color: #747f8c !important;
 }
 .header .btn-navbar {
-  background-color: #434343 !important;
+  background-color: #747f8c !important;
 }
 .header .nav .dropdown-toggle:hover,
 .header .nav .dropdown.open .dropdown-toggle {
-  background-color: #4f4f4f !important;
+  background-color: #8a949e !important;
 }
 .header .nav li.dropdown .dropdown-toggle i {
   color: #808080 !important;
@@ -80,7 +80,7 @@ ul.page-sidebar-menu > li.active i {
   display: none;
 }
 ul.page-sidebar-menu > li.active > a{
-  background: #28b779 !important;
+  background: #3fd5c0 !important;
   border-top-color: transparent !important;
   color:#fff !important;
 }  
@@ -222,7 +222,7 @@ Footer Layouts (new in v1.3)
 ***/
 /* begin:fixed footer */
 .page-footer-fixed .footer {
-  background-color: #434343;
+  background-color: #747f8c;
 }
 .page-footer-fixed .footer .footer-inner {
   color: #aaaaaa;
@@ -324,7 +324,7 @@ Landscape phone to portrait tablet
   }
   ul.page-sidebar-menu > li.active > a {
     color: #ffffff !important;
-    background-color: #28b779 !important;
+    background-color: #3fd5c0 !important;
   }
 
   ul.page-sidebar-menu ul.sub-menu > li > a {
@@ -361,7 +361,7 @@ Landscape phone to portrait tablet
   ***/
   
   .footer {
-    background-color: #434343;
+    background-color: #747f8c;
   }
 
   .footer .footer-inner {

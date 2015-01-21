@@ -3,15 +3,34 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @section scripts{
-<script>
-    $(function () {
-        $("#Name").val("@ViewBag.Name");
-    });
-</script>
+    <script>
+        $(function () {
+            $("#Name").val("@ViewBag.Name");
+        });
+    </script>
 }
 @model PagedList<Entity.MechanismProducts>
 <div class="row-fluid">
     <div class="span12" style="width: 100%">
+        @using (Html.BeginForm("selall", "MechanismProducts", new { id = 1 }, FormMethod.Get))
+        {
+            <div class="myoption">
+                <table style="width: 100%">
+                    <tr>
+                        <td width="100px">
+                            产品名称:
+                        </td>
+                        <td>
+                            <input type="text" id="Name" name="Name" class="span6"  style="margin-bottom: 0px"  />
+                        </td>
+                        <td>
+                            <input type="submit" value="查询" class="btn blue" />
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+        }
         <div class="portlet box blue">
             <div class="portlet-title">
                 <div class="caption">
@@ -21,22 +40,6 @@
                 </div>
             </div>
             <div class="portlet-body">
-                @using (Html.BeginForm("selall", "MechanismProducts", new { id = 1 }, FormMethod.Get))
-                {
-                    <table class="" style=" width:100%">
-                        <tr>
-                            <td width="150px">
-                                产品名称:
-                            </td>
-                            <td>
-                                <input type="text" id="Name" name="Name" class="span6" />
-                            </td>
-                            <td>
-                                <input type="submit" value="查询" class="btn blue" />
-                            </td>
-                        </tr>
-                    </table>
-                }
                 <table class="table table-bordered table-hover">
                     <tr>
                         <th>
@@ -58,7 +61,7 @@
                             <td>
                                 @if (string.IsNullOrEmpty(item.WebSite))
                                 { 
-                                    <span class="tooltips"  data-placement="top" data-original-title="暂无官网">@item.Name</span>
+                                    <span class="tooltips" data-placement="top" data-original-title="暂无官网">@item.Name</span>
                                 }
                                 else
                                 { 
@@ -80,7 +83,8 @@
                                 }
                             </td>
                             <td>
-                                <a href="@Url.Action("GetInfo", "MechanismProducts", new { MPID =item.ID})" target="_blank">查看详细</a>
+                                <a href="@Url.Action("GetInfo", "MechanismProducts", new { MPID = item.ID })" target="_blank">
+                                    查看详细</a>
                             </td>
                         </tr>
                     }
