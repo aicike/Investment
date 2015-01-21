@@ -1,23 +1,22 @@
 ﻿@{
-    ViewBag.Title = ViewBag.MName+"-机构产品管理";
+    ViewBag.Title = ViewBag.MName + "-机构产品管理";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @section scripts{
 }
 @model List<Entity.MechanismProducts>
-
 <div class="row-fluid">
     <div class="span12" style="width: 100%">
-    @Html.ActionLink("添加产品", "Add", "MechanismProducts", new { MID = ViewBag.MID }, new { @class = "btn blue" }, true)
-          <a href="@Url.Action("Index", "Mechanism")" class="btn blue" >返回</a><br />
-        <br />
+        <div class="myoption">
+            <a href="@Url.Action("Index", "Mechanism")" class="btn blue" >返回</a></div>
         <div class="portlet box blue">
             <div class="portlet-title">
                 <div class="caption">
                     <i class="icon-cogs"></i>@(ViewBag.MName)-机构产品列表
                 </div>
-                <div class="tools">
-                </div>
+               <div class="tools">
+                    @Html.ActionLink("<i class='icon-plus'></i>&nbsp;添加产品", "Add", "MechanismProducts", new { MID = ViewBag.MID }, new { style = "color:#FFF" }, true).Html()
+                  </div>
             </div>
             <div class="portlet-body">
                 <table class="table table-bordered table-hover">
@@ -29,12 +28,9 @@
                             最高贷款额度（万）
                         </th>
                         <th>
-                            备注
-                        </th>
-                        <th>
                             状态
                         </th>
-                        <th style="width: 80px">
+                        <th style="">
                             操作
                         </th>
                     </tr>
@@ -42,9 +38,9 @@
                     {
                         <tr>
                             <td>
-                            @if (string.IsNullOrEmpty(item.WebSite))
+                                @if (string.IsNullOrEmpty(item.WebSite))
                                 { 
-                                    <span  class="tooltips" data-placement="top" data-original-title="暂无官网">@item.Name</span>
+                                    <span class="tooltips" data-placement="top" data-original-title="暂无官网">@item.Name</span>
                                 }
                                 else
                                 { 
@@ -55,21 +51,20 @@
                                 @item.MaxQuota
                             </td>
                             <td>
-                                @item.Remark
-                            </td>
-                            <td>
                                 @if (item.IsEnable)
                                 {
-                                     @:正常
+                                    @:正常
                                 }
                                 else
                                 { 
-                                <span style=" color:Red">禁用</span>
+                                    <span style="color: Red">禁用</span>
                                    
                                 }
                             </td>
                             <td>
-                            @Html.ActionLink("修改", "Edit", "MechanismProducts", new { MID = ViewBag.MID, MPID = item.ID }, null, true)
+                                <a href="@Url.Action("GetInfo", "MechanismProducts", new { MPID = item.ID })" target="_blank">
+                                    查看详细</a>
+                                @Html.ActionLink("修改", "Edit", "MechanismProducts", new { MID = ViewBag.MID, MPID = item.ID }, null, true)
                             </td>
                         </tr>
                     }
@@ -78,4 +73,3 @@
         </div>
     </div>
 </div>
-

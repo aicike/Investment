@@ -60,10 +60,14 @@
                     {
                         <tr>
                             <td style="text-align: center; vertical-align: inherit">
-                                @item.FName
+                                  <a href="@Url.Action("Detail", "Financing", new { id = item.FID })"  target="_blank" class="tooltips" data-placement="top" data-original-title="点击查看融资意向详细">
+                                    @item.FName
+                                    </a>
                             </td>
                             <td>
+                                <a href="@Url.Action("GetInfo", "MechanismProducts", new { MPID =item.MID})"  target="_blank" class="tooltips" data-placement="top" data-original-title="点击查看产品详细">
                                 @item.MName
+                                </a>
                             </td>
                             <td style="text-align: center; vertical-align: inherit">
                                 <a href="@Url.Action("Preview", "WorkFlowApproval", new { financingID = item.FID })">

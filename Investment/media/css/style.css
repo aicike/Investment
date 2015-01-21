@@ -69,7 +69,7 @@ General backgrounds
 ***/
 .bg-blue {
   background-image: none !important;
-  background-color: #4b8df8 !important;
+  background-color: #4b77be !important;
 }
 
 .bg-red {
@@ -1366,7 +1366,7 @@ Portlets
 }
 
 .portlet-body.blue, .portlet.blue {
-  background-color: #4b8df8 !important;
+  background-color: #4b77be !important;
 }
 
 .portlet-body.red, .portlet.red {
@@ -1540,11 +1540,11 @@ Box portlet
 }
 
 .portlet.box.blue .portlet-title {
-  background-color: #4b8df8;
+  background-color: #4b77be;
 } 
 
 .portlet.box.blue {  
-   border: 1px solid #b4cef8;
+   border: 1px solid #7093cc;
    border-top: 0;
 }
 
@@ -3892,7 +3892,7 @@ Daterangepicker plugin css changes
 }
 
 .daterangepicker td.active {
-  background-color: #4b8df8 !important;
+  background-color: #4b77be !important;
   background-image: none !important;
   filter:none !important;
 }
@@ -4584,7 +4584,7 @@ jQuery UI Dialogs(new in v1.2.4)
 /*dialog title bg colors*/
 .ui-dialog.ui-dialog-blue .ui-dialog-titlebar {
   color: #fff !important;
-  background-color: #4b8df8 !important;
+  background-color: #4b77be !important;
 }
 
 .ui-dialog.ui-dialog-blue .ui-dialog-titlebar-close {
@@ -5197,7 +5197,7 @@ Bootstrap Datetimepickers Restyle(in v1.2.4)
 
 .datetimepicker table .active {
   background-image: none !important;
-  background-color: #4b8df8 !important;
+  background-color: #4b77be !important;
   filter: none !important;
 }
 
@@ -5220,7 +5220,7 @@ Bootstrap Datepickers Restyle(in v1.2.4)
 
 .datepicker table .active {
   background-image: none !important;
-  background-color: #4b8df8 !important;
+  background-color: #4b77be !important;
   filter: none !important;
 }
 

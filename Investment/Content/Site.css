@@ -37,6 +37,6 @@ input[type="checkbox"].input-validation-error
 {
     margin-bottom: 10px;
     padding: 10px;
-    border: 1px solid #bce8f1;
-    background-color: #d9edf7;
+    border: 1px solid #d6e9c6;
+    background-color: #eef7ea;
 }

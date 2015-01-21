@@ -1,64 +1,59 @@
 ﻿@{
-    ViewBag.Title =ViewBag.MName+"-修改产品";
+    ViewBag.Title = ViewBag.MName + "-修改产品";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @section scripts{
-<script src="@Url.Content("/Scripts/ueditor/ueditor.config.js")" type="text/javascript"></script>
+    <script src="@Url.Content("/Scripts/ueditor/ueditor.config.js")" type="text/javascript"></script>
     <script src="@Url.Content("/Scripts/ueditor/ueditor.all.js")" type="text/javascript"></script>
-<script>
-    $(function () {
-        var IsEnable = "@Model.IsEnable";
-        $("#IsEnable").val(IsEnable);
+    <script>
+        $(function () {
+            var IsEnable = "@Model.IsEnable";
+            $("#IsEnable").val(IsEnable);
 
-        var ue;
+            var ue;
 
-        window.UEDITOR_HOME_URL = "/Scripts/ueditor/";
-        //实例化编辑器
-        var options = {
-            initialFrameWidth: '99%',
-            initialFrameHeight: 280,
-            imageUrl: UEDITOR_HOME_URL + "net/imageUp.ashx",
-            imagePath: "",
-            imageManagerPath: "",
-            initialContent: ""
-        };
-        ue = UE.getEditor('editor', options);
-    });
-</script>
+            window.UEDITOR_HOME_URL = "/Scripts/ueditor/";
+            //实例化编辑器
+            var options = {
+                initialFrameWidth: '99%',
+                initialFrameHeight: 280,
+                imageUrl: UEDITOR_HOME_URL + "net/imageUp.ashx",
+                imagePath: "",
+                imageManagerPath: "",
+                initialContent: ""
+            };
+            ue = UE.getEditor('editor', options);
+        });
+    </script>
 }
 @model Entity.MechanismProducts
 <div class="row-fluid">
     <div class="span12" style="width: 100%">
-
-        <div class="portlet box blue">
-
-            <div class="portlet-title">
-
-                <div class="caption">
-                    <i class="icon-cogs"></i>@(ViewBag.MName)-修改产品
-                </div>
-                <div class="tools">
-                </div>
+        @using (Ajax.BeginForm("Edit", "MechanismProducts", new AjaxOptions() { UpdateTargetId = "alert" }, new { @class = "form-horizontal" }))
+        {
+            <div class="myoption">
+                <button class="btn blue" onclick="GetRole()" type="submit">
+                    保存</button>
+                <a href="@Url.Action("Index", "MechanismProducts", new { MID = ViewBag.MID })" class="btn blue" style="">
+                    返回</a>
             </div>
-            
-                    
-            <div class="portlet-body form">
-                @using (Ajax.BeginForm("Edit", "MechanismProducts", new AjaxOptions() { UpdateTargetId = "alert" }, new { @class = "form-horizontal" }))
-                {
-                        <button class="btn blue" onclick="GetRole()" type="submit">
-                        保存</button>
-                    <a href="@Url.Action("Index", "MechanismProducts", new { MID = ViewBag.MID })" class="btn blue" style="">
-                        返回</a><br />
-                    <br />
-                    
+            <div class="portlet box blue">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="icon-cogs"></i>@(ViewBag.MName)-修改产品
+                    </div>
+                    <div class="tools">
+                    </div>
+                </div>
+                <div class="portlet-body form">
                     <div class="control-group">
                         <label class="control-label">
                             产品名称:</label>
                         <div class="controls">
-                           @Html.TextBoxFor(a => a.Name, new { @class = "span6 m-wrap" })
-                           @Html.HiddenFor(a => a.ID)
-                           @Html.HiddenFor(a => a.MechanismID)
-                           @Html.HiddenFor(a => a.MechanismName)
+                            @Html.TextBoxFor(a => a.Name, new { @class = "span6 m-wrap" })
+                            @Html.HiddenFor(a => a.ID)
+                            @Html.HiddenFor(a => a.MechanismID)
+                            @Html.HiddenFor(a => a.MechanismName)
                             <span class="help-inline">@Html.ValidationMessageFor(a => a.Name)</span>
                         </div>
                     </div>
@@ -66,7 +61,7 @@
                         <label class="control-label">
                             产品网址:</label>
                         <div class="controls">
-                           @Html.TextBoxFor(a => a.WebSite, new { @class = "span6 m-wrap", placeholder = "例：http://www.xxx.com" })
+                            @Html.TextBoxFor(a => a.WebSite, new { @class = "span6 m-wrap", placeholder = "例：http://www.xxx.com" })
                             <span class="help-inline">@Html.ValidationMessageFor(a => a.WebSite)</span>
                         </div>
                     </div>
@@ -74,7 +69,7 @@
                         <label class="control-label">
                             最高贷款额度（万）:</label>
                         <div class="controls">
-                           @Html.TextBoxFor(a => a.MaxQuota, new { @class = "span6 m-wrap" })
+                            @Html.TextBoxFor(a => a.MaxQuota, new { @class = "span6 m-wrap" })
                             <span class="help-inline">@Html.ValidationMessageFor(a => a.MaxQuota)</span>
                         </div>
                     </div>
@@ -82,10 +77,10 @@
                         <label class="control-label">
                             是否启用:</label>
                         <div class="controls">
-                             <select id="IsEnable" name="IsEnable" class="small m-wrap">
-                                    <option value="True">启用</option>
-                                    <option value="False">禁用</option>
-                                </select>
+                            <select id="IsEnable" name="IsEnable" class="small m-wrap">
+                                <option value="True">启用</option>
+                                <option value="False">禁用</option>
+                            </select>
                         </div>
                     </div>
                     <div class="control-group">
@@ -95,10 +90,8 @@
                             <script type="text/plain" id="editor" height="300px" width="280px" name="Remark">@Html.Raw(Model.Remark)</script>
                         </div>
                     </div>
-
-                   
-                }
-            </div>
-        </div>
+                </div>
+            </div>    
+        }
     </div>
 </div>

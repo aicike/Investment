@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = Model.Name+"机构产品详细界面";
+    ViewBag.Title = Model.Name + "机构产品详细界面";
     Layout = "~/Views/Shared/_Layout_noMenu.cshtml";
     var mechanis = ViewBag.Mechanis as Entity.Mechanism;
 }
@@ -11,32 +11,101 @@
         });
     </script>
     <style>
+        *{
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+        }
+        .main{
+
+        background-color: #ffffff !important;
+         border:1px solid #aaaaaa; padding:10px; min-height:700px;box-shadow: 0px 0px 10px 8px #bebebe; margin-top:10px;margin-bottom:10px;
+        }
+        .page-content
+        {
+            background-color: #e7e8eb !important;
+        }
+
+        
+        .title
+        {
+            font-weight: bolder;
+            font-size: 2.0em;
+            height:30px
+        }
+
+        .depict
+        {
+            font-size: 0.75em;
+            line-height: 1.6em;
+            word-break: break-all;
+            word-wrap: break-word;
+            background-color: #ebebeb;
+            padding: 10px 10px 10px 10px;
+            margin-top:10px
+        }
+
+        .conter
+        {
+            
+            margin-top:10px;
+            margin-bottom: 10px;
+            padding-bottom:10px;
+            color: #000 !important;
+            line-height: 1.5 !important;
+            background: none !important;
+            text-shadow: none !important;
+        }
+
+        .image
+        {
+            padding: 10px 0px 5px 0px;
+        }
         img
         {
-             max-width:100%;  
-            }
+            max-width: 99%;
+        }
+
+         .conter p
+        {
+            margin: 0px !important;
+        }
+        .conter *
+        {
+            line-height: 1.5 !important;
+            @*background: none !important;
+            color: #000 !important;*@
+
+            text-shadow: none !important;
+            width: 100% !important;
+        }
     </style>
 }
-
 @model Entity.MechanismProducts
-<div class="row-fluid">
-    <div class="portlet box blue" style="border-top:1 !important">
-        <div class="portlet-body " style="min-height: 800px">
-            <table style="width: 100%; " class="">
-                <tr>
-                    <td colspan="6" align="center" style="font-size: 24px; font-weight: bold; text-align:center">
-                        @Model.Name
-                    </td>
-                </tr>
-                <tr>
-                    <td style=" ">
-                        所属机构：<a href="@mechanis.WebSite" class="tooltips" data-placement="top" data-original-title="点击查看官方网站"> @mechanis.Name </a>
-                    </td>
-                    <td style=" ">
-                        产品网站地址：@Model.WebSite
-                    </td>
-                </tr>
-            </table>
-        </div>
+<div class="main" style="">
+    <div class="title">@Model.Name</div>
+    <div class="depict">
+        所属机构：
+        @if (string.IsNullOrEmpty(mechanis.WebSite))
+        { 
+            <a  class="tooltips" data-placement="top" data-original-title="暂无网站地址">
+                @mechanis.Name </a> 
+        }
+        else
+        { 
+            <a href="@mechanis.WebSite" target="_blank" class="tooltips" data-placement="top" data-original-title="点击查看官方网站">
+                @mechanis.Name </a> 
+        }
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;产品网站地址：
+        @if (string.IsNullOrEmpty(Model.WebSite))
+        { 
+            @:暂无网站地址
+                        }
+        else
+        { 
+            <a href="@Model.WebSite"  target="_blank" >@Model.WebSite</a>
+        }
+    </div>
+    <div class="conter">
+        @Html.Raw(Model.Remark)
     </div>
 </div>

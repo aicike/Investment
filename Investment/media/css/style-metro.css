@@ -67,7 +67,7 @@ select:focus {
 
 .btn.green-stripe
 {
-	border-left: 3px solid #35aa47;
+	border-left: 3px solid #3a9893;
 }
 
 .btn.yellow-stripe {
@@ -78,7 +78,8 @@ select:focus {
 .btn.red {
   color: white;  
   text-shadow: none;	
-  background-color: #d84a38;
+  background-color: #f3565d;
+  border-color: #ec111b;
 }
 .btn.red:hover, 
 .btn.red:focus, 
@@ -86,7 +87,7 @@ select:focus {
 .btn.red.active,
 .btn.red[disabled], 
 .btn.red.disabled {    
-  background-color: #bb2413 !important;
+  background-color: #f03038 !important;
   color: #fff !important;
 }
 
@@ -102,15 +103,18 @@ select:focus {
 {
   color: white;  
   text-shadow: none;	
-  background-color: #4d90fe;
+  background-color: #428bca;
+border-color: #285e8e;
 }
 .btn.blue:hover, 
 .btn.blue:focus, 
 .btn.blue:active,
 .btn.blue.active,
 .btn.blue[disabled],
-.btn.blue.disabled {  
-  background-color: #0362fd !important;
+.btn.blue.disabled   
+{
+    background-color: #3276b1 !important;
+border-color: #2a6496;
   color: #fff !important;
 }
 
@@ -118,7 +122,8 @@ select:focus {
 .btn.green {
   color: white;
   text-shadow: none;	 
-  background-color: #35aa47;
+  background-color: #45b6af;
+  border-color: #307f7a;
 }
 .btn.green:hover, 
 .btn.green:focus, 
@@ -126,7 +131,7 @@ select:focus {
 .btn.green.active,
 .btn.green.disabled, 
 .btn.green[disabled]{ 
-  background-color: #1d943b !important;
+  background-color: #3a9893 !important;
   color: #fff !important;
 }
 

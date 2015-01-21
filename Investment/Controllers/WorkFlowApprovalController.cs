@@ -170,6 +170,16 @@ namespace Investment.Controllers
 
         #region 审批节点
 
+        #region 提交申请
+        public ActionResult TiJiaoShenQing(int WorkFlowID)
+        {
+            WorkFlowModel WFModel = new WorkFlowModel();
+            var item = WFModel.Get(WorkFlowID);
+            CheckGroupAccount(item);
+            return View(item);
+        }
+        #endregion
+
         #region 融资立项初审
 
         public ActionResult RongZiLiXiangChuShen(int WorkFlowID)
