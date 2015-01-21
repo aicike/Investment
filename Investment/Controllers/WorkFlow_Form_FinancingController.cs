@@ -98,6 +98,12 @@ namespace Investment.Controllers
         /// <returns></returns>
         public ActionResult CommitOpinion(int WorkFlowID)
         {
+            WorkFlowModel wfmodel = new WorkFlowModel();
+            var workFlow = wfmodel.Get(WorkFlowID);
+            var currentNode = workFlow.WorkFlow_Node;
+            WorkFlow_NodeModel wfnm = new WorkFlow_NodeModel();
+            var list = wfnm.GetWorkFlow_Node_WorkFlowNodeID(currentNode.ID);
+            ViewBag.WFM = list;
             return PartialView(WorkFlowID);
         }
 

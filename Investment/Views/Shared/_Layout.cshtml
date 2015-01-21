@@ -20,7 +20,7 @@
     <link href="@Url.Content("/media/css/style-metro.css")" rel="stylesheet" type="text/css" />
     <link href="@Url.Content("/media/css/style.css")" rel="stylesheet" type="text/css" />
     <link href="@Url.Content("/media/css/style-responsive.css")" rel="stylesheet" type="text/css" />
-    <link href="@Url.Content("/media/css/default.css")" rel="stylesheet" type="text/css" id="style_color" />
+    <link href="@Url.Content("/media/css/light.css")" rel="stylesheet" type="text/css" id="style_color" />
     <link href="@Url.Content("/media/css/uniform.default.css")" rel="stylesheet" type="text/css" />
     <!-- END GLOBAL MANDATORY STYLES -->
     <!-- BEGIN PAGE LEVEL STYLES -->
@@ -213,28 +213,16 @@
                 <!-- BEGIN PAGE HEADER-->
                 <div class="row-fluid" id="_Title">
                     <div class="span12">
-                        <!-- BEGIN STYLE CUSTOMIZER -->
-                        <!-- END BEGIN STYLE CUSTOMIZER -->
-                        <!-- BEGIN PAGE TITLE & BREADCRUMB-->
-                        <h3 class="page-title">
-                            @ViewBag.Title
-                        </h3>
                         <ul class="breadcrumb">
                             <li><i class="icon-home"></i><a href="@Url.Action("index", "Home")">首页</a> <i class="icon-angle-right">
                             </i></li>
                             <li>@ViewBag.Title</li>
                         </ul>
-                        <!-- END PAGE TITLE & BREADCRUMB-->
                     </div>
                 </div>
-                <!-- END PAGE HEADER-->
-                <!-- BEGIN PAGE CONTENT-->
                 @RenderBody()
-                <!-- END PAGE CONTENT-->
             </div>
-            <!-- END PAGE CONTAINER-->
         </div>
-        <!-- END PAGE -->
     </div>
     <div class="footer">
         <div class="footer-inner">

@@ -8,30 +8,25 @@
 @model PagedList<Entity.Financing>
 <div class="row-fluid">
     <div class="span12">
-        <div>
-            @if (ViewBag.LoginUesrID == company.OwnerID)
-            {
-            @Html.ActionLink("新增融资信息", "AddFinancing", "Company", new { companyID = company.ID, page = ViewBag.Page }, new { @class = "btn blue" }, true)
-            }
-            @Html.ActionLink("返回", "Index", "Company", new { id = ViewBag.Page }, new { @class = "btn blue" })
-        </div>
         @using (Html.BeginForm("Financing", "Company", new { id = 1, companyID = company.ID, page = ViewBag.Page }))
         {
-            <table style="width: 100%; margin-top: 20px; margin-bottom: 20px;">
-                <tr>
-                    <td style="width: 100px;">
-                        项目名称
-                    </td>
-                    <td>
-                        <input type="text" class="span6" name="Name" id="Name" style="margin-bottom: 0px" />
-                    </td>
-                    <td style="width: 100px;">
-                        <input type="submit" value="查询" class="btn blue" />
-                    </td>
-                    <td>
-                    </td>
-                </tr>
-            </table>
+            <div class="myoption">
+                <table style="width: 100%;">
+                    <tr>
+                        <td style="width: 100px;">
+                            项目名称
+                        </td>
+                        <td>
+                            <input type="text" class="span6" name="Name" id="Name" style="margin-bottom: 0px" />
+                        </td>
+                        <td style="width: 100px;">
+                            <input type="submit" value="查询" class="btn blue" />
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                </table>
+            </div>
         }
         <div class="portlet box blue" style="margin-top: 10px;">
             <div class="portlet-title">
@@ -39,6 +34,11 @@
                     <i class="icon-cogs"></i>@company.Name - 融资信息列表
                 </div>
                 <div class="tools">
+                    @if (ViewBag.LoginUesrID == company.OwnerID)
+                    {
+                        @Html.ActionLink("<i class='icon-plus'></i>&nbsp;新增融资信息", "AddFinancing", "Company", new { companyID = company.ID, page = ViewBag.Page }, new { style = "color:#FFF" }, true).Html()
+                    }
+                    @Html.ActionLink("<i class='icon-share-alt'></i>&nbsp;返回", "Index", "Company", new { id = ViewBag.Page }, new { style = "color:#FFF" }).Html()
                 </div>
             </div>
             <div class="portlet-body">
@@ -76,7 +76,7 @@
                                     @if (item.MaxTimeLimit != 0)
                                     {
                                         @:@item.MinTimeLimit + @item.MaxTimeLimit
-                                    }
+                                                                                                                    }
                                     else
                                     {
                                         @item.MinTimeLimit
@@ -90,7 +90,7 @@
                                     @if (ViewBag.LoginUesrID == item.Owner_A_ID)
                                     { 
                                         @Html.ActionLink("修改", "EditFinancing", "Company", new { id = item.ID, companyID = company.ID, page = ViewBag.Page }, null, true)@:
-                                        @Ajax.ActionLink("删除", "DeleteFinancing", "Company", new { id = item.ID,companyID = company.ID, page = ViewBag.Page }, new AjaxOptions() { UpdateTargetId = "alert", OnBegin = "return AppDelete('确定删除?删除此项将会删除其关联的所有数据！')" }, true)
+                                        @Ajax.ActionLink("删除", "DeleteFinancing", "Company", new { id = item.ID, companyID = company.ID, page = ViewBag.Page }, new AjaxOptions() { UpdateTargetId = "alert", OnBegin = "return AppDelete('确定删除?删除此项将会删除其关联的所有数据！')" }, true)
                                     }
                                 </td>
                             </tr>

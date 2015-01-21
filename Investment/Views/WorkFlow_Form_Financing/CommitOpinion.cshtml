@@ -1,10 +1,11 @@
 ﻿@{
     ViewBag.Title = "";
     Layout = null;
+    var wfm = ViewBag.WFM as List<Entity.WorkFlow_Node>;
 }
 @model int
 <script>
-    CommitOpinion_WorkFlowID='@Model';
+    CommitOpinion_WorkFlowID = '@Model';
 </script>
 @{Html.AddJavaScript(Url.Content("/Scripts/CommitOpinion.js"));}
 <div id="responsive_approvalrecord1" class="modal hide fade" tabindex="-1" data-width="800">
@@ -22,7 +23,7 @@
         </div>
     </div>
     <div class="modal-footer">
-        <button type="button" data-dismiss="modal" class="btn blue btnCommitOpinion" commit="@Url.Action("Agree", "WorkFlowApproval")">
+        <button type="button" data-dismiss="modal" class="btn blue btnCommitOpinion" commit="@Url.Action("Agree", "WorkFlowApproval")" status="approvalrecord1">
             确定</button>
         <button type="button" data-dismiss="modal" class="btn">
             关闭</button>
@@ -38,12 +39,30 @@
     <div class="modal-body">
         <div class="row-fluid">
             <div class="span12" style="max-height: 600px; overflow-y: auto">
-                <textarea class="span12 m-wrap txtCommitOpinion" rows="7"></textarea>
+                <div class="controls">
+                    <span class="inline">驳回节点到：</span>
+                    <select class="inline m-wrap" id="select_return">
+                        @for (int i = 0; i < wfm.Count; i++)
+                        {
+                            if (i == 0)
+                            { 
+                            <option value="@wfm[i].ID">上一节点：@wfm[i].WorkFlowNodeManager.Name</option>
+                            }
+                            else
+                            { 
+                            <option value="@wfm[i].ID">更早节点：@wfm[i].WorkFlowNodeManager.Name</option>    
+                            }
+                        }
+                    </select>
+                </div>
+                <div class="controls">
+                    <textarea class="span12 m-wrap txtCommitOpinion" rows="7"></textarea>
+                </div>
             </div>
         </div>
     </div>
     <div class="modal-footer">
-        <button type="button" data-dismiss="modal"  class="btn blue btnCommitOpinion" commit="@Url.Action("Reject", "WorkFlowApproval")">
+        <button type="button" data-dismiss="modal"  class="btn blue btnCommitOpinion" commit="@Url.Action("Reject", "WorkFlowApproval")" status="approvalrecord2">
             确定</button>
         <button type="button" data-dismiss="modal" class="btn">
             关闭</button>
@@ -64,7 +83,7 @@
         </div>
     </div>
     <div class="modal-footer">
-        <button type="button" data-dismiss="modal" class="btn blue btnCommitOpinion" commit="@Url.Action("Disagree", "WorkFlowApproval")">
+        <button type="button" data-dismiss="modal" class="btn blue btnCommitOpinion" commit="@Url.Action("Disagree", "WorkFlowApproval")" status="approvalrecord3">
             确定</button>
         <button type="button" data-dismiss="modal" class="btn">
             关闭</button>

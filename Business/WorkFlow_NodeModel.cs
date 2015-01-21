@@ -14,11 +14,24 @@ namespace Business
         /// <summary>
         /// 获取流程的所有节点
         /// </summary>
-        /// <param name="WorkFlowID"></param>
+        /// <param name="WorkFlowManagerID"></param>
         /// <returns></returns>
-        public List<WorkFlow_Node> GetWorkFlow_Node(int WorkFlowID)
+        public List<WorkFlow_Node> GetWorkFlow_Node(int WorkFlowManagerID)
         {
-            var list = List().Where(a => a.WorkFlowManagerID == WorkFlowID).ToList();
+            var list = List().Where(a => a.WorkFlowManagerID == WorkFlowManagerID).ToList();
+            return list;
+        }
+
+
+        /// <summary>
+        /// 根据WorkFlowNodeID获取以往节点
+        /// </summary>
+        /// <param name="WorkFlowNodeID"></param>
+        /// <returns></returns>
+        public List<WorkFlow_Node> GetWorkFlow_Node_WorkFlowNodeID(int WorkFlowNodeID)
+        {
+            var current= List().Where(a => a.ID == WorkFlowNodeID).FirstOrDefault();
+            var list = List().Where(a => a.WorkFlowManagerID == current.WorkFlowManager.ID && a.Order < current.Order).ToList();
             return list;
         }
 

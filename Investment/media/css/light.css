@@ -72,7 +72,6 @@ ul.page-sidebar-menu > li.active > a .selected {
   top:0px;
   width: 7px;
   height: 39px;
-  background-image: url("../../img/sidebar-menu-arrow-green.png");
 }  
 ul.page-sidebar-menu > li.active i {
   color: #fff !important;
@@ -151,7 +150,7 @@ ul.page-sidebar-menu ul.sub-menu > li > a i {
 Sidebar toggler
 ***/
 .sidebar-toggler {  
-  background-image: url(../../img/sidebar-toggler-light.jpg);
+  background-image: url(../image/sidebar-toggler.jpg);
   background-color: #333;
 }
 /* search box bg color on expanded */

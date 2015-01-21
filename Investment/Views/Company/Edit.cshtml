@@ -15,10 +15,10 @@
         <div class="tabbable tabbable-custom boxless">
             @using (Ajax.BeginForm("Edit", "Company", new AjaxOptions() { UpdateTargetId = "alert" }, new { @class = "form-horizontal" }))
             {
-                <div style="margin-bottom: 20px;">
+                <div class="myoption">
                     <button type="submit" class="btn blue">
                         保存</button>
-                   @* @if (Model.Status == 0)
+                    @* @if (Model.Status == 0)
                     { 
                         @Ajax.ActionLink("审核通过", "ChangeStatus", "Company", new { id = Model.ID, status = 1 }, new AjaxOptions { UpdateTargetId = "alert" }, new { @class = "btn red" }, true, false)@:
                         @Ajax.ActionLink("审核不通过", "ChangeStatus", "Company", new { id = Model.ID, status = 2 }, new AjaxOptions { UpdateTargetId = "alert" }, new { @class = "btn red" }, true, false)
@@ -370,7 +370,7 @@
                                         <div class="controls">
                                             <div>
                                                 <span class="help-inline">
-                                                    @{Html.RenderAction("SingleManage", "Attachment", new Investment.Models.AttachmentControl { ID = "16", Text = "[上传]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.GaoGuanJianLi });}
+                                                    @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "16", Text = "附件管理", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.GaoGuanJianLi });}
                                                 </span>
                                             </div>
                                         </div>

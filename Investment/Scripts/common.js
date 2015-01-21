@@ -50,6 +50,11 @@ $(function () {
         }
         window.setTimeout(resetfun(), 3000);
     });
+
+    //处理内容页面最小高度问题
+    var windowHeight = document.body.scrollHeight;
+    var contentHeight = windowHeight - 80;
+    $(".page-content").css("min-height", contentHeight);
 });
 
 //处理双击问题
@@ -59,7 +64,7 @@ function close_modal_div() {
     $(".submitbtn").removeClass("disabled").removeAttr("disabled");
 }
 function open_modal_div() {
-    var submitDiv = $("<div class='modal-backdrop fade in submitDiv' style='z-index: 10049;'></div>");
+    var submitDiv = $("<div class='modal-backdrop fade in submitDiv' style='z-index: 10049;'><div style='top: 40%;position: absolute;width:100%'><div style='margin: 0px auto;width: 300px;width: 300px;text-align: center;color:#fff;font-size: 28px;font-weight: bolder;'>请&nbsp;&nbsp;稍&nbsp;&nbsp;等&nbsp;.&nbsp;.&nbsp;.</div></div></div>");
     $("body").append(submitDiv);
     $(".submitbtn").addClass("disabled").attr("disabled", "disabled");
 }

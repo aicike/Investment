@@ -7,15 +7,13 @@
 @model List<Entity.Mechanism>
 <div class="row-fluid">
     <div class="span12" style="width: 100%">
-        @Html.ActionLink("添加机构", "Add", "Mechanism", null, new { @class = "btn blue" }, true)
-        <br />
-        <br />
         <div class="portlet box blue">
             <div class="portlet-title">
                 <div class="caption">
                     <i class="icon-cogs"></i>机构列表
                 </div>
                 <div class="tools">
+                    @Html.ActionLink("<i class='icon-plus'></i>&nbsp;添加机构", "Add", "Mechanism", null, new { style = "color:#FFF" }, true).Html()
                 </div>
             </div>
             <div class="portlet-body">
@@ -35,7 +33,6 @@
                     {
                         <tr>
                             <td>
-
                                 @if (string.IsNullOrEmpty(item.WebSite))
                                 { 
                                     <span class="tooltips" data-placement="top" data-original-title="暂无官网地址">@item.Name</span>
