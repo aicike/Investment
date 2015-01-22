@@ -18,7 +18,13 @@
     <div class="modal-body">
         <div class="row-fluid">
             <div class="span12" style="max-height: 600px; overflow-y: auto">
+            <div class="controls">
                 <textarea class="span12 m-wrap txtCommitOpinion" rows="7"></textarea>
+                </div>
+                
+                <div class="controls">
+                @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "1", Text = "附件管理", Table = Entity.SystemConst.TableName.ApprovalRecord, TableId = ViewBag.approvalRecordID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.ShenPiGuoChengFuJian });}
+                </div>
             </div>
         </div>
     </div>

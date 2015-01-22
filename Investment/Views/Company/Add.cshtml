@@ -58,6 +58,30 @@
                                     </div>
                                     <div class="control-group">
                                         <label class="control-label">
+                                            公司网址</label>
+                                        <div class="controls">
+                                            @Html.TextBoxFor(a => a.WebSite, new { @class = "m-wrap span6" })
+                                            <span class="help-inline">@Html.ValidationMessageFor(a => a.WebSite)</span>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">
+                                            公司电话</label>
+                                        <div class="controls">
+                                            @Html.TextBoxFor(a => a.Phone, new { @class = "m-wrap span6" })
+                                            <span class="help-inline">@Html.ValidationMessageFor(a => a.Phone)</span>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">
+                                            公司传真</label>
+                                        <div class="controls">
+                                            @Html.TextBoxFor(a => a.Fax, new { @class = "m-wrap span6" })
+                                            <span class="help-inline">@Html.ValidationMessageFor(a => a.Fax)</span>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">
                                             法定代表人</label>
                                         <div class="controls">
                                             @Html.TextBoxFor(a => a.FaDingDaiBiaoRen, new { @class = "span6 m-wrap" })

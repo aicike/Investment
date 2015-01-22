@@ -1132,7 +1132,6 @@
     <None Include="Views\WorkFlowApproval\QianShuXieYi.cshtml" />
     <None Include="Views\WorkFlowApproval\QueRenShouQuFeiYong.cshtml" />
     <Content Include="Views\WorkFlowApproval\SelInfoPath.cshtml" />
-    <Content Include="Views\WorkFlowApproval\TiJiaoShenQing.cshtml" />
     <None Include="Views\WorkFlowApproval\XieYiQueRen.cshtml" />
     <None Include="Views\WorkFlowApproval\DiaoChaFuDao.cshtml" />
     <None Include="Views\WorkFlowApproval\JiGouDuiJie.cshtml" />
@@ -1155,7 +1154,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>59413</DevelopmentServerPort>
+          <DevelopmentServerPort>59791</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

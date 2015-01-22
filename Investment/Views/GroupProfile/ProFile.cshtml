@@ -197,17 +197,17 @@
                             @using (Ajax.BeginForm("UPProFile", "GroupProfile", new AjaxOptions() { UpdateTargetId = "alert" }))
                             {
                                 <label class="control-label">
-                                    登陆账号</label>
+                                    登录账号</label>
                                 @Html.TextBoxFor(a => a.AccountNumber, new { @readonly = "readonly", @class = "m-wrap span8" })
                                 <label class="control-label">
                                     姓名</label>
-                                @Html.TextBoxFor(a => a.Name, new { @class = "m-wrap span8" })
+                                @Html.TextBoxFor(a => a.Name, new { @class = "m-wrap span8" })<span class="help-inline">@Html.ValidationMessageFor(a => a.Name)</span>
                                 <label class="control-label">
                                     手机号</label>
-                                @Html.TextBoxFor(a => a.Phone, new { @class = "m-wrap span8" })
+                                @Html.TextBoxFor(a => a.Phone, new { @class = "m-wrap span8" })<span class="help-inline">@Html.ValidationMessageFor(a => a.Phone)</span>
                                 <label class="control-label">
                                     邮箱</label>
-                                @Html.TextBoxFor(a => a.Email, new { @class = "m-wrap span8" })
+                                @Html.TextBoxFor(a => a.Email, new { @class = "m-wrap span8" })<span class="help-inline">@Html.ValidationMessageFor(a => a.Email)</span>
                                 @Html.HiddenFor(a => a.ID)
                                 @Html.HiddenFor(a => a.AccountPwd)
                                 @Html.HiddenFor(a => a.GroupID)

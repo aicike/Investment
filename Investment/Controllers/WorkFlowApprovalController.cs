@@ -55,7 +55,7 @@ namespace Investment.Controllers
                 var ispeding = WFModel.GetISCreatePending(financingID);
                 if (ispeding.HasError)
                 {
-                    return JavaScript("JMessage('" + ispeding.Error+ "',true)");
+                    return JavaScript("JMessage('" + ispeding.Error + "',true)");
                 }
                 //融资意向
                 FinancingModel FModel = new FinancingModel();
@@ -292,10 +292,20 @@ namespace Investment.Controllers
         /// 同意
         /// </summary>
         /// <returns></returns>
-        public ActionResult Agree(int WorkFlowID, string Opinion)
+        public ActionResult Agree(int WorkFlowID, string Opinion, string hid_attachment)
         {
             WorkFlowModel wfm = new WorkFlowModel();
-            var result= wfm.WorkFlow_Agree(WorkFlowID, LoginAccount.UserID, Opinion);
+            var workFlow = wfm.Get(WorkFlowID);
+            var result = wfm.WorkFlow_Agree(WorkFlowID, LoginAccount.UserID, Opinion);
+            if (result.HasError == false && string.IsNullOrEmpty(hid_attachment) == false)
+            {
+                var attachment = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Attachment>>(hid_attachment);
+                AttachmentModel attachmentModel = new AttachmentModel();
+                foreach (var item in attachment)
+                {
+                    attachmentModel.CopyAttachment_Company(workFlow.CompanyID, item, "/Approval" + WorkFlowID);
+                }
+            }
             return Json(result);
         }
 
@@ -303,7 +313,7 @@ namespace Investment.Controllers
         /// 不同意
         /// </summary>
         /// <returns></returns>
-        public ActionResult Disagree(int WorkFlowID, string Opinion)
+        public ActionResult Disagree(int WorkFlowID, string Opinion, string hid_attachment)
         {
             WorkFlowModel wfm = new WorkFlowModel();
             var result = wfm.WorkFlow_Disagree(WorkFlowID, LoginAccount.UserID, Opinion);
@@ -314,7 +324,7 @@ namespace Investment.Controllers
         /// 驳回
         /// </summary>
         /// <returns></returns>
-        public ActionResult Reject(int WorkFlowID, string Opinion,int Node)
+        public ActionResult Reject(int WorkFlowID, string Opinion, int Node)
         {
             WorkFlowModel wfm = new WorkFlowModel();
             var result = wfm.WorkFlow_Reject(WorkFlowID, LoginAccount.UserID, Node, Opinion);

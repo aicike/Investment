@@ -14,6 +14,8 @@ namespace Business
         /// 复制临时文件到正式文件夹中
         /// 目录关系为：主目录下包含
         /// -------Company(公司文件目录)
+        ///        -------Base（公司基本信息目录）
+        ///        -------Financing（融资信息文件目录）
         ///        -------Approval（审批文件目录）
         /// -------Organization(机构文件目录)
         /// </summary>
@@ -45,8 +47,6 @@ namespace Business
                 attachment.FilePath = path_Physics;
                 attachment.FileUrl = SystemConst.AttachmentUrl + path_Logic;
                 result = base.Add(attachment);
-
-
             }
             catch (Exception ex)
             {
@@ -54,6 +54,7 @@ namespace Business
             }
             return result;
         }
+
 
         /// <summary>
         /// 正式附件删除（目前只限制于公司基本资料的删除）

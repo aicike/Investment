@@ -81,93 +81,127 @@
                                             <input type="checkbox" id="menu_@menu.ID" name="checkboxMenu" value="@menu.ID"/>
                                         }
                                         <label for="menu_@menu.ID" style="display: inline">@menu.Name</label></span>
-                                    <ul id="ul1">
-                                        @foreach (var option in menu.MenuOptions)
-                                        {
-                                            <li><span style="font-size: 14px;" class="sp_title">
-                                                @if (currentRoleOptionList.Contains(option.ID))
-                                                {
-                                                    <input type="checkbox" id="option_@option.ID" name="checkboxOption" value="@option.ID" checked="checked"/>
-                                                }
-                                                else
-                                                {
-                                                    <input type="checkbox" id="option_@option.ID" name="checkboxOption" value="@option.ID"/>
-                                                }
-                                                <label for="option_@option.ID" style="display: inline">@option.Name</label>
-                                            </li>
-                                        }
-                                        @{var sumMenus = menu.Menus.OrderBy(a => a.Order);}
-                                        @foreach (var subMenu in sumMenus)
-                                        {
-                                            if (subMenu.IsShow.HasValue && subMenu.IsShow.Value == false)
+                                    @{var sumMenus = menu.Menus.OrderBy(a => a.Order);
+                                      bool hasUL = false;
+                                    }
+                                    @if (menu.MenuOptions.Count > 0 || sumMenus.Where(a=>a.IsShow.HasValue==false||a.IsShow.Value==true).Count() > 0)
+                                    {
+                                        hasUL = true;
+                                    }
+                                    @if (hasUL)
+                                    { 
+                                        @Html.Raw("<ul id='ul1'>")
+                                    }
+                                    @foreach (var option in menu.MenuOptions)
+                                    {
+                                        <li><span style="font-size: 14px;" class="sp_title">
+                                            @if (currentRoleOptionList.Contains(option.ID))
                                             {
-                                                continue;
+                                                <input type="checkbox" id="option_@option.ID" name="checkboxOption" value="@option.ID" checked="checked"/>
                                             }
-                                            <li><span style="font-size: 16px;" class="sp_title">
-                                                @if (currentRoleMenuList.Contains(subMenu.ID))
-                                                {
-                                                    <input type="checkbox" id="menu_@subMenu.ID" name="checkboxMenu" value="@subMenu.ID" checked="checked"/>
-                                                }
-                                                else
-                                                { 
-                                                    <input type="checkbox" id="menu_@subMenu.ID" name="checkboxMenu" value="@subMenu.ID"/>
-                                                }
-                                                <label for="menu_@subMenu.ID" style="display: inline">@subMenu.Name</label></span>
-                                                <ul>
-                                                    @foreach (var option in subMenu.MenuOptions)
+                                            else
+                                            {
+                                                <input type="checkbox" id="option_@option.ID" name="checkboxOption" value="@option.ID"/>
+                                            }
+                                            <label for="option_@option.ID" style="display: inline">@option.Name</label>
+                                        </li>
+                                    }
+                                    @foreach (var subMenu in sumMenus)
+                                    {
+                                        if (subMenu.IsShow.HasValue && subMenu.IsShow.Value == false)
+                                        {
+                                            continue;
+                                        }
+                                        <li><span style="font-size: 16px;" class="sp_title">
+                                            @if (currentRoleMenuList.Contains(subMenu.ID))
+                                            {
+                                                <input type="checkbox" id="menu_@subMenu.ID" name="checkboxMenu" value="@subMenu.ID" checked="checked"/>
+                                            }
+                                            else
+                                            { 
+                                                <input type="checkbox" id="menu_@subMenu.ID" name="checkboxMenu" value="@subMenu.ID"/>
+                                            }
+                                            <label for="menu_@subMenu.ID" style="display: inline">@subMenu.Name</label></span>
+                                            @{
+                                            bool hasUL2 = false;
+                                            }
+                                            @if (subMenu.MenuOptions.Count > 0 || subMenu.Menus.Where(a => a.IsShow.HasValue == false || a.IsShow.Value == true).Count() > 0)
+                                            {
+                                                hasUL2 = true;
+                                            }
+                                            @if (hasUL2)
+                                            { 
+                                                @Html.Raw("<ul>")                                                    
+                                            }
+                                            @foreach (var option in subMenu.MenuOptions)
+                                            {
+                                                <li><span style="font-size: 14px;" class="sp_title">
+                                                    @if (currentRoleOptionList.Contains(option.ID))
                                                     {
-                                                        <li><span style="font-size: 14px;" class="sp_title">
-                                                            @if (currentRoleOptionList.Contains(option.ID))
-                                                            {
-                                                                <input type="checkbox" id="option_@option.ID" name="checkboxOption" value="@option.ID" checked="checked"/>
-                                                            }
-                                                            else
-                                                            {
-                                                                <input type="checkbox" id="option_@option.ID" name="checkboxOption" value="@option.ID"/>
-                                                            }
-                                                            <label for="option_@option.ID" style="display: inline">@option.Name</label>
-                                                        </li>
+                                                        <input type="checkbox" id="option_@option.ID" name="checkboxOption" value="@option.ID" checked="checked"/>
                                                     }
-                                                    @foreach (var menu3 in subMenu.Menus)
+                                                    else
                                                     {
-                                                        if (menu3.IsShow.HasValue && menu3.IsShow.Value == false)
+                                                        <input type="checkbox" id="option_@option.ID" name="checkboxOption" value="@option.ID"/>
+                                                    }
+                                                    <label for="option_@option.ID" style="display: inline">@option.Name</label></span>
+                                                </li>
+                                            }
+                                            @foreach (var menu3 in subMenu.Menus)
+                                            {
+                                                if (menu3.IsShow.HasValue && menu3.IsShow.Value == false)
+                                                {
+                                                    continue;
+                                                }
+                                                <li><span style="font-size: 14px;" class="sp_title">
+                                                    @if (currentRoleMenuList.Contains(menu3.ID))
+                                                    {
+                                                        <input type="checkbox" id="menu_@menu3.ID" name="checkboxMenu" value="@menu3.ID" checked="checked"/>
+                                                    }
+                                                    else
+                                                    { 
+                                                        <input type="checkbox" id="menu_@menu3.ID" name="checkboxMenu" value="@menu3.ID"/>
+                                                    }
+                                                    <label for="menu_@menu3.ID" style="display: inline">@menu3.Name</label></span>
+                                                    @{bool hasUL3 = false;}
+                                                    @if (menu3.Menus.Where(a => a.IsShow.HasValue == false || a.IsShow.Value == true).Count() > 0)
+                                                    {
+                                                        hasUL3 = true;
+                                                    }
+                                                    @if (hasUL3)
+                                                    {@Html.Raw("<ul>")}
+                                                    @foreach (var menu4 in menu3.Menus)
+                                                    {
+                                                        if (menu4.IsShow.HasValue && menu4.IsShow.Value == false)
                                                         {
                                                             continue;
                                                         }
                                                         <li><span style="font-size: 14px;" class="sp_title">
-                                                            @if (currentRoleMenuList.Contains(menu3.ID))
+                                                            @if (currentRoleMenuList.Contains(menu4.ID))
                                                             {
-                                                                <input type="checkbox" id="menu_@menu3.ID" name="checkboxMenu" value="@menu3.ID" checked="checked"/>
+                                                                <input type="checkbox" id="menu_@menu4.ID" name="checkboxMenu" value="@menu4.ID" checked="checked"/>
                                                             }
                                                             else
                                                             { 
-                                                                <input type="checkbox" id="menu_@menu3.ID" name="checkboxMenu" value="@menu3.ID"/>
+                                                                <input type="checkbox" id="menu_@menu4.ID" name="checkboxMenu" value="@menu4.ID"/>
                                                             }
-                                                            <label for="menu_@menu3.ID" style="display: inline">@menu3.Name</label>
-                                                            <ul>
-                                                                @foreach (var menu4 in menu3.Menus)
-                                                                {
-                                                                    if (menu4.IsShow.HasValue && menu4.IsShow.Value == false)
-                                                                    {
-                                                                        continue;
-                                                                    }
-                                                                    <li><span style="font-size: 14px;" class="sp_title">
-                                                                        @if (currentRoleMenuList.Contains(menu4.ID))
-                                                                        {
-                                                                            <input type="checkbox" id="menu_@menu4.ID" name="checkboxMenu" value="@menu4.ID" checked="checked"/>
-                                                                        }
-                                                                        else
-                                                                        { 
-                                                                            <input type="checkbox" id="menu_@menu4.ID" name="checkboxMenu" value="@menu4.ID"/>
-                                                                        }
-                                                                        <label for="menu_@menu4.ID" style="display: inline">@menu4.Name</label> </li>
-                                                                }
-                                                            </ul></li>
+                                                            <label for="menu_@menu4.ID" style="display: inline">@menu4.Name</label>
+                                                        </span></li>
                                                     }
-                                                </ul>
-                                            </li>
-                                        }
-                                    </ul>
+                                                    @if (hasUL3)
+                                                    {@Html.Raw("</ul>")}
+                                                </li>
+                                            }
+                                            @if (hasUL2)
+                                            {
+                                                 @Html.Raw("</ul>")
+                                            }
+                                        </li>
+                                    }
+                                    @if (hasUL)
+                                    {  
+                                        @Html.Raw("</ul>")
+                                    }
                                 </div>
                             }
                         </div>

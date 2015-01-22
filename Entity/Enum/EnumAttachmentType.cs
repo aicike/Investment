@@ -178,8 +178,12 @@ namespace Entity.Enum
         /// <summary>
         /// 融资信息附件全部附件
         /// </summary>
-        RongZiXinXiFuJian = 33
-
+        RongZiXinXiFuJian = 33,
+        
+        /// <summary>
+        /// 审批过程中产生的附件
+        /// </summary>
+        ShenPiGuoChengFuJian = 34,
     
 
         

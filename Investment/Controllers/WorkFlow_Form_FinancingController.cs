@@ -100,7 +100,15 @@ namespace Investment.Controllers
         {
             WorkFlowModel wfmodel = new WorkFlowModel();
             var workFlow = wfmodel.Get(WorkFlowID);
-            var currentNode = workFlow.WorkFlow_Node;
+
+            //获取当前审批记录
+            var SessionLoginUser = Session["SessionLoginUser"] as SessionLoginUser;
+            var approvalRecord = workFlow.ApprovalRecord.Where(a => a.WorkFlowID == WorkFlowID && a.GroupAccountID == SessionLoginUser.UserID && a.Operation == -1).FirstOrDefault();
+            if (approvalRecord != null)
+            {
+                ViewBag.approvalRecordID = approvalRecord.ID;//审批记录ID，上传控件使用
+            }
+            var currentNode = workFlow.WorkFlow_Node;//当前审批节点
             WorkFlow_NodeModel wfnm = new WorkFlow_NodeModel();
             var list = wfnm.GetWorkFlow_Node_WorkFlowNodeID(currentNode.ID);
             ViewBag.WFM = list;

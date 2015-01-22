@@ -50,6 +50,7 @@ namespace Entity
         /// 手机号
         /// </summary>
         [Display(Name = "手机号")]
+        [RegularExpression(@"1[3|5|7|8|][0-9]{9}", ErrorMessage = "请输入正确的电话号码。")]
         public string Phone { get; set; }
 
         /// <summary>
