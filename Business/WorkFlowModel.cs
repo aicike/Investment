@@ -205,7 +205,7 @@ namespace Business
                 var IsOver = ARModel.JudgeThisNodeIsOver(WorkFlowID);
                 //查找下一节点
                 WorkFlow_NodeModel w_nModel = new WorkFlow_NodeModel();
-                if (IsOver)
+                if (!IsOver)
                 {
                     var Nextworkflow_node = w_nModel.GetNextWorkFlow_Node(workflow.Financing.WorkFlowManagerID, workflow.WorkFlow_NodeID.Value);
                     //流程结束

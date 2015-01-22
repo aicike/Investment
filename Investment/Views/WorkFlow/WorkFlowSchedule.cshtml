@@ -1,0 +1,81 @@
+﻿@{
+    ViewBag.Title = "流程进度图表";
+    Layout = "~/Views/Shared/_Layout_noMenu.cshtml";
+}
+@model List<Entity.WorkFlow_Node>
+@section scripts{
+    <link href="@Url.Content("/Scripts/modernizr/css/component.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("/Scripts/modernizr/css/default.css")" rel="stylesheet" type="text/css" />
+    <script src="@Url.Content("/Scripts/modernizr/js/modernizr.custom.js")" type="text/javascript"></script>
+    <script>
+        $(function () {
+            $("#_Title").hide();
+
+            //            var height = $("div[class=cbp_tmlabel]:last").height();
+
+        });
+
+
+    </script>
+}
+<div class="row-fluid">
+    <div class="span12" style="width: 100%">
+        <table align="center" width="80%" style="margin-top: 20px; line-height: 35px">
+            <tr>
+                <td colspan="6" align="center" style="font-size: 30px; color: #000; font-weight: bold">
+                    @ViewBag.Types
+                </td>
+            </tr>
+            <tr>
+                <td align="center" style="font-size: 25px; color: #000">
+                    单号：@ViewBag.number
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div class="container">
+    <div class="main">
+        <ul class="cbp_tmtimeline">
+            @foreach (var item in Model)
+            {
+                <li>
+                    @if (item.Order < ViewBag.Work_nodeOrder)
+                    {
+                        
+                        <time class="cbp_tmtime"><span>
+						</time>
+                        <div style="background: #3fd5c0" class="cbp_tmicon cbp_tmicon-screen">
+                        </div>
+                    }
+                    else if (item.Order == ViewBag.Work_nodeOrder)
+                    { 
+                            
+                        <time class="cbp_tmtime">
+                        <span>
+						</span> <span>当前进度</span>
+						</time>
+                        <div class="cbp_tmicon cbp_tmicon-screen">
+                        </div>
+                    }
+                    else
+                    {
+                            
+                        <time class="cbp_tmtime"><span>
+						</time>
+                        <div style="background: #efefef" class="cbp_tmicon cbp_tmicon-screen">
+                        </div>
+                    }
+                    <div class="cbp_tmlabel">
+                        <h2>
+                            @item.WorkFlowNodeManager.Name</h2>
+                        <p>
+                            操作指引</p>
+                    </div>
+                </li>
+            }
+        </ul>
+    </div>
+</div>
+<div style="text-align: center; clear: both">
+</div>
