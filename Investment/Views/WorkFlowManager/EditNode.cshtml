@@ -5,6 +5,8 @@
 }
 @section scripts
 {
+    <script src="@Url.Content("/Scripts/ueditor/ueditor.config.js")" type="text/javascript"></script>
+    <script src="@Url.Content("/Scripts/ueditor/ueditor.all.js")" type="text/javascript"></script>
     <style>
         
     </style>
@@ -30,6 +32,22 @@
             {
              $("#trFZR").hide();
             }
+
+
+            
+              var ue;
+
+            window.UEDITOR_HOME_URL = "/Scripts/ueditor/";
+            //实例化编辑器
+            var options = {
+                initialFrameWidth: '99%',
+                initialFrameHeight: 280,
+                imageUrl: UEDITOR_HOME_URL + "net/imageUp.ashx",
+                imagePath: "",
+                imageManagerPath: "",
+                initialContent: ""
+            };
+            ue = UE.getEditor('editor', options);
            
         });
         
@@ -164,7 +182,7 @@
                     <table class="table table-hover" style="">
                         <tr>
                             <td style="width: 120px">
-                                节点：
+                                节点：@Model.WorkFlowNodeManagerID
                             </td>
                             <td>
                                 <div class="controls">
@@ -173,14 +191,14 @@
                                         if (Model.WorkFlowNodeManagerID == item.ID)
                                         { 
                                         <label class="radio">
-                                            <input type="radio"  name="NodeID" value="@item.ID" _IsSince="@item.IsSinceApproval.ToString()" />
+                                            <input type="radio"  name="NodeID"  checked="checked"  value="@item.ID" _IsSince="@item.IsSinceApproval.ToString()" />
                                             @item.Name (@item.Remark)
                                         </label>
                                         }
                                         else
                                         {
                                         <label class="radio">
-                                            <input type="radio"  name="NodeID" checked="checked" value="@item.ID" _IsSince="@item.IsSinceApproval.ToString()" />
+                                            <input type="radio"  name="NodeID"value="@item.ID" _IsSince="@item.IsSinceApproval.ToString()" />
                                             @item.Name (@item.Remark)
                                         </label>
                                         }
@@ -242,6 +260,14 @@
                                 </div>
                             </td>
                             <td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                操作指引：
+                            </td>
+                            <td colspan="2">
+                                <script type="text/plain" id="editor" height="300px" width="280px" name="Remark">@Html.Raw(Model.Remark)</script>
                             </td>
                         </tr>
                     </table>

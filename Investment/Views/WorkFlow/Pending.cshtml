@@ -3,6 +3,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @section scripts{
+
 }
 @model PagedList<Entity.WorkFlow>
 <div class="row-fluid">
@@ -19,14 +20,17 @@
                 <table class="table table-bordered table-hover" id="table_company">
                     <thead>
                         <tr>
-                            <th style="width: 200px;">
+                            <th  style="width: 45px;">
+                                流程图
+                            </th>
+                            <th>
                                 项目名称
                             </th>
-                            <th style="width: 80px;">
-                                融资金额（万元）
+                            <th style="width: 100px;">
+                                融资金额(万元)
                             </th>
                             <th style="width: 80px;">
-                                融资期限（月）
+                                融资期限(月)
                             </th>
                             <th style="width: 80px;">
                                 融资成本
@@ -34,7 +38,7 @@
                             <th style="width: 80px;">
                                 申请时间
                             </th>
-                            <th style="width: 130px;">
+                            <th style="width: 150px;">
                                 项目类型
                             </th>
                             <th style="width: 80px">
@@ -46,6 +50,11 @@
                         @foreach (var item in Model)
                         {
                             <tr>
+                                <td style=" text-align:center">
+                                    <a href="@Url.Action("WorkFlowSchedule", "WorkFlow", new { WorkFlowID=item.ID })" title="流程节点与操作指引" target="_blank" style="">
+                                        <img src="@Url.Content("/Image/lct.png")" style=" max-width:25px" />
+                                    </a>    
+                                </td>
                                 <td>
                                     @item.Financing.Name
                                 </td>

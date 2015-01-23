@@ -19,6 +19,9 @@
                 <table class="table table-bordered table-hover" id="table_company">
                     <thead>
                         <tr>
+                            <th style="width: 50px;">
+                                流程图
+                            </th>
                             <th style="width: 100px;">
                                 编号
                             </th>
@@ -27,6 +30,9 @@
                             </th>
                             <th style="width: 80px;">
                                 申请时间
+                            </th>
+                            <th style="width: 80px;">
+                                申请人
                             </th>
                             <th style="width: 80px;">
                                 状态
@@ -43,6 +49,11 @@
                         @foreach (var item in Model)
                         {
                             <tr>
+                                <td style=" text-align:center">
+                                    <a href="@Url.Action("WorkFlowSchedule", "WorkFlow", new { WorkFlowID=item.ID })" title="流程节点与操作指引" target="_blank" style="">
+                                        <img src="@Url.Content("/Image/lct.png")" style=" max-width:25px" />
+                                    </a>    
+                                </td>
                                 <td>
                                     @Html.ActionLink(@item.Number, "SelInfoPath", "WorkFlowApproval", new { WorkFlowID = item.ID }, new { target = "_blank" })
                                 </td>
@@ -51,6 +62,9 @@
                                 </td>
                                 <td>
                                     @item.BeginDate.ToString("yyyy/MM/dd")
+                                </td>
+                                <td>
+                                    @item.Financing.Owner_A.Name
                                 </td>
                                 <td>
                                     @switch (item.State)
@@ -66,7 +80,7 @@
                                                 break;
                                         case 3:
                                         @:未通过
-                                                                                   break;
+                                                                                                                                                           break;
                                     }
                                 </td>
                                 <td>
@@ -78,8 +92,8 @@
                                     }
                                     @foreach (var ar in ars)
                                     {
-                                        @:@ar.AccountPosition：@ar.AccountName<br/>
-                                                                        }
+                                        @:@ar.AccountPosition：@ar.AccountName<br />
+                                                                                                                                                }
                                 </td>
                             </tr>
                         }

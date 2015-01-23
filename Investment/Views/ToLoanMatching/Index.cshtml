@@ -21,14 +21,30 @@
                         }
                         else {
                             that = this;
-                        } 
+                        }
                     });
                 });
             });
         }
         $(function () {
+            var types = "@ViewBag.Types";
+            if (types == "2") {
+                $("#tab2").click();
+                 $("#tab1").attr("href","#");
+            }
+            else {
+                $("#tab1").click();
+                 $("#tab2").attr("href","#");
+            }
+            $("#tab2").click(function () {
+                    window.location.href = "@Url.Action("Index", "ToLoanMatching", new { Types = 2 })";
+                });
+                 $("#tab1").click(function () {
+                    window.location.href = "@Url.Action("Index", "ToLoanMatching", new { Types = 1 })";
+                });
             $("#Matching").rowspan(0); //传入的参数是对应的列数从0开始，哪一列有相同的内容就输入对应的列数值 
             $("#Matching").rowspan(2);
+
         }); 
     </script>
 }
@@ -44,52 +60,111 @@
                 </div>
             </div>
             <div class="portlet-body">
-                <table id="Matching" class="table table-bordered">
-                    <tr>
-                        <th>
-                            融资意向
-                        </th>
-                        <th>
-                            机构产品名称
-                        </th>
-                        <th>
-                            操作
-                        </th>
-                    </tr>
-                    @foreach (var item in Model)
-                    {
-                        <tr>
-                            <td style="text-align: center; vertical-align: inherit">
-                                  <a href="@Url.Action("Detail", "Financing", new { id = item.FID })"  target="_blank" class="tooltips" data-placement="top" data-original-title="点击查看融资意向详细">
-                                    @item.FName
-                                    </a>
-                            </td>
-                            <td>
-                                <a href="@Url.Action("GetInfo", "MechanismProducts", new { MPID =item.MID})"  target="_blank" class="tooltips" data-placement="top" data-original-title="点击查看产品详细">
-                                @item.MName
-                                </a>
-                            </td>
-                            <td style="text-align: center; vertical-align: inherit">
-                                <a href="@Url.Action("Preview", "WorkFlowApproval", new { financingID = item.FID })">
-                                    待定单预览</a>
-                            </td>
-                        </tr>
-                    }
-                </table>
-                <div class="pagination">
-                    @Html.Pager(Model, new PagerOptions
-               {
-                   PageIndexParameterName = "ID",
-                   CurrentPagerItemWrapperFormatString = "<li class=\"disabled\"><a>{0}</a></li>",
-                   NumericPagerItemWrapperFormatString = "<li>{0}</li>",
-                   NavigationPagerItemWrapperFormatString = "<li>{0}</li>",
-                   CssClass = "",
-                   SeparatorHtml = "",
-                   AutoHide = false,
-                   PageIndexOutOfRangeErrorMessage = "页面错误。",
-                   ShowFirstLast = false,
-                   ContainerTagName = "ul"
-               })
+                <div class="tabbable tabbable-custom boxless">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a id="tab1" href="#tab_1" data-toggle="tab" style="font-weight: bold">
+                            融资业务</a></li>
+                        <li><a id="tab2" class="" href="#tab_2" data-toggle="tab" style="font-weight: bold">
+                            自有资金业务</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="tab_1">
+                            <table id="Matching" class="table table-bordered">
+                                <tr>
+                                    <th>
+                                        融资意向
+                                    </th>
+                                    <th>
+                                        机构产品名称
+                                    </th>
+                                    <th>
+                                        操作
+                                    </th>
+                                </tr>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td style="text-align: center; vertical-align: inherit">
+                                            <a href="@Url.Action("Detail", "Financing", new { id = item.FID })"  target="_blank" class="tooltips" data-placement="top" data-original-title="点击查看融资意向详细">
+                                                @item.FName
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a href="@Url.Action("GetInfo", "MechanismProducts", new { MPID = item.MID })"  target="_blank" class="tooltips" data-placement="top" data-original-title="点击查看产品详细">
+                                                @item.MName
+                                            </a>
+                                        </td>
+                                        <td style="text-align: center; vertical-align: inherit">
+                                            <a href="@Url.Action("Preview", "WorkFlowApproval", new { financingID = item.FID })">
+                                                待定单预览</a>
+                                        </td>
+                                    </tr>
+                                }
+                            </table>
+                            <div class="pagination">
+                                @Html.Pager(Model, new PagerOptions
+                                   {
+                                       PageIndexParameterName = "ID",
+                                       CurrentPagerItemWrapperFormatString = "<li class=\"disabled\"><a>{0}</a></li>",
+                                       NumericPagerItemWrapperFormatString = "<li>{0}</li>",
+                                       NavigationPagerItemWrapperFormatString = "<li>{0}</li>",
+                                       CssClass = "",
+                                       SeparatorHtml = "",
+                                       AutoHide = false,
+                                       PageIndexOutOfRangeErrorMessage = "页面错误。",
+                                       ShowFirstLast = false,
+                                       ContainerTagName = "ul"
+                                   })
+                            </div>
+                        </div>
+                        <div class="tab-pane " id="tab_2">
+                            <table class="table table-bordered">
+                                <tr>
+                                    <th>
+                                        融资意向
+                                    </th>
+                                    <th>
+                                        业务类型
+                                    </th>
+                                    <th>
+                                        操作
+                                    </th>
+                                </tr>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td style="text-align: center; vertical-align: inherit">
+                                            <a href="@Url.Action("Detail", "Financing", new { id = item.FID })"  target="_blank" class="tooltips" data-placement="top" data-original-title="点击查看融资意向详细">
+                                                @item.FName
+                                            </a>
+                                        </td>
+                                        <td>
+                                            自有资金业务
+                                        </td>
+                                        <td style="text-align: center; vertical-align: inherit">
+                                            <a href="@Url.Action("Preview", "WorkFlowApproval", new { financingID = item.FID })">
+                                                待定单预览</a>
+                                        </td>
+                                    </tr>
+                                }
+                            </table>
+                            <div class="pagination">
+                                @Html.Pager(Model, new PagerOptions
+                                   {
+                                       PageIndexParameterName = "ID",
+                                       CurrentPagerItemWrapperFormatString = "<li class=\"disabled\"><a>{0}</a></li>",
+                                       NumericPagerItemWrapperFormatString = "<li>{0}</li>",
+                                       NavigationPagerItemWrapperFormatString = "<li>{0}</li>",
+                                       CssClass = "",
+                                       SeparatorHtml = "",
+                                       AutoHide = false,
+                                       PageIndexOutOfRangeErrorMessage = "页面错误。",
+                                       ShowFirstLast = false,
+                                       ContainerTagName = "ul"
+                                   })
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

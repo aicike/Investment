@@ -93,7 +93,14 @@ namespace Investment.Controllers
             var workflow = wfm.Get(WorkFlowID);
             ViewBag.number = workflow.Number;
             ViewBag.Types = workflow.Financing.WorkFlowManager.Name;
-            ViewBag.Work_nodeOrder = workflow.WorkFlow_Node.Order;
+            if (workflow.WorkFlow_NodeID.HasValue)
+            {
+                ViewBag.Work_nodeOrder = workflow.WorkFlow_Node.Order;
+            }
+            else
+            {
+                ViewBag.Work_nodeOrder = 0;
+            }
             //获取流程节点
             WorkFlow_NodeModel wfnmodel = new WorkFlow_NodeModel();
             var workflow_node = wfnmodel.GetWorkFlow_Node(workflow.Financing.WorkFlowManagerID).OrderBy(a => a.Order).ToList();

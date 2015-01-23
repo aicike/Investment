@@ -32,6 +32,11 @@ namespace Entity
         /// </summary>
         public int Order { get; set; }
 
+        /// <summary>
+        /// 操作指引
+        /// </summary>
+        public string Remark { get; set; }
+
         //-------------子表----------------------------
         /// <summary>
         /// 审批人表

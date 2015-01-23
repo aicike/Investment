@@ -216,6 +216,7 @@
     <Content Include="Image\Bg_1.png" />
     <Content Include="Image\DD.gif" />
     <Content Include="Image\default_Avatar.png" />
+    <Content Include="Image\lct.png" />
     <Content Include="Image\logo.png" />
     <Content Include="Image\Logo_144.png" />
     <Content Include="Image\touzilLogo.jpg" />
@@ -1148,6 +1149,7 @@
     <None Include="Views\WorkFlowApproval\QianShuXieYi.cshtml" />
     <None Include="Views\WorkFlowApproval\QueRenShouQuFeiYong.cshtml" />
     <Content Include="Views\WorkFlowApproval\SelInfoPath.cshtml" />
+    <Content Include="Views\WorkFlowApproval\TiJiaoShenQing.cshtml" />
     <None Include="Views\WorkFlowApproval\XieYiQueRen.cshtml" />
     <None Include="Views\WorkFlowApproval\DiaoChaFuDao.cshtml" />
     <None Include="Views\WorkFlowApproval\JiGouDuiJie.cshtml" />
