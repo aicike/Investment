@@ -106,7 +106,7 @@ SET IDENTITY_INSERT [dbo].[WorkFlowManager] OFF
 
 /***流程节点***/
 SET IDENTITY_INSERT [dbo].[WorkFlowNodeManager] ON
-INSERT [dbo].[WorkFlowNodeManager] ([ID], [Name], [Remark],[IsSinceApproval],[Controllers],[Action]) VALUES (1, '融资立项初审','无','False','WorkFlowApproval','RongZiLiXiangChuShen')
+INSERT [dbo].[WorkFlowNodeManager] ([ID], [Name], [Remark],[IsSinceApproval],[Controllers],[Action]) VALUES (1, '业务初审','无','False','WorkFlowApproval','RongZiLiXiangChuShen')
 INSERT [dbo].[WorkFlowNodeManager] ([ID], [Name], [Remark],[IsSinceApproval],[Controllers],[Action]) VALUES (2, '项目立项','无','False','WorkFlowApproval','XiangMuLiXiang')
 INSERT [dbo].[WorkFlowNodeManager] ([ID], [Name], [Remark],[IsSinceApproval],[Controllers],[Action]) VALUES (3, '签署协议','无','True','WorkFlowApproval','QianShuXieYi')
 INSERT [dbo].[WorkFlowNodeManager] ([ID], [Name], [Remark],[IsSinceApproval],[Controllers],[Action]) VALUES (4, '协议确认','无','False','WorkFlowApproval','XieYiQueRen')
@@ -115,6 +115,16 @@ INSERT [dbo].[WorkFlowNodeManager] ([ID], [Name], [Remark],[IsSinceApproval],[Co
 INSERT [dbo].[WorkFlowNodeManager] ([ID], [Name], [Remark],[IsSinceApproval],[Controllers],[Action]) VALUES (7, '落实放款','无','False','WorkFlowApproval','LuoShiFangKuan')
 INSERT [dbo].[WorkFlowNodeManager] ([ID], [Name], [Remark],[IsSinceApproval],[Controllers],[Action]) VALUES (8, '确认收取费用','无','False','WorkFlowApproval','QueRenShouQuFeiYong')
 INSERT [dbo].[WorkFlowNodeManager] ([ID], [Name], [Remark],[IsSinceApproval],[Controllers],[Action]) VALUES (9, '提交申请','无','True','WorkFlowApproval','TiJiaoShenQing')
+
+INSERT [dbo].[WorkFlowNodeManager] ([ID], [Name], [Remark],[IsSinceApproval],[Controllers],[Action]) VALUES (12, '详尽调查','无','True','WorkFlowApproval','')
+INSERT [dbo].[WorkFlowNodeManager] ([ID], [Name], [Remark],[IsSinceApproval],[Controllers],[Action]) VALUES (13, '风控审核','无','False','WorkFlowApproval','')
+INSERT [dbo].[WorkFlowNodeManager] ([ID], [Name], [Remark],[IsSinceApproval],[Controllers],[Action]) VALUES (15, '落实放款条件','无','False','WorkFlowApproval','')
+INSERT [dbo].[WorkFlowNodeManager] ([ID], [Name], [Remark],[IsSinceApproval],[Controllers],[Action]) VALUES (16, '放款审批','无','False','WorkFlowApproval','')
+INSERT [dbo].[WorkFlowNodeManager] ([ID], [Name], [Remark],[IsSinceApproval],[Controllers],[Action]) VALUES (17, '放款','无','False','WorkFlowApproval','')
+
+
+
+
 SET IDENTITY_INSERT [dbo].[WorkFlowNodeManager] OFF
 /****** Object:  Table [dbo].[Company]    Script Date: 11/27/2014 14:40:46 ******/
 

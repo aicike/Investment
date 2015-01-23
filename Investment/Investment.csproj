@@ -671,6 +671,13 @@
     <Content Include="Scripts\knockout-2.1.0.debug.js" />
     <Content Include="Scripts\knockout-2.1.0.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
+    <Content Include="Scripts\modernizr\css\component.css" />
+    <Content Include="Scripts\modernizr\css\default.css" />
+    <Content Include="Scripts\modernizr\fonts\bpicons\bpicons.svg" />
+    <Content Include="Scripts\modernizr\fonts\fontawesome.svg" />
+    <Content Include="Scripts\modernizr\fonts\timelineicons\ecoico.dev.svg" />
+    <Content Include="Scripts\modernizr\fonts\timelineicons\ecoico.svg" />
+    <Content Include="Scripts\modernizr\js\modernizr.custom.js" />
     <Content Include="Scripts\plupload-2.0.0\examples\custom.html" />
     <Content Include="Scripts\plupload-2.0.0\examples\jquery\all_runtimes.html" />
     <Content Include="Scripts\plupload-2.0.0\examples\jquery\jquery_ui_widget.html" />
@@ -1056,6 +1063,15 @@
     <Content Include="Scripts\ueditor\net\getRemoteImage.ashx" />
     <Content Include="Scripts\ueditor\net\imageUp.ashx" />
     <Content Include="Scripts\ueditor\net\Web.config" />
+    <None Include="Scripts\modernizr\fonts\bpicons\bpicons.eot" />
+    <None Include="Scripts\modernizr\fonts\bpicons\bpicons.ttf" />
+    <None Include="Scripts\modernizr\fonts\bpicons\bpicons.woff" />
+    <None Include="Scripts\modernizr\fonts\fontawesome.eot" />
+    <None Include="Scripts\modernizr\fonts\fontawesome.ttf" />
+    <None Include="Scripts\modernizr\fonts\fontawesome.woff" />
+    <None Include="Scripts\modernizr\fonts\timelineicons\ecoico.eot" />
+    <None Include="Scripts\modernizr\fonts\timelineicons\ecoico.ttf" />
+    <None Include="Scripts\modernizr\fonts\timelineicons\ecoico.woff" />
     <None Include="Scripts\plupload-2.0.0\examples\dump.php" />
     <None Include="Scripts\plupload-2.0.0\examples\jquery\s3.php" />
     <None Include="Scripts\plupload-2.0.0\examples\upload.php" />
@@ -1137,6 +1153,7 @@
     <None Include="Views\WorkFlowApproval\JiGouDuiJie.cshtml" />
     <Content Include="Views\WorkFlowApproval\LuoShiFangKuan.cshtml" />
     <Content Include="Views\WorkLog\Index.cshtml" />
+    <Content Include="Views\WorkFlow\WorkFlowSchedule.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

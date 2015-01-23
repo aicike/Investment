@@ -18,7 +18,7 @@ namespace Investment.Controllers
         public ActionResult Index(int ?id)
         {
             FinancingMatchingModel FMModel = new FinancingMatchingModel();
-            var fmlist = FMModel.GetMatching();
+            var fmlist = FMModel.GetMatching_BYAccountID(LoginAccount.UserID);
             var pagelist = fmlist.ToPagedList(id ?? 1, 15);
             return View(pagelist);
 

@@ -80,5 +80,24 @@ namespace Investment.Controllers
             var list = objs.ToPagedList(id ?? 1, 15);
             return View(list);
         }
+
+        /// <summary>
+        /// 流程进度图表
+        /// </summary>
+        /// <param name="WorkFlowID"></param>
+        /// <returns></returns>
+        public ActionResult WorkFlowSchedule(int WorkFlowID)
+        {
+            //流程信息
+            WorkFlowModel wfm = new WorkFlowModel();
+            var workflow = wfm.Get(WorkFlowID);
+            ViewBag.number = workflow.Number;
+            ViewBag.Types = workflow.Financing.WorkFlowManager.Name;
+            ViewBag.Work_nodeOrder = workflow.WorkFlow_Node.Order;
+            //获取流程节点
+            WorkFlow_NodeModel wfnmodel = new WorkFlow_NodeModel();
+            var workflow_node = wfnmodel.GetWorkFlow_Node(workflow.Financing.WorkFlowManagerID).OrderBy(a => a.Order).ToList();
+            return View(workflow_node);
+        }
     }
 }
