@@ -131,6 +131,16 @@ namespace Business
             }
         }
 
+        /// <summary>
+        /// 根据用户ID查询未审批记录
+        /// </summary>
+        /// <param name="GroupAccountID"></param>
+        /// <returns></returns>
+        public List<ApprovalRecord> GetList_ByUID(int GroupAccountID)
+        {
+            var list = List().Where(a=>a.GroupAccountID==GroupAccountID&&a.Operation==-1).ToList();
+            return list;
+        }
 
     }
 }
