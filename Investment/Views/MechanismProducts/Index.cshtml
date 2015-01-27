@@ -7,8 +7,6 @@
 @model List<Entity.MechanismProducts>
 <div class="row-fluid">
     <div class="span12" style="width: 100%">
-        <div class="myoption">
-            <a href="@Url.Action("Index", "Mechanism")" class="btn blue" >返回</a></div>
         <div class="portlet box blue">
             <div class="portlet-title">
                 <div class="caption">
@@ -16,6 +14,8 @@
                 </div>
                <div class="tools">
                     @Html.ActionLink("<i class='icon-plus'></i>&nbsp;添加产品", "Add", "MechanismProducts", new { MID = ViewBag.MID }, new { style = "color:#FFF" }, true).Html()
+
+                    <a href="@Url.Action("Index", "Mechanism")" class="btn blue" ><i class='icon-share-alt'></i>&nbsp;返回</a>
                   </div>
             </div>
             <div class="portlet-body">
