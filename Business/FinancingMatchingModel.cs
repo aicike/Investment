@@ -20,10 +20,27 @@ namespace Business
         {
             var query = from a in Context.Financings
                         from b in Context.MechanismProducts
-                        where a.Amount <= b.MaxQuota && a.Owner_A_ID==AccountID && a.Status==0 orderby a.ID
-                        select new FinancingMatching { FID = a.ID,FName=a.Name,MID=b.ID,MName=b.Name};
+                        where a.WorkFlowManagerID != 4 && a.Amount <= b.MaxQuota && a.Owner_A_ID == AccountID && a.Status == 0 
+                        orderby a.ID
+                        select new FinancingMatching { FID = a.ID, FName = a.Name, MID = b.ID, MName = b.Name };
             return query;
         }
+
+
+        /// <summary>
+        /// 查找所有匹配融资意向的数据（只属于我的） 自有资金
+        /// </summary>
+        /// <returns></returns>
+        public IQueryable<FinancingMatching> GetMatchingZY_BYAccountID(int AccountID)
+        {
+            var query = from a in Context.Financings
+                        where a.WorkFlowManagerID == 4 && a.Owner_A_ID == AccountID && a.Status == 0
+                        orderby a.ID
+                        select new FinancingMatching { FID = a.ID, FName = a.Name, MID = a.ID, MName = a.Name };
+            return query;
+        }
+
+
 
         /// <summary>
         /// 查找所有匹配融资意向的数据（所有的）
@@ -33,9 +50,22 @@ namespace Business
         {
             var query = from a in Context.Financings
                         from b in Context.MechanismProducts
-                        where a.Amount <= b.MaxQuota && a.Status == 0
+                        where a.WorkFlowManagerID != 4 && a.Amount <= b.MaxQuota && a.Status == 0
                         orderby a.ID
                         select new FinancingMatching { FID = a.ID, FName = a.Name, MID = b.ID, MName = b.Name };
+            return query;
+        }
+
+        /// <summary>
+        /// 查找所有匹配融资意向的数据（所有的）自有资金
+        /// </summary>
+        /// <returns></returns>
+        public IQueryable<FinancingMatching> GetMatchingZY()
+        {
+            var query = from a in Context.Financings
+                        where a.WorkFlowManagerID == 4  && a.Status == 0
+                        orderby a.ID
+                        select new FinancingMatching { FID = a.ID, FName = a.Name, MID = a.ID, MName = a.Name };
             return query;
         }
     }

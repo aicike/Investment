@@ -40,3 +40,8 @@ input[type="checkbox"].input-validation-error
     border: 1px solid #d6e9c6;
     background-color: #eef7ea;
 }
+
+.table td
+{
+    vertical-align: inherit;
+}

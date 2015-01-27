@@ -69,6 +69,7 @@ namespace Investment.Controllers
         /// <param name="WorkFlowNodeISSince">当前节点是否子审批</param>
         /// <returns></returns>
         [HttpPost]
+        [ValidateInput(false)]
         public ActionResult AddNode(WorkFlow_Node workFlow_node, string WorkFlowNodeISSince, string AccountIDs, string PositionIDs)
         {
             //添加节点
@@ -141,6 +142,7 @@ namespace Investment.Controllers
         /// <param name="PositionIDs"></param>
         /// <returns></returns>
         [HttpPost]
+        [ValidateInput(false)]
         public ActionResult EditNode(WorkFlow_Node workFlow_node, string WorkFlowNodeISSince, string AccountIDs, string PositionIDs)
         {
             //修改节点

@@ -116,8 +116,10 @@ namespace Business
             Result result = new Result();
             //获取流程中选择的机构
             WorkFlowMechanismProductModel WFMPModel = new WorkFlowMechanismProductModel();
+            WFMPModel.Context.Configuration.ProxyCreationEnabled = false;
             var wfmps = WFMPModel.GetInfo_ByWorkFlowID(WorkFlowID);
             MechanismProductsModel mpModel = new MechanismProductsModel();
+            mpModel.Context.Configuration.ProxyCreationEnabled = false;
             //生成快照
             foreach (var item in wfmps)
             {
