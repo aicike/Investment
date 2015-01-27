@@ -1137,7 +1137,7 @@
     <Content Include="Views\WorkFlowApproval\Pending.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\WorkFlow\List.cshtml" />
-    <Content Include="Views\Company\Detail.cshtml" />
+    <Content Include="Views\Company\Detail2.cshtml" />
     <Content Include="Views\WorkFlowApproval\RongZiLiXiangChuShen.cshtml" />
     <Content Include="Views\WorkFlow_Form_Financing\CommitOpinion.cshtml" />
     <Content Include="Views\WorkFlow_Form_Financing\MechanismProducts.cshtml" />
@@ -1149,6 +1149,7 @@
     <Content Include="Views\MechanismProducts\GetInfo.cshtml" />
     <Content Include="Views\Company\Add.cshtml" />
     <Content Include="Views\Company\Edit.cshtml" />
+    <Content Include="Views\Company\Detail.cshtml" />
     <None Include="Views\WorkFlowApproval\QianShuXieYi.cshtml" />
     <None Include="Views\WorkFlowApproval\QueRenShouQuFeiYong.cshtml" />
     <Content Include="Views\WorkFlowApproval\SelInfoPath.cshtml" />

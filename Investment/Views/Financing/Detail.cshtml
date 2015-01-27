@@ -12,7 +12,12 @@
     <script>
         $(function () {
             $("#link_1").click();
+
+            $("textarea").each(function (i, n) {
+                autoTextarea(n,15); // 调用
+            });
         });
+
     </script>
 }
 @model Entity.Financing
