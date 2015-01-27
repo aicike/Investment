@@ -2,7 +2,8 @@
     ViewBag.Title = "MechanismProducts";
 }
 @model List<Entity.MechanismProducts> 
-<div class="span12" style="margin-left: 0px">
+
+<div class="span12" style="margin-left: 0px" id="cp_div">
     <table class="table table-bordered dataTable">
         <tr>
             <td colspan="6" class="td_title" style="font-weight: bold; text-align: left !important;">
@@ -46,3 +47,10 @@
         }
     </table>
 </div>
+<script>
+
+    var zy = "@ViewBag.ISZY";
+    if (zy == "1") {
+        document.getElementById("cp_div").style.display = "none";
+    }
+</script>

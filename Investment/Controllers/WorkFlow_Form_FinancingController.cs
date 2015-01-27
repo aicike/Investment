@@ -131,26 +131,33 @@ namespace Investment.Controllers
                 //查询流程状态
                 WorkFlowModel wfmodel = new WorkFlowModel();
                 var workflow = wfmodel.Get(WorkFlowID.Value);
-                //获取流程对接机构列表
-                WorkFlowMechanismProductModel wmpModel = new WorkFlowMechanismProductModel();
-                var workflowmchanismproducts = wmpModel.GetInfo_ByWorkFlowID(WorkFlowID.Value);
-
-                foreach (var item in workflowmchanismproducts)
+                if (workflow.Financing.WorkFlowManagerID == 4)
                 {
-                    //流程结束 取快照
-                    if (workflow.State == 2 || workflow.State == 3)
+                    ViewBag.ISZY = 1;
+                }
+                else
+                {
+                    //获取流程对接机构列表
+                    WorkFlowMechanismProductModel wmpModel = new WorkFlowMechanismProductModel();
+                    var workflowmchanismproducts = wmpModel.GetInfo_ByWorkFlowID(WorkFlowID.Value);
+
+                    foreach (var item in workflowmchanismproducts)
                     {
-                        MechanismProducts mp = Newtonsoft.Json.JsonConvert.DeserializeObject<MechanismProducts>(item.FormJson);
-                        mp.State = item.State;
-                        mchanismproducts.Add(mp);
+                        //流程结束 取快照
+                        if (workflow.State == 2 || workflow.State == 3)
+                        {
+                            MechanismProducts mp = Newtonsoft.Json.JsonConvert.DeserializeObject<MechanismProducts>(item.FormJson);
+                            mp.State = item.State;
+                            mchanismproducts.Add(mp);
+                        }
+                        else
+                        {
+                            var mp = item.MechanismProducts;
+                            mp.State = item.State;
+                            mchanismproducts.Add(mp);
+                        }
+                        //return Newtonsoft.Json.JsonConvert.SerializeObject(list);
                     }
-                    else
-                    {
-                        var mp = item.MechanismProducts;
-                        mp.State = item.State;
-                        mchanismproducts.Add(mp);
-                    }
-                    //return Newtonsoft.Json.JsonConvert.SerializeObject(list);
                 }
             }
             else
