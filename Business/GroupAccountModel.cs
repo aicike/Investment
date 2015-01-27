@@ -170,5 +170,14 @@ namespace Business
             }
             return gaList;
         }
+
+        /// <summary>
+        /// 获取人员列表（除去管理员账号）
+        /// </summary>
+        /// <returns></returns>
+        public List<GroupAccount> GetListWithoutAdmin()
+        {
+            return List().Where(a => a.ID != 1).ToList();
+        }
     }
 }

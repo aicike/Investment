@@ -24,7 +24,7 @@ namespace Investment.Controllers
         public ActionResult Index()
         {
             GroupAccountModel GAModel = new GroupAccountModel();
-            var list = GAModel.List().Where(a => a.ID != 1).ToList();
+            var list = GAModel.GetListWithoutAdmin();
             return View(list);
         }
         /// <summary>
