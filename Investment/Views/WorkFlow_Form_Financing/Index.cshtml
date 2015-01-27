@@ -35,7 +35,7 @@
                 项目类型
             </td>
             <td class="span4">
-                @Model.WorkFlowManager.Name
+                @(Model.WorkFlowManager == null ? "" : Model.WorkFlowManager.Name)
             </td>
             <td class="span2 td_title">
                 项目经理
@@ -46,8 +46,8 @@
                     @:A：@Model.Owner_A.Name &nbsp;&nbsp;&nbsp;&nbsp;
                     if (Model.Owner_B != null)
                     { 
-                        @:B：@Model.Owner_B.Name
-                    }
+                    @:B：@Model.Owner_B.Name
+                                    }
                 }
             </td>
         </tr>
@@ -77,7 +77,7 @@
                 @if (Model.MaxTimeLimit != 0)
                 {
                     @:@Model.MinTimeLimit + @Model.MaxTimeLimit
-                                    }
+                                                        }
                 else
                 {
                     @Model.MinTimeLimit

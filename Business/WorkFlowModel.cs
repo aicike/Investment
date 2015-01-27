@@ -99,8 +99,16 @@ namespace Business
             //var wfmpIDs = obj.WorkFlowMechanismProduct.Select(a => a.MechanismProductsID).ToList();
             //base.Context.MechanismProducts.Where(a => wfmpIDs.Contains(a.ID));//机构产品信息
 
-            financing.Company = company;
+            var workFlowManager = base.Context.WorkFlowManager.Where(a => a.ID == obj.Financing.WorkFlowManagerID).AsNoTracking().FirstOrDefault(); //流程类型
 
+            var owner_a = base.Context.GroupAccount.Where(a => a.ID == obj.Financing.Owner_A_ID).AsNoTracking().FirstOrDefault(); //A角
+
+            var owner_b = base.Context.GroupAccount.Where(a => a.ID == obj.Financing.Owner_B_ID).AsNoTracking().FirstOrDefault(); //A角
+
+            financing.Company = company;
+            financing.WorkFlowManager = workFlowManager;
+            financing.Owner_A = owner_a;
+            financing.Owner_B = owner_b;
 
             string json = Newtonsoft.Json.JsonConvert.SerializeObject(financing);
             return json;

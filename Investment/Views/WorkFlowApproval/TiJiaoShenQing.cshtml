@@ -76,7 +76,7 @@
             </tr>
             <tr>
                 <td>
-                    @{Html.RenderAction("Index", "WorkFlow_Form_Financing", new { financingID = Model.financingID, workflowID = Model.ID });}
+                    @{Html.RenderAction("Index", "WorkFlow_Form_Financing", new { financingID = Model.FinancingID, workflowID = Model.ID });}
                 </td>
             </tr>
             <tr>
@@ -90,15 +90,6 @@
                 </td>
             </tr>
         </table>
-       @* <div id="div_FC" class="Float_div control-group">
-            <table align="center">
-                <tr>
-                    <td>
-                        <a href="@Url.Action("Index", "Mechanism")" class="btn blue" style="width:80px">返回</a>
-                    </td>
-                </tr>
-            </table>
-        </div>*@
          <div id="div_FC" class="Float_div control-group">
             <table align="center">
                 <tr>

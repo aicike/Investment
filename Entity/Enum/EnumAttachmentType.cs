@@ -194,7 +194,12 @@ namespace Entity.Enum
         /// <summary>
         /// 施工合同
         /// </summary>
-        ShiGongHeTong =35,
+        ShiGongHeTong =36,
+
+        /// <summary>
+        /// 审批过程中产生的附件
+        /// </summary>
+        ShenPiGuoChengFuJian = 37,
 
         ///// <summary>
         ///// 验质证书
@@ -244,10 +249,6 @@ namespace Entity.Enum
         ///// </summary>
         //RongZiXinXiFuJian = 33,
 
-        ///// <summary>
-        ///// 审批过程中产生的附件
-        ///// </summary>
-        //ShenPiGuoChengFuJian = 34,
 
     }
 }
