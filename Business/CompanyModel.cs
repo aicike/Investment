@@ -14,13 +14,13 @@ namespace Business
     public class CompanyModel : BaseModel<Company>
     {
 
-        public Result Add(Company company, Attachment attachment_YingYeZhiZhao)
+        public Result Add(Company company, List<Attachment> attachments)
         {
             if (string.IsNullOrEmpty(company.Name) || string.IsNullOrEmpty(company.Address) || string.IsNullOrEmpty(company.ChengLiShiJianJiYingYeQiXian) ||
                 company.ZhuCheZiJin <= 0 || company.ShiShouZiBen <= 0 || company.ZiChanZongE <= 0 || company.FuZhaiZongE <= 0 || company.ZhuYingYeWuShouRu <= 0 || company.JingLiRun <= 0 ||
                 company.HuoYouFuZhai <= 0 ||
                 string.IsNullOrEmpty(company.FaDingDaiBiaoRen) || string.IsNullOrEmpty(company.KeWoGongQiuGuanXi) || string.IsNullOrEmpty(company.NiDaiKuanYinHang) ||
-                string.IsNullOrEmpty(company.GuQuanJieGou) || string.IsNullOrEmpty(company.ShiJiKongZhiRenXinYongJiLu) || string.IsNullOrEmpty(company.XinYongDengJi) ||
+                string.IsNullOrEmpty(company.GuQuanJieGou) || string.IsNullOrEmpty(company.ShiJiKongZhiRenXinYongJiLu)  ||
                 string.IsNullOrEmpty(company.JingYingQingKuangJiQiBianDong) || string.IsNullOrEmpty(company.HeXinJingZhengLi) || string.IsNullOrEmpty(company.CaiWuQingKuangJiQiBianDong) ||
                 string.IsNullOrEmpty(company.CaiWuQingKuang) || string.IsNullOrEmpty(company.GuanLianFangJiGuanLianFangJiaoYi) || string.IsNullOrEmpty(company.MuQianDaiKuanDanBaoZhiXingQingKuang) ||
                 string.IsNullOrEmpty(company.DiZhiYaFanDanBao) || string.IsNullOrEmpty(company.QiYeXingZhi) || string.IsNullOrEmpty(company.YingYeZhiZhao) ||
@@ -29,14 +29,9 @@ namespace Business
                 company.IsComplete = false;
             }
             var result = base.Add(company);
-            if (result.HasError == false && attachment_YingYeZhiZhao != null)
+            if (result.HasError == false && attachments != null)
             {
-                //保存营业执照照片
-                AttachmentModel attachmentModel = new AttachmentModel();
-                attachment_YingYeZhiZhao.EnumAttachmentType = (int)attachment_YingYeZhiZhao.EnumAttachmentType;
-                attachment_YingYeZhiZhao.TableName = SystemConst.TableName.Company;
-                attachment_YingYeZhiZhao.TableID = company.ID;
-                result = attachmentModel.CopyAttachment_Company(company.ID, attachment_YingYeZhiZhao, "/Base");
+                UploadAttachment(company.ID, attachments);
             }
             return result;
         }
@@ -48,13 +43,13 @@ namespace Business
         /// <param name="attachment_YingYeZhiZhao">营业执照附件</param>
         /// <param name="deleteFileNameNumbers">需要删除的文件</param>
         /// <returns></returns>
-        public new Result Edit(Company company)
+        public new Result Edit(Company company, List<Attachment> attachments)
         {
             if (string.IsNullOrEmpty(company.Name) || string.IsNullOrEmpty(company.Address) || string.IsNullOrEmpty(company.ChengLiShiJianJiYingYeQiXian) ||
                    company.ZhuCheZiJin <= 0 || company.ShiShouZiBen <= 0 || company.ZiChanZongE <= 0 || company.FuZhaiZongE <= 0 || company.ZhuYingYeWuShouRu <= 0 || company.JingLiRun <= 0 ||
                    company.HuoYouFuZhai <= 0 ||
                    string.IsNullOrEmpty(company.FaDingDaiBiaoRen) || string.IsNullOrEmpty(company.KeWoGongQiuGuanXi) || string.IsNullOrEmpty(company.NiDaiKuanYinHang) ||
-                   string.IsNullOrEmpty(company.GuQuanJieGou) || string.IsNullOrEmpty(company.ShiJiKongZhiRenXinYongJiLu) || string.IsNullOrEmpty(company.XinYongDengJi) ||
+                   string.IsNullOrEmpty(company.GuQuanJieGou) || string.IsNullOrEmpty(company.ShiJiKongZhiRenXinYongJiLu)  ||
                    string.IsNullOrEmpty(company.JingYingQingKuangJiQiBianDong) || string.IsNullOrEmpty(company.HeXinJingZhengLi) || string.IsNullOrEmpty(company.CaiWuQingKuangJiQiBianDong) ||
                    string.IsNullOrEmpty(company.CaiWuQingKuang) || string.IsNullOrEmpty(company.GuanLianFangJiGuanLianFangJiaoYi) || string.IsNullOrEmpty(company.MuQianDaiKuanDanBaoZhiXingQingKuang) ||
                    string.IsNullOrEmpty(company.DiZhiYaFanDanBao) || string.IsNullOrEmpty(company.QiYeXingZhi) || string.IsNullOrEmpty(company.YingYeZhiZhao) ||
@@ -63,23 +58,10 @@ namespace Business
                 company.IsComplete = false;
             }
             var result = base.Edit(company);
-            //if (result.HasError == false && attachment_YingYeZhiZhao != null)
-            //{
-            //    AttachmentModel attachmentModel = new AttachmentModel();
-            //    //删除原营业执照照片
-            //    if (deleteFileNameNumbers != null)
-            //    {
-            //        foreach (var item in deleteFileNameNumbers)
-            //        {
-            //            attachmentModel.DeleteOldFile(SystemConst.TableName.Company, company.ID, item);
-            //        }
-            //    }
-            //    //保存营业执照照片
-            //    attachment_YingYeZhiZhao.EnumAttachmentType = (int)attachment_YingYeZhiZhao.EnumAttachmentType;
-            //    attachment_YingYeZhiZhao.TableName = SystemConst.TableName.Company;
-            //    attachment_YingYeZhiZhao.TableID = company.ID;
-            //    result = attachmentModel.CopyAttachment_Company(company.ID, attachment_YingYeZhiZhao);
-            //}
+            if (result.HasError == false && attachments != null)
+            {
+                UploadAttachment(company.ID, attachments);
+            }
             return result;
         }
 
@@ -89,12 +71,12 @@ namespace Business
         /// <param name="companyID"></param>
         /// <param name="attachmentList"></param>
         /// <returns></returns>
-        public Result UploadAttachment(int companyID, List<Attachment> attachmentList)
+        private Result UploadAttachment(int companyID, List<Attachment> attachmentList)
         {
             Result result = new Result();
+            AttachmentModel attachmentModel = new AttachmentModel();
             if (attachmentList != null)
             {
-                AttachmentModel attachmentModel = new AttachmentModel();
                 foreach (Attachment item in attachmentList)
                 {
                     result = attachmentModel.CopyAttachment_Company(companyID, item, "/Base");

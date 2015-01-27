@@ -39,114 +39,114 @@ namespace Investment.Controllers
         private string GetEnumAttachmentType_Str(EnumAttachmentType eat)
         {
             string str = null;
-            switch (eat)
-            {
-                case EnumAttachmentType.Unknown:
-                    str = "未知";
-                    break;
-                case EnumAttachmentType.YingYeZhiZhao1:
-                    str = "营业执照正本";
-                    break;
-                case EnumAttachmentType.YingYeZhiZhao2:
-                    str = "营业执照副本";
-                    break;
-                case EnumAttachmentType.ZuZhiJiGouDaiMa1:
-                    str = "组织机构代码证正本";
-                    break;
-                case EnumAttachmentType.ZuZhiJiGouDaiMa2:
-                    str = "组织机构代码证副本";
-                    break;
-                case EnumAttachmentType.ShuiWu1:
-                    str = "税务登记证正本";
-                    break;
-                case EnumAttachmentType.ShuiWu2:
-                    str = "税务登记证副本";
-                    break;
-                case EnumAttachmentType.YanZiBaoGao:
-                    str = "验资报告";
-                    break;
-                case EnumAttachmentType.FaRen1:
-                    str = "法人身份证正面";
-                    break;
-                case EnumAttachmentType.FaRen2:
-                    str = "法人身份证反面";
-                    break;
-                case EnumAttachmentType.DaiKuanKa:
-                    str = "贷款卡";
-                    break;
-                case EnumAttachmentType.KaiHuXuKe_XinYongDaiMa:
-                    str = "开户许可证、信用代码证";
-                    break;
-                case EnumAttachmentType.GongSiZhangChengJiXiuZhengAn:
-                    str = "未公司章程及修正案知";
-                    break;
-                case EnumAttachmentType.YanZhiZhengShu:
-                    str = "验质证书";
-                    break;
-                case EnumAttachmentType.GongShangJiBenXinXiChaXunDan:
-                    str = "工商基本信息查询单";
-                    break;
-                case EnumAttachmentType.FaRenJiGuDongShenFenZheng:
-                    str = "法人及股东身份证";
-                    break;
-                case EnumAttachmentType.GaoGuanJianLi:
-                    str = "高管简历";
-                    break;
-                case EnumAttachmentType.XiangMuXiangGuanPiWen:
-                    str = "项目相关批文";
-                    break;
-                case EnumAttachmentType.KeXingXingBaoGao:
-                    str = "可行性报告";
-                    break;
-                case EnumAttachmentType.XiangMuJianJieJiXiaoGuoTu:
-                    str = "项目简介及效果图";
-                    break;
-                case EnumAttachmentType.GongSiJianJie:
-                    str = "公司简介";
-                    break;
-                case EnumAttachmentType.RongZhiShenQingShuJiHuanKuanJiHuaShu:
-                    str = "融资申请书及还款计划书";
-                    break;
-                case EnumAttachmentType.WuZheng:
-                    str = "五证";
-                    break;
-                case EnumAttachmentType.GongSiJinSanNianJiDangNianCaiWuBaoBiaoHeShenJiBaoGao:
-                    str = "公司近三年及当年财务报表和审计报告";
-                    break;
-                case EnumAttachmentType.ErJiKeMuMingXi:
-                    str = "二级科目明细";
-                    break;
-                case EnumAttachmentType.ZengZhiShui_YingYeShui_SuoDeShui:
-                    str = "公司最近一年的增值税、营业税、所得税纳税申请表和纳税凭证复印件";
-                    break;
-                case EnumAttachmentType.GongSiDaiKuanMingXi:
-                    str = "公司贷款明细，包含借款主体、期限、金额、方式、抵押或担保情况、到期日、贷款银行等，并提供贷款合同复印件";
-                    break;
-                case EnumAttachmentType.ShiGongHeTong:
-                    str = "施工合同";
-                    break;
-                case EnumAttachmentType.XiaoShouMingXi:
-                    str = "销售明细";
-                    break;
-                case EnumAttachmentType.ShenQingRenYinHangDuiZhangDan:
-                    str = "申请人的所有账号近一年的银行对账单";
-                    break;
-                case EnumAttachmentType.DiYaWuZhiLiao:
-                    str = "抵押物资料（土地证、房产证、评估报告）";
-                    break;
-                case EnumAttachmentType.CaiChanQingDan:
-                    str = "公司实际经营者及主要股东个人财产清单及相关产权证书复印件";
-                    break;
-                case EnumAttachmentType.GuanLianGongSiZiLiao:
-                    str = "关联公司资料";
-                    break;
-                case EnumAttachmentType.RongZiXinXiFuJian:
-                    str = "融资信息附件全部附件";
-                    break;
-                default:
-                    str = "未配置";
-                    break;
-            }
+            //switch (eat)
+            //{
+            //    case EnumAttachmentType.Unknown:
+            //        str = "未知";
+            //        break;
+            //    case EnumAttachmentType.YingYeZhiZhao1:
+            //        str = "营业执照正本";
+            //        break;
+            //    case EnumAttachmentType.YingYeZhiZhao2:
+            //        str = "营业执照副本";
+            //        break;
+            //    case EnumAttachmentType.ZuZhiJiGouDaiMa1:
+            //        str = "组织机构代码证正本";
+            //        break;
+            //    case EnumAttachmentType.ZuZhiJiGouDaiMa2:
+            //        str = "组织机构代码证副本";
+            //        break;
+            //    case EnumAttachmentType.ShuiWu1:
+            //        str = "税务登记证正本";
+            //        break;
+            //    case EnumAttachmentType.ShuiWu2:
+            //        str = "税务登记证副本";
+            //        break;
+            //    case EnumAttachmentType.YanZiBaoGao:
+            //        str = "验资报告";
+            //        break;
+            //    case EnumAttachmentType.FaRen1:
+            //        str = "法人身份证正面";
+            //        break;
+            //    case EnumAttachmentType.FaRen2:
+            //        str = "法人身份证反面";
+            //        break;
+            //    case EnumAttachmentType.DaiKuanKa:
+            //        str = "贷款卡";
+            //        break;
+            //    case EnumAttachmentType.KaiHuXuKe_XinYongDaiMa:
+            //        str = "开户许可证、信用代码证";
+            //        break;
+            //    case EnumAttachmentType.GongSiZhangChengJiXiuZhengAn:
+            //        str = "未公司章程及修正案知";
+            //        break;
+            //    case EnumAttachmentType.YanZhiZhengShu:
+            //        str = "验质证书";
+            //        break;
+            //    case EnumAttachmentType.GongShangJiBenXinXiChaXunDan:
+            //        str = "工商基本信息查询单";
+            //        break;
+            //    case EnumAttachmentType.FaRenJiGuDongShenFenZheng:
+            //        str = "法人及股东身份证";
+            //        break;
+            //    case EnumAttachmentType.GaoGuanJianLi:
+            //        str = "高管简历";
+            //        break;
+            //    case EnumAttachmentType.XiangMuXiangGuanPiWen:
+            //        str = "项目相关批文";
+            //        break;
+            //    case EnumAttachmentType.KeXingXingBaoGao:
+            //        str = "可行性报告";
+            //        break;
+            //    case EnumAttachmentType.XiangMuJianJieJiXiaoGuoTu:
+            //        str = "项目简介及效果图";
+            //        break;
+            //    case EnumAttachmentType.GongSiJianJie:
+            //        str = "公司简介";
+            //        break;
+            //    case EnumAttachmentType.RongZhiShenQingShuJiHuanKuanJiHuaShu:
+            //        str = "融资申请书及还款计划书";
+            //        break;
+            //    case EnumAttachmentType.WuZheng:
+            //        str = "五证";
+            //        break;
+            //    case EnumAttachmentType.GongSiJinSanNianJiDangNianCaiWuBaoBiaoHeShenJiBaoGao:
+            //        str = "公司近三年及当年财务报表和审计报告";
+            //        break;
+            //    case EnumAttachmentType.ErJiKeMuMingXi:
+            //        str = "二级科目明细";
+            //        break;
+            //    case EnumAttachmentType.ZengZhiShui_YingYeShui_SuoDeShui:
+            //        str = "公司最近一年的增值税、营业税、所得税纳税申请表和纳税凭证复印件";
+            //        break;
+            //    case EnumAttachmentType.GongSiDaiKuanMingXi:
+            //        str = "公司贷款明细，包含借款主体、期限、金额、方式、抵押或担保情况、到期日、贷款银行等，并提供贷款合同复印件";
+            //        break;
+            //    case EnumAttachmentType.ShiGongHeTong:
+            //        str = "施工合同";
+            //        break;
+            //    case EnumAttachmentType.XiaoShouMingXi:
+            //        str = "销售明细";
+            //        break;
+            //    case EnumAttachmentType.ShenQingRenYinHangDuiZhangDan:
+            //        str = "申请人的所有账号近一年的银行对账单";
+            //        break;
+            //    case EnumAttachmentType.DiYaWuZhiLiao:
+            //        str = "抵押物资料（土地证、房产证、评估报告）";
+            //        break;
+            //    case EnumAttachmentType.CaiChanQingDan:
+            //        str = "公司实际经营者及主要股东个人财产清单及相关产权证书复印件";
+            //        break;
+            //    case EnumAttachmentType.GuanLianGongSiZiLiao:
+            //        str = "关联公司资料";
+            //        break;
+            //    case EnumAttachmentType.RongZiXinXiFuJian:
+            //        str = "融资信息附件全部附件";
+            //        break;
+            //    default:
+            //        str = "未配置";
+            //        break;
+            //}
             return str;
         }
 

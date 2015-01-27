@@ -38,6 +38,9 @@ namespace Investment.Controllers
             CompanyModel companyModel = new CompanyModel();
             company.OwnerID = LoginAccount.UserID;
             company.Status = 1;
+
+            List<Attachment> attachments = GetAttachment();
+
             Result result = companyModel.Add(company, null);
             if (result.HasError)
             {
@@ -58,11 +61,8 @@ namespace Investment.Controllers
         {
             Result result = null;
             CompanyModel companyModel = new CompanyModel();
-            result = companyModel.Edit(company);
-            if (result.HasError == false)
-            {
-                result = EditAttachment(company);
-            }
+            List<Attachment> attachments = GetAttachment();
+            result = companyModel.Edit(company, attachments);
             if (result.HasError)
             {
                 return JavaScript("JMessage('" + result.Error + "',true)");
@@ -73,211 +73,195 @@ namespace Investment.Controllers
             }
         }
 
-        private Result EditAttachment(Company company)
+        private List<Attachment> GetAttachment()
         {
             List<Attachment> attachmentList = new List<Attachment>();
 
-            string FaRen1 = Request.Form["hid_attachment_1"];
-            if (string.IsNullOrEmpty(FaRen1) == false)
+            string QiYeZiZhi = Request.Form["hid_attachment_1"];
+            if (string.IsNullOrEmpty(QiYeZiZhi) == false)
             {
-                var attachment_FaRen1 = Newtonsoft.Json.JsonConvert.DeserializeObject<Attachment>(FaRen1);
-                attachmentList.Add(attachment_FaRen1);
+                var attachment_QiYeZiZhi = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Attachment>>(QiYeZiZhi);
+                attachmentList.AddRange(attachment_QiYeZiZhi);
             }
-            string FaRen2 = Request.Form["hid_attachment_2"];
-            if (string.IsNullOrEmpty(FaRen2) == false)
+            string YingYeZhiZhao = Request.Form["hid_attachment_2"];
+            if (string.IsNullOrEmpty(YingYeZhiZhao) == false)
             {
-                var attachment_FaRen2 = Newtonsoft.Json.JsonConvert.DeserializeObject<Attachment>(FaRen2);
-                attachmentList.Add(attachment_FaRen2);
+                var attachment_YingYeZhiZhao = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Attachment>>(YingYeZhiZhao);
+                attachmentList.AddRange(attachment_YingYeZhiZhao);
             }
-            string YingYeZhiZhao1 = Request.Form["hid_attachment_3"];
-            if (string.IsNullOrEmpty(YingYeZhiZhao1) == false)
+            string ZuZhiJiGouDaiMa = Request.Form["hid_attachment_3"];
+            if (string.IsNullOrEmpty(ZuZhiJiGouDaiMa) == false)
             {
-                var attachment_YingYeZhiZhao1 = Newtonsoft.Json.JsonConvert.DeserializeObject<Attachment>(YingYeZhiZhao1);
-                attachmentList.Add(attachment_YingYeZhiZhao1);
+                var attachment_ZuZhiJiGouDaiMa = Newtonsoft.Json.JsonConvert.DeserializeObject<Attachment>(ZuZhiJiGouDaiMa);
+                attachmentList.Add(attachment_ZuZhiJiGouDaiMa);
             }
-            string YingYeZhiZhao2 = Request.Form["hid_attachment_4"];
-            if (string.IsNullOrEmpty(YingYeZhiZhao2) == false)
+            string ShuiWu = Request.Form["hid_attachment_4"];
+            if (string.IsNullOrEmpty(ZuZhiJiGouDaiMa) == false)
             {
-                var attachment_YingYeZhiZhao2 = Newtonsoft.Json.JsonConvert.DeserializeObject<Attachment>(YingYeZhiZhao2);
-                attachmentList.Add(attachment_YingYeZhiZhao2);
+                var attachment_ShuiWu = Newtonsoft.Json.JsonConvert.DeserializeObject<Attachment>(ShuiWu);
+                attachmentList.Add(attachment_ShuiWu);
             }
-            string ZuZhiJiGouDaiMa1 = Request.Form["hid_attachment_5"];
-            if (string.IsNullOrEmpty(ZuZhiJiGouDaiMa1) == false)
-            {
-                var attachment_ZuZhiJiGouDaiMa1 = Newtonsoft.Json.JsonConvert.DeserializeObject<Attachment>(ZuZhiJiGouDaiMa1);
-                attachmentList.Add(attachment_ZuZhiJiGouDaiMa1);
-            }
-            string ZuZhiJiGouDaiMa2 = Request.Form["hid_attachment_6"];
-            if (string.IsNullOrEmpty(ZuZhiJiGouDaiMa2) == false)
-            {
-                var attachment_ZuZhiJiGouDaiMa2 = Newtonsoft.Json.JsonConvert.DeserializeObject<Attachment>(ZuZhiJiGouDaiMa2);
-                attachmentList.Add(attachment_ZuZhiJiGouDaiMa2);
-            }
-            string ShuiWu1 = Request.Form["hid_attachment_7"];
-            if (string.IsNullOrEmpty(ShuiWu1) == false)
-            {
-                var attachment_ShuiWu1 = Newtonsoft.Json.JsonConvert.DeserializeObject<Attachment>(ShuiWu1);
-                attachmentList.Add(attachment_ShuiWu1);
-            }
-            string ShuiWu2 = Request.Form["hid_attachment_8"];
-            if (string.IsNullOrEmpty(ShuiWu2) == false)
-            {
-                var attachment_ShuiWu2 = Newtonsoft.Json.JsonConvert.DeserializeObject<Attachment>(ShuiWu2);
-                attachmentList.Add(attachment_ShuiWu2);
-            }
-            string DaiKuanKa = Request.Form["hid_attachment_9"];
-            if (string.IsNullOrEmpty(DaiKuanKa) == false)
-            {
-                var attachment_DaiKuanKa = Newtonsoft.Json.JsonConvert.DeserializeObject<Attachment>(DaiKuanKa);
-                attachmentList.Add(attachment_DaiKuanKa);
-            }
-            string KaiHuXuKeZheng = Request.Form["hid_attachment_10"];
+            string KaiHuXuKeZheng = Request.Form["hid_attachment_5"];
             if (string.IsNullOrEmpty(KaiHuXuKeZheng) == false)
             {
-                var attachment_KaiHuXuKeZheng = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Attachment>>(KaiHuXuKeZheng);
-                attachmentList.AddRange(attachment_KaiHuXuKeZheng);
+                var attachment_KaiHuXuKeZheng = Newtonsoft.Json.JsonConvert.DeserializeObject<Attachment>(KaiHuXuKeZheng);
+                attachmentList.Add(attachment_KaiHuXuKeZheng);
             }
-            string YanZhiZhengShu = Request.Form["hid_attachment_11"];
-            if (string.IsNullOrEmpty(YanZhiZhengShu) == false)
+            string YanZiBaoGao = Request.Form["hid_attachment_6"];
+            if (string.IsNullOrEmpty(YanZiBaoGao) == false)
             {
-                var attachment_YanZhiZhengShu = Newtonsoft.Json.JsonConvert.DeserializeObject<Attachment>(YanZhiZhengShu);
-                attachmentList.Add(attachment_YanZhiZhengShu);
+                var attachment_YanZiBaoGao = Newtonsoft.Json.JsonConvert.DeserializeObject<Attachment>(YanZiBaoGao);
+                attachmentList.Add(attachment_YanZiBaoGao);
             }
-            string GongSiZhangChengJiXiuZhengAn = Request.Form["hid_attachment_12"];
-            if (string.IsNullOrEmpty(GongSiZhangChengJiXiuZhengAn) == false)
+            string GongSiZhangCheng = Request.Form["hid_attachment_7"];
+            if (string.IsNullOrEmpty(GongSiZhangCheng) == false)
             {
-                var attachment_GongSiZhangChengJiXiuZhengAn = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Attachment>>(GongSiZhangChengJiXiuZhengAn);
-                attachmentList.AddRange(attachment_GongSiZhangChengJiXiuZhengAn);
+                var attachment_GongSiZhangCheng = Newtonsoft.Json.JsonConvert.DeserializeObject<Attachment>(GongSiZhangCheng);
+                attachmentList.Add(attachment_GongSiZhangCheng);
             }
-            string YanZhiBaoGao = Request.Form["hid_attachment_13"];
-            if (string.IsNullOrEmpty(YanZhiBaoGao) == false)
+            string GongShangChaXun = Request.Form["hid_attachment_8"];
+            if (string.IsNullOrEmpty(GongShangChaXun) == false)
             {
-                var attachment_YanZhiBaoGao = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Attachment>>(YanZhiBaoGao);
-                attachmentList.AddRange(attachment_YanZhiBaoGao);
+                var attachment_GongShangChaXun = Newtonsoft.Json.JsonConvert.DeserializeObject<Attachment>(GongShangChaXun);
+                attachmentList.Add(attachment_GongShangChaXun);
             }
-            string GongShangJiBenXinXiChaXunDan = Request.Form["hid_attachment_14"];
-            if (string.IsNullOrEmpty(GongShangJiBenXinXiChaXunDan) == false)
+            string XinYongDaiMaZheng = Request.Form["hid_attachment_9"];
+            if (string.IsNullOrEmpty(XinYongDaiMaZheng) == false)
             {
-                var attachment_GongShangJiBenXinXiChaXunDan = Newtonsoft.Json.JsonConvert.DeserializeObject<Attachment>(GongShangJiBenXinXiChaXunDan);
-                attachmentList.Add(attachment_GongShangJiBenXinXiChaXunDan);
+                var attachment_XinYongDaiMaZheng = Newtonsoft.Json.JsonConvert.DeserializeObject<Attachment>(XinYongDaiMaZheng);
+                attachmentList.Add(attachment_XinYongDaiMaZheng);
             }
-            string FaRenJiGuDongShenFenZheng = Request.Form["hid_attachment_15"];
-            if (string.IsNullOrEmpty(FaRenJiGuDongShenFenZheng) == false)
-            {
-                var attachment_FaRenJiGuDongShenFenZheng = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Attachment>>(FaRenJiGuDongShenFenZheng);
-                attachmentList.AddRange(attachment_FaRenJiGuDongShenFenZheng);
-            }
-            string GaoGuanJianLi = Request.Form["hid_attachment_16"];
-            if (string.IsNullOrEmpty(GaoGuanJianLi) == false)
-            {
-                var attachment_GaoGuanJianLi = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Attachment>>(GaoGuanJianLi);
-                attachmentList.AddRange(attachment_GaoGuanJianLi);
-            }
-            string XiangMuXiangGuanPiWen = Request.Form["hid_attachment_17"];
-            if (string.IsNullOrEmpty(XiangMuXiangGuanPiWen) == false)
-            {
-                var attachment_XiangMuXiangGuanPiWen = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Attachment>>(XiangMuXiangGuanPiWen);
-                attachmentList.AddRange(attachment_XiangMuXiangGuanPiWen);
-            }
-            string KeXingXingBaoGao = Request.Form["hid_attachment_18"];
-            if (string.IsNullOrEmpty(KeXingXingBaoGao) == false)
-            {
-                var attachment_KeXingXingBaoGao = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Attachment>>(KeXingXingBaoGao);
-                attachmentList.AddRange(attachment_KeXingXingBaoGao);
-            }
-            string XiangMuJianJieJiXiaoGuoTu = Request.Form["hid_attachment_19"];
-            if (string.IsNullOrEmpty(XiangMuJianJieJiXiaoGuoTu) == false)
-            {
-                var attachment_XiangMuJianJieJiXiaoGuoTu = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Attachment>>(XiangMuJianJieJiXiaoGuoTu);
-                attachmentList.AddRange(attachment_XiangMuJianJieJiXiaoGuoTu);
-            }
-            string GongSiJianJie = Request.Form["hid_attachment_20"];
+            string GongSiJianJie = Request.Form["hid_attachment_10"];
             if (string.IsNullOrEmpty(GongSiJianJie) == false)
             {
                 var attachment_GongSiJianJie = Newtonsoft.Json.JsonConvert.DeserializeObject<Attachment>(GongSiJianJie);
                 attachmentList.Add(attachment_GongSiJianJie);
             }
-            string RongZhiShenQingShuJiHuanKuanJiHuaShu = Request.Form["hid_attachment_21"];
-            if (string.IsNullOrEmpty(RongZhiShenQingShuJiHuanKuanJiHuaShu) == false)
+            string FaRen = Request.Form["hid_attachment_11"];
+            if (string.IsNullOrEmpty(FaRen) == false)
             {
-                var attachment_RongZhiShenQingShuJiHuanKuanJiHuaShu = Newtonsoft.Json.JsonConvert.DeserializeObject<Attachment>(RongZhiShenQingShuJiHuanKuanJiHuaShu);
-                attachmentList.Add(attachment_RongZhiShenQingShuJiHuanKuanJiHuaShu);
+                var attachment_FaRen = Newtonsoft.Json.JsonConvert.DeserializeObject<Attachment>(FaRen);
+                attachmentList.Add(attachment_FaRen);
             }
-            string WuZheng = Request.Form["hid_attachment_22"];
+            string GuDong = Request.Form["hid_attachment_12"];
+            if (string.IsNullOrEmpty(GuDong) == false)
+            {
+                var attachment_GuDong = Newtonsoft.Json.JsonConvert.DeserializeObject<Attachment>(GuDong);
+                attachmentList.Add(attachment_GuDong);
+            }
+            string FaRenGuDongZhengXinBaoGao = Request.Form["hid_attachment_13"];
+            if (string.IsNullOrEmpty(FaRenGuDongZhengXinBaoGao) == false)
+            {
+                var attachment_FaRenGuDongZhengXinBaoGao = Newtonsoft.Json.JsonConvert.DeserializeObject<Attachment>(FaRenGuDongZhengXinBaoGao);
+                attachmentList.Add(attachment_FaRenGuDongZhengXinBaoGao);
+            }
+            string GuDongGouCheng = Request.Form["hid_attachment_14"];
+            if (string.IsNullOrEmpty(GuDongGouCheng) == false)
+            {
+                var attachment_GuDongGouCheng = Newtonsoft.Json.JsonConvert.DeserializeObject<Attachment>(GuDongGouCheng);
+                attachmentList.Add(attachment_GuDongGouCheng);
+            }
+            string ZuZhiJieGou = Request.Form["hid_attachment_15"];
+            if (string.IsNullOrEmpty(ZuZhiJieGou) == false)
+            {
+                var attachment_ZuZhiJieGou = Newtonsoft.Json.JsonConvert.DeserializeObject<Attachment>(ZuZhiJieGou);
+                attachmentList.Add(attachment_ZuZhiJieGou);
+            }
+            string GuanLiChengJianJie = Request.Form["hid_attachment_16"];
+            if (string.IsNullOrEmpty(GuanLiChengJianJie) == false)
+            {
+                var attachment_GuanLiChengJianJie = Newtonsoft.Json.JsonConvert.DeserializeObject<Attachment>(GuanLiChengJianJie);
+                attachmentList.Add(attachment_GuanLiChengJianJie);
+            }
+            string GuanLianQiYe = Request.Form["hid_attachment_17"];
+            if (string.IsNullOrEmpty(GuanLianQiYe) == false)
+            {
+                var attachment_GuanLianQiYe = Newtonsoft.Json.JsonConvert.DeserializeObject<Attachment>(GuanLianQiYe);
+                attachmentList.Add(attachment_GuanLianQiYe);
+            }
+            string JieDaiXinXi = Request.Form["hid_attachment_18"];
+            if (string.IsNullOrEmpty(JieDaiXinXi) == false)
+            {
+                var attachment_JieDaiXinXi = Newtonsoft.Json.JsonConvert.DeserializeObject<Attachment>(JieDaiXinXi);
+                attachmentList.Add(attachment_JieDaiXinXi);
+            }
+            string SanNianShenJiBaoGao = Request.Form["hid_attachment_19"];
+            if (string.IsNullOrEmpty(SanNianShenJiBaoGao) == false)
+            {
+                var attachment_SanNianShenJiBaoGao = Newtonsoft.Json.JsonConvert.DeserializeObject<Attachment>(SanNianShenJiBaoGao);
+                attachmentList.Add(attachment_SanNianShenJiBaoGao);
+            }
+            string LiuYueCaiWuBaoBiao = Request.Form["hid_attachment_20"];
+            if (string.IsNullOrEmpty(LiuYueCaiWuBaoBiao) == false)
+            {
+                var attachment_LiuYueCaiWuBaoBiao = Newtonsoft.Json.JsonConvert.DeserializeObject<Attachment>(LiuYueCaiWuBaoBiao);
+                attachmentList.Add(attachment_LiuYueCaiWuBaoBiao);
+            }
+            string ZengZhiShuiYingYeShui = Request.Form["hid_attachment_21"];
+            if (string.IsNullOrEmpty(ZengZhiShuiYingYeShui) == false)
+            {
+                var attachment_ZengZhiShuiYingYeShui = Newtonsoft.Json.JsonConvert.DeserializeObject<Attachment>(ZengZhiShuiYingYeShui);
+                attachmentList.Add(attachment_ZengZhiShuiYingYeShui);
+            }
+            string DiYaWu = Request.Form["hid_attachment_22"];
+            if (string.IsNullOrEmpty(DiYaWu) == false)
+            {
+                var attachment_DiYaWu = Newtonsoft.Json.JsonConvert.DeserializeObject<Attachment>(DiYaWu);
+                attachmentList.Add(attachment_DiYaWu);
+            }
+            string KeXingXingBaoGao = Request.Form["hid_attachment_23"];
+            if (string.IsNullOrEmpty(KeXingXingBaoGao) == false)
+            {
+                var attachment_KeXingXingBaoGao = Newtonsoft.Json.JsonConvert.DeserializeObject<Attachment>(KeXingXingBaoGao);
+                attachmentList.Add(attachment_KeXingXingBaoGao);
+            }
+
+
+            string XiangMuXiangGuanPiWen = Request.Form["hid_attachment_24"];
+            if (string.IsNullOrEmpty(XiangMuXiangGuanPiWen) == false)
+            {
+                var attachment_XiangMuXiangGuanPiWen = Newtonsoft.Json.JsonConvert.DeserializeObject<Attachment>(XiangMuXiangGuanPiWen);
+                attachmentList.Add(attachment_XiangMuXiangGuanPiWen);
+            }
+            string WuZheng = Request.Form["hid_attachment_25"];
             if (string.IsNullOrEmpty(WuZheng) == false)
             {
-                var attachment_WuZheng = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Attachment>>(WuZheng);
-                attachmentList.AddRange(attachment_WuZheng);
+                var attachment_WuZheng = Newtonsoft.Json.JsonConvert.DeserializeObject<Attachment>(WuZheng);
+                attachmentList.Add(attachment_WuZheng);
             }
-            string GongSiJinSanNianJiDangNianCaiWuBaoBiaoHeShenJiBaoGao = Request.Form["hid_attachment_23"];
-            if (string.IsNullOrEmpty(GongSiJinSanNianJiDangNianCaiWuBaoBiaoHeShenJiBaoGao) == false)
-            {
-                var attachment_GongSiJinSanNianJiDangNianCaiWuBaoBiaoHeShenJiBaoGao = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Attachment>>(GongSiJinSanNianJiDangNianCaiWuBaoBiaoHeShenJiBaoGao);
-                attachmentList.AddRange(attachment_GongSiJinSanNianJiDangNianCaiWuBaoBiaoHeShenJiBaoGao);
-            }
-            string ErJiKeMuMingXi = Request.Form["hid_attachment_24"];
-            if (string.IsNullOrEmpty(ErJiKeMuMingXi) == false)
-            {
-                var attachment_ErJiKeMuMingXi = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Attachment>>(ErJiKeMuMingXi);
-                attachmentList.AddRange(attachment_ErJiKeMuMingXi);
-            }
-            string ZengZhiShui_YingYeShui_SuoDeShui = Request.Form["hid_attachment_25"];
-            if (string.IsNullOrEmpty(ZengZhiShui_YingYeShui_SuoDeShui) == false)
-            {
-                var attachment_ZengZhiShui_YingYeShui_SuoDeShui = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Attachment>>(ZengZhiShui_YingYeShui_SuoDeShui);
-                attachmentList.AddRange(attachment_ZengZhiShui_YingYeShui_SuoDeShui);
-            }
-            string GongSiDaiKuanMingXi = Request.Form["hid_attachment_26"];
-            if (string.IsNullOrEmpty(GongSiDaiKuanMingXi) == false)
-            {
-                var attachment_GongSiDaiKuanMingXi = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Attachment>>(GongSiDaiKuanMingXi);
-                attachmentList.AddRange(attachment_GongSiDaiKuanMingXi);
-            }
-            string ShiGongHeTong = Request.Form["hid_attachment_27"];
+            string ShiGongHeTong = Request.Form["hid_attachment_26"];
             if (string.IsNullOrEmpty(ShiGongHeTong) == false)
             {
-                var attachment_ShiGongHeTong = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Attachment>>(ShiGongHeTong);
-                attachmentList.AddRange(attachment_ShiGongHeTong);
+                var attachment_ShiGongHeTong = Newtonsoft.Json.JsonConvert.DeserializeObject<Attachment>(ShiGongHeTong);
+                attachmentList.Add(attachment_ShiGongHeTong);
             }
-            string XiaoShouMingXi = Request.Form["hid_attachment_28"];
+            string XiaoShouMingXi = Request.Form["hid_attachment_27"];
             if (string.IsNullOrEmpty(XiaoShouMingXi) == false)
             {
-                var attachment_XiaoShouMingXi = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Attachment>>(XiaoShouMingXi);
-                attachmentList.AddRange(attachment_XiaoShouMingXi);
+                var attachment_XiaoShouMingXi = Newtonsoft.Json.JsonConvert.DeserializeObject<Attachment>(XiaoShouMingXi);
+                attachmentList.Add(attachment_XiaoShouMingXi);
             }
-            string ShenQingRenYinHangDuiZhangDan = Request.Form["hid_attachment_29"];
-            if (string.IsNullOrEmpty(ShenQingRenYinHangDuiZhangDan) == false)
+
+
+            string QiShui = Request.Form["hid_attachment_28"];
+            if (string.IsNullOrEmpty(QiShui) == false)
             {
-                var attachment_ShenQingRenYinHangDuiZhangDan = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Attachment>>(ShenQingRenYinHangDuiZhangDan);
-                attachmentList.AddRange(attachment_ShenQingRenYinHangDuiZhangDan);
+                var attachment_QiShui = Newtonsoft.Json.JsonConvert.DeserializeObject<Attachment>(QiShui);
+                attachmentList.Add(attachment_QiShui);
             }
-            string DiYaWuZhiLiao = Request.Form["hid_attachment_30"];
-            if (string.IsNullOrEmpty(DiYaWuZhiLiao) == false)
+            string GuoWangJingYan = Request.Form["hid_attachment_29"];
+            if (string.IsNullOrEmpty(GuoWangJingYan) == false)
             {
-                var attachment_DiYaWuZhiLiao = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Attachment>>(DiYaWuZhiLiao);
-                attachmentList.AddRange(attachment_DiYaWuZhiLiao);
+                var attachment_GuoWangJingYan = Newtonsoft.Json.JsonConvert.DeserializeObject<Attachment>(GuoWangJingYan);
+                attachmentList.Add(attachment_GuoWangJingYan);
             }
-            string CaiChanQingDan = Request.Form["hid_attachment_31"];
-            if (string.IsNullOrEmpty(CaiChanQingDan) == false)
+            string FangGuanJuDangAnChaXun = Request.Form["hid_attachment_30"];
+            if (string.IsNullOrEmpty(FangGuanJuDangAnChaXun) == false)
             {
-                var attachment_CaiChanQingDan = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Attachment>>(CaiChanQingDan);
-                attachmentList.AddRange(attachment_CaiChanQingDan);
+                var attachment_FangGuanJuDangAnChaXun = Newtonsoft.Json.JsonConvert.DeserializeObject<Attachment>(FangGuanJuDangAnChaXun);
+                attachmentList.Add(attachment_FangGuanJuDangAnChaXun);
             }
-            string GuanLianGongSiZiLiao = Request.Form["hid_attachment_32"];
-            if (string.IsNullOrEmpty(GuanLianGongSiZiLiao) == false)
-            {
-                var attachment_GuanLianGongSiZiLiao = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Attachment>>(GuanLianGongSiZiLiao);
-                attachmentList.AddRange(attachment_GuanLianGongSiZiLiao);
-            }
-            string QiTa = Request.Form["hid_attachment_50"];
-            if (string.IsNullOrEmpty(QiTa) == false)
-            {
-                var attachment_QiTa = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Attachment>>(QiTa);
-                attachmentList.AddRange(attachment_QiTa);
-            }
-            CompanyModel companyModel = new CompanyModel();
-            Result result = companyModel.UploadAttachment(company.ID, attachmentList);
-            return result;
+            return attachmentList;
         }
 
         public ActionResult ChangeStatus(int id, int status)
@@ -374,7 +358,7 @@ namespace Investment.Controllers
 
 
             WorkFlowManagerModel wfmm = new WorkFlowManagerModel();
-            var wfms = wfmm.List().OrderBy(a=>a.ID).ToList();
+            var wfms = wfmm.List().OrderBy(a => a.ID).ToList();
             List<SelectListItem> newList = new List<SelectListItem>();
             var wfm_list = new SelectList(wfms, "ID", "Name");
             newList.Add(new SelectListItem { Text = "请选择项目类型", Value = "select", Selected = true });

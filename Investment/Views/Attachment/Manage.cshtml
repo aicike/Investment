@@ -10,12 +10,12 @@
 <style>
     
 </style>
-<span class="help-inline"><a class="blue" data-toggle="modal" href="#responsive_@ac.ID">
-    [管理附件]</a>
+<a class="blue" data-toggle="modal" href="#responsive_@ac.ID">
+    @ac.Text</a>
     @if (Model.Count > 0)
     { 
         @:（@(Model.Count)个）
-                                            }<label id="label_new_attachment_@ac.ID"></label></span>
+                                            }<label id="label_new_attachment_@ac.ID"></label>
 <div id="responsive_@ac.ID" class="modal hide fade" tabindex="-1" data-width="800">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true" id="btn_attachment_close_@ac.ID">

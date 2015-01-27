@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations;
 namespace Entity
 {
     /// <summary>
-    /// 客户信息主表
+    /// 公司信息主表
     /// </summary>
     public class Company : BaseEntity
     {
@@ -34,10 +34,10 @@ namespace Entity
         public bool IsComplete { get; set; }
 
         /// <summary>
-        /// 客户名称
+        /// 公司名称
         /// </summary>
-        [Display(Name = "客户名称")]
-        [Required(ErrorMessage = "请输入客户名称")]
+        [Display(Name = "公司名称")]
+        [Required(ErrorMessage = "请输入公司名称")]
         [StringLength(100, ErrorMessage = "不能超过100字")]
         public string Name { get; set; }
 
@@ -95,9 +95,16 @@ namespace Entity
         /// <summary>
         /// 法定代表人
         /// </summary>
-        [Display(Name = "法定代表人")]
-        [Required(ErrorMessage = "请输入法定代表人")]
+        [Display(Name = "法人姓名及身份证号")]
+        [Required(ErrorMessage = "法人姓名及身份证号")]
         public string FaDingDaiBiaoRen { get; set; }
+
+        /// <summary>
+        /// 股东
+        /// </summary>
+        [Display(Name = "股东姓名及身份证号")]
+        [Required(ErrorMessage = "股东姓名及身份证号")]
+        public string GuDong { get; set; }
 
         /// <summary>
         /// 资产总额
@@ -164,7 +171,7 @@ namespace Entity
         /// 实际控制人
         /// </summary>
         [Display(Name = "实际控制人")]
-        [Required(ErrorMessage = "请输入实际控制人")]
+        [Required(ErrorMessage = "请输入实际控制人及身份证号")]
         public string ShiJiKongZhiRen { get; set; }
 
         /// <summary>
@@ -174,10 +181,10 @@ namespace Entity
         public string ShiJiKongZhiRenXinYongJiLu { get; set; }
 
         /// <summary>
-        /// 信用等级
+        /// 信用代码证号
         /// </summary>
-        [Display(Name = "信用等级")]
-        public string XinYongDengJi { get; set; }
+        [Display(Name = "信用代码证号")]
+        public string XinYongDaiMaZhengHao { get; set; }
 
         /// <summary>
         /// 经营情况及其变动
@@ -231,8 +238,29 @@ namespace Entity
         /// <summary>
         /// 营业执照
         /// </summary>
-        [Display(Name = "营业执照")]
+        [Display(Name = "营业执照号")]
         public string YingYeZhiZhao { get; set; }
+
+
+        /// <summary>
+        /// 组织机构代码证号
+        /// </summary>
+        [Display(Name = "组织机构代码证号")]
+        public string ZuZhiJiGouDaiMaZheng { get; set; }
+
+
+        /// <summary>
+        /// 税务登记证号
+        /// </summary>
+        [Display(Name = "税务登记证号")]
+        public string SuiWuDengJi { get; set; }
+
+
+        /// <summary>
+        /// 开户许可证号
+        /// </summary>
+        [Display(Name = "开户许可证号")]
+        public string KaiHuXuKeZheng { get; set; }
 
 
         /// <summary>

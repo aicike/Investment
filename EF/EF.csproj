@@ -53,6 +53,14 @@
     <Compile Include="Mapping\RoleOptionMap.cs" />
     <Compile Include="Mapping\RoleAccountMap.cs" />
     <Compile Include="Mapping\AttachmentMap.cs" />
+    <Compile Include="Migrations\201501260918343_UPDATE.cs" />
+    <Compile Include="Migrations\201501260918343_UPDATE.Designer.cs">
+      <DependentUpon>201501260918343_UPDATE.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201501260921128_UPDATE1.cs" />
+    <Compile Include="Migrations\201501260921128_UPDATE1.Designer.cs">
+      <DependentUpon>201501260921128_UPDATE1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -68,6 +76,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Initial.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201501260918343_UPDATE.resx">
+      <DependentUpon>201501260918343_UPDATE.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201501260921128_UPDATE1.resx">
+      <DependentUpon>201501260921128_UPDATE1.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
