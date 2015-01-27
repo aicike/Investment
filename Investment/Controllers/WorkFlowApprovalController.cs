@@ -34,6 +34,11 @@ namespace Investment.Controllers
             //获取所有机构
             var AllProduct = MPModel.GetAllInfo();
             ViewBag.AllProduct = AllProduct;
+            //是否为自有业务
+            if (financing.WorkFlowManagerID == 4)
+            { 
+                ViewBag.ISZY = 1;
+            }
 
             return View(financing);
         }
@@ -68,19 +73,22 @@ namespace Investment.Controllers
                 workflow.State = 0;
                 workflow.CompanyID = financing.CompanyID;
                 result = WFModel.Add(workflow);
-                //添加流程机构信息
-                WorkFlowMechanismProductModel wmpModel = new WorkFlowMechanismProductModel();
-                //机构ID集合
-                Products = Products.TrimEnd(',');
-                var pros = Products.Split(',').Select(a => int.Parse(a));
-                foreach (var item in pros)
+                if (!string.IsNullOrEmpty(Products))
                 {
-                    WorkFlowMechanismProduct wmp = new WorkFlowMechanismProduct();
-                    wmp.WorkFlowID = workflow.ID;
-                    wmp.State = 0;
-                    wmp.MechanismProductsID = item;
-                    wmp.FormJson = "";
-                    wmpModel.Add(wmp);
+                    //添加流程机构信息
+                    WorkFlowMechanismProductModel wmpModel = new WorkFlowMechanismProductModel();
+                    //机构ID集合
+                    Products = Products.TrimEnd(',');
+                    var pros = Products.Split(',').Select(a => int.Parse(a));
+                    foreach (var item in pros)
+                    {
+                        WorkFlowMechanismProduct wmp = new WorkFlowMechanismProduct();
+                        wmp.WorkFlowID = workflow.ID;
+                        wmp.State = 0;
+                        wmp.MechanismProductsID = item;
+                        wmp.FormJson = "";
+                        wmpModel.Add(wmp);
+                    }
                 }
                 scope.Complete();
 

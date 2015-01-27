@@ -13,6 +13,11 @@
             SetFC();
             $("#_Title").hide();
             $("#link_1").click();
+
+            var zy = "@ViewBag.ISZY";
+            if (zy == "1") {
+                $("#jg_div").hide();
+            }
         });
 
         function SetFC() {
@@ -39,6 +44,10 @@
         };
 
         function CkbSub() {
+            var zy = "@ViewBag.ISZY";
+            if (zy == 1) { 
+                return true
+            }
             var product = "";
             if ($('input[name="CK_Product"]:checked').length == 0) {
                 JMessage("请选择对接机构", true);
@@ -96,7 +105,7 @@
             </tr>
             <tr>
                 <td>
-                    <div class="tabbable tabbable-custom">
+                    <div class="tabbable tabbable-custom" id="jg_div">
                         <ul class="nav nav-tabs">
                             <li class="active"><a href="#tab_1" id="link_1" data-toggle="tab" onclick="Ck_XXK()">
                                 匹配成功的产品</a></li>

@@ -35,7 +35,7 @@ namespace Business
             int cnt = base.SqlExecute(sql);
             if (cnt <= 0)
             {
-                result.HasError = true;
+                //result.HasError = true;
             }
             return result;
         }
