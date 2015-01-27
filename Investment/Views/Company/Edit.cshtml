@@ -558,6 +558,14 @@
                         </div>
                     </div>
                 </div>
+                <div class="myoption">
+                    <div>
+                        <button type="submit" class="btn blue submitbtn">
+                            保存</button>
+                        <button type="button" class="btn" onclick="location.href='@ViewBag.BackUrl'">
+                            返回</button>@Html.HiddenFor(a => a.ID)@Html.HiddenFor(a => a.OwnerID)@Html.HiddenFor(a => a.Status)
+                    </div>
+                </div>
             }
         </div>
     </div>

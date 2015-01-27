@@ -168,7 +168,7 @@
                                     <label class="control-label">
                                         增信措施</label>
                                     <div class="controls">
-                                        @Html.TextAreaFor(a => a.ZengXinCuoShi, new { @class = "span6 m-wrap", @readonly = "readonly" })
+                                        @Html.TextAreaFor(a => a.ZengXinCuoShi, new { @class = "span6 m-wrap", @readonly = "readonly", style = "overflow-y:visible" })
                                         <span class="help-inline">@Html.ValidationMessageFor(a => a.ZengXinCuoShi)</span>
                                     </div>
                                 </div>

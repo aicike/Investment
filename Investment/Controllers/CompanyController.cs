@@ -326,6 +326,15 @@ namespace Investment.Controllers
             newList.Add(new SelectListItem { Text = "请选择项目类型", Value = "select", Selected = true });
             newList.AddRange(wfm_list);
             ViewData["wfm"] = newList;
+
+            GroupAccountModel gam = new GroupAccountModel();
+            var gaList = gam.List().ToList();
+            List<SelectListItem> newGAList = new List<SelectListItem>();
+            var ga_list = new SelectList(gaList, "ID", "Name");
+            newGAList.Add(new SelectListItem { Text = "请选择B角", Value = "0", Selected = true });
+            newGAList.AddRange(ga_list);
+            ViewData["gaList"] = newGAList;
+
             return View();
         }
 
@@ -341,6 +350,10 @@ namespace Investment.Controllers
                 attachments = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Attachment>>(RongZiXinXiFuJian);
             }
             financing.Owner_A_ID = LoginAccount.UserID;
+            if (financing.Owner_B_ID.HasValue && financing.Owner_B_ID.Value == 0)
+            {
+                financing.Owner_B_ID = null;
+            }
             Result result = fm.Add(financing, attachments);
             if (result.HasError)
             {
@@ -349,12 +362,13 @@ namespace Investment.Controllers
             return JavaScript("window.location.href='" + Url.Action("Financing", "Company", new { companyID = financing.CompanyID, page = page }) + "'");
         }
 
-        public ActionResult EditFinancing(int id, int companyID, int page)
+        public ActionResult EditFinancing(int id, int companyID, int page, int fromID)
         {
             FinancingModel fm = new FinancingModel();
             var financing = fm.Get(id);
             (financing.CompanyID == companyID).NotAuthorizedPage();
             ViewBag.Page = page;
+            ViewBag.fromID = fromID;
 
 
             WorkFlowManagerModel wfmm = new WorkFlowManagerModel();
@@ -365,11 +379,20 @@ namespace Investment.Controllers
             newList.AddRange(wfm_list);
             ViewData["wfm"] = newList;
 
+
+            GroupAccountModel gam = new GroupAccountModel();
+            var gaList = gam.List().ToList();
+            List<SelectListItem> newGAList = new List<SelectListItem>();
+            var ga_list = new SelectList(gaList, "ID", "Name");
+            newGAList.Add(new SelectListItem { Text = "请选择B角", Value = "0", Selected = true });
+            newGAList.AddRange(ga_list);
+            ViewData["gaList"] = newGAList;
+
             return View(financing);
         }
 
         [HttpPost]
-        public ActionResult EditFinancing(Financing financing, int page)
+        public ActionResult EditFinancing(Financing financing, int page, int fromID)
         {
             Result result = null;
             FinancingModel fm = new FinancingModel();
@@ -379,15 +402,25 @@ namespace Investment.Controllers
             {
                 attachments = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Attachment>>(RongZiXinXiFuJian);
             }
+            if (financing.Owner_B_ID.HasValue && financing.Owner_B_ID.Value == 0)
+            {
+                financing.Owner_B_ID = null;
+            }
             result = fm.Edit(financing, attachments);
             if (result.HasError)
             {
                 return JavaScript("JMessage('" + result.Error + "',true)");
             }
-            return JavaScript("window.location.href='" + Url.Action("Financing", "Company", new { companyID = financing.CompanyID, page = page }) + "'");
+            if (fromID == 1)
+            {
+                return JavaScript("window.location.href='" + Url.Action("Financing", "Company", new { companyID = financing.CompanyID, page = page }) + "'");
+            }
+            else {
+                return JavaScript("window.location.href='" + Url.Action("Index", "Financing", new {id = page }) + "'");
+            }
         }
 
-        public string DeleteFinancing(int id, int companyID, int page)
+        public string DeleteFinancing(int id, int companyID, int page,int fromID)
         {
             FinancingModel fm = new FinancingModel();
             var result = fm.Delete_Check(id, LoginAccount.UserID);
@@ -395,7 +428,14 @@ namespace Investment.Controllers
             {
                 return "<script>JMessage('" + result.Error + "',true)</script>";
             }
-            return "<script>window.location.href='" + Url.Action("Financing", "Company", new { companyID = companyID, page = page }) + "';</script>";
+            if (fromID == 1)
+            {
+                return "<script>window.location.href='" + Url.Action("Financing", "Company", new { companyID = companyID, page = page }) + "';</script>";
+            }
+            else
+            {
+                return "<script>window.location.href='" + Url.Action("Index", "Financing", new { id= page }) + "';</script>";
+            }
         }
 
         #endregion

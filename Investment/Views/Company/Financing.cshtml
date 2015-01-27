@@ -89,8 +89,8 @@
                                     @Html.ActionLink("详细", "Detail", "Financing", new { id = item.ID }, null, true)
                                     @if (ViewBag.LoginUesrID == item.Owner_A_ID)
                                     { 
-                                        @Html.ActionLink("修改", "EditFinancing", "Company", new { id = item.ID, companyID = company.ID, page = ViewBag.Page }, null, true)@:
-                                        @Ajax.ActionLink("删除", "DeleteFinancing", "Company", new { id = item.ID, companyID = company.ID, page = ViewBag.Page }, new AjaxOptions() { UpdateTargetId = "alert", OnBegin = "return AppDelete('确定删除?删除此项将会删除其关联的所有数据！')" }, true)
+                                        @Html.ActionLink("修改", "EditFinancing", "Company", new { id = item.ID, companyID = company.ID, page = ViewBag.Page, fromID=1 }, null, true)@:
+                                        @Ajax.ActionLink("删除", "DeleteFinancing", "Company", new { id = item.ID, companyID = company.ID, page = ViewBag.Page, fromID = 1 }, new AjaxOptions() { UpdateTargetId = "alert", OnBegin = "return AppDelete('确定删除?删除此项将会删除其关联的所有数据！')" }, true)
                                     }
                                 </td>
                             </tr>

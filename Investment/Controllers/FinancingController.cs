@@ -15,7 +15,7 @@ namespace Investment.Controllers
         /// <param name="id"></param>
         /// <param name="Name"></param>
         /// <returns></returns>
-        public ActionResult Index(int? id, string Name)
+        public ActionResult Index(int? id,string Name)
         {
             FinancingModel fm = new FinancingModel();
 
@@ -26,6 +26,7 @@ namespace Investment.Controllers
                 objs = objs.Where(a => a.Name.Contains(Name));
             }
             var list = objs.ToPagedList(id ?? 1, 15);
+            ViewBag.LoginUesrID = LoginAccount.UserID;
             return View(list);
         }
 

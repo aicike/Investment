@@ -37,13 +37,13 @@
 <div class="row-fluid">
     <div class="span12">
         <div class="tabbable tabbable-custom boxless">
-            @using (Ajax.BeginForm("EditFinancing", "Company", new { page = ViewBag.Page }, new AjaxOptions() { UpdateTargetId = "alert" }, new { @class = "form-horizontal" }))
+            @using (Ajax.BeginForm("EditFinancing", "Company", new { page = ViewBag.Page, fromID=ViewBag.fromID }, new AjaxOptions() { UpdateTargetId = "alert" }, new { @class = "form-horizontal" }))
             {
                 <div class="myoption">
                     <button type="submit" class="btn blue" id="btnSubmit">
                         保存</button>
                     <button type="button" class="btn" onclick="location.href='@ViewBag.BackUrl'">
-                        返回</button>@Html.HiddenFor(a => a.ID)@Html.HiddenFor(a => a.CompanyID)@Html.HiddenFor(a => a.Owner_A_ID)@Html.HiddenFor(a => a.Owner_B_ID)
+                        返回</button>@Html.HiddenFor(a => a.ID)@Html.HiddenFor(a => a.CompanyID)@Html.HiddenFor(a => a.Owner_A_ID)
                 </div>
                 <div class="tabbable tabbable-custom">
                     <ul class="nav nav-tabs">
@@ -171,6 +171,14 @@
                                             <span class="help-inline">@Html.ValidationMessageFor(a => a.Remark)</span>
                                         </div>
                                     </div>
+                                    <div class="control-group">
+                                        <label class="control-label">
+                                            B角设定</label>
+                                        <div class="controls">
+                                            @Html.DropDownListFor(a => a.Owner_B_ID, ViewData["gaList"] as List<SelectListItem>, new { @class = "span6 m-wrap" })
+                                            <span class="help-inline">@Html.ValidationMessageFor(a => a.Owner_B_ID)</span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -188,6 +196,12 @@
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="myoption">
+                    <button type="submit" class="btn blue" id="btnSubmit">
+                        保存</button>
+                    <button type="button" class="btn" onclick="location.href='@ViewBag.BackUrl'">
+                        返回</button>@Html.HiddenFor(a => a.ID)@Html.HiddenFor(a => a.CompanyID)@Html.HiddenFor(a => a.Owner_A_ID)
                 </div>
             }
         </div>

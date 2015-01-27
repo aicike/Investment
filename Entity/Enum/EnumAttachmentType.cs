@@ -201,6 +201,11 @@ namespace Entity.Enum
         /// </summary>
         ShenPiGuoChengFuJian = 37,
 
+        /// <summary>
+        /// 融资信息附件全部附件
+        /// </summary>
+        RongZiXinXiFuJian = 38,
+
         ///// <summary>
         ///// 验质证书
         ///// </summary>
@@ -244,10 +249,6 @@ namespace Entity.Enum
         ///// </summary>
         //GuanLianGongSiZiLiao = 32,
 
-        ///// <summary>
-        ///// 融资信息附件全部附件
-        ///// </summary>
-        //RongZiXinXiFuJian = 33,
 
 
     }

@@ -276,6 +276,71 @@ namespace Investment.Controllers
 
         #endregion
 
+        #region 详尽调查
+
+        public ActionResult XiangJinDiaoCha(int WorkFlowID)
+        {
+            WorkFlowModel WFModel = new WorkFlowModel();
+            var item = WFModel.Get(WorkFlowID);
+            CheckGroupAccount(item);
+            return View(item);
+        }
+
+        #endregion
+
+        #region 风控审核
+
+        public ActionResult FengKongShenHe(int WorkFlowID)
+        {
+            WorkFlowModel WFModel = new WorkFlowModel();
+            var item = WFModel.Get(WorkFlowID);
+            CheckGroupAccount(item);
+            return View(item);
+        }
+
+        #endregion
+
+        #region 落实放款条件
+
+        public ActionResult LuoShiFangKuanTiaoJian(int WorkFlowID)
+        {
+            WorkFlowModel WFModel = new WorkFlowModel();
+            var item = WFModel.Get(WorkFlowID);
+            CheckGroupAccount(item);
+            return View(item);
+        }
+
+        #endregion
+
+        #region 放款审批
+
+        public ActionResult FangKuanShenPi(int WorkFlowID)
+        {
+            WorkFlowModel WFModel = new WorkFlowModel();
+            var item = WFModel.Get(WorkFlowID);
+            CheckGroupAccount(item);
+            return View(item);
+        }
+
+        #endregion
+
+        #region 放款
+
+        public ActionResult FangKuan(int WorkFlowID)
+        {
+            WorkFlowModel WFModel = new WorkFlowModel();
+            var item = WFModel.Get(WorkFlowID);
+            CheckGroupAccount(item);
+            return View(item);
+        }
+
+        #endregion
+
+
+
+
+
+
         /// <summary>
         /// 检查是否有权限查看此页面
         /// </summary>

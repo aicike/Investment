@@ -137,6 +137,9 @@ namespace Investment.Controllers
                 case EnumAttachmentType.ShenPiGuoChengFuJian:
                     str = "审批过程中产生的附件";
                     break;
+                case EnumAttachmentType.RongZiXinXiFuJian:
+                    str = "审批过程中产生的附件";
+                    break;
                 default:
                     str = "未配置";
                     break;

@@ -45,7 +45,6 @@
                     <button type="button" class="btn" onclick="location.href='@ViewBag.BackUrl'">
                         返回</button><input type="hidden" id="CompanyID" name="CompanyID" value="@ViewBag.CompanyID" />
                 </div>
-                
                 <div class="tabbable tabbable-custom">
                     <ul class="nav nav-tabs">
                         <li class="active"><a href="#tab_1" id="link_1" data-toggle="tab">融资信息</a></li>
@@ -172,6 +171,14 @@
                                             <span class="help-inline">@Html.ValidationMessageFor(a => a.Remark)</span>
                                         </div>
                                     </div>
+                                    <div class="control-group">
+                                        <label class="control-label">
+                                            B角设定</label>
+                                        <div class="controls">
+                                            @Html.DropDownListFor(a => a.Owner_B_ID, ViewData["gaList"] as List<SelectListItem>, new { @class = "span6 m-wrap" })
+                                            <span class="help-inline">@Html.ValidationMessageFor(a => a.Owner_B_ID)</span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -189,6 +196,12 @@
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="myoption">
+                    <button type="submit" class="btn blue" id="btnSubmit">
+                        保存</button>
+                    <button type="button" class="btn" onclick="location.href='@ViewBag.BackUrl'">
+                        返回</button><input type="hidden" id="CompanyID" name="CompanyID" value="@ViewBag.CompanyID" />
                 </div>
             }
         </div>
