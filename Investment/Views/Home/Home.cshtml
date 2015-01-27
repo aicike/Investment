@@ -13,13 +13,13 @@
                 </div>
                 <div class="details">
                     <div class="number">
-                        1349
+                        @ViewBag.DBCnt
                     </div>
                     <div class="desc">
                         待处理业务
                     </div>
                 </div>
-                <a class="more" href="#">进入查看<i class="m-icon-swapright m-icon-white"></i> </a>
+                <a class="more" href="@Url.Action("Backlog", "WorkFlow")">进入查看<i class="m-icon-swapright m-icon-white"></i> </a>
             </div>
         </div>
         <div class="span3 responsive" data-tablet="span6" data-desktop="span3">
@@ -29,11 +29,11 @@
                 </div>
                 <div class="details">
                     <div class="number">
-                        549</div>
+                        @ViewBag.DDCnt</div>
                     <div class="desc">
                         待定业务</div>
                 </div>
-                <a class="more" href="#">进入查看 <i class="m-icon-swapright m-icon-white"></i></a>
+                <a class="more" href="@Url.Action("Pending", "WorkFlow")">进入查看 <i class="m-icon-swapright m-icon-white"></i></a>
             </div>
         </div>
         <div class="span3 responsive" data-tablet="span6  fix-offset" data-desktop="span3">
