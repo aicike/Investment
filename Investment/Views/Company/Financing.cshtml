@@ -57,6 +57,9 @@
                             <th>
                                 融资成本
                             </th>
+                            <th>
+                                项目类型
+                            </th>
                             <th style="width: 20%">
                                 操作
                             </th>
@@ -84,6 +87,9 @@
                                 </td>
                                 <td>
                                     @item.FinancingCost
+                                </td>
+                                <td>
+                                    @item.WorkFlowManager.Name
                                 </td>
                                 <td>
                                     @Html.ActionLink("详细", "Detail", "Financing", new { id = item.ID }, null, true)

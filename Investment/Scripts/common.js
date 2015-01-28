@@ -55,6 +55,9 @@ $(function () {
     var windowHeight = document.body.scrollHeight;
     var contentHeight = windowHeight - 80;
     $(".page-content").css("min-height", contentHeight);
+
+    //处理页面未加载完成就立即操作问题
+    close_modal_div();
 });
 
 //处理双击问题
