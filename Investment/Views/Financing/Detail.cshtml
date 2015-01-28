@@ -14,10 +14,9 @@
             $("#link_1").click();
 
             $("textarea").each(function (i, n) {
-                autoTextarea(n,15); // 调用
+                autoTextarea(n, 15); // 调用
             });
         });
-
     </script>
 }
 @model Entity.Financing
@@ -106,6 +105,13 @@
                                     <div class="controls">
                                         @Html.TextBoxFor(a => a.Name, new { @class = "span6 m-wrap", @readonly = "readonly" })
                                         <span class="help-inline">@Html.ValidationMessageFor(a => a.Name)</span>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">
+                                        项目类型</label>
+                                    <div class="controls">
+                                        <input type="text" class="span6 m-wrap" value="@Model.WorkFlowManager.Name"/>
                                     </div>
                                 </div>
                                 <div class="control-group">
