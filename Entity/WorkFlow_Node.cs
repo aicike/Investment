@@ -33,6 +33,11 @@ namespace Entity
         public int Order { get; set; }
 
         /// <summary>
+        /// 是否自审批 true是 false否（提交表单的人）
+        /// </summary>
+        public bool IsSinceApproval { get; set; }
+
+        /// <summary>
         /// 操作指引
         /// </summary>
         public string Remark { get; set; }

@@ -41,7 +41,7 @@
                                 @item.WorkFlowNodeManager.Name
                             </td>
                             <td>
-                                @if (item.WorkFlowApprovalManager.ToList().Count <= 0)
+                                @if (item.IsSinceApproval)
                                 {
                                     @:自审批
                                 }
