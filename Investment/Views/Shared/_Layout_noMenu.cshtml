@@ -48,7 +48,7 @@
     <link rel="shortcut icon" href="@Url.Content("/media/image/favicon.ico")" />
 </head>
 <body class="page-header-fixed page-full-width">
-    <div class="header navbar navbar-inverse navbar-fixed-top">
+    <div class="header navbar navbar-inverse navbar-fixed-top" id="div_noMenu_top">
         <!-- BEGIN TOP NAVIGATION BAR -->
         <div class="navbar-inner">
             <div class="container-fluid">
@@ -185,9 +185,9 @@
     </div>
     <div id="jmessage" style="z-index: 9999; display: none;">
     </div>
-    <div class="page-container row-fluid">
+    <div class="page-container row-fluid" id="div_noMenu_head">
         <!-- BEGIN PAGE -->
-        <div class="page-content">
+        <div class="page-content" id="div_noMenu_pagecontent" style="min-height:inherit !important;">
             <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
             <div id="portlet-config" class="modal hide">
                 <div class="modal-header">

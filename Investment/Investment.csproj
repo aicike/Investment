@@ -1148,8 +1148,10 @@
     <Content Include="Views\ToLoanMatching\Index.cshtml" />
     <Content Include="Views\MechanismProducts\GetInfo.cshtml" />
     <Content Include="Views\Company\Add.cshtml" />
-    <Content Include="Views\Company\Edit.cshtml" />
+    <Content Include="Views\Company\Edit4.cshtml" />
     <Content Include="Views\Company\Detail.cshtml" />
+    <Content Include="Views\Company\Edit.cshtml" />
+    <Content Include="Views\Company\Add4.cshtml" />
     <None Include="Views\WorkFlowApproval\QianShuXieYi.cshtml" />
     <None Include="Views\WorkFlowApproval\QueRenShouQuFeiYong.cshtml" />
     <Content Include="Views\WorkFlowApproval\SelInfoPath.cshtml" />
