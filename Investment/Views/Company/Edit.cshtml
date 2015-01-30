@@ -17,7 +17,7 @@
             margin-left: 125px;
         }
     </style>
-    <script>
+    <script type="text/javascript">
         var hasGuanLian = '@ViewBag.HasGuanLian';
         $(function () {
             var qiYeXingZhi = '@Model.QiYeXingZhi';
@@ -25,10 +25,9 @@
 
 
             var url_gl = '@Url.Action("Add_GuanLian", "Company")';
-            $("#link_1").click();
 
             $("#link_open_guanlian").click(function () {
-                $("#div_guanlian_company").attr("src", url_gl);
+                $("#iframe_guanlian").attr("src", url_gl);
                 init_gl();
             });
             init_gl();
@@ -96,7 +95,7 @@
                                     <label class="control-label">
                                         成立时间</label>
                                     <div class="controls">
-                                        @Html.TextBox("SetUpTime", "", new { @class = "m-wrap span8", placeholder = "年/月/日 （如：2014/05/01）" })
+                                        @Html.TextBox("SetUpTime", @Model.SetUpTime.ToString("yyyy/MM/dd"), new { @class = "m-wrap span6", placeholder = "年/月/日 （如：2014/05/01）" })
                                         <span class="help-inline">@Html.ValidationMessageFor(a => a.SetUpTime)</span>
                                     </div>
                                 </div>
@@ -284,7 +283,7 @@
                                     <div class="controls">
                                         @Html.TextAreaFor(a => a.XinYongDaiMaZhengHao, new { @class = "span8 m-wrap" })
                                         <span class="help-inline">
-                                            @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "9", Text = "[附件]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.ZhengXinBaoGao });}
+                                            @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "6", Text = "[附件]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.ZhengXinBaoGao });}
                                         </span><span class="help-inline">@Html.ValidationMessageFor(a => a.XinYongDaiMaZhengHao)</span>
                                     </div>
                                 </div>
@@ -317,7 +316,7 @@
                             <hr />
                             <div class="row-fluid">
                                 <div class="span10" style="overflow-x: auto; padding-left: 125px;">
-                                    <table class="table table-bordered" style="min-width: 700px;">
+                                    <table class="table table-bordered">
                                         <tr>
                                             <td style="width: 300px;">
                                                 关联公司名称
@@ -346,7 +345,7 @@
                                     </table>
                                 </div>
                                 <div id="div_guanlian_company" class="modal hide fade" tabindex="-1" style="width:1200px;margin-left:-600px;">
-                                    <iframe style="width:100%;height:800px;border:none" src="@Url.Action("Add_GuanLian", "Company")">
+                                    <iframe style="width:100%;height:800px;border:none" id="iframe_guanlian" src="@Url.Action("Add_GuanLian", "Company")">
                                     </iframe>
                                 </div>
                             </div>
@@ -401,7 +400,7 @@
                                 <div style="margin-left: 59px; width: 550px; float: left;">
                                     1. 公司简介（公司成立、发展、经营状况、公司管理层简介）</div>
                                 <div style="float: left; margin-left: 50px">
-                                    @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "10", Text = "[附件]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.GongSiJianJie });}
+                                    @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "7", Text = "[附件]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.GongSiJianJie });}
                                 </div>
                                 <div style="clear: both">
                                 </div>
@@ -411,7 +410,7 @@
                                     2. 公司章程及章程修正案
                                 </div>
                                 <div style="float: left; margin-left: 50px">
-                                    @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "7", Text = "[附件]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.GongSiZhangChengJiXiuZhengAn });}
+                                    @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "8", Text = "[附件]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.GongSiZhangChengJiXiuZhengAn });}
                                 </div>
                                 <div style="clear: both">
                                 </div>
@@ -421,7 +420,7 @@
                                     3. 企业工商档案查询
                                 </div>
                                 <div style="float: left; margin-left: 50px">
-                                    @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "8", Text = "[附件]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.GongShangJiBenXinXiChaXunDan });}
+                                    @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "9", Text = "[附件]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.GongShangJiBenXinXiChaXunDan });}
                                 </div>
                                 <div style="clear: both">
                                 </div>
@@ -431,7 +430,7 @@
                                     4. 验资报告及增资报告
                                 </div>
                                 <div style="float: left; margin-left: 50px">
-                                    @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "6", Text = "[附件]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.YanZiBaoGao });}
+                                    @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "10", Text = "[附件]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.YanZiBaoGao });}
                                 </div>
                                 <div style="clear: both">
                                 </div>
@@ -485,7 +484,7 @@
                                 <div style="margin-left: 59px; width: 550px; float: left;">
                                     10. 关联企业基本情况介绍和对外投资情况介绍</div>
                                 <div style="float: left; margin-left: 50px">
-                                    @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "17", Text = "[附件]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.GuanLianQiYeJiBenQingKuangJieShao });}
+                                    @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "16", Text = "[附件]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.GuanLianQiYeJiBenQingKuangJieShao });}
                                 </div>
                                 <div style="clear: both">
                                 </div>
@@ -509,7 +508,7 @@
                                     <div class="controls">
                                         @Html.TextAreaFor(a => a.MuQianDaiKuanDanBaoZhiXingQingKuang, new { @class = "m-wrap span8" })
                                         <span class="help-inline">
-                                            @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "18", Text = "[附件]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.GongSiDaiKuanMingXi });}
+                                            @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "17", Text = "[附件]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.GongSiDaiKuanMingXi });}
                                         </span><span class="help-inline">@Html.ValidationMessageFor(a => a.MuQianDaiKuanDanBaoZhiXingQingKuang)</span>
                                     </div>
                                 </div>
@@ -521,7 +520,7 @@
                                 <div style="margin-left: 59px; width: 550px; float: left;">
                                     1. 近三年审计报告</div>
                                 <div style="float: left; margin-left: 50px">
-                                    @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "19", Text = "[附件]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.ShenJiBaoGao });}
+                                    @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "18", Text = "[附件]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.ShenJiBaoGao });}
                                 </div>
                                 <div style="clear: both">
                                 </div>
@@ -530,7 +529,7 @@
                                 <div style="margin-left: 59px; width: 550px; float: left;">
                                     1. 近6个月财务报表（资产负债表、利润表和现金流量表）、往来款明细、固定资产清单</div>
                                 <div style="float: left; margin-left: 50px">
-                                    @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "20", Text = "[附件]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.ErJiKeMuMingXi });}
+                                    @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "19", Text = "[附件]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.ErJiKeMuMingXi });}
                                 </div>
                                 <div style="clear: both">
                                 </div>
@@ -539,7 +538,7 @@
                                 <div style="margin-left: 59px; width: 550px; float: left;">
                                     2. 最近一年的增值税、营业税、所得税纳税申报表和纳税凭证</div>
                                 <div style="float: left; margin-left: 50px">
-                                    @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "21", Text = "[附件]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.ZengZhiShui_YingYeShui_SuoDeShui });}
+                                    @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "20", Text = "[附件]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.ZengZhiShui_YingYeShui_SuoDeShui });}
                                 </div>
                                 <div style="clear: both">
                                 </div>
@@ -560,7 +559,7 @@
                                 <div style="margin-left: 59px; width: 550px; float: left;">
                                     1. 抵押物清单，抵押评估报告</div>
                                 <div style="float: left; margin-left: 50px">
-                                    @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "22", Text = "[附件]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.DiYaWuZhiLiao });}
+                                    @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "21", Text = "[附件]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.DiYaWuZhiLiao });}
                                 </div>
                                 <div style="clear: both">
                                 </div>
@@ -569,7 +568,7 @@
                                 <div style="margin-left: 59px; width: 550px; float: left;">
                                     2. 可行性报告</div>
                                 <div style="float: left; margin-left: 50px">
-                                    @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "23", Text = "[附件]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.KeXingXingBaoGao });}
+                                    @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "22", Text = "[附件]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.KeXingXingBaoGao });}
                                 </div>
                                 <div style="clear: both">
                                 </div>
@@ -578,7 +577,7 @@
                                 <div style="margin-left: 59px; width: 550px; float: left;">
                                     3. 项目相关批文</div>
                                 <div style="float: left; margin-left: 50px">
-                                    @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "24", Text = "[附件]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.XiangMuXiangGuanPiWen });}
+                                    @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "23", Text = "[附件]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.XiangMuXiangGuanPiWen });}
                                 </div>
                                 <div style="clear: both">
                                 </div>
@@ -587,7 +586,7 @@
                                 <div style="margin-left: 59px; width: 550px; float: left;">
                                     4. 五证</div>
                                 <div style="float: left; margin-left: 50px">
-                                    @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "25", Text = "[附件]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.WuZheng });}
+                                    @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "24", Text = "[附件]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.WuZheng });}
                                 </div>
                                 <div style="clear: both">
                                 </div>
@@ -596,7 +595,7 @@
                                 <div style="margin-left: 59px; width: 550px; float: left;">
                                     5. 施工合同</div>
                                 <div style="float: left; margin-left: 50px">
-                                    @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "26", Text = "[附件]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.ShiGongHeTong });}
+                                    @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "25", Text = "[附件]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.ShiGongHeTong });}
                                 </div>
                                 <div style="clear: both">
                                 </div>
@@ -605,7 +604,7 @@
                                 <div style="margin-left: 59px; width: 550px; float: left;">
                                     6. 销售明细</div>
                                 <div style="float: left; margin-left: 50px">
-                                    @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "27", Text = "[附件]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.XiaoShouMingXi });}
+                                    @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "26", Text = "[附件]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.XiaoShouMingXi });}
                                 </div>
                                 <div style="clear: both">
                                 </div>
@@ -614,7 +613,7 @@
                                 <div style="margin-left: 59px; width: 550px; float: left;">
                                     7. 契税完税证明</div>
                                 <div style="float: left; margin-left: 50px">
-                                    @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "28", Text = "[附件]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.QiShui });}
+                                    @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "27", Text = "[附件]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.QiShui });}
                                 </div>
                                 <div style="clear: both">
                                 </div>
@@ -623,7 +622,7 @@
                                 <div style="margin-left: 59px; width: 550px; float: left;">
                                     8. 过往房地产开发经验</div>
                                 <div style="float: left; margin-left: 50px">
-                                    @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "29", Text = "[附件]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.GuoWangFangDiChanKaiFaJingYan });}
+                                    @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "28", Text = "[附件]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.GuoWangFangDiChanKaiFaJingYan });}
                                 </div>
                                 <div style="clear: both">
                                 </div>
@@ -632,7 +631,7 @@
                                 <div style="margin-left: 59px; width: 550px; float: left;">
                                     9. 房管局档案查询</div>
                                 <div style="float: left; margin-left: 50px">
-                                    @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "30", Text = "[附件]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.FangGuanJuDangAnChaXun });}
+                                    @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "29", Text = "[附件]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.FangGuanJuDangAnChaXun });}
                                 </div>
                                 <div style="clear: both">
                                 </div>
