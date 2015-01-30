@@ -18,9 +18,24 @@
         }
     </style>
     <script>
+        var hasGuanLian = '@ViewBag.HasGuanLian';
         $(function () {
-            $("#link_1").click();
+            var url_gl = '@Url.Action("Add_GuanLian", "Company")';
+
+            $("#link_open_guanlian").click(function () {
+                $("#div_guanlian_company").attr("src", url_gl);
+                init_gl();
+            });
+            init_gl();
         });
+        function init_gl() {
+            if (hasGuanLian == 'False') {
+                $("#_Title").hide();
+                $("#div_noMenu_top").hide();
+                $("#div_noMenu_head").css("margin-top", "0px");
+                $("#div_page_root").css("margin-top", "10px");
+            }
+        }
     </script>
 }
 @model Entity.Company

@@ -40,7 +40,8 @@ namespace Investment.Controllers
             CompanyModel companyModel = new CompanyModel();
             company.OwnerID = LoginAccount.UserID;
             company.Status = 1;
-            if (string.IsNullOrEmpty(company.Phone)) {
+            if (string.IsNullOrEmpty(company.Phone))
+            {
                 company.Phone = "0";
             }
             List<Attachment> attachments = GetAttachment_Add();
@@ -49,7 +50,7 @@ namespace Investment.Controllers
             {
                 return JavaScript("JMessage('" + result.Error + "',true)");
             }
-            var com= result.Entity as Company;
+            var com = result.Entity as Company;
             return JavaScript("window.location.href='" + Url.Action("Edit", "Company", new { id = com.ID }) + "'");
         }
 
@@ -59,14 +60,33 @@ namespace Investment.Controllers
             Company company = new Company();
             ViewBag.Layout = "~/Views/Shared/_Layout_noMenu.cshtml";
             ViewBag.HasGuanLian = false;
-            return View("Add",company);
+            return View("Add", company);
         }
-        
+
+        [HttpPost]
+        public ActionResult Add_GuanLian(Company company)
+        {
+            CompanyModel companyModel = new CompanyModel();
+            company.OwnerID = LoginAccount.UserID;
+            company.Status = 1;
+            List<Attachment> attachments = GetAttachment_Edit();
+            Result result = companyModel.Add(company, attachments);
+            if (result.HasError)
+            {
+                return JavaScript("JMessage('" + result.Error + "',true)");
+            }
+            var com = result.Entity as Company;
+            return JavaScript("window.location.href='" + Url.Action("Edit", "Company", new { id = com.ID }) + "'");
+        }
 
         public ActionResult Edit(int id)
         {
             CompanyModel companyModel = new CompanyModel();
             var company = companyModel.Get(id);
+            if (company.Phone.Equals("0"))
+            {
+                company.Phone = "";
+            }
             ViewBag.Layout = "~/Views/Shared/_Layout.cshtml";
             ViewBag.HasGuanLian = true;
             return View(company);
@@ -166,37 +186,39 @@ namespace Investment.Controllers
                 var attachment_KaiHuXuKeZheng = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Attachment>>(KaiHuXuKeZheng);
                 attachmentList.AddRange(attachment_KaiHuXuKeZheng);
             }
-            string YanZiBaoGao = Request.Form["hid_attachment_6"];
-            if (string.IsNullOrEmpty(YanZiBaoGao) == false)
-            {
-                var attachment_YanZiBaoGao = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Attachment>>(YanZiBaoGao);
-                attachmentList.AddRange(attachment_YanZiBaoGao);
-            }
-            string GongSiZhangCheng = Request.Form["hid_attachment_7"];
-            if (string.IsNullOrEmpty(GongSiZhangCheng) == false)
-            {
-                var attachment_GongSiZhangCheng = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Attachment>>(GongSiZhangCheng);
-                attachmentList.AddRange(attachment_GongSiZhangCheng);
-            }
-            string GongShangChaXun = Request.Form["hid_attachment_8"];
-            if (string.IsNullOrEmpty(GongShangChaXun) == false)
-            {
-                var attachment_GongShangChaXun = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Attachment>>(GongShangChaXun);
-                attachmentList.AddRange(attachment_GongShangChaXun);
-            }
-            string XinYongDaiMaZheng = Request.Form["hid_attachment_9"];
+            string XinYongDaiMaZheng = Request.Form["hid_attachment_6"];
             if (string.IsNullOrEmpty(XinYongDaiMaZheng) == false)
             {
                 var attachment_XinYongDaiMaZheng = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Attachment>>(XinYongDaiMaZheng);
                 attachmentList.AddRange(attachment_XinYongDaiMaZheng);
             }
-            string GongSiJianJie = Request.Form["hid_attachment_10"];
+
+
+            string GongSiJianJie = Request.Form["hid_attachment_7"];
             if (string.IsNullOrEmpty(GongSiJianJie) == false)
             {
                 var attachment_GongSiJianJie = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Attachment>>(GongSiJianJie);
                 attachmentList.AddRange(attachment_GongSiJianJie);
             }
-            string FaRen = Request.Form["hid_attachment_11"];
+            string GongSiZhangCheng = Request.Form["hid_attachment_8"];
+            if (string.IsNullOrEmpty(GongSiZhangCheng) == false)
+            {
+                var attachment_GongSiZhangCheng = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Attachment>>(GongSiZhangCheng);
+                attachmentList.AddRange(attachment_GongSiZhangCheng);
+            }
+            string GongShangChaXun = Request.Form["hid_attachment_9"];
+            if (string.IsNullOrEmpty(GongShangChaXun) == false)
+            {
+                var attachment_GongShangChaXun = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Attachment>>(GongShangChaXun);
+                attachmentList.AddRange(attachment_GongShangChaXun);
+            }
+            string YanZhiBaoGao = Request.Form["hid_attachment_9"];
+            if (string.IsNullOrEmpty(YanZhiBaoGao) == false)
+            {
+                var attachment_YanZhiBaoGao = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Attachment>>(YanZhiBaoGao);
+                attachmentList.AddRange(attachment_YanZhiBaoGao);
+            }
+            string FaRen = Request.Form["hid_attachment_10"];
             if (string.IsNullOrEmpty(FaRen) == false)
             {
                 var attachment_FaRen = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Attachment>>(FaRen);
@@ -226,49 +248,43 @@ namespace Investment.Controllers
                 var attachment_ZuZhiJieGou = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Attachment>>(ZuZhiJieGou);
                 attachmentList.AddRange(attachment_ZuZhiJieGou);
             }
-            string GuanLiChengJianJie = Request.Form["hid_attachment_16"];
-            if (string.IsNullOrEmpty(GuanLiChengJianJie) == false)
-            {
-                var attachment_GuanLiChengJianJie = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Attachment>>(GuanLiChengJianJie);
-                attachmentList.AddRange(attachment_GuanLiChengJianJie);
-            }
-            string GuanLianQiYe = Request.Form["hid_attachment_17"];
+            string GuanLianQiYe = Request.Form["hid_attachment_16"];
             if (string.IsNullOrEmpty(GuanLianQiYe) == false)
             {
                 var attachment_GuanLianQiYe = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Attachment>>(GuanLianQiYe);
                 attachmentList.AddRange(attachment_GuanLianQiYe);
             }
-            string JieDaiXinXi = Request.Form["hid_attachment_18"];
+            string JieDaiXinXi = Request.Form["hid_attachment_17"];
             if (string.IsNullOrEmpty(JieDaiXinXi) == false)
             {
                 var attachment_JieDaiXinXi = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Attachment>>(JieDaiXinXi);
                 attachmentList.AddRange(attachment_JieDaiXinXi);
             }
-            string SanNianShenJiBaoGao = Request.Form["hid_attachment_19"];
+            string SanNianShenJiBaoGao = Request.Form["hid_attachment_18"];
             if (string.IsNullOrEmpty(SanNianShenJiBaoGao) == false)
             {
                 var attachment_SanNianShenJiBaoGao = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Attachment>>(SanNianShenJiBaoGao);
                 attachmentList.AddRange(attachment_SanNianShenJiBaoGao);
             }
-            string LiuYueCaiWuBaoBiao = Request.Form["hid_attachment_20"];
+            string LiuYueCaiWuBaoBiao = Request.Form["hid_attachment_19"];
             if (string.IsNullOrEmpty(LiuYueCaiWuBaoBiao) == false)
             {
                 var attachment_LiuYueCaiWuBaoBiao = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Attachment>>(LiuYueCaiWuBaoBiao);
                 attachmentList.AddRange(attachment_LiuYueCaiWuBaoBiao);
             }
-            string ZengZhiShuiYingYeShui = Request.Form["hid_attachment_21"];
+            string ZengZhiShuiYingYeShui = Request.Form["hid_attachment_20"];
             if (string.IsNullOrEmpty(ZengZhiShuiYingYeShui) == false)
             {
                 var attachment_ZengZhiShuiYingYeShui = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Attachment>>(ZengZhiShuiYingYeShui);
                 attachmentList.AddRange(attachment_ZengZhiShuiYingYeShui);
             }
-            string DiYaWu = Request.Form["hid_attachment_22"];
+            string DiYaWu = Request.Form["hid_attachment_21"];
             if (string.IsNullOrEmpty(DiYaWu) == false)
             {
                 var attachment_DiYaWu = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Attachment>>(DiYaWu);
                 attachmentList.AddRange(attachment_DiYaWu);
             }
-            string KeXingXingBaoGao = Request.Form["hid_attachment_23"];
+            string KeXingXingBaoGao = Request.Form["hid_attachment_22"];
             if (string.IsNullOrEmpty(KeXingXingBaoGao) == false)
             {
                 var attachment_KeXingXingBaoGao = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Attachment>>(KeXingXingBaoGao);
@@ -276,25 +292,25 @@ namespace Investment.Controllers
             }
 
 
-            string XiangMuXiangGuanPiWen = Request.Form["hid_attachment_24"];
+            string XiangMuXiangGuanPiWen = Request.Form["hid_attachment_23"];
             if (string.IsNullOrEmpty(XiangMuXiangGuanPiWen) == false)
             {
                 var attachment_XiangMuXiangGuanPiWen = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Attachment>>(XiangMuXiangGuanPiWen);
                 attachmentList.AddRange(attachment_XiangMuXiangGuanPiWen);
             }
-            string WuZheng = Request.Form["hid_attachment_25"];
+            string WuZheng = Request.Form["hid_attachment_24"];
             if (string.IsNullOrEmpty(WuZheng) == false)
             {
                 var attachment_WuZheng = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Attachment>>(WuZheng);
                 attachmentList.AddRange(attachment_WuZheng);
             }
-            string ShiGongHeTong = Request.Form["hid_attachment_26"];
+            string ShiGongHeTong = Request.Form["hid_attachment_25"];
             if (string.IsNullOrEmpty(ShiGongHeTong) == false)
             {
                 var attachment_ShiGongHeTong = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Attachment>>(ShiGongHeTong);
                 attachmentList.AddRange(attachment_ShiGongHeTong);
             }
-            string XiaoShouMingXi = Request.Form["hid_attachment_27"];
+            string XiaoShouMingXi = Request.Form["hid_attachment_26"];
             if (string.IsNullOrEmpty(XiaoShouMingXi) == false)
             {
                 var attachment_XiaoShouMingXi = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Attachment>>(XiaoShouMingXi);
@@ -302,19 +318,19 @@ namespace Investment.Controllers
             }
 
 
-            string QiShui = Request.Form["hid_attachment_28"];
+            string QiShui = Request.Form["hid_attachment_27"];
             if (string.IsNullOrEmpty(QiShui) == false)
             {
                 var attachment_QiShui = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Attachment>>(QiShui);
                 attachmentList.AddRange(attachment_QiShui);
             }
-            string GuoWangJingYan = Request.Form["hid_attachment_29"];
+            string GuoWangJingYan = Request.Form["hid_attachment_28"];
             if (string.IsNullOrEmpty(GuoWangJingYan) == false)
             {
                 var attachment_GuoWangJingYan = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Attachment>>(GuoWangJingYan);
                 attachmentList.AddRange(attachment_GuoWangJingYan);
             }
-            string FangGuanJuDangAnChaXun = Request.Form["hid_attachment_30"];
+            string FangGuanJuDangAnChaXun = Request.Form["hid_attachment_29"];
             if (string.IsNullOrEmpty(FangGuanJuDangAnChaXun) == false)
             {
                 var attachment_FangGuanJuDangAnChaXun = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Attachment>>(FangGuanJuDangAnChaXun);
@@ -473,12 +489,13 @@ namespace Investment.Controllers
             {
                 return JavaScript("window.location.href='" + Url.Action("Financing", "Company", new { companyID = financing.CompanyID, page = page }) + "'");
             }
-            else {
-                return JavaScript("window.location.href='" + Url.Action("Index", "Financing", new {id = page }) + "'");
+            else
+            {
+                return JavaScript("window.location.href='" + Url.Action("Index", "Financing", new { id = page }) + "'");
             }
         }
 
-        public string DeleteFinancing(int id, int companyID, int page,int fromID)
+        public string DeleteFinancing(int id, int companyID, int page, int fromID)
         {
             FinancingModel fm = new FinancingModel();
             var result = fm.Delete_Check(id, LoginAccount.UserID);
@@ -492,7 +509,7 @@ namespace Investment.Controllers
             }
             else
             {
-                return "<script>window.location.href='" + Url.Action("Index", "Financing", new { id= page }) + "';</script>";
+                return "<script>window.location.href='" + Url.Action("Index", "Financing", new { id = page }) + "';</script>";
             }
         }
 
