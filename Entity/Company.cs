@@ -51,6 +51,7 @@ namespace Entity
         /// 公司电话
         /// </summary>
         [Display(Name = "公司电话")]
+        [Required(ErrorMessage = "请输入公司电话")]
         public string Phone { get; set; }
 
         /// <summary>
@@ -77,19 +78,22 @@ namespace Entity
         /// <summary>
         /// 成立时间及营业期限
         /// </summary>
-        [Display(Name = "成立时间及营业期限")]
+        [Display(Name = "有效期限")]
+        [Required(ErrorMessage = "请输入有效期限")]
         public string ChengLiShiJianJiYingYeQiXian { get; set; }
 
         /// <summary>
         /// 注册资本（万元）
         /// </summary>
         [Display(Name = "注册资本")]
+        [Required(ErrorMessage = "请输入注册资本")]
         public double ZhuCheZiJin { get; set; }
 
         /// <summary>
         /// 实收资本（万元）
         /// </summary>
         [Display(Name = "实收资本")]
+        [Required(ErrorMessage = "请输入实收资本")]
         public double ShiShouZiBen { get; set; }
 
         /// <summary>
@@ -136,6 +140,14 @@ namespace Entity
         [Display(Name = "主营业务")]
         [Required(ErrorMessage = "请输入主营业务")]
         public string ZhuYingYeWu { get; set; }
+
+        /// <summary>
+        /// 经营范围
+        /// </summary>
+        [Display(Name = "经营范围")]
+        [Required(ErrorMessage = "请输入经营范围")]
+        public string JingYingFanWei { get; set; }
+
 
         /// <summary>
         /// 净利润
@@ -262,13 +274,6 @@ namespace Entity
         [Display(Name = "开户许可证号")]
         public string KaiHuXuKeZheng { get; set; }
 
-
-        /// <summary>
-        /// 经营范围
-        /// </summary>
-        [Display(Name = "经营范围")]
-        public string JingYingFanWei { get; set; }
-
         /// <summary>
         /// 贷款卡
         /// </summary>
@@ -276,7 +281,6 @@ namespace Entity
         public string DaiKuanKa { get; set; }
 
         [Display(Name = "企业资质")]
-        [Required(ErrorMessage = "请输入企业资质")]
         public string QiYeZiZhi { get; set; }
 
         /// <summary>

@@ -32,6 +32,7 @@ namespace Business
             if (result.HasError == false && attachments != null)
             {
                 UploadAttachment(company.ID, attachments);
+                result.Entity = company;
             }
             return result;
         }

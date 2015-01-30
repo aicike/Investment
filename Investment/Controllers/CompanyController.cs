@@ -29,6 +29,8 @@ namespace Investment.Controllers
         public ActionResult Add()
         {
             Company company = new Company();
+            ViewBag.Layout = "~/Views/Shared/_Layout.cshtml";
+            ViewBag.HasGuanLian = true;
             return View(company);
         }
 
@@ -38,21 +40,35 @@ namespace Investment.Controllers
             CompanyModel companyModel = new CompanyModel();
             company.OwnerID = LoginAccount.UserID;
             company.Status = 1;
-
-            List<Attachment> attachments = GetAttachment();
-
-            Result result = companyModel.Add(company, null);
+            if (string.IsNullOrEmpty(company.Phone)) {
+                company.Phone = "0";
+            }
+            List<Attachment> attachments = GetAttachment_Add();
+            Result result = companyModel.Add(company, attachments);
             if (result.HasError)
             {
                 return JavaScript("JMessage('" + result.Error + "',true)");
             }
-            return JavaScript("window.location.href='" + Url.Action("Index", "Company") + "'");
+            var com= result.Entity as Company;
+            return JavaScript("window.location.href='" + Url.Action("Edit", "Company", new { id = com.ID }) + "'");
         }
+
+        //新增关联公司
+        public ActionResult Add_GuanLian()
+        {
+            Company company = new Company();
+            ViewBag.Layout = "~/Views/Shared/_Layout_noMenu.cshtml";
+            ViewBag.HasGuanLian = false;
+            return View("Add",company);
+        }
+        
 
         public ActionResult Edit(int id)
         {
             CompanyModel companyModel = new CompanyModel();
             var company = companyModel.Get(id);
+            ViewBag.Layout = "~/Views/Shared/_Layout.cshtml";
+            ViewBag.HasGuanLian = true;
             return View(company);
         }
 
@@ -61,7 +77,7 @@ namespace Investment.Controllers
         {
             Result result = null;
             CompanyModel companyModel = new CompanyModel();
-            List<Attachment> attachments = GetAttachment();
+            List<Attachment> attachments = GetAttachment_Edit();
             result = companyModel.Edit(company, attachments);
             if (result.HasError)
             {
@@ -73,7 +89,50 @@ namespace Investment.Controllers
             }
         }
 
-        private List<Attachment> GetAttachment()
+        private List<Attachment> GetAttachment_Add()
+        {
+            List<Attachment> attachmentList = new List<Attachment>();
+
+            string QiYeZiZhi = Request.Form["hid_attachment_1"];
+            if (string.IsNullOrEmpty(QiYeZiZhi) == false)
+            {
+                var attachment_QiYeZiZhi = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Attachment>>(QiYeZiZhi);
+                attachmentList.AddRange(attachment_QiYeZiZhi);
+            }
+            string YingYeZhiZhao = Request.Form["hid_attachment_2"];
+            if (string.IsNullOrEmpty(YingYeZhiZhao) == false)
+            {
+                var attachment_YingYeZhiZhao = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Attachment>>(YingYeZhiZhao);
+                attachmentList.AddRange(attachment_YingYeZhiZhao);
+            }
+            string ZuZhiJiGouDaiMa = Request.Form["hid_attachment_3"];
+            if (string.IsNullOrEmpty(ZuZhiJiGouDaiMa) == false)
+            {
+                var attachment_ZuZhiJiGouDaiMa = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Attachment>>(ZuZhiJiGouDaiMa);
+                attachmentList.AddRange(attachment_ZuZhiJiGouDaiMa);
+            }
+            string ShuiWu = Request.Form["hid_attachment_4"];
+            if (string.IsNullOrEmpty(ZuZhiJiGouDaiMa) == false)
+            {
+                var attachment_ShuiWu = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Attachment>>(ShuiWu);
+                attachmentList.AddRange(attachment_ShuiWu);
+            }
+            string KaiHuXuKeZheng = Request.Form["hid_attachment_5"];
+            if (string.IsNullOrEmpty(KaiHuXuKeZheng) == false)
+            {
+                var attachment_KaiHuXuKeZheng = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Attachment>>(KaiHuXuKeZheng);
+                attachmentList.AddRange(attachment_KaiHuXuKeZheng);
+            }
+            string XinYongDaiMaZheng = Request.Form["hid_attachment_6"];
+            if (string.IsNullOrEmpty(XinYongDaiMaZheng) == false)
+            {
+                var attachment_XinYongDaiMaZheng = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Attachment>>(XinYongDaiMaZheng);
+                attachmentList.AddRange(attachment_XinYongDaiMaZheng);
+            }
+            return attachmentList;
+        }
+
+        private List<Attachment> GetAttachment_Edit()
         {
             List<Attachment> attachmentList = new List<Attachment>();
 
@@ -263,7 +322,6 @@ namespace Investment.Controllers
             }
             return attachmentList;
         }
-
         public ActionResult ChangeStatus(int id, int status)
         {
             CompanyModel companyModel = new CompanyModel();
