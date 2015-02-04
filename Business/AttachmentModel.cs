@@ -76,6 +76,25 @@ namespace Business
             return result;
         }
 
+
+        /// <summary>
+        /// 正式附件删除（未做验证及删除物理文件）
+        /// </summary>
+        /// <returns></returns>
+        public Result DeleteAttachment(int id)
+        {
+            //找到未删除的该附件
+            var attachment = List().Where(a => a.ID == id &&
+                                               a.Status == 0).FirstOrDefault();
+            Result result = new Result();
+            if (attachment != null)
+            {
+                attachment.Status = 1;
+                result = Edit(attachment);
+            }
+            return result;
+        }
+
         /// <summary>
         /// 删除附件数据，包含物理文件
         /// </summary>

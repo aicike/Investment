@@ -289,6 +289,7 @@ namespace Entity
         [Display(Name = "关联公司")]
         public string GuanLianGongSi { get; set; }
 
+
         //----------------------子表------------------------------------------
         /// <summary>
         /// 公司用户表
@@ -297,7 +298,15 @@ namespace Entity
 
         public virtual ICollection<CompanyLoan> CompanyLoans { get; set; }
 
-        public virtual ICollection<CompanyRelation> CompanyRelations { get; set; }
+        /// <summary>
+        /// 主关联该对象公司的公司（不常用）
+        /// </summary>
+        public virtual ICollection<CompanyRelation> CompanyRelations1 { get; set; }
+
+        /// <summary>
+        /// 我的关联公司（常用）
+        /// </summary>
+        public virtual ICollection<CompanyRelation> CompanyRelations2 { get; set; }
 
         public virtual ICollection<Financing> Financings { get; set; }
 

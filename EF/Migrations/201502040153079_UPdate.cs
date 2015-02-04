@@ -3,16 +3,16 @@ namespace EF.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class update : DbMigration
+    public partial class UPdate : DbMigration
     {
         public override void Up()
         {
-            AddColumn("dbo.WorkFlow_Node", "Remark", c => c.String());
+            DropColumn("dbo.Company", "IsShow");
         }
         
         public override void Down()
         {
-            DropColumn("dbo.WorkFlow_Node", "Remark");
+            AddColumn("dbo.Company", "IsShow", c => c.Boolean());
         }
     }
 }

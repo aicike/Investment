@@ -145,10 +145,6 @@ namespace Entity.Enum
         /// </summary>
         ZengZhiShui_YingYeShui_SuoDeShui = 26,
 
-        /// <summary>
-        /// 契税完税证明
-        /// </summary>
-        QiShui = 27,
         
         /// <summary>
         /// 房管局档案查询
@@ -172,7 +168,7 @@ namespace Entity.Enum
         FaRenJiGuDongZhengXinBaoGao = 31,
 
         /// <summary>
-        /// 可行性报告
+        /// 项目可研报告
         /// </summary>
         KeXingXingBaoGao = 32,
 
@@ -182,9 +178,9 @@ namespace Entity.Enum
         XiangMuXiangGuanPiWen = 33,
 
         /// <summary>
-        /// 五证
+        /// 建设用地规划许可证
         /// </summary>
-        WuZheng = 34,
+        WuZheng_1 = 34,
 
         /// <summary>
         /// 销售明细
@@ -205,6 +201,31 @@ namespace Entity.Enum
         /// 融资信息附件全部附件
         /// </summary>
         RongZiXinXiFuJian = 38,
+
+        /// <summary>
+        /// 资产清单
+        /// </summary>
+        ZiChanQingDan = 39,
+
+        /// <summary>
+        /// 建设工程规划许可证
+        /// </summary>
+        WuZheng_2 = 40,
+
+        /// <summary>
+        /// 建筑工程施工许可证
+        /// </summary>
+        WuZheng_3 = 41,
+
+        /// <summary>
+        /// 国有土地使用证
+        /// </summary>
+        WuZheng_4 = 42,
+
+        /// <summary>
+        /// 商品房预售许可证
+        /// </summary>
+        WuZheng_5 = 43,
 
         ///// <summary>
         ///// 验质证书

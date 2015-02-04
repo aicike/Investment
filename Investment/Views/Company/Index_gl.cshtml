@@ -1,57 +1,19 @@
 ﻿@{
-    ViewBag.Title = "客户管理";
+    ViewBag.Title = "客户管理-关联公司";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @section scripts{
-    <script>
-        $(function () {
-            $(".radio_gl").change(function () {
-                $("#btn_submit").click();
-            });
-        });
-    </script>
 }
-@model PagedList<Entity.Company>
+@model List<Entity.Company>
 <div class="row-fluid">
     <div class="span12">
-        @using (Html.BeginForm("Index", "Company",FormMethod.Get, new { id = 1 }))
-        {
-            <div class="myoption">
-                <table style="width: 100%;">
-                    <tr>
-                        <td style="width: 50%">
-                            显示方式：
-                            <label class="radio inline">
-                                <input type="radio" name="radio_gl" value="0" class="radio_gl" @(ViewBag.Radio==0?"checked":"")/>
-                                显示全部公司（包含被关联公司）
-                            </label>
-                            <label class="radio inline">
-                                <input type="radio" name="radio_gl" value="1" class="radio_gl" @(ViewBag.Radio==1?"checked":"")/>
-                                只显示有贷款业务公司
-                            </label>
-                        </td>
-                        <td style="width: 50%">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="width: 50%">
-                            客户名称：
-                            <input type="text" class="span6" name="Name" id="Name" style="margin-bottom: 0px" value="@ViewBag.Name" />
-                        </td>
-                        <td style="width: 50%">
-                            <input type="submit" value="查询" class="btn blue" id="btn_submit" />
-                        </td>
-                    </tr>
-                </table>
-            </div>
-        }
         <div class="portlet box blue">
             <div class="portlet-title">
                 <div class="caption">
-                    客户列表
+                    @ViewBag.Com.Name - 关联公司列表
                 </div>
                 <div class="tools">
-                    @Html.ActionLink("<i class='icon-plus'></i>&nbsp;新增客户", "Add", "Company", null, new { @class = "", style = "color:#FFF" }, true).Html()
+                    @Html.ActionLink("<i class='icon-plus'></i>&nbsp;新增关联公司", "Add_GuanLian", "Company", new { companyID=ViewBag.Com.ID }, new { @class = "", style = "color:#FFF" }, true).Html()
                 </div>
             </div>
             <div class="portlet-body">
@@ -60,9 +22,6 @@
                         <tr>
                             <th>
                                 客户名称
-                            </th>
-                            <th>
-                                关联公司
                             </th>
                             <th>
                                 审核状态
@@ -78,12 +37,6 @@
                             <tr>
                                 <td>
                                     @item.Name
-                                </td>
-                                <td>
-                                    @foreach (var gl in item.CompanyRelations2)
-                                    {
-                                        @:@gl.Company.Name<br />
-                                                                                                                                                                                                                                                                                                                                    }
                                 </td>
                                 <td>
                                     @if (item.Status == 0)
@@ -103,27 +56,12 @@
                                     @Html.ActionLink("详细", "Detail", "Company", new { id = item.ID }, null, true)
                                     @Html.ActionLink("修改", "Edit", "Company", new { id = item.ID }, null, true)
                                     @Ajax.ActionLink("删除", "Delete", "Company", new { id = item.ID }, new AjaxOptions() { UpdateTargetId = "alert", OnBegin = "return AppDelete('确定删除?删除此项将会删除其关联的所有数据！')" }, true)
-                                    @Html.ActionLink("融资信息", "Financing", "Company", new { companyID = item.ID, page = Model.CurrentPageIndex }, null, true)
+                                    @Html.ActionLink("融资信息", "Financing", "Company", new { companyID = item.ID }, null, true)
                                 </td>
                             </tr>
                         }
                     </tbody>
                 </table>
-                <div class="pagination">
-                    @Html.Pager(Model, new PagerOptions
-               {
-                   PageIndexParameterName = "ID",
-                   CurrentPagerItemWrapperFormatString = "<li class=\"disabled\"><a>{0}</a></li>",
-                   NumericPagerItemWrapperFormatString = "<li>{0}</li>",
-                   NavigationPagerItemWrapperFormatString = "<li>{0}</li>",
-                   CssClass = "",
-                   SeparatorHtml = "",
-                   AutoHide = false,
-                   PageIndexOutOfRangeErrorMessage = "页面错误。",
-                   ShowFirstLast = false,
-                   ContainerTagName = "ul"
-               })
-                </div>
             </div>
         </div>
     </div>

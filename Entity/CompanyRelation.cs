@@ -9,12 +9,18 @@ namespace Entity
     {
         public int ID { get; set; }
 
+        /// <summary>
+        /// 被关联公司的ID
+        /// </summary>
         public int CompanyID { get; set; }
 
         public virtual Company Company { get; set; }
 
-        public int RelationID { get; set; }
+        /// <summary>
+        /// 主关联公司的ID
+        /// </summary>
+        public int RelationObjectID { get; set; }
 
-        public virtual Relation Relation { get; set; }
+        public virtual Company RelationObject { get; set; }
     }
 }

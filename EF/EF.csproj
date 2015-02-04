@@ -53,13 +53,10 @@
     <Compile Include="Mapping\RoleOptionMap.cs" />
     <Compile Include="Mapping\RoleAccountMap.cs" />
     <Compile Include="Mapping\AttachmentMap.cs" />
-    <Compile Include="Migrations\201501270134397_update.cs" />
-    <Compile Include="Migrations\201501270134397_update.Designer.cs">
-      <DependentUpon>201501270134397_update.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201501290602300_update1.cs" />
-    <Compile Include="Migrations\201501290602300_update1.Designer.cs">
-      <DependentUpon>201501290602300_update1.cs</DependentUpon>
+    <Compile Include="Mapping\CompanyRelationMap.cs" />
+    <Compile Include="Migrations\201502040153079_UPdate.cs" />
+    <Compile Include="Migrations\201502040153079_UPdate.Designer.cs">
+      <DependentUpon>201502040153079_UPdate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -78,11 +75,8 @@
     <Content Include="Initial.sql" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201501270134397_update.resx">
-      <DependentUpon>201501270134397_update.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201501290602300_update1.resx">
-      <DependentUpon>201501290602300_update1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201502040153079_UPdate.resx">
+      <DependentUpon>201502040153079_UPdate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

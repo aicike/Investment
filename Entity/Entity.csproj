@@ -52,7 +52,6 @@
     <Compile Include="Financing.cs" />
     <Compile Include="FinancingMatching.cs" />
     <Compile Include="MechanismProducts.cs" />
-    <Compile Include="Relation.cs" />
     <Compile Include="Enum\EnumAttachmentType.cs" />
     <Compile Include="Mechanism.cs" />
     <Compile Include="MenuOption.cs" />

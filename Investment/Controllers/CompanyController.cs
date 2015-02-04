@@ -13,7 +13,7 @@ namespace Investment.Controllers
     {
         #region 客户信息
 
-        public ActionResult Index(int? id, string Name)
+        public ActionResult Index(int? id, string Name, int? radio_gl)
         {
             CompanyModel cm = new CompanyModel();
             var objs = cm.List();
@@ -21,8 +21,31 @@ namespace Investment.Controllers
             {
                 objs = objs.Where(a => a.Name.Contains(Name));
             }
-            //var list = objs.ToPagedList(id ?? 1, 15);
-            var list = cm.List().Where(a => a.OwnerID == LoginAccount.UserID).ToPagedList(id ?? 1, 15);
+            if (radio_gl.HasValue == false || radio_gl == 0)
+            {
+                ViewBag.Radio = 0;
+            }
+            else
+            {
+                objs = objs.Where(a => a.Financings.Any());
+                ViewBag.Radio = 1;
+            }
+            ViewBag.Name = Name;
+            var list = objs.Where(a => a.OwnerID == LoginAccount.UserID).ToPagedList(id ?? 1, 15);
+            return View(list);
+        }
+
+        /// <summary>
+        /// 关联公司列表
+        /// </summary>
+        /// <param name="id">主公司</param>
+        /// <returns></returns>
+        public ActionResult Index_gl(int id)
+        {
+            CompanyModel cm = new CompanyModel();
+            var objs = cm.List().Where(a => a.ID == id).FirstOrDefault();
+            ViewBag.Com = objs;
+            var list = objs.CompanyRelations2.Select(a => a.Company).ToList();
             return View(list);
         }
 
@@ -54,29 +77,49 @@ namespace Investment.Controllers
             return JavaScript("window.location.href='" + Url.Action("Edit", "Company", new { id = com.ID }) + "'");
         }
 
-        //新增关联公司
-        public ActionResult Add_GuanLian()
+        /// <summary>
+        /// 新增关联公司
+        /// </summary>
+        /// <param name="companyID">主关联公司ID</param>
+        /// <returns></returns>
+        public ActionResult Add_GuanLian(int companyID)
         {
             Company company = new Company();
             ViewBag.Layout = "~/Views/Shared/_Layout_noMenu.cshtml";
             ViewBag.HasGuanLian = false;
+            ViewBag.CompanyID = companyID;
             return View("Add", company);
         }
 
         [HttpPost]
-        public ActionResult Add_GuanLian(Company company)
+        public ActionResult Add_GuanLian(Company company, int hidCompanyID)
         {
             CompanyModel companyModel = new CompanyModel();
             company.OwnerID = LoginAccount.UserID;
             company.Status = 1;
             List<Attachment> attachments = GetAttachment_Edit();
             Result result = companyModel.Add(company, attachments);
+            Company com = null;
+            if (result.HasError == false)
+            {
+                com = result.Entity as Company;
+                CompanyRelationModel crm = new CompanyRelationModel();
+                result = crm.Add(new CompanyRelation() { RelationObjectID = hidCompanyID, CompanyID = com.ID });
+            }
             if (result.HasError)
             {
                 return JavaScript("JMessage('" + result.Error + "',true)");
             }
-            var com = result.Entity as Company;
-            return JavaScript("window.location.href='" + Url.Action("Edit", "Company", new { id = com.ID }) + "'");
+            //Company c = new Company();
+            //c.Name = com.Name;
+            //c.ZhuCheZiJin = com.ZhuCheZiJin;
+            //c.JingYingFanWei = com.JingYingFanWei;
+            //c.ID = com.ID;
+            //var json = Newtonsoft.Json.JsonConvert.SerializeObject(c);
+
+            var javascript = "$('body',parent.document).find('#table_guanlian').append('<tr><td>" + com.Name + "</td><td>" + com.ZhuCheZiJin + "</td><td>" + com.JingYingFanWei + "</td><td>查看</td></tr>');$('body',parent.document).find('.modal-backdrop:last').click();";
+
+            return JavaScript(javascript);
         }
 
         public ActionResult Edit(int id)
@@ -335,6 +378,13 @@ namespace Investment.Controllers
             {
                 var attachment_FangGuanJuDangAnChaXun = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Attachment>>(FangGuanJuDangAnChaXun);
                 attachmentList.AddRange(attachment_FangGuanJuDangAnChaXun);
+            }
+            
+            string ZiChanQingDan = Request.Form["hid_attachment_30"];
+            if (string.IsNullOrEmpty(ZiChanQingDan) == false)
+            {
+                var attachment_ZiChanQingDan = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Attachment>>(ZiChanQingDan);
+                attachmentList.AddRange(attachment_ZiChanQingDan);
             }
             return attachmentList;
         }

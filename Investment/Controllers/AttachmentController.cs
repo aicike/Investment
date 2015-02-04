@@ -104,9 +104,6 @@ namespace Investment.Controllers
                 case EnumAttachmentType.ZengZhiShui_YingYeShui_SuoDeShui:
                     str = "公司最近一年的增值税、营业税、所得税纳税申请表和纳税凭证复印件";
                     break;
-                case EnumAttachmentType.QiShui:
-                    str = "契税完税证明";
-                    break;
                 case EnumAttachmentType.FangGuanJuDangAnChaXun:
                     str = "房管局档案查询";
                     break;
@@ -120,13 +117,25 @@ namespace Investment.Controllers
                     str = "法人及股东身的征信报告";
                     break;
                 case EnumAttachmentType.KeXingXingBaoGao:
-                    str = "可行性报告";
+                    str = "项目可研报告";
                     break;
                 case EnumAttachmentType.XiangMuXiangGuanPiWen:
                     str = "项目相关批文";
                     break;
-                case EnumAttachmentType.WuZheng:
-                    str = "五证";
+                case EnumAttachmentType.WuZheng_1:
+                    str = "建设用地规划许可证";
+                    break;
+                case EnumAttachmentType.WuZheng_2:
+                    str = "建设工程规划许可证";
+                    break;
+                case EnumAttachmentType.WuZheng_3:
+                    str = "建筑工程施工许可证";
+                    break;
+                case EnumAttachmentType.WuZheng_4:
+                    str = "国有土地使用证";
+                    break;
+                case EnumAttachmentType.WuZheng_5:
+                    str = "商品房预售许可证";
                     break;
                 case EnumAttachmentType.XiaoShouMingXi:
                     str = "销售明细";
@@ -139,6 +148,9 @@ namespace Investment.Controllers
                     break;
                 case EnumAttachmentType.RongZiXinXiFuJian:
                     str = "审批过程中产生的附件";
+                    break;
+                case EnumAttachmentType.ZiChanQingDan:
+                    str = "资产清单";
                     break;
                 default:
                     str = "未配置";
@@ -232,7 +244,7 @@ namespace Investment.Controllers
         public ActionResult DeleteAttachment(int tableId, int id)
         {
             AttachmentModel attachmentModel = new AttachmentModel();
-            var result = attachmentModel.DeleteAttachment(tableId, id);
+            var result = attachmentModel.DeleteAttachment( id);
             return Json(result);
         }
 
