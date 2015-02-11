@@ -23,6 +23,9 @@
                             机构名称
                         </th>
                         <th>
+                            机构简称
+                        </th>
+                        <th>
                             产品管理
                         </th>
                         <th style="width: 20%">
@@ -41,6 +44,9 @@
                                 { 
                                     <a  class="tooltips" href="@item.WebSite"  target="_blank"  data-placement="top" data-original-title="点击进入官网">@item.Name</a>
                                 }
+                            </td>
+                            <td>
+                                @item.ShortName
                             </td>
                             <td>
                                 @Html.ActionLink("点击进入", "Index", "MechanismProducts", new { MID = item.ID }, null)

@@ -586,6 +586,7 @@
     <Content Include="Scripts\jquery-ui-1.10.3.custom.min.js" />
     <Content Include="Scripts\jquery-ui-1.8.20.js" />
     <Content Include="Scripts\jquery-ui-1.8.20.min.js" />
+    <Content Include="Scripts\jquery.jqprint-0.3.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate-vsdoc.js" />
@@ -1152,6 +1153,7 @@
     <Content Include="Views\Company\Detail.cshtml" />
     <Content Include="Views\Company\Edit.cshtml" />
     <Content Include="Views\Company\Add4.cshtml" />
+    <Content Include="Views\Company\JGJDXX.cshtml" />
     <None Include="Views\WorkFlowApproval\QianShuXieYi.cshtml" />
     <None Include="Views\WorkFlowApproval\QueRenShouQuFeiYong.cshtml" />
     <Content Include="Views\WorkFlowApproval\SelInfoPath.cshtml" />
@@ -1167,6 +1169,7 @@
     <Content Include="Views\WorkFlow\WorkFlowSchedule.cshtml" />
     <Content Include="Views\WorkFlowApproval\FengKongShenHe.cshtml" />
     <Content Include="Views\WorkFlowApproval\FangKuan.cshtml" />
+    <Content Include="Views\WorkFlow\EditABRole.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

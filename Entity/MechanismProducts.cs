@@ -34,6 +34,12 @@ namespace Entity
         public double MaxQuota { get; set; }
 
         /// <summary>
+        /// 最高放贷期限
+        /// </summary>
+        [Required(ErrorMessage = "请输入最高放贷期限（月）")]
+        public int MaxMonth { get; set; }
+
+        /// <summary>
         /// 办理指南
         /// </summary>
         public string Remark { get; set; }

@@ -3,6 +3,23 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @section scripts{
+    <script>
+    function GetABRole(workflowID) { 
+        var url = "@Url.Action("EditABRole", "WorkFlow")";
+        url = url+"?WorkFlowID="+workflowID;
+         $("#iframe_GGAB").attr("src", url);
+    }
+    function ckbABOk()
+    {
+        $("#del_GGAB").click();
+        JMessage("更改成功！",false);
+        setTimeout(function() { 
+            location.reload();
+
+        }, 1000); 
+
+    }
+    </script>
 }
 @model PagedList<Entity.WorkFlow>
 <div class="row-fluid">
@@ -13,6 +30,7 @@
                     <i class="icon-cogs"></i>项目列表
                 </div>
                 <div class="tools">
+                    <a onclick="ckbABOk()" id="a_delAB" style="display: none"></a>
                 </div>
             </div>
             <div class="portlet-body">
@@ -25,7 +43,7 @@
                             <th style="width: 100px;">
                                 编号
                             </th>
-                            <th >
+                            <th>
                                 项目名称
                             </th>
                             <th style="width: 80px;">
@@ -43,16 +61,19 @@
                             <th style="width: 150px;">
                                 当前审批人
                             </th>
+                            <th style="width: 150px;">
+                                操作
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach (var item in Model)
                         {
                             <tr>
-                                <td style=" text-align:center">
-                                    <a href="@Url.Action("WorkFlowSchedule", "WorkFlow", new { WorkFlowID=item.ID })" title="流程节点与操作指引" target="_blank" style="">
+                                <td style="text-align: center">
+                                    <a href="@Url.Action("WorkFlowSchedule", "WorkFlow", new { WorkFlowID = item.ID })" title="流程节点与操作指引" target="_blank" style="">
                                         <img src="@Url.Content("/Image/lct.png")" style=" max-width:25px" />
-                                    </a>    
+                                    </a>
                                 </td>
                                 <td>
                                     @Html.ActionLink(@item.Number, "SelInfoPath", "WorkFlowApproval", new { WorkFlowID = item.ID }, new { target = "_blank" })
@@ -63,7 +84,7 @@
                                 <td>
                                     @item.BeginDate.ToString("yyyy/MM/dd")
                                 </td>
-                                 <td>
+                                <td>
                                     @item.Financing.Owner_A.Name
                                 </td>
                                 <td>
@@ -80,7 +101,7 @@
                                                 break;
                                         case 3:
                                         @:未通过
-                                                                                                                        break;
+                                                                                                                                                                                                break;
                                     }
                                 </td>
                                 <td>
@@ -93,7 +114,10 @@
                                     @foreach (var ar in ars)
                                     {
                                         @:@ar.AccountPosition：@ar.AccountName<br />
-                                                                                                            }
+                                                                                                                                                                                    }
+                                </td>
+                                <td>
+                                    <a data-toggle="modal" onclick="GetABRole(@item.ID)" href="#div_guanlian_GGAB">更改AB角</a>
                                 </td>
                             </tr>
                         }
@@ -116,5 +140,25 @@
                 </div>
             </div>
         </div>
+    </div>
+</div>
+<div id="div_guanlian_GGAB" class="modal hide fade" tabindex="-1" data-width="970"
+    style="">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+        </button>
+        <h3>
+            更改项目AB角</h3>
+    </div>
+    <div class="modal-body" style="min-height: 300px">
+        <div class="row-fluid">
+            <div class="span12">
+                <iframe style="width: 100%; height: 295px; border: none" id="iframe_GGAB"></iframe>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" id="del_GGAB" data-dismiss="modal" class="btn">
+            关闭</button>
     </div>
 </div>

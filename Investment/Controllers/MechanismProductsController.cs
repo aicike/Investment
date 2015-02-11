@@ -124,6 +124,8 @@ namespace Investment.Controllers
                 }
             }
             var pagelist = mplist.ToPagedList(id ?? 1, 15);
+            int index = id??1-1;
+            ViewBag.Index = 15 * index;
 
             return View(pagelist);
         }

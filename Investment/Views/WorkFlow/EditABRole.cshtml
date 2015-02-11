@@ -1,0 +1,89 @@
+﻿@{
+    ViewBag.Title = "EditABRole";
+    Layout = "~/Views/Shared/_Layout_noMenu.cshtml";
+    var GAlist = ViewBag.GAlist as List<Entity.GroupAccount>;
+}
+@section scripts{
+    <script>
+        $(function () {
+            $('#div_noMenu_top').hide();
+            $('#_Title').hide();
+            $('.footer').hide();
+            $("#AuserID").val("@Model.Financing.Owner_A_ID");
+            var buserid = "@Model.Financing.Owner_B_ID";
+            if (buserid != "" && buserid != undefined) {
+                $("#BuserID").val("@Model.Financing.Owner_B_ID");
+            }
+        });
+
+        function ckbOk()
+        {
+            $("#a_delAB", parent.document).click();
+        }
+    </script>
+}
+@model Entity.WorkFlow
+<div class="row-fluid">
+    <div class="span12" style="width: 100%">
+        @using (Ajax.BeginForm("EditABRole", "WorkFlow", new AjaxOptions() { UpdateTargetId = "alert" }, new { @class = "form-horizontal" }))
+        {
+            <div class="myoption">
+                <button class="btn blue" type="submit">
+                    保存</button>
+            </div>
+            <table class="table table-bordered">
+                <tr>
+                    <td style="width: 100px">
+                        流程单号:
+                    </td>
+                    <td>@Model.Number
+                    </td>
+                    <td style="width: 100px">
+                        申请日期:
+                    </td>
+                    <td>@Model.BeginDate
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        项目名称:
+                    </td>
+                    <td>@Model.Financing.Name
+                    </td>
+                    <td>
+                        项目类型:
+                    </td>
+                    <td>@Model.Financing.WorkFlowManager.Name
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        项目负责人:
+                    </td>
+                    <td>
+                        <select id="AuserID" name="AuserID" class="">
+                            @foreach (var item in GAlist)
+                            {
+                                <option value="@item.ID">@item.Name</option>
+                            }
+                        </select>
+                        <input type="hidden" id="FinancingID" name ="FinancingID" value="@Model.FinancingID" />
+                    </td>
+                    <td>
+                        B角:
+                    </td>
+                    <td>
+                        <select id="BuserID" name="BuserID"  class="">
+                            <option value="-1">暂无B角</option>
+                            @foreach (var item in GAlist)
+                            {
+                                <option value="@item.ID">@item.Name</option>
+                            }
+                        </select>
+                    </td>
+                </tr>
+            </table>
+            
+        }
+    </div>
+</div>

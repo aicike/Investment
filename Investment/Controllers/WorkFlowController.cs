@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Business;
+using Entity;
 
 namespace Investment.Controllers
 {
@@ -106,5 +107,34 @@ namespace Investment.Controllers
             var workflow_node = wfnmodel.GetWorkFlow_Node(workflow.Financing.WorkFlowManagerID).OrderBy(a => a.Order).ToList();
             return View(workflow_node);
         }
+
+        #region 更改项目AB角色
+        /// <summary>
+        /// 更改AB角色界面
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult EditABRole(int WorkFlowID)
+        {
+            WorkFlowModel wfm = new WorkFlowModel();
+            var workflow = wfm.Get(WorkFlowID);
+            GroupAccountModel gamodel = new GroupAccountModel();
+            var GAlist = gamodel.GetListWithoutAdmin();
+            ViewBag.GAlist = GAlist;
+            return View(workflow);
+        }
+
+        /// <summary>
+        /// 更改AB角色界面
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult EditABRole(int FinancingID, int AuserID, int BuserID)
+        {
+            FinancingModel fm = new FinancingModel();
+            fm.SetABRole(FinancingID, AuserID, BuserID);
+            //邮件通知
+            return JavaScript("ckbOk()");
+        }
+        #endregion
     }
 }

@@ -20,8 +20,15 @@ namespace Entity
         /// 机构名称
         /// </summary>
         [Display(Name = "机构名称")]
-        [Required(ErrorMessage = "请输入登录账号")]
+        [Required(ErrorMessage = "请输入机构名称")]
         public string Name { get; set; }
+
+        /// <summary>
+        /// 机构简称
+        /// </summary>
+        [Display(Name = "机构简称")]
+        [Required(ErrorMessage = "请输入机构简称")]
+        public string ShortName { get; set; }
 
         /// <summary>
         /// 官方网站

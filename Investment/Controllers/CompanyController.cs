@@ -89,6 +89,11 @@ namespace Investment.Controllers
             }
             ViewBag.Layout = "~/Views/Shared/_Layout.cshtml";
             ViewBag.HasGuanLian = true;
+            ViewBag.CompanyID = company.ID;
+            //查找借贷信息
+            CompanyReferenceModel crmodel = new CompanyReferenceModel();
+            var crlist = crmodel.GetInfo_byCID(company.ID);
+            ViewBag.CRList = crlist;
             return View(company);
         }
 
@@ -360,6 +365,9 @@ namespace Investment.Controllers
         {
             CompanyModel companyModel = new CompanyModel();
             var company = companyModel.Get(id);
+            CompanyReferenceModel crmodel = new CompanyReferenceModel();
+            var crlist = crmodel.GetInfo_byCID(company.ID);
+            ViewBag.CRList = crlist;
             return View(company);
         }
 
@@ -513,6 +521,80 @@ namespace Investment.Controllers
             }
         }
 
+        #endregion
+
+        #region 客户信息用户控件
+        /// <summary>
+        /// 机构借贷信息控件
+        /// </summary>
+        /// <param name="Types">0 新增 1修改</param>
+        /// <returns></returns>
+        public ActionResult JGJDXX(int Types,int CompanyID, int? referenceID)
+        {
+            CompanyReferenceModel crmodel = new CompanyReferenceModel();
+            CompanyReference crf = new CompanyReference();
+            if (Types == 1)
+            {
+                crf = crmodel.Get(referenceID.Value);
+            }
+            ViewBag.CompanyID = CompanyID;
+            return View(crf);
+        }
+
+        /// <summary>
+        /// 机构借贷信息控件
+        /// </summary>
+        /// <param name="Types">0 新增 1修改</param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult AddJGJDXX(CompanyReference companyreference)
+        {
+            CompanyReferenceModel crmodel = new CompanyReferenceModel();
+            //修改
+            if (companyreference.ID > 0)
+            {
+                crmodel.Edit(companyreference);
+            }
+            else {
+                crmodel.Add(companyreference);
+            }
+            AttachmentModel amodel = new AttachmentModel();
+            List<Attachment> attachmentList = new List<Attachment>();
+            string fj = Request.Form["hid_attachment_JGJDXX"];
+            if (string.IsNullOrEmpty(fj) == false)
+            {
+                var fjjson = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Attachment>>(fj);
+                foreach (var item in fjjson)
+                {
+                    item.TableID = companyreference.ID;
+                    amodel.Add(item);
+                }
+                
+                //attachmentList.AddRange(fjjson);
+            }
+            var jsonreference = Newtonsoft.Json.JsonConvert.SerializeObject(companyreference);
+            return JavaScript("AddJGJDXX("+jsonreference+")");
+            //return JavaScript(" window.location.href='" + Url.Action("Edit", "Company", new { id = companyreference.CompanyID}) + "';");
+           
+        }
+        /// <summary>
+        /// 删除借贷信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public string DeleteJGJDXX(int id,int CID)
+        {
+            CompanyReferenceModel crmodel = new CompanyReferenceModel();
+            var result = crmodel.Delete(id);
+            AttachmentModel amodel = new AttachmentModel();
+            amodel.DelInfo("CompanyReference",id);
+            if (result.HasError)
+            {
+                return "<script>JMessage('" + result.Error + "',true)</script>";
+            }
+
+            return "<script>JMessage('删除成功',false);$('#JGJDtr_" + id + "').hide();</script>";
+        }
         #endregion
     }
 }

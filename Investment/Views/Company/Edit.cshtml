@@ -1,6 +1,7 @@
 ﻿@{
     ViewBag.Title = "修改客户";
     Layout = ViewBag.Layout;
+    var CRList = ViewBag.CRList as List<Entity.CompanyReference>;
 }
 @section scripts{
     <style>
@@ -18,6 +19,32 @@
         }
     </style>
     <script type="text/javascript">
+        window.onbeforeunload = function () {
+            var scrollPos;
+            if (typeof window.pageYOffset != 'undefined') {
+                scrollPos = window.pageYOffset;
+            }
+            else if (typeof document.compatMode != 'undefined' &&
+          document.compatMode != 'BackCompat') {
+                scrollPos = document.documentElement.scrollTop;
+            }
+            else if (typeof document.body != 'undefined') {
+                scrollPos = document.body.scrollTop;
+            }
+            document.cookie = "scrollTop=" + scrollPos; //存储滚动条位置到cookies中  
+        }
+
+        window.onload = function () {
+            if (document.cookie.match(/scrollTop=([^;]+)(;|$)/) != null) {
+                var arr = document.cookie.match(/scrollTop=([^;]+)(;|$)/); //cookies中不为空，则读取滚动条位置  
+                document.documentElement.scrollTop = parseInt(arr[1]);
+                document.body.scrollTop = parseInt(arr[1]);
+            }
+        }
+
+
+
+
         var hasGuanLian = '@ViewBag.HasGuanLian';
         $(function () {
             var qiYeXingZhi = '@Model.QiYeXingZhi';
@@ -40,9 +67,25 @@
                 $("#div_page_root").css("margin-top", "10px");
             }
         }
+        function AddJGJKXX() {
+            var url = '@Html.Raw(@Url.Action("JGJDXX", "Company", new { Types = 0, CompanyID = ViewBag.CompanyID }))';
+
+            $("#iframe_JGJKXX").attr("src", url);
+        }
+
+        function EditJGJKXX(referenceid) {
+            var url = '@Html.Raw(@Url.Action("JGJDXX", "Company", new { Types = 1, CompanyID = ViewBag.CompanyID }))';
+            url = url + "&referenceID=" + referenceid
+            $("#iframe_JGJKXX").attr("src", url);
+        }
+
+        function reloadJGJDXX() {
+            location.reload();
+        }
     </script>
 }
 @model Entity.Company
+<a onclick="reloadJGJDXX()" id="reloadJGJDXX" style="display: none"></a>
 <div class="row-fluid" id="div_page_root">
     <div class="span12">
         <div class="tabbable tabbable-custom boxless">
@@ -51,11 +94,11 @@
                 <div class="myoption">
                     <div>
                         <button type="submit" class="btn blue submitbtn">
-                            保存</button>   
+                            保存</button>
                         @if (ViewBag.HasGuanLian)
                         { 
-                        <button type="button" class="btn" onclick="location.href='@ViewBag.BackUrl'">
-                            返回</button>
+                            <button type="button" class="btn" onclick="location.href='@ViewBag.BackUrl'">
+                                返回</button>
                         }@Html.HiddenFor(a => a.ID)@Html.HiddenFor(a => a.OwnerID)@Html.HiddenFor(a => a.Status)
                     </div>
                 </div>
@@ -344,7 +387,8 @@
                                         </tr>
                                     </table>
                                 </div>
-                                <div id="div_guanlian_company" class="modal hide fade" tabindex="-1" style="width:1200px;margin-left:-600px;">
+                                <div id="div_guanlian_company" class="modal hide fade" tabindex="-1" style="width: 1200px;
+                                    margin-left: -600px;">
                                     <iframe style="width:100%;height:800px;border:none" id="iframe_guanlian" src="@Url.Action("Add_GuanLian", "Company")">
                                     </iframe>
                                 </div>
@@ -501,16 +545,71 @@
                     </div>
                     <div class="portlet-body form">
                         <div class="row-fluid">
-                            <div class="span6">
+                            <div class="span12">
                                 <div class="control-group">
-                                    <label class="control-label">
-                                        金融机构借贷信息</label>
-                                    <div class="controls">
-                                        @Html.TextAreaFor(a => a.MuQianDaiKuanDanBaoZhiXingQingKuang, new { @class = "m-wrap span8" })
-                                        <span class="help-inline">
-                                            @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "17", Text = "[附件]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.GongSiDaiKuanMingXi });}
-                                        </span><span class="help-inline">@Html.ValidationMessageFor(a => a.MuQianDaiKuanDanBaoZhiXingQingKuang)</span>
-                                    </div>
+                                    <table class="table table-bordered" id="tab_JGJDXX">
+                                        <tr>
+                                            <td colspan="8">
+                                                金融机构借贷信息 <a data-toggle="modal" onclick="AddJGJKXX()" href="#div_guanlian_JGJKXX">(新增借贷信息)</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                借款金额
+                                            </td>
+                                            <td>
+                                                贷款方
+                                            </td>
+                                            <td>
+                                                借款期限
+                                            </td>
+                                            <td>
+                                                借款方式
+                                            </td>
+                                            <td>
+                                                抵押物信息
+                                            </td>
+                                            <td>
+                                                担保方
+                                            </td>
+                                            <td>
+                                                相关附件
+                                            </td>
+                                            <td>
+                                                操作
+                                            </td>
+                                        </tr>
+                                        @foreach (var item in CRList)
+                                        {
+                                            <tr id="JGJDtr_@item.ID">
+                                                <td>
+                                                    @item.Borrow
+                                                </td>
+                                                <td>
+                                                    @item.Lenders
+                                                </td>
+                                                <td>
+                                                    @item.Deadline
+                                                </td>
+                                                <td>
+                                                    @item.Methods
+                                                </td>
+                                                <td>
+                                                    @item.Collateral
+                                                </td>
+                                                <td>
+                                                    @item.Sponsors
+                                                </td>
+                                                <td>
+                                                    @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "JGJDXX", Text = "[附件]", Table = "CompanyReference", TableId = item.ID, EnumAttachmentType = 0, IsEnabled = false });}
+                                                </td>
+                                                <td>
+                                                    <a  data-toggle='modal' onclick='EditJGJKXX(@item.ID)' href='#div_guanlian_JGJKXX'>修改</a>
+                                                    @Ajax.ActionLink("删除", "DeleteJGJDXX", "Company", new { ID = item.ID, CID = item.CompanyID }, new AjaxOptions() { UpdateTargetId = "alert", OnBegin = "return AppDelete('确定删除?')" }, true)
+                                                </td>
+                                            </tr>
+                                        }
+                                    </table>
                                 </div>
                             </div>
                         </div>
@@ -527,7 +626,7 @@
                             </div>
                             <div class="control-group">
                                 <div style="margin-left: 59px; width: 550px; float: left;">
-                                    1. 近6个月财务报表（资产负债表、利润表和现金流量表）、往来款明细、固定资产清单</div>
+                                    2. 近3个月财务报表（资产负债表、利润表和现金流量表）、往来款明细、固定资产清单</div>
                                 <div style="float: left; margin-left: 50px">
                                     @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "19", Text = "[附件]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.ErJiKeMuMingXi });}
                                 </div>
@@ -536,7 +635,7 @@
                             </div>
                             <div class="control-group">
                                 <div style="margin-left: 59px; width: 550px; float: left;">
-                                    2. 最近一年的增值税、营业税、所得税纳税申报表和纳税凭证</div>
+                                    3. 最近一年的增值税、营业税、所得税纳税申报表和纳税凭证</div>
                                 <div style="float: left; margin-left: 50px">
                                     @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "20", Text = "[附件]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.ZengZhiShui_YingYeShui_SuoDeShui });}
                                 </div>
@@ -645,8 +744,8 @@
                             保存</button>
                         @if (ViewBag.HasGuanLian)
                         { 
-                        <button type="button" class="btn" onclick="location.href='@ViewBag.BackUrl'">
-                            返回</button>
+                            <button type="button" class="btn" onclick="location.href='@ViewBag.BackUrl'">
+                                返回</button>
                         }
                     </div>
                 </div>
@@ -654,3 +753,26 @@
         </div>
     </div>
 </div>
+<div id="div_guanlian_JGJKXX" class="modal hide fade" tabindex="-1" data-width="970"
+    style="">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+        </button>
+        <h3>
+            金融机构借贷信息</h3>
+    </div>
+    <div class="modal-body" style="min-height: 570px">
+        <div class="row-fluid">
+            <div class="span12">
+                <iframe style="width: 100%; height: 565px; border: none" id="iframe_JGJKXX"></iframe>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" id="del_JGJKXX" data-dismiss="modal" class="btn">
+            关闭</button>
+    </div>
+</div>
+<script>
+    
+</script>
