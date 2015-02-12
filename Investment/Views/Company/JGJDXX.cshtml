@@ -1,0 +1,116 @@
+﻿@{
+    ViewBag.Title = "JGJDXX";
+    Layout = "~/Views/Shared/_Layout_noMenu.cshtml";
+}
+@section scripts{
+<script>
+    $(function () {
+        $('#div_noMenu_top').hide();
+        $('#_Title').hide();
+        $('.footer').hide();
+
+        $("#responsive_JGJDXX").find("div[class='modal-footer']").hide();
+
+        $('#responsive_JGJDXX').attr("style", "max-width:700px;min-height:450px;margin-left:-350px");
+        
+    });
+    //添加新行
+    function AddJGJDXX(jsonreference) {
+        
+//        var data = " <tr id='JGJDtr_"+jsonreference.ID+"'><td>" + jsonreference.Borrow + "</td> <td>" + jsonreference.Lenders + " </td> <td>" + jsonreference.Deadline + "</td>"
+//                   + "<td>" + jsonreference.Methods + "</td> <td>" + jsonreference.Collateral + "</td><td>" + jsonreference.Sponsors + " </td>"
+//                   +"<td> 相关附件</td>"
+//                   + "<td><a  data-toggle='modal' onclick='EditJGJKXX(" + jsonreference.ID + ")' href='#div_guanlian_JGJKXX'>修改</a> "
+//                   + " <a data-ajax='true' data-ajax-begin='return AppDelete(\"确定删除?\")' data-ajax-mode='replace' data-ajax-update='#alert' href='/Company/DeleteJGJDXX/" + jsonreference.ID + "?CID=" + jsonreference.CompanyID + "'>删除</a></td></tr>";
+
+//        $('#tab_JGJDXX', parent.document).append(data);
+//        $("#del_JGJKXX", parent.document).click();
+
+        $("#reloadJGJDXX", parent.document).click();
+        
+    }
+    
+</script>
+}
+@model Entity.CompanyReference
+<div class="row-fluid">
+    <div class="span12" style="width: 100%">
+        @using (Ajax.BeginForm("AddJGJDXX", "Company", new AjaxOptions() { UpdateTargetId = "alert" }, new { @class = "form-horizontal" }))
+        {
+            <div class="myoption">
+                <button class="btn blue" type="submit">
+                    保存</button>
+            </div>
+            <div class="portlet box blue">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="icon-cogs"></i>新增借贷信息
+                    </div>
+                    <div class="tools">
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <input type="hidden" name="Roles" id="Roles" />
+                    <input type="hidden" name="Positions" id="Positions" />
+                    <div class="control-group">
+                        <label class="control-label">
+                            借款金额:</label>
+                        <div class="controls">
+                            @Html.TextBoxFor(a => a.Borrow, new { @class = "span6 m-wrap" })
+                            @Html.HiddenFor(a => a.ID)
+                            <input type="hidden" value="@ViewBag.CompanyID" name="CompanyID" />
+                            <span class="help-inline">@Html.ValidationMessageFor(a => a.Borrow)</span>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">
+                            贷款方:</label>
+                        <div class="controls">
+                            @Html.TextBoxFor(a => a.Lenders, new { @class = "span6 m-wrap" })
+                            <span class="help-inline">@Html.ValidationMessageFor(a => a.Lenders)</span>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">
+                            借款期限:</label>
+                        <div class="controls">
+                            @Html.TextBoxFor(a => a.Deadline, new { @class = "span6 m-wrap", placeholder = "如：2014/1/1-2015/1/1" })
+                            <span class="help-inline">@Html.ValidationMessageFor(a => a.Deadline)</span>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">
+                            借款方式:</label>
+                        <div class="controls">
+                            @Html.TextBoxFor(a => a.Methods, new { @class = "span6 m-wrap" })
+                            <span class="help-inline">@Html.ValidationMessageFor(a => a.Methods)</span>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">
+                            抵押物信息:</label>
+                        <div class="controls">
+                            @Html.TextAreaFor(a => a.Collateral, new { @class = "span6 m-wrap" })
+                            <span class="help-inline">@Html.ValidationMessageFor(a => a.Collateral)</span>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">
+                            担保方:</label>
+                        <div class="controls">
+                            @Html.TextBoxFor(a => a.Sponsors, new { @class = "span6 m-wrap" })
+                            <span class="help-inline">@Html.ValidationMessageFor(a => a.Sponsors)</span>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">
+                            相关附件:</label>
+                        <div class="controls" style="vertical-align: inherit; padding-top: 5px; ">
+                            @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "JGJDXX", Text = "[附件]", Table = "CompanyReference", TableId = Model.ID, EnumAttachmentType = 0 });}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

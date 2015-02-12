@@ -15,20 +15,9 @@
     <script>
         $(function () {
 
-             //选择节点
+            //选择节点
             $("input[name='NodeID']").change(function(){
-                 var ISSince = $(this).attr("_IsSince");
                  $("#WorkFlowNodeManagerID").val($(this).val());
-                 if(ISSince=="True")
-                 {
-                    $("#trFZR").hide();
-                    $("#WorkFlowNodeISSince").val("True");
-                 }
-                 else
-                 {
-                    $("#trFZR").show();
-                    $("#WorkFlowNodeISSince").val("False");
-                 }
             });
 
 
@@ -48,6 +37,18 @@
        
         });
 
+        function changeZSP(sel)
+        {
+            if($(sel).val()=="True")
+            {
+            $("#trFZR").hide();
+            }
+            else
+            {
+            $("#trFZR").show();
+            }
+        }
+
         function checkSub()
         {
             if($("input[name='NodeID']:checked").length<=0)
@@ -55,7 +56,7 @@
                 JMessage("请选择节点",true);
                 return false;
             }
-            if($("#WorkFlowNodeISSince").val()=="False")
+            if($("#IsSinceApproval").val()=="False")
             {
                 var cnt = $("div[name='divFZR']").length;
                 if(cnt<=0)
@@ -188,7 +189,7 @@
                                     @foreach (var item in Nodes)
                                     {
                                         <label class="radio">
-                                            <input type="radio"  name="NodeID" value="@item.ID" _IsSince="@item.IsSinceApproval.ToString()" />
+                                            <input type="radio"  name="NodeID" value="@item.ID"  />
                                             @item.Name (@item.Remark)
                                         </label>
                                     }
@@ -197,7 +198,6 @@
                                 <input type="hidden" id="AccountIDs" name="AccountIDs" />
                                 <input type="hidden" id="PositionIDs" name="PositionIDs" />
                                 <input type="hidden" id="WorkFlowNodeManagerID" name="WorkFlowNodeManagerID" />
-                                <input type="hidden" id="WorkFlowNodeISSince" name="WorkFlowNodeISSince" />
                             </td>
                             <td>@*@Html.ValidationMessageFor(a => a.Name)*@
                             </td>
@@ -219,6 +219,19 @@
                                         <option value="@i">@i</option>
                                         }
                                     }
+                                </select>
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                         <tr >
+                            <td>
+                                是否自审批：
+                            </td>
+                            <td>
+                                <select onchange="changeZSP(this)" id="IsSinceApproval" name="IsSinceApproval" class="small m-wrap">
+                                    <option value="False">否</option>
+                                    <option value="True">是</option>
                                 </select>
                             </td>
                             <td>

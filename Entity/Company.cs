@@ -312,5 +312,8 @@ namespace Entity
 
         public virtual ICollection<WorkFlow> WorkFlows { get; set; }
 
+
+        public virtual ICollection<CompanyReference> CompanyReference { get; set; }
+
     }
 }

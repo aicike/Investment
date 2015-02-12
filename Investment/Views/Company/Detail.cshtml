@@ -1,6 +1,7 @@
 ﻿@{
     ViewBag.Title = "客户信息";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var CRList = ViewBag.CRList as List<Entity.CompanyReference>;
 }
 @section scripts{
     <style>
@@ -493,16 +494,65 @@
                     </div>
                     <div class="portlet-body form">
                         <div class="row-fluid">
-                            <div class="span6">
+                            <div class="span12">
                                 <div class="control-group">
-                                    <label class="control-label">
-                                        金融机构借贷信息</label>
-                                    <div class="controls">
-                                        @Html.TextAreaFor(a => a.MuQianDaiKuanDanBaoZhiXingQingKuang, new { @class = "m-wrap span8", @readonly = "readonly" })
-                                        <span class="help-inline">
-                                            @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { IsEnabled = false, ID = "17", Text = "[附件]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.GongSiDaiKuanMingXi });}
-                                        </span><span class="help-inline">@Html.ValidationMessageFor(a => a.MuQianDaiKuanDanBaoZhiXingQingKuang)</span>
-                                    </div>
+                                   <table class="table table-bordered" id="tab_JGJDXX">
+                                        <tr>
+                                            <td colspan="8">
+                                                金融机构借贷信息 
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                借款金额
+                                            </td>
+                                            <td>
+                                                贷款方
+                                            </td>
+                                            <td>
+                                                借款期限
+                                            </td>
+                                            <td>
+                                                借款方式
+                                            </td>
+                                            <td>
+                                                抵押物信息
+                                            </td>
+                                            <td>
+                                                担保方
+                                            </td>
+                                            <td>
+                                                相关附件
+                                            </td>
+                                        </tr>
+                                        @foreach (var item in CRList)
+                                        {
+                                            <tr >
+                                                <td>
+                                                    @item.Borrow
+                                                </td>
+                                                <td>
+                                                    @item.Lenders
+                                                </td>
+                                                <td>
+                                                    @item.Deadline
+                                                </td>
+                                                <td>
+                                                    @item.Methods
+                                                </td>
+                                                <td>
+                                                    @item.Collateral
+                                                </td>
+                                                <td>
+                                                    @item.Sponsors
+                                                </td>
+                                                <td>
+                                                    @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "JGJDXX", Text = "[附件]", Table = "CompanyReference", TableId = item.ID, EnumAttachmentType = 0, IsEnabled = false });}
+                                                </td>
+                                            
+                                            </tr>
+                                        }
+                                    </table>
                                 </div>
                             </div>
                         </div>

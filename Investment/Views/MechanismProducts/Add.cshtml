@@ -69,6 +69,14 @@
                     </div>
                     <div class="control-group">
                         <label class="control-label">
+                            最高放贷期限（月）:</label>
+                        <div class="controls">
+                            @Html.TextBoxFor(a => a.MaxMonth, new { @class = "span6 m-wrap" })
+                            <span class="help-inline">@Html.ValidationMessageFor(a => a.MaxMonth)</span>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">
                             是否启用:</label>
                         <div class="controls">
                             <select name="IsEnable" class="small m-wrap">

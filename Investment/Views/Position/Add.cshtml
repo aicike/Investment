@@ -7,12 +7,13 @@
 @model Entity.Position
 <div class="row-fluid">
     <div class="span12" style="width: 100%">
-        <div class="myoption">
-            <button class="btn blue" onclick="GetRole()" type="submit">
-                添加</button>
-            <a href="@Url.Action("Index", "Position")" class="btn blue" style="">返回</a></div>
+        
         @using (Ajax.BeginForm("Add", "Position", new AjaxOptions() { UpdateTargetId = "alert" }, new { @class = "form-horizontal" }))
         {
+            <div class="myoption">
+            <button class="btn blue" type="submit">
+                添加</button>
+            <a href="@Url.Action("Index", "Position")" class="btn blue" style="">返回</a></div>
             <div class="portlet box blue">
                 <div class="portlet-title">
                     <div class="caption">

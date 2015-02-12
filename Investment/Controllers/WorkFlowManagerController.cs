@@ -66,11 +66,10 @@ namespace Investment.Controllers
         /// <param name="WorkFlowID">流程ID</param>
         /// <param name="AccountIDs">负责人</param>
         /// <param name="PositionIDs">职位</param>
-        /// <param name="WorkFlowNodeISSince">当前节点是否子审批</param>
         /// <returns></returns>
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult AddNode(WorkFlow_Node workFlow_node, string WorkFlowNodeISSince, string AccountIDs, string PositionIDs)
+        public ActionResult AddNode(WorkFlow_Node workFlow_node, string AccountIDs, string PositionIDs)
         {
             //添加节点
             WorkFlow_NodeModel wnModel = new WorkFlow_NodeModel();
@@ -80,7 +79,7 @@ namespace Investment.Controllers
                 //更改排序
                 wnModel.SetOrder_add(workFlow_node.WorkFlowManagerID, workFlow_node.Order, workFlow_node.ID);
 
-                if (WorkFlowNodeISSince == "False")
+                if (!workFlow_node.IsSinceApproval)
                 {
                     //处理审批人
                     WorkFlowApprovalManagerModel wamModel = new WorkFlowApprovalManagerModel();
@@ -143,7 +142,7 @@ namespace Investment.Controllers
         /// <returns></returns>
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult EditNode(WorkFlow_Node workFlow_node, string WorkFlowNodeISSince, string AccountIDs, string PositionIDs)
+        public ActionResult EditNode(WorkFlow_Node workFlow_node, string AccountIDs, string PositionIDs)
         {
             //修改节点
             WorkFlow_NodeModel wnModel = new WorkFlow_NodeModel();
@@ -154,11 +153,11 @@ namespace Investment.Controllers
                 //更改排序
                 wnModel.SetOrder_edit(workFlow_node.WorkFlowManagerID, workFlow_node.Order, wnitem.Order, workFlow_node.ID);
 
-                if (WorkFlowNodeISSince == "False")
+                //处理审批人
+                WorkFlowApprovalManagerModel wamModel = new WorkFlowApprovalManagerModel();
+                wamModel.DelInfo(workFlow_node.ID);
+                if (!workFlow_node.IsSinceApproval)
                 {
-                    //处理审批人
-                    WorkFlowApprovalManagerModel wamModel = new WorkFlowApprovalManagerModel();
-                    wamModel.DelInfo(workFlow_node.ID);
                     var AIDS = AccountIDs.Split(','); //员工
                     var PIDS = PositionIDs.Split(','); //职位
                     for (int i = 0; i < AIDS.Count(); i++)

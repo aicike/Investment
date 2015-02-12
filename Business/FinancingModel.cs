@@ -72,7 +72,25 @@ namespace Business
             return result;
         }
 
-      
+        /// <summary>
+        /// 更改AB角色
+        /// </summary>
+        /// <param name="FID"></param>
+        /// <param name="AuserID"></param>
+        /// <param name="BuserID"></param>
+        /// <returns></returns>
+        public Result SetABRole(int FID, int AuserID, int BuserID)
+        {
+            Result result = new Result();
+            string sql = "update Financing set Owner_A_ID=" + AuserID;
+            if (BuserID > 0)
+            {
+                sql = sql + ",Owner_B_ID=" + BuserID;
+            }
+            sql = sql + " where id=" + FID;
+            base.SqlExecute(sql);
+            return result;
+        }
 
     }
 

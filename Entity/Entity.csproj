@@ -47,6 +47,7 @@
     <Compile Include="Company.cs" />
     <Compile Include="CompanyAccount.cs" />
     <Compile Include="CompanyLoan.cs" />
+    <Compile Include="CompanyReference.cs" />
     <Compile Include="CompanyRelation.cs" />
     <Compile Include="Enum\EnumAttachmentFormat.cs" />
     <Compile Include="Financing.cs" />

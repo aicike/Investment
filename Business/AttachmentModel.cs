@@ -150,5 +150,22 @@ namespace Business
             return list.OrderBy(a => a.EnumAttachmentType).ToList();
         }
 
+        /// <summary>
+        /// 根据表名与ID删除数据(同时删除物理文件)
+        /// </summary>
+        /// <param name="tableName"></param>
+        /// <param name="TableID"></param>
+        /// <returns></returns>
+        public Result DelInfo(string tableName, int TableID)
+        {
+            Result result = new Result();
+            var list = List().Where(a=>a.TableID==TableID&&a.TableName==tableName);
+            foreach (var item in list)
+            {
+                File.Delete(item.FilePath);
+                base.Delete(item.ID);
+            }
+            return result;
+        }
     }
 }

@@ -14,20 +14,10 @@
         $(function () {
              //选择节点
             $("input[name='NodeID']").change(function(){
-                 var ISSince = $(this).attr("_IsSince");
                  $("#WorkFlowNodeManagerID").val($(this).val());
-                 if(ISSince=="True")
-                 {
-                    $("#trFZR").hide();
-                    $("#WorkFlowNodeISSince").val("True");
-                 }
-                 else
-                 {
-                    $("#trFZR").show();
-                    $("#WorkFlowNodeISSince").val("False");
-                 }
             });
-            var issince = "@Model.WorkFlowNodeManager.IsSinceApproval";
+            var issince = "@Model.IsSinceApproval";
+            $("#IsSinceApproval").val(issince);
             if(issince=="True"||issince=="true")
             {
              $("#trFZR").hide();
@@ -50,6 +40,19 @@
             ue = UE.getEditor('editor', options);
            
         });
+
+           function changeZSP(sel)
+        {
+            if($(sel).val()=="True")
+            {
+            $("#trFZR").hide();
+            }
+            else
+            {
+            $("#trFZR").show();
+            }
+        }
+
         
         function checkSub()
         {
@@ -58,7 +61,7 @@
                 JMessage("请选择节点",true);
                 return false;
             }
-            if($("#WorkFlowNodeISSince").val()=="False")
+            if($("#IsSinceApproval").val()=="False")
             {
                 var cnt = $("div[name='divFZR']").length;
                 if(cnt<=0)
@@ -191,14 +194,14 @@
                                         if (Model.WorkFlowNodeManagerID == item.ID)
                                         { 
                                         <label class="radio">
-                                            <input type="radio"  name="NodeID"  checked="checked"  value="@item.ID" _IsSince="@item.IsSinceApproval.ToString()" />
+                                            <input type="radio"  name="NodeID"  checked="checked"  value="@item.ID"  />
                                             @item.Name (@item.Remark)
                                         </label>
                                         }
                                         else
                                         {
                                         <label class="radio">
-                                            <input type="radio"  name="NodeID"value="@item.ID" _IsSince="@item.IsSinceApproval.ToString()" />
+                                            <input type="radio"  name="NodeID"value="@item.ID"  />
                                             @item.Name (@item.Remark)
                                         </label>
                                         }
@@ -209,16 +212,9 @@
                                 <input type="hidden" id="WorkFlowManagerID" name="WorkFlowManagerID" value="@ViewBag.WorkFlowID"/>
                                 <input type="hidden" id="AccountIDs" name="AccountIDs" />
                                 <input type="hidden" id="PositionIDs" name="PositionIDs" />
-                                @if (Model.WorkFlowNodeManager.IsSinceApproval)
-                                {
-                                    <input type="hidden" id="WorkFlowNodeISSince" name="WorkFlowNodeISSince" value="True" />
-                                }
-                                else
-                                {
-                                    <input type="hidden" id="WorkFlowNodeISSince" name="WorkFlowNodeISSince" value="False" />
-                                }
+
                             </td>
-                            <td>@*@Html.ValidationMessageFor(a => a.Name)*@
+                            <td>
                             </td>
                         </tr>
                         <tr>
@@ -238,6 +234,19 @@
                                         <option value="@i">@i</option>
                                         }
                                     }
+                                </select>
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                        <tr >
+                            <td>
+                                是否自审批：
+                            </td>
+                            <td>
+                                <select onchange="changeZSP(this)" id="IsSinceApproval" name="IsSinceApproval" class="small m-wrap">
+                                    <option value="False">否</option>
+                                    <option value="True">是</option>
                                 </select>
                             </td>
                             <td>

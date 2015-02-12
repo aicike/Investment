@@ -72,6 +72,7 @@
     <Compile Include="Commons\ToolImage.cs" />
     <Compile Include="CompanyAccountModel.cs" />
     <Compile Include="CompanyModel.cs" />
+    <Compile Include="CompanyReferenceModel.cs" />
     <Compile Include="CompanyRelationModel.cs" />
     <Compile Include="EFModel.cs" />
     <Compile Include="FinancingMatchingModel.cs" />

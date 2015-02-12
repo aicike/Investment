@@ -31,11 +31,6 @@ namespace Entity
         public string Remark { get; set; }
 
         /// <summary>
-        /// 是否自审批 true是 false否（提交表单的人）
-        /// </summary>
-        public bool IsSinceApproval { get; set; }
-
-        /// <summary>
         /// 控制器
         /// </summary>
         public string Controllers { get; set; }

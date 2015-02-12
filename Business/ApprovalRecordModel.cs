@@ -33,7 +33,7 @@ namespace Business
         {
             Result result = new Result();
             //是否自审批
-            if (workflow_node.WorkFlowNodeManager.IsSinceApproval)
+            if (workflow_node.IsSinceApproval)
             {
                 WorkFlowModel WFModel = new WorkFlowModel();
                 var workflow = WFModel.Get(WorkFlowID);
@@ -97,6 +97,7 @@ namespace Business
             var approvalrecord = base.List().Where(a => a.WorkFlowID == WorkFLowID && a.Operation == -1 && a.GroupAccountID == GroupAccountID).FirstOrDefault();
             approvalrecord.Opinion = Content;
             approvalrecord.Operation = Operation;
+            approvalrecord.Date = DateTime.Now;
             result = base.Edit(approvalrecord);
             return result;
         }
