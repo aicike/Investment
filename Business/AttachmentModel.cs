@@ -15,7 +15,7 @@ namespace Business
         /// 目录关系为：主目录下包含
         /// -------Company(公司文件目录)
         ///        -------Base（公司基本信息目录）
-        ///        -------Financing（融资信息文件目录）
+        ///        -------Financing（贷款信息文件目录）
         ///        -------Approval（审批文件目录）
         /// -------Organization(机构文件目录)
         /// </summary>

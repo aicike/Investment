@@ -9,7 +9,7 @@ using Entity;
 namespace Investment.Controllers
 {
     /// <summary>
-    /// 审批流程表单——融资表单
+    /// 审批流程表单——贷款表单
     /// </summary>
     public class WorkFlow_Form_FinancingController : Controller
     {

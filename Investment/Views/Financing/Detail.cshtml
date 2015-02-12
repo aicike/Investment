@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "融资信息";
+    ViewBag.Title = "贷款信息";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @section scripts{
@@ -65,7 +65,7 @@
                         <div class="span3">
                             <div class="control-group">
                                 <label class="control-label">
-                                    融资状态：</label>
+                                    贷款状态：</label>
                                 <div class="controls">
                                     @switch (Model.Status)
                                     {
@@ -90,7 +90,7 @@
             </div>
             <div class="tabbable tabbable-custom">
                 <ul class="nav nav-tabs">
-                    <li class="active"><a href="#tab_1" id="link_1" data-toggle="tab">融资信息</a></li>
+                    <li class="active"><a href="#tab_1" id="link_1" data-toggle="tab">贷款信息</a></li>
                     <li><a class="" href="#tab_2" data-toggle="tab">附件信息</a></li>
                     <li><a class="" href="@Url.Action("Detail", "Company", new { id = Model.CompanyID })" target="_blank" >
                         客户信息</a></li>
@@ -101,7 +101,7 @@
                             <div class="portlet-body form">
                                 <div class="control-group">
                                     <label class="control-label">
-                                        项目名称</label>
+                                        贷款主体</label>
                                     <div class="controls">
                                         @Html.TextBoxFor(a => a.Name, new { @class = "span6 m-wrap", @readonly = "readonly" })
                                         <span class="help-inline">@Html.ValidationMessageFor(a => a.Name)</span>
@@ -116,7 +116,7 @@
                                 </div>
                                 <div class="control-group">
                                     <label class="control-label">
-                                        融资金额（万元）</label>
+                                        贷款金额（万元）</label>
                                     <div class="controls">
                                         @Html.TextBoxFor(a => a.Amount, new { @class = "m-wrap span6", @readonly = "readonly" })
                                         <span class="help-inline">@Html.ValidationMessageFor(a => a.Amount)</span>
@@ -124,7 +124,7 @@
                                 </div>
                                 <div class="control-group">
                                     <label class="control-label">
-                                        融资期限（月）</label>
+                                        贷款利率（月）</label>
                                     <div class="controls">
                                         @Html.TextBoxFor(a => a.MinTimeLimit, new { @class = "span2 m-wrap", @readonly = "readonly" })&nbsp;&nbsp;&nbsp<span
                                             class="help-inline">-</span>&nbsp;&nbsp;&nbsp;&nbsp;@Html.TextBoxFor(a => a.MaxTimeLimit, new { @class = "span2 m-wrap", @readonly = "readonly" })
@@ -153,15 +153,7 @@
                                 </div>
                                 <div class="control-group">
                                     <label class="control-label">
-                                        融资成本</label>
-                                    <div class="controls">
-                                        @Html.TextBoxFor(a => a.FinancingCost, new { @class = "span6 m-wrap", @readonly = "readonly" })
-                                        <span class="help-inline">@Html.ValidationMessageFor(a => a.FinancingCost)</span>
-                                    </div>
-                                </div>
-                                <div class="control-group">
-                                    <label class="control-label">
-                                        融资用途</label>
+                                        贷款用途</label>
                                     <div class="controls">
                                         @Html.TextAreaFor(a => a.Purpose, new { @class = "span6 m-wrap", @readonly = "readonly" })
                                         <span class="help-inline">@Html.ValidationMessageFor(a => a.Purpose)</span>
@@ -177,7 +169,7 @@
                                 </div>
                                 <div class="control-group">
                                     <label class="control-label">
-                                        增信措施</label>
+                                        担保措施</label>
                                     <div class="controls">
                                         @Html.TextAreaFor(a => a.ZengXinCuoShi, new { @class = "span6 m-wrap", @readonly = "readonly", style = "overflow-y:visible" })
                                         <span class="help-inline">@Html.ValidationMessageFor(a => a.ZengXinCuoShi)</span>
@@ -185,7 +177,7 @@
                                 </div>
                                 <div class="control-group">
                                     <label class="control-label">
-                                        融资方案</label>
+                                        交易模式</label>
                                     <div class="controls">
                                         @Html.TextAreaFor(a => a.RongZiFangAn, new { @class = "span6 m-wrap", @readonly = "readonly" })
                                         <span class="help-inline">@Html.ValidationMessageFor(a => a.RongZiFangAn)</span>

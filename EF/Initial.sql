@@ -4,8 +4,8 @@ SET IDENTITY_INSERT [dbo].[Menu] ON
 --集团
 INSERT [dbo].[Menu] ([ID], [Area], [Controller], [Action], [Name], [ShowName], [Order], [ParentMenuID],AccountType) VALUES (11, NULL, 'Home', 'Home', N'客户管理', N'客户管理', 1, NULL,0)
 INSERT [dbo].[Menu] ([ID], [Area], [Controller], [Action], [Name], [ShowName], [Order], [ParentMenuID],AccountType) VALUES (1101, NULL, 'Company', 'Index', N'客户管理', N'客户管理', 1, 11,0)
-INSERT [dbo].[Menu] ([ID], [Area], [Controller], [Action], [Name], [ShowName], [Order], [ParentMenuID],AccountType) VALUES (1102, NULL, 'Financing', 'Index', N'融资信息列表', N'融资信息列表', 2, 11,0)
-INSERT [dbo].[Menu] ([ID], [Area], [Controller], [Action], [Name], [ShowName], [Order], [ParentMenuID],AccountType) VALUES (1103, NULL, 'Financing', 'IndexALL', N'融资信息列表（全）', N'融资信息列表（全）', 3, 11,0)
+INSERT [dbo].[Menu] ([ID], [Area], [Controller], [Action], [Name], [ShowName], [Order], [ParentMenuID],AccountType) VALUES (1102, NULL, 'Financing', 'Index', N'贷款信息列表', N'贷款信息列表', 2, 11,0)
+INSERT [dbo].[Menu] ([ID], [Area], [Controller], [Action], [Name], [ShowName], [Order], [ParentMenuID],AccountType) VALUES (1103, NULL, 'Financing', 'IndexALL', N'贷款信息列表（全）', N'贷款信息列表（全）', 3, 11,0)
 
 INSERT [dbo].[Menu] ([ID], [Area], [Controller], [Action], [Name], [ShowName], [Order], [ParentMenuID],AccountType) VALUES (21, NULL, 'Home', 'Home', N'机构管理', N'机构管理', 2, NULL,0)
 INSERT [dbo].[Menu] ([ID], [Area], [Controller], [Action], [Name], [ShowName], [Order], [ParentMenuID],AccountType) VALUES (2101, NULL, 'Mechanism', 'Index', N'机构管理', N'机构管理', 1, 21,0)
@@ -39,19 +39,19 @@ INSERT [dbo].[Menu] ([ID], [Area], [Controller], [Action], [Name], [ShowName], [
 SET IDENTITY_INSERT [dbo].[Menu] OFF
 
 /****** Object:  Table [dbo].[MenuOption]    Script Date: 12/05/2014 12:46:05 ******/
---客户、融资信息管理
+--客户、贷款信息管理
 INSERT INTO dbo.MenuOption(MenuID ,Name ,Controller ,[Action] ,[Order]) VALUES  ( 1101 ,N'新增客户' , N'Company' , N'Add' , 1)
 INSERT INTO dbo.MenuOption(MenuID ,Name ,Controller ,[Action] ,[Order]) VALUES  ( 1101 ,N'详细' , N'Company' , N'Detail' , 2)
 INSERT INTO dbo.MenuOption(MenuID ,Name ,Controller ,[Action] ,[Order]) VALUES  ( 1101 ,N'修改' , N'Company' , N'Edit' , 3)
 INSERT INTO dbo.MenuOption(MenuID ,Name ,Controller ,[Action] ,[Order]) VALUES  ( 1101 ,N'删除' , N'Company' , N'Delete' , 4)
-INSERT INTO dbo.MenuOption(MenuID ,Name ,Controller ,[Action] ,[Order]) VALUES  ( 1101 ,N'融资信息列表' , N'Company' , N'Financing' , 5)
-INSERT INTO dbo.MenuOption(MenuID ,Name ,Controller ,[Action] ,[Order]) VALUES  ( 1101 ,N'新增融资信息' , N'Company' , N'AddFinancing' , 6)
-INSERT INTO dbo.MenuOption(MenuID ,Name ,Controller ,[Action] ,[Order]) VALUES  ( 1101 ,N'查看融资信息' , N'Financing' , N'Detail' , 7)
-INSERT INTO dbo.MenuOption(MenuID ,Name ,Controller ,[Action] ,[Order]) VALUES  ( 1101 ,N'修改融资信息' , N'Company' , N'EditFinancing' , 8)
-INSERT INTO dbo.MenuOption(MenuID ,Name ,Controller ,[Action] ,[Order]) VALUES  ( 1101 ,N'删除融资信息' , N'Company' , N'DeleteFinancing' , 9)
---查看融资详细
+INSERT INTO dbo.MenuOption(MenuID ,Name ,Controller ,[Action] ,[Order]) VALUES  ( 1101 ,N'贷款信息列表' , N'Company' , N'Financing' , 5)
+INSERT INTO dbo.MenuOption(MenuID ,Name ,Controller ,[Action] ,[Order]) VALUES  ( 1101 ,N'新增贷款信息' , N'Company' , N'AddFinancing' , 6)
+INSERT INTO dbo.MenuOption(MenuID ,Name ,Controller ,[Action] ,[Order]) VALUES  ( 1101 ,N'查看贷款信息' , N'Financing' , N'Detail' , 7)
+INSERT INTO dbo.MenuOption(MenuID ,Name ,Controller ,[Action] ,[Order]) VALUES  ( 1101 ,N'修改贷款信息' , N'Company' , N'EditFinancing' , 8)
+INSERT INTO dbo.MenuOption(MenuID ,Name ,Controller ,[Action] ,[Order]) VALUES  ( 1101 ,N'删除贷款信息' , N'Company' , N'DeleteFinancing' , 9)
+--查看贷款详细
 INSERT INTO dbo.MenuOption(MenuID ,Name ,Controller ,[Action] ,[Order]) VALUES  ( 1102 ,N'详细' , N'Financing' , N'Detail' , 1)
---查看融资详细
+--查看贷款详细
 INSERT INTO dbo.MenuOption(MenuID ,Name ,Controller ,[Action] ,[Order]) VALUES  ( 1103 ,N'详细' , N'Financing' , N'Detail' , 1)
 --机构、产品管理
 INSERT INTO dbo.MenuOption(MenuID ,Name ,Controller ,[Action] ,[Order]) VALUES  ( 2101 ,N'添加' , N'Mechanism' , N'Add' , 1)
@@ -97,9 +97,9 @@ SET IDENTITY_INSERT [dbo].[GroupAccount] OFF
 
 /***流程分类***/
 SET IDENTITY_INSERT [dbo].[WorkFlowManager] ON
-INSERT [dbo].[WorkFlowManager] ([ID], [Name], [IsEnable]) VALUES (1, '大型企业或另类融资顾问业务','True')
-INSERT [dbo].[WorkFlowManager] ([ID], [Name], [IsEnable]) VALUES (2, '中小企业融资顾问业务','True')
-INSERT [dbo].[WorkFlowManager] ([ID], [Name], [IsEnable]) VALUES (3, '小微企业融资顾问业务','True')
+INSERT [dbo].[WorkFlowManager] ([ID], [Name], [IsEnable]) VALUES (1, '大型企业或另类贷款顾问业务','True')
+INSERT [dbo].[WorkFlowManager] ([ID], [Name], [IsEnable]) VALUES (2, '中小企业贷款顾问业务','True')
+INSERT [dbo].[WorkFlowManager] ([ID], [Name], [IsEnable]) VALUES (3, '小微企业贷款顾问业务','True')
 INSERT [dbo].[WorkFlowManager] ([ID], [Name], [IsEnable]) VALUES (4, '自有资金业务','True')
 SET IDENTITY_INSERT [dbo].[WorkFlowManager] OFF
 

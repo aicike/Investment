@@ -18,7 +18,7 @@
         </tr>
         <tr>
             <td class="span2 td_title">
-                项目名称
+                贷款主体
             </td>
             <td class="span4">
                 @Model.Name
@@ -60,18 +60,18 @@
         </tr>
         <tr>
             <td colspan="4" class="td_title" style="font-weight: bold">
-                融资信息
+                贷款信息
             </td>
         </tr>
         <tr>
             <td class="span2 td_title">
-                融资金额（万元）
+                贷款金额（万元）
             </td>
             <td class="span4">
                 @Model.Amount
             </td>
             <td class="span2 td_title">
-                融资期限（月）
+                贷款期限（月）
             </td>
             <td class="span4">
                 @if (Model.MaxTimeLimit != 0)
@@ -86,10 +86,10 @@
         </tr>
         <tr>
             <td class="span2 td_title">
-                融资成本
+                贷款利率
             </td>
             <td class="span4">
-                @Model.FinancingCost
+                @Model.ShouYiLv @(Model.ShouYiLvType == 0 ? "月" : "年")
             </td>
             <td class="span2 td_title">
                 资金用途
@@ -108,15 +108,7 @@
         </tr>
         <tr>
             <td class="span2 td_title">
-                融资标的
-            </td>
-            <td class="span10" colspan="3">
-                @Model.RongZiBiaoDi
-            </td>
-        </tr>
-        <tr>
-            <td class="span2 td_title">
-                增信措施
+                担保措施
             </td>
             <td class="span10" colspan="3">
                 @Model.ZengXinCuoShi
@@ -124,7 +116,7 @@
         </tr>
         <tr>
             <td class="span2 td_title">
-                融资方案
+                交易模式
             </td>
             <td class="span10" colspan="3">
                 @Model.RongZiFangAn

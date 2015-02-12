@@ -13,7 +13,7 @@ namespace Entity
         public int ID { get; set; }
 
         /// <summary>
-        /// 项目名称
+        /// 贷款主体
         /// </summary>
         public string XiangMuMingCheng { get; set; }
 
@@ -23,22 +23,22 @@ namespace Entity
         public string XiangMuLeiXing { get; set; }
 
         /// <summary>
-        /// 融资金额（本次贷款金额）
+        /// 贷款金额（本次贷款金额）
         /// </summary>
         public double RongZiJinE { get; set; }
 
         /// <summary>
-        /// 融资期限（月？还是天）
+        /// 贷款期限（月？还是天）
         /// </summary>
         public double RongZiQiXian { get; set; }
 
         /// <summary>
-        /// 融资成本
+        /// 贷款利率
         /// </summary>
         public double RongZiChengBen { get; set; }
 
         /// <summary>
-        /// 融资用途
+        /// 贷款用途
         /// </summary>
         public string RongZiYongTu { get; set; }
 
@@ -47,18 +47,14 @@ namespace Entity
         /// </summary>
         public string HuanKuanLaiYuan { get; set; }
 
-        /// <summary>
-        /// 融资标的
-        /// </summary>
-        public string RongZiBiaoDi { get; set; }
 
         /// <summary>
-        /// 增信措施
+        /// 担保措施
         /// </summary>
         public string ZengXinCuoShi { get; set; }
 
         /// <summary>
-        /// 融资方案
+        /// 交易模式
         /// </summary>
         public string RongZiFangAn { get; set; }
 

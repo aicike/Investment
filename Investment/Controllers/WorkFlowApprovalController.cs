@@ -20,7 +20,7 @@ namespace Investment.Controllers
         /// <summary>
         /// 预览界面
         /// </summary>
-        /// <param name="financingID">融资意向</param>
+        /// <param name="financingID">贷款意向</param>
         /// <returns></returns>
         public ActionResult Preview(int financingID)
         {
@@ -46,7 +46,7 @@ namespace Investment.Controllers
         /// <summary>
         /// 生成待定义业务单
         /// </summary>
-        /// <param name="financingID">融资意向</param>
+        /// <param name="financingID">贷款意向</param>
         /// <param name="Products">对接机构 数据结构1,2,3</param>
         /// <returns></returns>
         public ActionResult SetPendingForm(int financingID, string Products)
@@ -62,7 +62,7 @@ namespace Investment.Controllers
                 {
                     return JavaScript("JMessage('" + ispeding.Error + "',true)");
                 }
-                //融资意向
+                //贷款意向
                 FinancingModel FModel = new FinancingModel();
                 var financing = FModel.Get(financingID);
                 //流程数据
@@ -188,7 +188,7 @@ namespace Investment.Controllers
         }
         #endregion
 
-        #region 融资立项初审
+        #region 贷款立项初审
 
         public ActionResult RongZiLiXiangChuShen(int WorkFlowID)
         {

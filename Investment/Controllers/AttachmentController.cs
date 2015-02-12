@@ -152,6 +152,15 @@ namespace Investment.Controllers
                 case EnumAttachmentType.ZiChanQingDan:
                     str = "资产清单";
                     break;
+                case EnumAttachmentType.DiYaWuQingDan:
+                    str = "抵押物清单";
+                    break;
+                case EnumAttachmentType.HuanKuanLaiYuan:
+                    str = "还款来源";
+                    break;
+                case EnumAttachmentType.XiangMuXianChangHeCha:
+                    str = "项目现场核查";
+                    break;
                 default:
                     str = "未配置";
                     break;

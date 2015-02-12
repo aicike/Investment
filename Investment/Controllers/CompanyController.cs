@@ -110,12 +110,6 @@ namespace Investment.Controllers
             {
                 return JavaScript("JMessage('" + result.Error + "',true)");
             }
-            //Company c = new Company();
-            //c.Name = com.Name;
-            //c.ZhuCheZiJin = com.ZhuCheZiJin;
-            //c.JingYingFanWei = com.JingYingFanWei;
-            //c.ID = com.ID;
-            //var json = Newtonsoft.Json.JsonConvert.SerializeObject(c);
 
             var javascript = "$('body',parent.document).find('#table_guanlian').append('<tr><td>" + com.Name + "</td><td>" + com.ZhuCheZiJin + "</td><td>" + com.JingYingFanWei + "</td><td>查看</td></tr>');$('body',parent.document).find('.modal-backdrop:last').click();";
 
@@ -410,12 +404,16 @@ namespace Investment.Controllers
         {
             CompanyModel companyModel = new CompanyModel();
             var company = companyModel.Get(id);
+            if (company.Phone.Equals("0"))
+            {
+                company.Phone = "";
+            }
             return View(company);
         }
 
         #endregion
 
-        #region 融资信息
+        #region 贷款信息
 
         public ActionResult Financing(int? id, int companyID, int page, string Name)
         {
@@ -451,13 +449,13 @@ namespace Investment.Controllers
             newList.AddRange(wfm_list);
             ViewData["wfm"] = newList;
 
-            GroupAccountModel gam = new GroupAccountModel();
-            var gaList = gam.GetListWithoutAdmin();
-            List<SelectListItem> newGAList = new List<SelectListItem>();
-            var ga_list = new SelectList(gaList, "ID", "Name");
-            newGAList.Add(new SelectListItem { Text = "请选择B角", Value = "0", Selected = true });
-            newGAList.AddRange(ga_list);
-            ViewData["gaList"] = newGAList;
+            //GroupAccountModel gam = new GroupAccountModel();
+            //var gaList = gam.GetListWithoutAdmin();
+            //List<SelectListItem> newGAList = new List<SelectListItem>();
+            //var ga_list = new SelectList(gaList, "ID", "Name");
+            //newGAList.Add(new SelectListItem { Text = "请选择B角", Value = "0", Selected = true });
+            //newGAList.AddRange(ga_list);
+            //ViewData["gaList"] = newGAList;
 
             return View();
         }
@@ -468,15 +466,33 @@ namespace Investment.Controllers
             FinancingModel fm = new FinancingModel();
 
             string RongZiXinXiFuJian = Request.Form["hid_attachment_1"];
-            List<Attachment> attachments = null;
+            List<Attachment> attachments = new List<Attachment>();
             if (string.IsNullOrEmpty(RongZiXinXiFuJian) == false)
             {
                 attachments = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Attachment>>(RongZiXinXiFuJian);
+            }
+            string DiYaWuQingDan = Request.Form["hid_attachment_2"];
+            if (string.IsNullOrEmpty(DiYaWuQingDan) == false)
+            {
+                attachments.AddRange(Newtonsoft.Json.JsonConvert.DeserializeObject<List<Attachment>>(DiYaWuQingDan));
+            }
+            string HuanKuanLaiYuan = Request.Form["hid_attachment_3"];
+            if (string.IsNullOrEmpty(HuanKuanLaiYuan) == false)
+            {
+                attachments.AddRange(Newtonsoft.Json.JsonConvert.DeserializeObject<List<Attachment>>(HuanKuanLaiYuan));
+            }
+            string XiangMuXianChangHeCha = Request.Form["hid_attachment_4"];
+            if (string.IsNullOrEmpty(XiangMuXianChangHeCha) == false)
+            {
+                attachments.AddRange(Newtonsoft.Json.JsonConvert.DeserializeObject<List<Attachment>>(XiangMuXianChangHeCha));
             }
             financing.Owner_A_ID = LoginAccount.UserID;
             if (financing.Owner_B_ID.HasValue && financing.Owner_B_ID.Value == 0)
             {
                 financing.Owner_B_ID = null;
+            }
+            if (financing.BusinessType == 0) {
+                financing.WorkFlowManagerID = 4;
             }
             Result result = fm.Add(financing, attachments);
             if (result.HasError)
@@ -504,13 +520,13 @@ namespace Investment.Controllers
             ViewData["wfm"] = newList;
 
 
-            GroupAccountModel gam = new GroupAccountModel();
-            var gaList = gam.GetListWithoutAdmin();
-            List<SelectListItem> newGAList = new List<SelectListItem>();
-            var ga_list = new SelectList(gaList, "ID", "Name");
-            newGAList.Add(new SelectListItem { Text = "请选择B角", Value = "0", Selected = true });
-            newGAList.AddRange(ga_list);
-            ViewData["gaList"] = newGAList;
+            //GroupAccountModel gam = new GroupAccountModel();
+            //var gaList = gam.GetListWithoutAdmin();
+            //List<SelectListItem> newGAList = new List<SelectListItem>();
+            //var ga_list = new SelectList(gaList, "ID", "Name");
+            //newGAList.Add(new SelectListItem { Text = "请选择B角", Value = "0", Selected = true });
+            //newGAList.AddRange(ga_list);
+            //ViewData["gaList"] = newGAList;
 
             return View(financing);
         }
@@ -521,14 +537,33 @@ namespace Investment.Controllers
             Result result = null;
             FinancingModel fm = new FinancingModel();
             string RongZiXinXiFuJian = Request.Form["hid_attachment_1"];
-            List<Attachment> attachments = null;
+            List<Attachment> attachments = new List<Attachment>();
             if (string.IsNullOrEmpty(RongZiXinXiFuJian) == false)
             {
                 attachments = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Attachment>>(RongZiXinXiFuJian);
             }
+            string DiYaWuQingDan = Request.Form["hid_attachment_2"];
+            if (string.IsNullOrEmpty(DiYaWuQingDan) == false)
+            {
+                attachments.AddRange(Newtonsoft.Json.JsonConvert.DeserializeObject<List<Attachment>>(DiYaWuQingDan));
+            }
+            string HuanKuanLaiYuan = Request.Form["hid_attachment_3"];
+            if (string.IsNullOrEmpty(HuanKuanLaiYuan) == false)
+            {
+                attachments.AddRange(Newtonsoft.Json.JsonConvert.DeserializeObject<List<Attachment>>(HuanKuanLaiYuan));
+            }
+            string XiangMuXianChangHeCha = Request.Form["hid_attachment_4"];
+            if (string.IsNullOrEmpty(XiangMuXianChangHeCha) == false)
+            {
+                attachments.AddRange(Newtonsoft.Json.JsonConvert.DeserializeObject<List<Attachment>>(XiangMuXianChangHeCha));
+            }
             if (financing.Owner_B_ID.HasValue && financing.Owner_B_ID.Value == 0)
             {
                 financing.Owner_B_ID = null;
+            }
+            if (financing.BusinessType == 0)
+            {
+                financing.WorkFlowManagerID = 4;
             }
             result = fm.Edit(financing, attachments);
             if (result.HasError)

@@ -198,7 +198,7 @@ namespace Entity.Enum
         ShenPiGuoChengFuJian = 37,
 
         /// <summary>
-        /// 融资信息附件全部附件
+        /// 贷款信息附件全部附件
         /// </summary>
         RongZiXinXiFuJian = 38,
 
@@ -227,6 +227,21 @@ namespace Entity.Enum
         /// </summary>
         WuZheng_5 = 43,
 
+        /// <summary>
+        /// 抵押物清单
+        /// </summary>
+        DiYaWuQingDan=44,
+
+        /// <summary>
+        /// 还款来源
+        /// </summary>
+        HuanKuanLaiYuan = 45,
+
+        /// <summary>
+        /// 项目现场核查
+        /// </summary>
+        XiangMuXianChangHeCha = 46,
+
         ///// <summary>
         ///// 验质证书
         ///// </summary>
@@ -245,7 +260,7 @@ namespace Entity.Enum
         //XiangMuJianJieJiXiaoGuoTu = 19,
 
         ///// <summary>
-        ///// 融资申请书及还款计划书
+        ///// 贷款申请书及还款计划书
         ///// </summary>
         //RongZhiShenQingShuJiHuanKuanJiHuaShu = 21,
 

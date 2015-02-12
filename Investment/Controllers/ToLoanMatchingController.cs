@@ -15,7 +15,7 @@ namespace Investment.Controllers
         /// <summary>
         /// 借贷匹配
         /// </summary>
-        /// <param name="Types">类型 1或无：融资业务，2自有资金</param>
+        /// <param name="Types">类型 1或无：贷款业务，2自有资金</param>
         /// <returns></returns>
         public ActionResult Index(int? id, int? Types)
         {
@@ -23,7 +23,7 @@ namespace Investment.Controllers
             IQueryable<FinancingMatching> fmlist;
             if (Types.HasValue)
             {
-                if (Types.Value == 1) //融资业务
+                if (Types.Value == 1) //贷款业务
                 {
                     fmlist = FMModel.GetMatching_BYAccountID(LoginAccount.UserID);
                 }
@@ -32,7 +32,7 @@ namespace Investment.Controllers
                     fmlist = FMModel.GetMatchingZY_BYAccountID(LoginAccount.UserID);
                 }
             }
-            else //融资业务
+            else //贷款业务
             {
                 fmlist = FMModel.GetMatching_BYAccountID(LoginAccount.UserID);
             }

@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations;
 namespace Entity
 {
     /// <summary>
-    /// 融资信息表
+    /// 贷款信息表
     /// </summary>
     public class Financing : BaseEntity
     {
@@ -30,36 +30,36 @@ namespace Entity
         public virtual GroupAccount Owner_B { get; set; }
 
         /// <summary>
-        /// 融资信息状态   0：未进行   1：进行中   2：已结束
+        /// 贷款信息状态   0：未进行   1：进行中   2：已结束
         /// </summary>
         public int Status { get; set; }
 
         /// <summary>
-        /// 融资项目名称
+        /// 贷款贷款主体
         /// </summary>
-        [Display(Name = "项目名称")]
-        [Required(ErrorMessage = "请输入项目名称")]
+        [Display(Name = "贷款主体")]
+        [Required(ErrorMessage = "请输入贷款主体")]
         public string Name { get; set; }
 
         /// <summary>
-        /// 融资金额
+        /// 贷款金额
         /// </summary>
-        [Display(Name = "融资金额")]
-        [Required(ErrorMessage = "请输入融资金额")]
+        [Display(Name = "贷款金额")]
+        [Required(ErrorMessage = "请输入贷款金额")]
         public double Amount { get; set; }
 
         /// <summary>
-        /// 融资期限最小（单位：月）
+        /// 贷款期限最小（单位：月）
         /// </summary>
-        [Display(Name = "融资期限")]
-        [Required(ErrorMessage = "请输入融资期限")]
+        [Display(Name = "贷款期限")]
+        [Required(ErrorMessage = "请输入贷款期限")]
         public int MinTimeLimit { get; set; }
 
         /// <summary>
-        /// 融资期限最大（单位：月）
+        /// 贷款期限最大（单位：月）
         /// </summary>
-        [Display(Name = "融资期限")]
-        [Required(ErrorMessage = "请输入融资期限")]
+        [Display(Name = "贷款期限")]
+        [Required(ErrorMessage = "请输入贷款期限")]
         public int? MaxTimeLimit { get; set; }
 
         /// <summary>
@@ -68,24 +68,17 @@ namespace Entity
         public int ShouYiLvType { get; set; }
 
         /// <summary>
-        /// 收益率
+        /// 贷款利率
         /// </summary>
-        [Display(Name = "收益率")]
-        [Required(ErrorMessage = "请输入收益率")]
+        [Display(Name = "贷款利率")]
+        [Required(ErrorMessage = "请输入贷款利率")]
         public double ShouYiLv { get; set; }
 
         /// <summary>
-        /// 融资成本
+        /// 贷款用途
         /// </summary>
-        [Display(Name = "融资成本")]
-        [Required(ErrorMessage = "请输入融资成本")]
-        public double FinancingCost { get; set; }
-
-        /// <summary>
-        /// 融资用途
-        /// </summary>
-        [Display(Name = "融资用途")]
-        [Required(ErrorMessage = "请输入融资用途")]
+        [Display(Name = "贷款用途")]
+        [Required(ErrorMessage = "请输入贷款用途")]
         public string Purpose { get; set; }
 
         /// <summary>
@@ -94,30 +87,32 @@ namespace Entity
         [Display(Name = "还款来源")]
         [Required(ErrorMessage = "请输入还款来源")]
         public string Repayment { get; set; }
+        
+        /// <summary>
+        /// 抵押物清单
+        /// </summary>
+        [Display(Name = "抵押物清单")]
+        [Required(ErrorMessage = "抵押物清单")]
+        public string DiYaWuQingDan { get; set; }
 
         /// <summary>
-        /// 融资标的
+        /// 担保措施
         /// </summary>
-        public string RongZiBiaoDi { get; set; }
-
-        /// <summary>
-        /// 增信措施
-        /// </summary>
-        [Display(Name = "增信措施")]
-        [Required(ErrorMessage = "请输入增信措施")]
+        [Display(Name = "担保措施")]
+        [Required(ErrorMessage = "请输入担保措施")]
         public string ZengXinCuoShi { get; set; }
 
         /// <summary>
-        /// 融资方案
+        /// 交易模式
         /// </summary>
-        [Display(Name = "融资方案")]
-        [Required(ErrorMessage = "请输入融资方案")]
+        [Display(Name = "交易模式")]
+        [Required(ErrorMessage = "请输入交易模式")]
         public string RongZiFangAn { get; set; }
 
         /// <summary>
-        /// 备注
+        /// 项目现场核查
         /// </summary>
-        [Display(Name = "备注")]
+        [Display(Name = "项目现场核查")]
         public string Remark { get; set; }
 
         /// <summary>
@@ -125,6 +120,12 @@ namespace Entity
         /// </summary>
         [Required(ErrorMessage = "请输入业务来源")]
         public string BusinessResource { get; set; }
+
+        /// <summary>
+        /// 业务类型 0:自有资金  1:融资顾问
+        /// </summary>
+        [Required(ErrorMessage = "请输入业务类型")]
+        public int BusinessType { get; set; }
 
         /// <summary>
         /// 项目类型

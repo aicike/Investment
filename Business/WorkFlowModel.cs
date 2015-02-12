@@ -82,7 +82,7 @@ namespace Business
 
 
         /// <summary>
-        /// 根据流程ID获取 融资信息、公司信息的 json数据
+        /// 根据流程ID获取 贷款信息、公司信息的 json数据
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -92,7 +92,7 @@ namespace Business
 
             base.Context.Configuration.ProxyCreationEnabled = false;
 
-            var financing = base.Context.Financings.Where(a => a.ID == obj.FinancingID).AsNoTracking().FirstOrDefault();//融资信息
+            var financing = base.Context.Financings.Where(a => a.ID == obj.FinancingID).AsNoTracking().FirstOrDefault();//贷款信息
 
             var company = base.Context.Company.Where(a => a.ID == obj.Financing.CompanyID).AsNoTracking().FirstOrDefault(); //公司信息
 
@@ -183,7 +183,7 @@ namespace Business
                     ARModel.Add(approvalrecord);
                     //添加下一节点审批人记录
                     ARModel.AddunapprovedInfo(workflow_node, WorkFlowID);
-                    //更改融资意向状态
+                    //更改贷款意向状态
                     FinancingModel FModel = new FinancingModel();
                     var financing = FModel.Get(workflow.FinancingID);
                     financing.Status = 1;
@@ -229,7 +229,7 @@ namespace Business
                         base.Edit(workflow);
                         //生成产品快照
                         Get_To_Json_Product(WorkFlowID);
-                        //更改融资意向状态
+                        //更改贷款意向状态
                         FinancingModel FModel = new FinancingModel();
                         var financing = FModel.Get(workflow.FinancingID);
                         financing.Status = 2;
@@ -276,7 +276,7 @@ namespace Business
                 ARModel.UPDApprovedInfo(WorkFlowID, GroupAccountID, Content,2);
                 //删除多余记录
                 ARModel.DelunapprovedInfo(WorkFlowID);
-                //更改融资意向状态
+                //更改贷款意向状态
                 FinancingModel FModel = new FinancingModel();
                 var financing = FModel.Get(workflow.FinancingID);
                 financing.Status = 0;

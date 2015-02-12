@@ -10,7 +10,7 @@ namespace Investment.Controllers
     public class FinancingController : BaseController
     {
         /// <summary>
-        /// 只能查看自己所有权的融资信息
+        /// 只能查看自己所有权的贷款信息
         /// </summary>
         /// <param name="id"></param>
         /// <param name="Name"></param>
@@ -32,7 +32,7 @@ namespace Investment.Controllers
 
 
         /// <summary>
-        /// 查看所有的融资信息
+        /// 查看所有的贷款信息
         /// </summary>
         /// <param name="id"></param>
         /// <param name="Name"></param>

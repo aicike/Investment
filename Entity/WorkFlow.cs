@@ -24,9 +24,9 @@ namespace Entity
 
 
         /// <summary>
-        /// 融资意向表ID
+        /// 贷款意向表ID
         /// </summary>
-        [Display(Name = "融资意向表ID")]
+        [Display(Name = "贷款意向表ID")]
         public int FinancingID { get; set; }
         public virtual Financing Financing { get; set; }
 

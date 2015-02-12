@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "融资信息管理";
+    ViewBag.Title = "贷款信息管理";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var company = ViewBag.Company as Entity.Company;
 }
@@ -14,7 +14,7 @@
                 <table style="width: 100%;">
                     <tr>
                         <td style="width: 100px;">
-                            项目名称
+                            贷款主体
                         </td>
                         <td>
                             <input type="text" class="span6" name="Name" id="Name" style="margin-bottom: 0px" />
@@ -31,12 +31,12 @@
         <div class="portlet box blue" style="margin-top: 10px;">
             <div class="portlet-title">
                 <div class="caption">
-                    <i class="icon-cogs"></i>@company.Name - 融资信息列表
+                    <i class="icon-cogs"></i>@company.Name - 贷款信息列表
                 </div>
                 <div class="tools">
                     @if (ViewBag.LoginUesrID == company.OwnerID)
                     {
-                        @Html.ActionLink("<i class='icon-plus'></i>&nbsp;新增融资信息", "AddFinancing", "Company", new { companyID = company.ID, page = ViewBag.Page }, new { style = "color:#FFF" }, true).Html()
+                        @Html.ActionLink("<i class='icon-plus'></i>&nbsp;新增贷款信息", "AddFinancing", "Company", new { companyID = company.ID, page = ViewBag.Page }, new { style = "color:#FFF" }, true).Html()
                     }
                     @Html.ActionLink("<i class='icon-share-alt'></i>&nbsp;返回", "Index", "Company", new { id = ViewBag.Page }, new { style = "color:#FFF" }).Html()
                 </div>
@@ -46,16 +46,16 @@
                     <thead>
                         <tr>
                             <th>
-                                项目名称
+                                贷款主体
                             </th>
                             <th>
-                                融资金额
+                                贷款金额
                             </th>
                             <th>
-                                融资期限
+                                贷款期限
                             </th>
                             <th>
-                                融资成本
+                                贷款利率
                             </th>
                             <th>
                                 项目类型
@@ -86,7 +86,7 @@
                                     }
                                 </td>
                                 <td>
-                                    @item.FinancingCost
+                                    @item.ShouYiLv @(item.ShouYiLvType==0?"月":"年")
                                 </td>
                                 <td>
                                     @item.WorkFlowManager.Name

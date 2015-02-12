@@ -13,7 +13,7 @@ namespace Business
     {
 
         /// <summary>
-        /// 查找所有匹配融资意向的数据（只属于我的）
+        /// 查找所有匹配贷款意向的数据（只属于我的）
         /// </summary>
         /// <returns></returns>
         public IQueryable<FinancingMatching> GetMatching_BYAccountID(int AccountID)
@@ -28,7 +28,7 @@ namespace Business
 
 
         /// <summary>
-        /// 查找所有匹配融资意向的数据（只属于我的） 自有资金
+        /// 查找所有匹配贷款意向的数据（只属于我的） 自有资金
         /// </summary>
         /// <returns></returns>
         public IQueryable<FinancingMatching> GetMatchingZY_BYAccountID(int AccountID)
@@ -43,7 +43,7 @@ namespace Business
 
 
         /// <summary>
-        /// 查找所有匹配融资意向的数据（所有的）
+        /// 查找所有匹配贷款意向的数据（所有的）
         /// </summary>
         /// <returns></returns>
         public IQueryable<FinancingMatching> GetMatching()
@@ -57,7 +57,7 @@ namespace Business
         }
 
         /// <summary>
-        /// 查找所有匹配融资意向的数据（所有的）自有资金
+        /// 查找所有匹配贷款意向的数据（所有的）自有资金
         /// </summary>
         /// <returns></returns>
         public IQueryable<FinancingMatching> GetMatchingZY()
