@@ -1,0 +1,85 @@
+﻿@{
+    Layout = null;
+}
+@model List<Entity.CompanyReference>
+<style>
+    .myLink
+    {
+        cursor: pointer;
+    }
+    .form-horizontal .control-label
+    {
+        width: 115px;
+    }
+    .form-horizontal .controls
+    {
+        margin-left: 125px;
+    }
+</style>
+<script>
+  
+
+</script>
+<table class="table table-bordered" id="tab_JGJDXX">
+    <tr>
+        <td colspan="8">
+            金融机构借贷信息 <a data-toggle="modal" onclick="AddJGJKXX()" href="#div_guanlian_JGJKXX">(新增借贷信息)</a>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            借款金额
+        </td>
+        <td>
+            贷款方
+        </td>
+        <td>
+            借款期限
+        </td>
+        <td>
+            借款方式
+        </td>
+        <td>
+            抵押物信息
+        </td>
+        <td>
+            担保方
+        </td>
+        <td>
+            相关附件
+        </td>
+        <td>
+            操作
+        </td>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr id="JGJDtr_@item.ID">
+            <td>
+                @item.Borrow
+            </td>
+            <td>
+                @item.Lenders
+            </td>
+            <td>
+                @item.Deadline
+            </td>
+            <td>
+                @item.Methods
+            </td>
+            <td>
+                @item.Collateral
+            </td>
+            <td>
+                @item.Sponsors
+            </td>
+            <td>
+                @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "JGJDXX", Text = "[附件]", Table = "CompanyReference", TableId = item.ID, EnumAttachmentType = 0, IsEnabled = false });}
+            </td>
+            <td>
+                <a  data-toggle='modal' onclick='EditJGJKXX(@item.ID)' href='#div_guanlian_JGJKXX'>修改</a>
+                @Ajax.ActionLink("删除", "DeleteJGJDXX", "Company", new { ID = item.ID, CID = item.CompanyID }, new AjaxOptions() { UpdateTargetId = "alert", OnBegin = "return AppDelete('确定删除?')" }, true)
+            </td>
+        </tr>
+    }
+</table>
