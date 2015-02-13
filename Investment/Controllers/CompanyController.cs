@@ -378,7 +378,7 @@ namespace Investment.Controllers
                 var attachment_FangGuanJuDangAnChaXun = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Attachment>>(FangGuanJuDangAnChaXun);
                 attachmentList.AddRange(attachment_FangGuanJuDangAnChaXun);
             }
-            
+
             string ZiChanQingDan = Request.Form["hid_attachment_30"];
             if (string.IsNullOrEmpty(ZiChanQingDan) == false)
             {
@@ -449,22 +449,6 @@ namespace Investment.Controllers
             ViewBag.CompanyID = companyID;
             ViewBag.Page = page;
 
-            WorkFlowManagerModel wfmm = new WorkFlowManagerModel();
-            var wfms = wfmm.List().OrderBy(a => a.ID).ToList();
-            List<SelectListItem> newList = new List<SelectListItem>();
-            var wfm_list = new SelectList(wfms, "ID", "Name");
-            newList.Add(new SelectListItem { Text = "请选择项目类型", Value = "select", Selected = true });
-            newList.AddRange(wfm_list);
-            ViewData["wfm"] = newList;
-
-            //GroupAccountModel gam = new GroupAccountModel();
-            //var gaList = gam.GetListWithoutAdmin();
-            //List<SelectListItem> newGAList = new List<SelectListItem>();
-            //var ga_list = new SelectList(gaList, "ID", "Name");
-            //newGAList.Add(new SelectListItem { Text = "请选择B角", Value = "0", Selected = true });
-            //newGAList.AddRange(ga_list);
-            //ViewData["gaList"] = newGAList;
-
             return View();
         }
 
@@ -499,9 +483,7 @@ namespace Investment.Controllers
             {
                 financing.Owner_B_ID = null;
             }
-            if (financing.BusinessType == 0) {
-                financing.WorkFlowManagerID = 4;
-            }
+            financing.BusinessType = 0;//业务类型，未确定
             Result result = fm.Add(financing, attachments);
             if (result.HasError)
             {
@@ -517,17 +499,6 @@ namespace Investment.Controllers
             (financing.CompanyID == companyID).NotAuthorizedPage();
             ViewBag.Page = page;
             ViewBag.fromID = fromID;
-
-
-            WorkFlowManagerModel wfmm = new WorkFlowManagerModel();
-            var wfms = wfmm.List().OrderBy(a => a.ID).ToList();
-            List<SelectListItem> newList = new List<SelectListItem>();
-            var wfm_list = new SelectList(wfms, "ID", "Name");
-            newList.Add(new SelectListItem { Text = "请选择项目类型", Value = "select", Selected = true });
-            newList.AddRange(wfm_list);
-            ViewData["wfm"] = newList;
-
-
             //GroupAccountModel gam = new GroupAccountModel();
             //var gaList = gam.GetListWithoutAdmin();
             //List<SelectListItem> newGAList = new List<SelectListItem>();
@@ -614,7 +585,7 @@ namespace Investment.Controllers
         /// </summary>
         /// <param name="Types">0 新增 1修改</param>
         /// <returns></returns>
-        public ActionResult JGJDXX(int Types,int CompanyID, int? referenceID)
+        public ActionResult JGJDXX(int Types, int CompanyID, int? referenceID)
         {
             CompanyReferenceModel crmodel = new CompanyReferenceModel();
             CompanyReference crf = new CompanyReference();
@@ -640,7 +611,8 @@ namespace Investment.Controllers
             {
                 crmodel.Edit(companyreference);
             }
-            else {
+            else
+            {
                 crmodel.Add(companyreference);
             }
             AttachmentModel amodel = new AttachmentModel();
@@ -654,25 +626,25 @@ namespace Investment.Controllers
                     item.TableID = companyreference.ID;
                     amodel.Add(item);
                 }
-                
+
                 //attachmentList.AddRange(fjjson);
             }
             var jsonreference = Newtonsoft.Json.JsonConvert.SerializeObject(companyreference);
-            return JavaScript("AddJGJDXX("+jsonreference+")");
+            return JavaScript("AddJGJDXX(" + jsonreference + ")");
             //return JavaScript(" window.location.href='" + Url.Action("Edit", "Company", new { id = companyreference.CompanyID}) + "';");
-           
+
         }
         /// <summary>
         /// 删除借贷信息
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public string DeleteJGJDXX(int id,int CID)
+        public string DeleteJGJDXX(int id, int CID)
         {
             CompanyReferenceModel crmodel = new CompanyReferenceModel();
             var result = crmodel.Delete(id);
             AttachmentModel amodel = new AttachmentModel();
-            amodel.DelInfo("CompanyReference",id);
+            amodel.DelInfo("CompanyReference", id);
             if (result.HasError)
             {
                 return "<script>JMessage('" + result.Error + "',true)</script>";

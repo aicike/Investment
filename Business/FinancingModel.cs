@@ -16,6 +16,16 @@ namespace Business
             return List().Where(a => a.CompanyID == companyID);
         }
 
+        /// <summary>
+        /// 找到我所操作的融资信息
+        /// </summary>
+        /// <param name="ownerID"></param>
+        /// <returns></returns>
+        public IQueryable<Financing> GetByMyList(int ownerID)
+        {
+            return List().Where(a => a.Owner_A_ID == ownerID || a.Owner_B_ID == ownerID);
+        }
+
         public Result Add(Financing financing, List<Attachment> attachments)
         {
             Result result = base.Add(financing);
@@ -92,7 +102,21 @@ namespace Business
             return result;
         }
 
+        /// <summary>
+        /// 更改融资信息审核状态
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="status">0：未审核  1：审核通过  2：审核不通过</param>
+        /// <returns></returns>
+        public Result ChangeAuditStatus(int id, int status)
+        {
+            Result result = new Result();
+            string sql = "update Financing set AuditStatus=" + status + " where id=" + id;
+            int i= base.SqlExecute(sql);
+            if (i == 0) {
+                result.Error = "操作失败。";
+            }
+            return result;
+        }
     }
-
-
 }

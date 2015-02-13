@@ -58,7 +58,13 @@
                                 贷款利率
                             </th>
                             <th>
-                                项目类型
+                                业务类型
+                            </th>
+                            <th>
+                                进行状态
+                            </th>
+                            <th>
+                                审核状态
                             </th>
                             <th style="width: 20%">
                                 操作
@@ -79,7 +85,7 @@
                                     @if (item.MaxTimeLimit != 0)
                                     {
                                         @:@item.MinTimeLimit + @item.MaxTimeLimit
-                                                                                                                    }
+                                     }
                                     else
                                     {
                                         @item.MinTimeLimit
@@ -89,7 +95,35 @@
                                     @item.ShouYiLv @(item.ShouYiLvType==0?"月":"年")
                                 </td>
                                 <td>
-                                    @item.WorkFlowManager.Name
+                                    @(item.WorkFlowManager==null?"-":item.WorkFlowManager.Name)
+                                </td>
+                                <td>
+                                    @switch (item.Status)
+                                    {
+                                        case 0:
+                                        @:未进行
+                                                break;
+                                        case 1:
+                                        @:进行中
+                                                break;
+                                        case 2:
+                                        @:已完成
+                                                break;
+                                    }
+                                </td>
+                                <td>
+                                    @if (item.AuditStatus == 0)
+                                    { 
+                                        @:待审核
+                                    }
+                                    else if (item.AuditStatus == 1)
+                                    {
+                                        @:通过
+                                    }
+                                    else if (item.AuditStatus == 2)
+                                    { 
+                                        @:未通过
+                                    }
                                 </td>
                                 <td>
                                     @Html.ActionLink("详细", "Detail", "Financing", new { id = item.ID }, null, true)

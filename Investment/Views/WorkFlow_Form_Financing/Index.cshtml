@@ -47,7 +47,7 @@
                     if (Model.Owner_B != null)
                     { 
                     @:B：@Model.Owner_B.Name
-                                    }
+                                                    }
                 }
             </td>
         </tr>
@@ -77,7 +77,7 @@
                 @if (Model.MaxTimeLimit != 0)
                 {
                     @:@Model.MinTimeLimit + @Model.MaxTimeLimit
-                                                        }
+                                                                            }
                 else
                 {
                     @Model.MinTimeLimit
@@ -92,7 +92,7 @@
                 @Model.ShouYiLv @(Model.ShouYiLvType == 0 ? "月" : "年")
             </td>
             <td class="span2 td_title">
-                资金用途
+                贷款用途
             </td>
             <td class="span4">
                 @Model.Purpose
@@ -100,10 +100,18 @@
         </tr>
         <tr>
             <td class="span2 td_title">
-                还款来源
+                还款来源@{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "hkly", Text = "[附件]", IsEnabled = false, Table = Entity.SystemConst.TableName.Financing, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.HuanKuanLaiYuan });}
             </td>
             <td class="span10" colspan="3">
                 @Model.Repayment
+            </td>
+        </tr>
+        <tr>
+            <td class="span2 td_title">
+                抵押物清单@{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "dywqd", Text = "[附件]", IsEnabled = false, Table = Entity.SystemConst.TableName.Financing, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.DiYaWuQingDan });}
+            </td>
+            <td class="span10" colspan="3">
+                @Model.DiYaWuQingDan
             </td>
         </tr>
         <tr>
@@ -123,6 +131,14 @@
             </td>
         </tr>
         <tr>
+            <td class="span2 td_title">
+                项目现场调查@{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "xmxcdc", Text = "[附件]", IsEnabled = false, Table = Entity.SystemConst.TableName.Financing, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.XiangMuXianChangHeCha });}
+            </td>
+            <td class="span10" colspan="3">
+                @Model.Remark
+            </td>
+        </tr>
+        <tr>
             <td colspan="4" class="td_title" style="font-weight: bold">
                 企业基本信息
             </td>
@@ -138,7 +154,7 @@
                 企业性质
             </td>
             <td class="span4">
-                @Model.Company.QiYeXingZhi
+                @Investment.Models.CommonHelp.GetQiYeXingZhi(int.Parse(Model.Company.QiYeXingZhi))
             </td>
         </tr>
         <tr>
@@ -149,7 +165,7 @@
                 @Model.Company.SetUpTime.ToString("yyyy年MM月dd日")
             </td>
             <td class="span2 td_title">
-                企业资质
+                企业资质、证书
             </td>
             <td class="span4">
                 @Model.Company.QiYeZiZhi

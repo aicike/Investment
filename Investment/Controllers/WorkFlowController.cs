@@ -104,7 +104,7 @@ namespace Investment.Controllers
             }
             //获取流程节点
             WorkFlow_NodeModel wfnmodel = new WorkFlow_NodeModel();
-            var workflow_node = wfnmodel.GetWorkFlow_Node(workflow.Financing.WorkFlowManagerID).OrderBy(a => a.Order).ToList();
+            var workflow_node = wfnmodel.GetWorkFlow_Node(workflow.Financing.WorkFlowManagerID.Value).OrderBy(a => a.Order).ToList();
             return View(workflow_node);
         }
 

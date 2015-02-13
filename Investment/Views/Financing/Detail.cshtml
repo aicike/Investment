@@ -9,12 +9,55 @@
             cursor: pointer;
         }
     </style>
-    <script>
+    <script type="text/javascript">
         $(function () {
             $("#link_1").click();
 
             $("textarea").each(function (i, n) {
                 autoTextarea(n, 15); // 调用
+            });
+
+            $(".radio_gl").change(function () {
+                if ($(".radio_gl:checked").val() == 2) {
+                    $("#div_xmlx").show();
+                } else {
+                    $("#div_xmlx").hide();
+                }
+            });
+
+            var changeStatusUrl = '@Url.Action("ChangeStatus", "Financing")';
+            $(".changeStatus").click(function () {
+                var status_val= $(this).attr("status");
+                $.post(changeStatusUrl, {id:@Model.ID,status:status_val}, function (result) { 
+                    if(result.HasError){
+                        JMessage(result.Error,true);
+                    }else{
+                        JMessage("操作成功",false,true,null,200);
+                    }
+                },"json");
+            });
+
+            //审核前初始值
+            var BusinessType='@Model.BusinessType';
+            var WorkFlowManagerID='@(Model.WorkFlowManagerID.HasValue ? (Model.WorkFlowManagerID.Value == 4 ? 0 : Model.WorkFlowManagerID.Value) : 0)';
+            var Owner_A='@(Model.Owner_A_ID.HasValue ? Model.Owner_A_ID.Value : 0)';
+            var Owner_B='@(Model.Owner_B_ID.HasValue ? Model.Owner_B_ID.Value : 0)';
+
+            $("#Owner_A_ID,#Owner_B_ID,.radio_gl,#WorkFlowManagerID").change(function(){
+                var new_BusinessType=$(".radio_gl:checked").val();
+                var new_WorkFlowManagerID=$("#WorkFlowManagerID").val();
+                if(new_WorkFlowManagerID=="select"||new_BusinessType==0){
+                    new_WorkFlowManagerID=0;
+                }
+                var new_Owner_A=$("#Owner_A_ID").val();
+                var new_Owner_B=$("#Owner_B_ID").val();
+                if(BusinessType!=new_BusinessType||WorkFlowManagerID!=new_WorkFlowManagerID||Owner_A!=new_Owner_A||Owner_B!=new_Owner_B){
+                    $("#div_changeMsg").show();
+                    $("#btnSubmit").removeClass("disabled").removeAttr("disabled");
+                }else{
+                    $("#div_changeMsg").hide();
+                    $("#btnSubmit").addClass("disabled").addAttr("disabled");
+                }
             });
         });
     </script>
@@ -23,201 +66,302 @@
 <div class="row-fluid">
     <div class="span12">
         <div class="tabbable tabbable-custom boxless">
-            <form action="#" class="form-horizontal">
-            <div class="myoption">
-                <button type="button" class="btn" onclick="location.href='@ViewBag.BackUrl'">
-                    返回</button></div>
-            <div class="portlet box blue">
-                <div class="portlet-title">
-                    <div class="caption">
-                        <i class="icon-reorder"></i>状态信息</div>
-                    <div class="tools">
-                    </div>
+            @using (Ajax.BeginForm("Detail", "Company", new AjaxOptions() { UpdateTargetId = "alert" }, new { @class = "form-horizontal" }))
+            {
+                <div class="myoption">
+                    <button type="button" class="btn" onclick="location.href='@ViewBag.BackUrl'">
+                        返回</button>
+                    @if (ViewBag.hasPermissions)
+                    { 
+                        <button type="button" class='btn blue changeStatus @(Model.AuditStatus == 1 ? "disabled" : "")'  @(Model.AuditStatus == 1 ? "disabled" : "") style="margin-left: 15px;" status="1">
+                            审核通过</button>
+                        <button type="button" class='btn red changeStatus @(Model.AuditStatus == 2 ? "disabled" : "")' @(Model.AuditStatus == 2 ? "disabled" : "") style="margin-left: 15px;" status="2">
+                            审核不通过</button>
+                        <button type="submit" class='btn blue disabled' style="margin-left: 15px;" disabled="disabled"
+                            id="btnSubmit">
+                            保存</button><label id="div_changeMsg" style="margin-left: 15px; color: #f03038; display: none"
+                                class="inline">数据已更改，请点击 [保存] 按钮。</label>
+                    }
                 </div>
-                <div class="portlet-body form">
-                    <div class="row-fluid">
-                        <div class="span3">
-                            <div class="control-group">
-                                <label class="control-label">
-                                    项目经理：</label>
-                                <div class="controls">
-                                    @if (Model.Owner_A != null)
-                                    { 
-
-                                        <span class="help-inline">@Model.Owner_A.Name</span>
-                                    }
-                                </div>
-                            </div>
-                        </div>
-                        <div class="span3">
-                            <div class="control-group">
-                                <label class="control-label">
-                                    项目B角：</label>
-                                <div class="controls">
-                                    @if (Model.Owner_B != null)
-                                    { 
-
-                                        <span class="help-inline">@Model.Owner_B.Name</span>
-                                    }
-                                </div>
-                            </div>
-                        </div>
-                        <div class="span3">
-                            <div class="control-group">
-                                <label class="control-label">
-                                    贷款状态：</label>
-                                <div class="controls">
-                                    @switch (Model.Status)
-                                    {
-                                        case 0:
-
-                                        <span class="help-inline">未进行</span>
-                                            break;
-                                        case 1:
-
-                                        <span class="help-inline">进行中</span>
-                                            break;
-                                        case 2:
-
-                                        <span class="help-inline">已完成</span>
-                                            break;
-                                    }
-                                </div>
-                            </div>
+                <div class="portlet box blue">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="icon-reorder"></i>审核信息</div>
+                        <div class="tools">
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="tabbable tabbable-custom">
-                <ul class="nav nav-tabs">
-                    <li class="active"><a href="#tab_1" id="link_1" data-toggle="tab">贷款信息</a></li>
-                    <li><a class="" href="#tab_2" data-toggle="tab">附件信息</a></li>
-                    <li><a class="" href="@Url.Action("Detail", "Company", new { id = Model.CompanyID })" target="_blank" >
-                        客户信息</a></li>
-                </ul>
-                <div class="tab-content">
-                    <div class="tab-pane active" id="tab_1">
-                        <div class="portlet box">
-                            <div class="portlet-body form">
+                    <div class="portlet-body form">
+                        <div class="row-fluid">
+                            <div class="span5">
                                 <div class="control-group">
                                     <label class="control-label">
-                                        贷款主体</label>
+                                        业务类型：</label>
                                     <div class="controls">
-                                        @Html.TextBoxFor(a => a.Name, new { @class = "span6 m-wrap", @readonly = "readonly" })
-                                        <span class="help-inline">@Html.ValidationMessageFor(a => a.Name)</span>
+                                        @if (ViewBag.hasPermissions)
+                                        { 
+                                            <label class="radio inline">
+                                                <input type="radio" name="BusinessType" value="0" class="radio_gl disabled" @(Model.BusinessType == 0 ? "checked" : "")/>
+                                                未设置
+                                            </label>
+                                            <label class="radio inline">
+                                                <input type="radio" name="BusinessType" value="1" class="radio_gl" @(Model.BusinessType == 1 ? "checked" : "")/>
+                                                自有资金
+                                            </label>
+                                            <label class="radio inline">
+                                                <input type="radio" name="BusinessType" value="2" class="radio_gl" @(Model.BusinessType == 2 ? "checked" : "")/>
+                                                融资顾问
+                                            </label>
+                                        }
+                                        else
+                                        {
+                                            <span class="help-inline" style="margin-top: 7px;">
+                                                @switch (Model.BusinessType)
+                                                {
+                                                    case 0:
+                                                    @:未设置
+                                                    break;
+                                                    case 1:
+                                                    @:自有资金
+                                                    break;
+                                                    case 2:
+                                                    @:融资顾问
+                                                                                                                                                    break;
+                                                }
+                                            </span>
+                                        }
                                     </div>
                                 </div>
-                                <div class="control-group">
+                            </div>
+                            <div class="span5">
+                                <div class="control-group" id="div_xmlx" @(Model.BusinessType == 2 ? "" : "style=display:none")>
                                     <label class="control-label">
-                                        项目类型</label>
+                                        项目类型：</label>
                                     <div class="controls">
-                                        <input type="text" class="span6 m-wrap" value="@Model.WorkFlowManager.Name"/>
-                                    </div>
-                                </div>
-                                <div class="control-group">
-                                    <label class="control-label">
-                                        贷款金额（万元）</label>
-                                    <div class="controls">
-                                        @Html.TextBoxFor(a => a.Amount, new { @class = "m-wrap span6", @readonly = "readonly" })
-                                        <span class="help-inline">@Html.ValidationMessageFor(a => a.Amount)</span>
-                                    </div>
-                                </div>
-                                <div class="control-group">
-                                    <label class="control-label">
-                                        贷款利率（月）</label>
-                                    <div class="controls">
-                                        @Html.TextBoxFor(a => a.MinTimeLimit, new { @class = "span2 m-wrap", @readonly = "readonly" })&nbsp;&nbsp;&nbsp<span
-                                            class="help-inline">-</span>&nbsp;&nbsp;&nbsp;&nbsp;@Html.TextBoxFor(a => a.MaxTimeLimit, new { @class = "span2 m-wrap", @readonly = "readonly" })
-                                        <span class="help-inline">@Html.ValidationMessageFor(a => a.MinTimeLimit)</span>
-                                    </div>
-                                </div>
-                                <div class="control-group">
-                                    <label class="control-label">
-                                        收益率</label>
-                                    <div class="controls">
-                                        @Html.TextBoxFor(a => a.ShouYiLv, new { @class = "m-wrap span4", @readonly = "readonly" })
-                                        <label class="radio">
-                                            <div class="radio">
-                                                <span class="checked">
-                                                    <input type="radio" name="ShouYiLvType" value="0" checked=""></span></div>
-                                            月
-                                        </label>
-                                        <label class="radio">
-                                            <div class="radio">
-                                                <span>
-                                                    <input type="radio" name="ShouYiLvType" value="1"></span></div>
-                                            年
-                                        </label>
-                                        <span class="help-inline">@Html.ValidationMessageFor(a => a.ShouYiLv)</span>
-                                    </div>
-                                </div>
-                                <div class="control-group">
-                                    <label class="control-label">
-                                        贷款用途</label>
-                                    <div class="controls">
-                                        @Html.TextAreaFor(a => a.Purpose, new { @class = "span6 m-wrap", @readonly = "readonly" })
-                                        <span class="help-inline">@Html.ValidationMessageFor(a => a.Purpose)</span>
-                                    </div>
-                                </div>
-                                <div class="control-group">
-                                    <label class="control-label">
-                                        还款来源</label>
-                                    <div class="controls">
-                                        @Html.TextAreaFor(a => a.Repayment, new { @class = "span6 m-wrap", @readonly = "readonly" })
-                                        <span class="help-inline">@Html.ValidationMessageFor(a => a.Repayment)</span>
-                                    </div>
-                                </div>
-                                <div class="control-group">
-                                    <label class="control-label">
-                                        担保措施</label>
-                                    <div class="controls">
-                                        @Html.TextAreaFor(a => a.ZengXinCuoShi, new { @class = "span6 m-wrap", @readonly = "readonly", style = "overflow-y:visible" })
-                                        <span class="help-inline">@Html.ValidationMessageFor(a => a.ZengXinCuoShi)</span>
-                                    </div>
-                                </div>
-                                <div class="control-group">
-                                    <label class="control-label">
-                                        交易模式</label>
-                                    <div class="controls">
-                                        @Html.TextAreaFor(a => a.RongZiFangAn, new { @class = "span6 m-wrap", @readonly = "readonly" })
-                                        <span class="help-inline">@Html.ValidationMessageFor(a => a.RongZiFangAn)</span>
-                                    </div>
-                                </div>
-                                <div class="control-group">
-                                    <label class="control-label">
-                                        业务来源</label>
-                                    <div class="controls">
-                                        @Html.TextBoxFor(a => a.BusinessResource, new { @class = "span6 m-wrap", @readonly = "readonly" })
-                                        <span class="help-inline">@Html.ValidationMessageFor(a => a.BusinessResource)</span>
-                                    </div>
-                                </div>
-                                <div class="control-group">
-                                    <label class="control-label">
-                                        备注</label>
-                                    <div class="controls">
-                                        @Html.TextAreaFor(a => a.Remark, new { @class = "span6 m-wrap", @readonly = "readonly" })
-                                        <span class="help-inline">@Html.ValidationMessageFor(a => a.Remark)</span>
+                                        @if (ViewBag.hasPermissions)
+                                        { 
+                                            @Html.DropDownListFor(a => a.WorkFlowManagerID, ViewData["wfm"] as List<SelectListItem>, new { @class = "span6 m-wrap" })
+                                            <span class="help-inline">@Html.ValidationMessageFor(a => a.WorkFlowManagerID)</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="help-inline" style="margin-top: 7px;">
+                                                @(Model.WorkFlowManager == null ? "-" : Model.WorkFlowManager.Name)
+                                            </span>
+                                        }
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="tab-pane " id="tab_2">
-                        <div class="portlet box">
-                            <div class="portlet-body form">
+                        <div class="row-fluid">
+                            <div class="span5">
                                 <div class="control-group">
                                     <label class="control-label">
-                                        附件</label>
+                                        项目 A角：</label>
                                     <div class="controls">
-                                        @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "1", Text = "附件管理", Table = Entity.SystemConst.TableName.Financing, EnumAttachmentType = Entity.Enum.EnumAttachmentType.RongZiXinXiFuJian, IsEnabled = false });}
+                                        @if (ViewBag.hasPermissions)
+                                        { 
+                                            @Html.DropDownListFor(a => a.Owner_A_ID, ViewData["gaList"] as List<SelectListItem>, new { @class = "m-wrap small" })
+                                        }
+                                        else
+                                        {
+                                            <span class="help-inline" style="margin-top: 7px;">
+                                                @(Model.Owner_A == null ? "-" : Model.Owner_A.Name)
+                                            </span>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="span5">
+                                <div class="control-group">
+                                    <label class="control-label">
+                                        项目 B角：</label>
+                                    <div class="controls">
+                                        @if (ViewBag.hasPermissions)
+                                        { 
+                                            @Html.DropDownListFor(a => a.Owner_B_ID, ViewData["gaList"] as List<SelectListItem>, new { @class = "m-wrap small" })
+                                        }
+                                        else
+                                        {
+                                            <span class="help-inline" style="margin-top: 7px;">
+                                                @(Model.Owner_B == null ? "无" : Model.Owner_B.Name)
+                                            </span>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row-fluid">
+                            <div class="span5">
+                                <div class="control-group">
+                                    <label class="control-label">
+                                        审核状态：</label>
+                                    <div class="controls">
+                                        <span class="help-inline" style="margin-top: 7px; color: #f03038">
+                                            @switch (Model.AuditStatus)
+                                            {
+                                                case 0:
+                                                @:未审核
+                                            break;
+                                                case 1:
+
+                                                @:通过
+                                            break;
+                                                case 2:
+
+                                                @:不通过
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    break;
+                                            }
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="span5">
+                                <div class="control-group">
+                                    <label class="control-label">
+                                        贷款状态：</label>
+                                    <div class="controls">
+                                        <span class="help-inline" style="margin-top: 7px; color: #f03038">
+                                            @switch (Model.Status)
+                                            {
+                                                case 0:
+
+                                                @:未进行
+                                            break;
+                                                case 1:
+
+                                                @:进行中
+                                            break;
+                                                case 2:
+
+                                                @:已完成
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    break;
+                                            }
+                                        </span>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            </form>
+                <div class="tabbable tabbable-custom">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#tab_1" id="link_1" data-toggle="tab">贷款信息</a></li>
+                        <li><a class="" href="@Url.Action("Detail", "Company", new { id = Model.CompanyID })"
+            target="_blank" >客户信息</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="tab_1">
+                            <div class="portlet box">
+                                <div class="portlet-body form">
+                                    <div class="control-group">
+                                        <label class="control-label">
+                                            贷款主体</label>
+                                        <div class="controls">
+                                            @Html.TextBoxFor(a => a.Name, new { @class = "span6 m-wrap", @readonly = "readonly" })
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">
+                                            贷款金额（万元）</label>
+                                        <div class="controls">
+                                            @Html.TextBoxFor(a => a.Amount, new { @class = "m-wrap span6", @readonly = "readonly" })
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">
+                                            贷款期限（月）</label>
+                                        <div class="controls">
+                                            @Html.TextBoxFor(a => a.MinTimeLimit, new { @class = "span2 m-wrap", @readonly = "readonly" })&nbsp;&nbsp;&nbsp<span
+                                                class="help-inline">-</span>&nbsp;&nbsp;&nbsp;&nbsp;@Html.TextBoxFor(a => a.MaxTimeLimit, new { @class = "span2 m-wrap", @readonly = "readonly" })
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">
+                                            贷款利率</label>
+                                        <div class="controls">
+                                            @Html.TextBoxFor(a => a.ShouYiLv, new { @class = "m-wrap span4", @readonly = "readonly" })
+                                            <label class="radio">
+                                                <div class="radio">
+                                                    <span class="checked">
+                                                        <input type="radio" name="ShouYiLvType" value="0" checked=""></span></div>
+                                                月
+                                            </label>
+                                            <label class="radio">
+                                                <div class="radio">
+                                                    <span>
+                                                        <input type="radio" name="ShouYiLvType" value="1"></span></div>
+                                                年
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">
+                                            贷款用途</label>
+                                        <div class="controls">
+                                            @Html.TextAreaFor(a => a.Purpose, new { @class = "span6 m-wrap", @readonly = "readonly" })
+                                            <span class="help-inline">@Html.ValidationMessageFor(a => a.Purpose)</span>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">
+                                            还款来源</label>
+                                        <div class="controls">
+                                            @Html.TextAreaFor(a => a.Repayment, new { @class = "span6 m-wrap", @readonly = "readonly" })
+                                            @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "3", Text = "[附件]", IsEnabled = false, Table = Entity.SystemConst.TableName.Financing, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.HuanKuanLaiYuan });}
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">
+                                            抵押物清单</label>
+                                        <div class="controls">
+                                            @Html.TextAreaFor(a => a.DiYaWuQingDan, new { @class = "span6 m-wrap", @readonly = "readonly" })
+                                            @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "2", Text = "[附件]", IsEnabled = false, Table = Entity.SystemConst.TableName.Financing, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.DiYaWuQingDan });}
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">
+                                            担保措施</label>
+                                        <div class="controls">
+                                            @Html.TextAreaFor(a => a.ZengXinCuoShi, new { @class = "span6 m-wrap", @readonly = "readonly", style = "overflow-y:visible" })
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">
+                                            交易模式</label>
+                                        <div class="controls">
+                                            @Html.TextAreaFor(a => a.RongZiFangAn, new { @class = "span6 m-wrap", @readonly = "readonly" })
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">
+                                            业务来源</label>
+                                        <div class="controls">
+                                            @Html.TextBoxFor(a => a.BusinessResource, new { @class = "span6 m-wrap", @readonly = "readonly" })
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">
+                                            项目现场核查</label>
+                                        <div class="controls">
+                                            @Html.TextAreaFor(a => a.Remark, new { @class = "span6 m-wrap", @readonly = "readonly" })
+                                            @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "4", Text = "[附件]", IsEnabled = false, Table = Entity.SystemConst.TableName.Financing, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.XiangMuXianChangHeCha });}
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">
+                                            其他附件</label>
+                                        <div class="controls">
+                                            <span class="help-inline">
+                                                @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "1", Text = "附件管理", Table = Entity.SystemConst.TableName.Financing, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.RongZiXinXiFuJian, IsEnabled = false });}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
         </div>
     </div>
 </div>

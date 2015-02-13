@@ -139,6 +139,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AttachmentControl.cs" />
+    <Compile Include="Models\CommonHelp.cs" />
     <Compile Include="Models\HtmlHelperExtensions.cs" />
     <Compile Include="Models\NoClientCache.cs" />
     <Compile Include="Models\PermissionExtensions.cs" />
@@ -1147,12 +1148,12 @@
     <Content Include="Views\MechanismProducts\GetInfo.cshtml" />
     <Content Include="Views\Company\Add.cshtml" />
     <Content Include="Views\Company\Edit4.cshtml" />
-    <Content Include="Views\Company\Detail2.cshtml" />
     <Content Include="Views\Company\Edit.cshtml" />
     <Content Include="Views\Company\Add4.cshtml" />
     <Content Include="Views\Company\Index_gl.cshtml" />
-    <Content Include="Views\Company\Detail.cshtml" />    
+    <Content Include="Views\Company\Detail2.cshtml" />
     <Content Include="Views\Company\JGJDXX.cshtml" />
+    <Content Include="Views\Company\Detail.cshtml" />
     <None Include="Views\WorkFlowApproval\QianShuXieYi.cshtml" />
     <None Include="Views\WorkFlowApproval\QueRenShouQuFeiYong.cshtml" />
     <Content Include="Views\WorkFlowApproval\SelInfoPath.cshtml" />

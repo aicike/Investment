@@ -35,6 +35,11 @@ namespace Entity
         public int Status { get; set; }
 
         /// <summary>
+        /// 贷款信息审核状态   0：未审核   1：审核通过  2：审核不通过
+        /// </summary>
+        public int AuditStatus { get; set; }
+
+        /// <summary>
         /// 贷款贷款主体
         /// </summary>
         [Display(Name = "贷款主体")]
@@ -122,7 +127,7 @@ namespace Entity
         public string BusinessResource { get; set; }
 
         /// <summary>
-        /// 业务类型 0:自有资金  1:融资顾问
+        /// 业务类型 0:未确定  1:自有资金  2:融资顾问
         /// </summary>
         [Required(ErrorMessage = "请输入业务类型")]
         public int BusinessType { get; set; }
@@ -131,9 +136,7 @@ namespace Entity
         /// 项目类型
         /// </summary>
         [Display(Name = "项目类型")]
-        [Required(ErrorMessage = "请选择项目类型")]
-        [RegularExpression(@"\d+", ErrorMessage = "请选择项目类型")]
-        public int WorkFlowManagerID { get; set; }
+        public int? WorkFlowManagerID { get; set; }
 
         public virtual WorkFlowManager WorkFlowManager { get; set; }
         /// <summary>

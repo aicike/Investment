@@ -57,13 +57,16 @@
                                 贷款利率
                             </th>
                             <th style="width: 130px;">
-                                项目类型
+                                业务类型
                             </th>
                             <th style="width: 80px;">
                                 项目经理
                             </th>
                             <th style="width: 80px;">
-                                状态
+                                进行状态
+                            </th>
+                            <th style="width: 80px;">
+                                审核状态
                             </th>
                             <th style="width: 80px;">
                                 操作
@@ -87,7 +90,7 @@
                                     @if (item.MaxTimeLimit != 0)
                                     {
                                         @:@item.MinTimeLimit + @item.MaxTimeLimit
-                                                                                                                    }
+                                    }
                                     else
                                     {
                                         @item.MinTimeLimit
@@ -113,7 +116,21 @@
                                                 break;
                                         case 2:
                                         @:已完成
-                                                                                                                                                            break;
+                                                break;
+                                    }
+                                </td>
+                                 <td>
+                                    @if (item.AuditStatus == 0)
+                                    { 
+                                        @:待审核
+                                    }
+                                    else if (item.AuditStatus == 1)
+                                    {
+                                        @:通过
+                                    }
+                                    else if (item.AuditStatus == 2)
+                                    { 
+                                        @:未通过
                                     }
                                 </td>
                                 <td>

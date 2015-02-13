@@ -1,5 +1,13 @@
 ﻿
-function JMessage(msg, isError, isRefresh, refresh_url) {
+/**
+* 消息提示
+* @param                {String}                消息内容
+* @param                {bool}                  是否错误消息(默认true)
+* @param                {bool}                  是否刷新(默认false)
+* @param                {String}                刷新URL(可选)
+* @param                {millisecond}           刷新等待时间(单位毫秒)
+*/
+function JMessage(msg, isError, isRefresh, refresh_url, millisecond) {
     $('#jmessage').html(msg);
     if (isError != undefined && isError == true) {
         $('#jmessage').showTopbarMessage({ background: "#f00", close: 3000 });
@@ -7,10 +15,13 @@ function JMessage(msg, isError, isRefresh, refresh_url) {
         $('#jmessage').showTopbarMessage({ background: "#093", close: 3000 });
     }
     if (isRefresh != undefined && isRefresh == true) {
+        if (millisecond == undefined) {
+            millisecond = 2000;
+        }
         if (refresh_url != undefined && refresh_url.length > 0) {
-            window.setTimeout("location.href = '" + refresh_url + "';", 2000);
+            window.setTimeout("location.href = '" + refresh_url + "';", millisecond);
         } else {
-            window.setTimeout("window.location.reload();", 2000);
+            window.setTimeout("window.location.reload();", millisecond);
         }
     }
 }

@@ -44,6 +44,8 @@ namespace Entity
 
             public const string Financing = "Financing";
 
+            public const string CompanyReference = "CompanyReference";
+
             public const string ApprovalRecord = "ApprovalRecord";
         }
     }

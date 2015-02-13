@@ -26,16 +26,16 @@
                             <th>
                                 贷款主体
                             </th>
-                            <th style="width: 100px;">
+                            <th style="width: 110px;">
                                 贷款金额(万元)
                             </th>
-                            <th style="width: 80px;">
+                            <th style="width: 110px;">
                                 贷款期限(月)
                             </th>
-                            <th style="width: 80px;">
+                            <th style="width: 110px;">
                                 贷款利率
                             </th>
-                            <th style="width: 80px;">
+                            <th style="width: 110px;">
                                 申请时间
                             </th>
                             <th style="width: 150px;">
@@ -72,7 +72,7 @@
                                     }
                                 </td>
                                 <td>
-                                    @item.ShouYiLv @(item.ShouYiLvType==0?"月":"年")
+                                    @item.Financing.ShouYiLv @(item.Financing.ShouYiLvType == 0 ? "月" : "年")
                                 </td>
                                 <td>
                                     @item.BeginDate.ToString("yyyy/MM/dd")

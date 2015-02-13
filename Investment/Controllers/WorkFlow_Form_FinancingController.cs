@@ -75,6 +75,8 @@ namespace Investment.Controllers
             List<AttachmentSel> sel = new List<AttachmentSel>();
             sel.Add(new AttachmentSel() { TableName = SystemConst.TableName.Company, TableID = companyID.Value });
             sel.Add(new AttachmentSel() { TableName = SystemConst.TableName.Financing, TableID = financingID.Value });
+
+            //sel.Add(new AttachmentSel() { TableName = SystemConst.TableName.CompanyReference, TableID = financingID.Value });
             ViewBag.Sel_Str = Newtonsoft.Json.JsonConvert.SerializeObject(sel);
             return PartialView();
         }

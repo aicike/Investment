@@ -162,7 +162,7 @@ namespace Business
                     workflow.State = 1;
                     //查找下一节点
                     WorkFlow_NodeModel w_nModel = new WorkFlow_NodeModel();
-                    var workflow_node = w_nModel.Getwork_node(workflow.Financing.WorkFlowManagerID, 2);
+                    var workflow_node = w_nModel.Getwork_node(workflow.Financing.WorkFlowManagerID.Value, 2);
                     if (workflow_node == null)
                     {
                         result.HasError = true;
@@ -226,7 +226,7 @@ namespace Business
                 if (!IsOver)
                 {
                     //查找下一节点
-                    var Nextworkflow_node = w_nModel.GetNextWorkFlow_Node(workflow.Financing.WorkFlowManagerID, workflow.WorkFlow_NodeID.Value);
+                    var Nextworkflow_node = w_nModel.GetNextWorkFlow_Node(workflow.Financing.WorkFlowManagerID.Value, workflow.WorkFlow_NodeID.Value);
                     //流程结束
                     if (Nextworkflow_node == null)
                     {
@@ -403,7 +403,7 @@ namespace Business
                     {
                         case 1: //通过
                             //查找最后审批通过的节点
-                            var workflow_node = w_nModel.GetLastWorkFlow_Node(workflow.Financing.WorkFlowManagerID, workflow.WorkFlow_NodeID.Value);
+                            var workflow_node = w_nModel.GetLastWorkFlow_Node(workflow.Financing.WorkFlowManagerID.Value, workflow.WorkFlow_NodeID.Value);
                             //通知申请人
                             emailInfo = new EmailInfo();
                             emailInfo.To = workflow.Financing.Owner_A.Email;
