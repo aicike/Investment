@@ -20,7 +20,7 @@ namespace Business
         {
             var query = from a in Context.Financings
                         from b in Context.MechanismProducts
-                        where a.WorkFlowManagerID != 4 && a.Amount <= b.MaxQuota && a.Owner_A_ID == AccountID && a.Status == 0 
+                        where a.WorkFlowManagerID != 4 && a.Amount <= b.MaxQuota && a.Owner_A_ID == AccountID && a.Status == 0 && (a.MinTimeLimit + a.MaxTimeLimit ?? 0) <= b.MaxMonth
                         orderby a.ID
                         select new FinancingMatching { FID = a.ID, FName = a.Name, MID = b.ID, MName = b.Name };
             return query;
@@ -50,7 +50,7 @@ namespace Business
         {
             var query = from a in Context.Financings
                         from b in Context.MechanismProducts
-                        where a.WorkFlowManagerID != 4 && a.Amount <= b.MaxQuota && a.Status == 0
+                        where a.WorkFlowManagerID != 4 && a.Amount <= b.MaxQuota && a.Status == 0 && (a.MinTimeLimit + a.MaxTimeLimit ?? 0) <= b.MaxMonth
                         orderby a.ID
                         select new FinancingMatching { FID = a.ID, FName = a.Name, MID = b.ID, MName = b.Name };
             return query;
@@ -63,7 +63,7 @@ namespace Business
         public IQueryable<FinancingMatching> GetMatchingZY()
         {
             var query = from a in Context.Financings
-                        where a.WorkFlowManagerID == 4  && a.Status == 0
+                        where a.WorkFlowManagerID == 4 && a.Status == 0
                         orderby a.ID
                         select new FinancingMatching { FID = a.ID, FName = a.Name, MID = a.ID, MName = a.Name };
             return query;

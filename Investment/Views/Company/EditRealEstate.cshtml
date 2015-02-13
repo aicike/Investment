@@ -1,0 +1,186 @@
+﻿@{
+    ViewBag.Title = "项目资料(房地产)";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section scripts{
+    <style>
+        .myLink
+        {
+            cursor: pointer;
+        }
+        .form-horizontal .control-label
+        {
+            width: 115px;
+        }
+        .form-horizontal .controls
+        {
+            margin-left: 125px;
+        }
+    </style>
+}
+<div class="row-fluid" id="div_page_root">
+    <div class="span12">
+        <div class="tabbable tabbable-custom boxless">
+            @using (Ajax.BeginForm("EditRealEstates", "Company", new AjaxOptions() { UpdateTargetId = "alert" }, new { @class = "form-horizontal" }))
+            {
+                <div style=" margin-bottom:10px; margin-top:10px; height:30px">
+                   <a href="@Url.Action("Edit", "Company", new { id = ViewBag.CompanyID })"  style="  font-size:13px;font-weight:bold; color:Black; background-color:#e4e4e4; padding:10px 10px;text-decoration:none; margin-right:8px">公司基本资料</a>
+                    <a href="@Url.Action("EditWith", "Company", new { id = ViewBag.CompanyID })" style="  font-size:13px;font-weight:bold; color:Black; background-color:#e4e4e4; padding:10px 10px;text-decoration:none; margin-right:8px">公司详细资料</a>
+                    <a href="@Url.Action("EditFinance", "Company", new { id = ViewBag.CompanyID })" style="  font-size:13px;font-weight:bold; color:Black; background-color:#e4e4e4; padding:10px 10px;text-decoration:none; margin-right:8px">公司财务/债务情况</a>
+                    <a href="@Url.Action("EditRealEstate", "Company", new { id = ViewBag.CompanyID })"style="  font-size:13px; color:#fff; background-color:#4b77be; padding:10px 10px;text-decoration:none; margin-right:8px">项目资料（房地产）</a>
+                </div>
+                <div class="myoption">
+                    <div>
+                        <button type="submit" class="btn blue submitbtn">
+                            保存</button>
+                        
+                          <a href="@Url.Action("Index", "Company")" class="btn" style="">返回</a>
+                          <input type="hidden"  name="CompanyID" id="CompanyID" value="@ViewBag.CompanyID"/>
+                    </div>
+                </div>
+                
+                <div class="portlet box blue">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="icon-reorder"></i>项目资料（房地产）</div>
+                        <div class="tools">
+                        </div>
+                    </div>
+                    <div class="portlet-body form">
+                        <div class="row-fluid">
+                            <div class="control-group">
+                                <div style="margin-left: 59px; width: 550px; float: left;">
+                                    1. 资产清单</div>
+                                <div style="float: left; margin-left: 50px">
+                                    @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "30", Text = "[附件]", Table = Entity.SystemConst.TableName.Company, TableId = ViewBag.CompanyID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.ZiChanQingDan });}
+                                </div>
+                                <div style="clear: both">
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <div style="margin-left: 59px; width: 550px; float: left;">
+                                    2. 抵押物清单，抵押评估报告</div>
+                                <div style="float: left; margin-left: 50px">
+                                    @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "21", Text = "[附件]", Table = Entity.SystemConst.TableName.Company, TableId = ViewBag.CompanyID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.DiYaWuZhiLiao });}
+                                </div>
+                                <div style="clear: both">
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <div style="margin-left: 59px; width: 550px; float: left;">
+                                    3. 项目可研报告</div>
+                                <div style="float: left; margin-left: 50px">
+                                    @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "22", Text = "[附件]", Table = Entity.SystemConst.TableName.Company, TableId = ViewBag.CompanyID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.KeXingXingBaoGao });}
+                                </div>
+                                <div style="clear: both">
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <div style="margin-left: 59px; width: 550px; float: left;">
+                                    4. 项目相关批文</div>
+                                <div style="float: left; margin-left: 50px">
+                                    @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "23", Text = "[附件]", Table = Entity.SystemConst.TableName.Company, TableId = ViewBag.CompanyID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.XiangMuXiangGuanPiWen });}
+                                </div>
+                                <div style="clear: both">
+                                </div>
+                            </div>
+                            
+                            
+                            <div class="control-group">
+                                <div style="margin-left: 59px; width: 550px; float: left;">
+                                    5. 国有土地使用证</div>
+                                <div style="float: left; margin-left: 50px">
+                                    @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "24", Text = "[附件]", Table = Entity.SystemConst.TableName.Company, TableId = ViewBag.CompanyID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.WuZheng_4 });}
+                                </div>
+                                <div style="clear: both">
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <div style="margin-left: 59px; width: 550px; float: left;">
+                                    6. 建设用地规划许可证</div>
+                                <div style="float: left; margin-left: 50px">
+                                    @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "31", Text = "[附件]", Table = Entity.SystemConst.TableName.Company, TableId = ViewBag.CompanyID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.WuZheng_1 });}
+                                </div>
+                                <div style="clear: both">
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <div style="margin-left: 59px; width: 550px; float: left;">
+                                    7. 建设工程规划许可证</div>
+                                <div style="float: left; margin-left: 50px">
+                                    @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "32", Text = "[附件]", Table = Entity.SystemConst.TableName.Company, TableId = ViewBag.CompanyID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.WuZheng_2 });}
+                                </div>
+                                <div style="clear: both">
+                                </div>
+                            </div>
+                            
+                            <div class="control-group">
+                                <div style="margin-left: 59px; width: 550px; float: left;">
+                                    8. 建筑工程施工许可证</div>
+                                <div style="float: left; margin-left: 50px">
+                                    @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "33", Text = "[附件]", Table = Entity.SystemConst.TableName.Company, TableId = ViewBag.CompanyID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.WuZheng_3 });}
+                                </div>
+                                <div style="clear: both">
+                                </div>
+                            </div>
+                            
+                            <div class="control-group">
+                                <div style="margin-left: 59px; width: 550px; float: left;">
+                                    9. 商品房预售许可证</div>
+                                <div style="float: left; margin-left: 50px">
+                                    @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "34", Text = "[附件]", Table = Entity.SystemConst.TableName.Company, TableId = ViewBag.CompanyID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.WuZheng_5 });}
+                                </div>
+                                <div style="clear: both">
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <div style="margin-left: 59px; width: 550px; float: left;">
+                                    10. 施工合同</div>
+                                <div style="float: left; margin-left: 50px">
+                                    @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "25", Text = "[附件]", Table = Entity.SystemConst.TableName.Company, TableId = ViewBag.CompanyID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.ShiGongHeTong });}
+                                </div>
+                                <div style="clear: both">
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <div style="margin-left: 59px; width: 550px; float: left;">
+                                    11. 销售明细</div>
+                                <div style="float: left; margin-left: 50px">
+                                    @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "26", Text = "[附件]", Table = Entity.SystemConst.TableName.Company, TableId = ViewBag.CompanyID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.XiaoShouMingXi });}
+                                </div>
+                                <div style="clear: both">
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <div style="margin-left: 59px; width: 550px; float: left;">
+                                    12. 过往房地产开发经验</div>
+                                <div style="float: left; margin-left: 50px">
+                                    @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "28", Text = "[附件]", Table = Entity.SystemConst.TableName.Company, TableId = ViewBag.CompanyID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.GuoWangFangDiChanKaiFaJingYan });}
+                                </div>
+                                <div style="clear: both">
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <div style="margin-left: 59px; width: 550px; float: left;">
+                                    13. 房管局档案查询</div>
+                                <div style="float: left; margin-left: 50px">
+                                    @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "29", Text = "[附件]", Table = Entity.SystemConst.TableName.Company, TableId = ViewBag.CompanyID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.FangGuanJuDangAnChaXun });}
+                                </div>
+                                <div style="clear: both">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="myoption">
+                    <div>
+                        <button type="submit" class="btn blue submitbtn">
+                            保存</button>
+                        
+                          <a href="@Url.Action("Index", "Company")" class="btn" style="">返回</a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

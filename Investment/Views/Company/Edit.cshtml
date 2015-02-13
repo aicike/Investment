@@ -19,28 +19,7 @@
         }
     </style>
     <script type="text/javascript">
-        window.onbeforeunload = function () {
-            var scrollPos;
-            if (typeof window.pageYOffset != 'undefined') {
-                scrollPos = window.pageYOffset;
-            }
-            else if (typeof document.compatMode != 'undefined' &&
-          document.compatMode != 'BackCompat') {
-                scrollPos = document.documentElement.scrollTop;
-            }
-            else if (typeof document.body != 'undefined') {
-                scrollPos = document.body.scrollTop;
-            }
-            document.cookie = "scrollTop=" + scrollPos; //存储滚动条位置到cookies中  
-        }
-
-        window.onload = function () {
-            if (document.cookie.match(/scrollTop=([^;]+)(;|$)/) != null) {
-                var arr = document.cookie.match(/scrollTop=([^;]+)(;|$)/); //cookies中不为空，则读取滚动条位置  
-                document.documentElement.scrollTop = parseInt(arr[1]);
-                document.body.scrollTop = parseInt(arr[1]);
-            }
-        }
+      
 
 
 
@@ -67,21 +46,8 @@
                 $("#div_page_root").css("margin-top", "10px");
             }
         }
-        function AddJGJKXX() {
-            var url = '@Html.Raw(@Url.Action("JGJDXX", "Company", new { Types = 0, CompanyID = ViewBag.CompanyID }))';
 
-            $("#iframe_JGJKXX").attr("src", url);
-        }
-
-        function EditJGJKXX(referenceid) {
-            var url = '@Html.Raw(@Url.Action("JGJDXX", "Company", new { Types = 1, CompanyID = ViewBag.CompanyID }))';
-            url = url + "&referenceID=" + referenceid
-            $("#iframe_JGJKXX").attr("src", url);
-        }
-
-        function reloadJGJDXX() {
-            location.reload();
-        }
+       
     </script>
 }
 @model Entity.Company
@@ -91,15 +57,22 @@
         <div class="tabbable tabbable-custom boxless">
             @using (Ajax.BeginForm("Edit", "Company", new AjaxOptions() { UpdateTargetId = "alert" }, new { @class = "form-horizontal" }))
             {
+                <div style=" margin-bottom:10px; margin-top:10px; height:30px">
+                    <a href="@Url.Action("Edit", "Company", new { id = ViewBag.CompanyID })"  style="  font-size:13px; color:#fff; background-color:#4b77be; padding:10px 10px;text-decoration:none; margin-right:8px">公司基本资料</a>
+                    <a href="@Url.Action("EditWith", "Company", new { id = ViewBag.CompanyID })" style="  font-size:13px;font-weight:bold; color:Black; background-color:#e4e4e4; padding:10px 10px;text-decoration:none; margin-right:8px">公司详细资料</a>
+                    <a href="@Url.Action("EditFinance", "Company", new { id = ViewBag.CompanyID })" style="  font-size:13px;font-weight:bold; color:Black; background-color:#e4e4e4; padding:10px 10px;text-decoration:none; margin-right:8px">公司财务/债务情况</a>
+                    <a href="@Url.Action("EditRealEstate", "Company", new { id = ViewBag.CompanyID })" style="  font-size:13px;font-weight:bold; color:Black; background-color:#e4e4e4; padding:10px 10px;text-decoration:none; margin-right:8px">项目资料（房地产）</a>
+                </div>
                 <div class="myoption">
                     <div>
                         <button type="submit" class="btn blue submitbtn">
                             保存</button>
-                        @if (ViewBag.HasGuanLian)
-                        { 
-                            <button type="button" class="btn" onclick="location.href='@ViewBag.BackUrl'">
-                                返回</button>
-                        }@Html.HiddenFor(a => a.ID)@Html.HiddenFor(a => a.OwnerID)@Html.HiddenFor(a => a.Status)
+                       
+                          <a href="@Url.Action("Index", "Company")" class="btn" style="">返回</a>
+                          @Html.HiddenFor(a => a.ID)@Html.HiddenFor(a => a.OwnerID)@Html.HiddenFor(a => a.Status)
+                          @Html.HiddenFor(a => a.Phone)
+                          @Html.HiddenFor(a => a.WebSite)
+                          @Html.HiddenFor(a => a.Fax)
                     </div>
                 </div>
                 <div class="portlet box blue">
@@ -338,7 +311,7 @@
                                     <label class="control-label">
                                         股权结构概述</label>
                                     <div class="controls">
-                                        @Html.TextAreaFor(a => a.Name, new { @class = "span8 m-wrap" })
+                                        @Html.TextAreaFor(a => a.GuQuanJieGou, new { @class = "span8 m-wrap" })
                                         <span class="help-inline">@Html.ValidationMessageFor(a => a.GuQuanJieGou)</span>
                                     </div>
                                 </div>
@@ -348,7 +321,7 @@
                                     <label class="control-label">
                                         关联企业概述</label>
                                     <div class="controls">
-                                        @Html.TextAreaFor(a => a.Name, new { @class = "span8 m-wrap" })
+                                        @Html.TextAreaFor(a => a.GuanLianGongSi, new { @class = "span8 m-wrap" })
                                         <span class="help-inline">@Html.ValidationMessageFor(a => a.GuanLianGongSi)</span>
                                     </div>
                                 </div>
@@ -402,423 +375,15 @@
                         }
                     </div>
                 </div>
-                <div class="portlet box blue">
-                    <div class="portlet-title">
-                        <div class="caption">
-                            <i class="icon-reorder"></i>公司详细资料</div>
-                        <div class="tools">
-                        </div>
-                    </div>
-                    <div class="portlet-body form">
-                        <div class="row-fluid">
-                            <div class="span6">
-                                <div class="control-group">
-                                    <label class="control-label">
-                                        公司电话</label>
-                                    <div class="controls">
-                                        @Html.TextBoxFor(a => a.Phone, new { @class = "m-wrap span8" })
-                                        <span class="help-inline">@Html.ValidationMessageFor(a => a.Phone)</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="span6">
-                                <div class="control-group">
-                                    <label class="control-label">
-                                        公司网址</label>
-                                    <div class="controls">
-                                        @Html.TextBoxFor(a => a.WebSite, new { @class = "m-wrap span8" })
-                                        <span class="help-inline">@Html.ValidationMessageFor(a => a.WebSite)</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row-fluid">
-                            <div class="span6">
-                                <div class="control-group">
-                                    <label class="control-label">
-                                        公司传真</label>
-                                    <div class="controls">
-                                        @Html.TextBoxFor(a => a.Fax, new { @class = "m-wrap span8" })
-                                        <span class="help-inline">@Html.ValidationMessageFor(a => a.Fax)</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <hr />
-                        <div class="row-fluid">
-                            <div class="control-group">
-                                <div style="margin-left: 59px; width: 550px; float: left;">
-                                    1. 公司简介（公司成立、发展、经营状况、公司管理层简介）</div>
-                                <div style="float: left; margin-left: 50px">
-                                    @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "7", Text = "[附件]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.GongSiJianJie });}
-                                </div>
-                                <div style="clear: both">
-                                </div>
-                            </div>
-                            <div class="control-group">
-                                <div style="margin-left: 59px; width: 550px; float: left;">
-                                    2. 公司章程及章程修正案
-                                </div>
-                                <div style="float: left; margin-left: 50px">
-                                    @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "8", Text = "[附件]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.GongSiZhangChengJiXiuZhengAn });}
-                                </div>
-                                <div style="clear: both">
-                                </div>
-                            </div>
-                            <div class="control-group">
-                                <div style="margin-left: 59px; width: 550px; float: left;">
-                                    3. 企业工商档案查询
-                                </div>
-                                <div style="float: left; margin-left: 50px">
-                                    @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "9", Text = "[附件]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.GongShangJiBenXinXiChaXunDan });}
-                                </div>
-                                <div style="clear: both">
-                                </div>
-                            </div>
-                            <div class="control-group">
-                                <div style="margin-left: 59px; width: 550px; float: left;">
-                                    4. 验资报告及增资报告
-                                </div>
-                                <div style="float: left; margin-left: 50px">
-                                    @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "10", Text = "[附件]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.YanZiBaoGao });}
-                                </div>
-                                <div style="clear: both">
-                                </div>
-                            </div>
-                            <div class="control-group">
-                                <div style="margin-left: 59px; width: 550px; float: left;">
-                                    5. 法定代表人（证书）、法定代表人身份证、个人简历</div>
-                                <div style="float: left; margin-left: 50px">
-                                    @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "11", Text = "[附件]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.FaRenShenFenZheng_GeRenJianLi });}
-                                </div>
-                                <div style="clear: both">
-                                </div>
-                            </div>
-                            <div class="control-group">
-                                <div style="margin-left: 59px; width: 550px; float: left;">
-                                    6. 股东身份证、个人简历</div>
-                                <div style="float: left; margin-left: 50px">
-                                    @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "12", Text = "[附件]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.GuDongShenFenZheng_GeRenJianLi });}
-                                </div>
-                                <div style="clear: both">
-                                </div>
-                            </div>
-                            <div class="control-group">
-                                <div style="margin-left: 59px; width: 550px; float: left;">
-                                    7. 法定代表人及股东征信报告</div>
-                                <div style="float: left; margin-left: 50px">
-                                    @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "13", Text = "[附件]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.FaRenJiGuDongZhengXinBaoGao });}
-                                </div>
-                                <div style="clear: both">
-                                </div>
-                            </div>
-                            <div class="control-group">
-                                <div style="margin-left: 59px; width: 550px; float: left;">
-                                    8. 股东构成、股权结构（及变动情况）、股东基本情况介绍</div>
-                                <div style="float: left; margin-left: 50px">
-                                    @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "14", Text = "[附件]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.GuDongGouCheng });}
-                                </div>
-                                <div style="clear: both">
-                                </div>
-                            </div>
-                            <div class="control-group">
-                                <div style="margin-left: 59px; width: 550px; float: left;">
-                                    9. 公司组织结构（部门/机构设置、人员）</div>
-                                <div style="float: left; margin-left: 50px">
-                                    @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "15", Text = "[附件]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.XiangMuGongSiZuZhiJieGou });}
-                                </div>
-                                <div style="clear: both">
-                                </div>
-                            </div>
-                            <div class="control-group">
-                                <div style="margin-left: 59px; width: 550px; float: left;">
-                                    10. 关联企业基本情况介绍和对外投资情况介绍</div>
-                                <div style="float: left; margin-left: 50px">
-                                    @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "16", Text = "[附件]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.GuanLianQiYeJiBenQingKuangJieShao });}
-                                </div>
-                                <div style="clear: both">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="portlet box blue">
-                    <div class="portlet-title">
-                        <div class="caption">
-                            <i class="icon-reorder"></i>公司财务/债务情况</div>
-                        <div class="tools">
-                        </div>
-                    </div>
-                    <div class="portlet-body form">
-                        <div class="row-fluid">
-                            <div class="span12">
-                                <div class="control-group">
-                                    <table class="table table-bordered" id="tab_JGJDXX">
-                                        <tr>
-                                            <td colspan="8">
-                                                金融机构借贷信息 <a data-toggle="modal" onclick="AddJGJKXX()" href="#div_guanlian_JGJKXX">(新增借贷信息)</a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                借款金额
-                                            </td>
-                                            <td>
-                                                贷款方
-                                            </td>
-                                            <td>
-                                                借款期限
-                                            </td>
-                                            <td>
-                                                借款方式
-                                            </td>
-                                            <td>
-                                                抵押物信息
-                                            </td>
-                                            <td>
-                                                担保方
-                                            </td>
-                                            <td>
-                                                相关附件
-                                            </td>
-                                            <td>
-                                                操作
-                                            </td>
-                                        </tr>
-                                        @foreach (var item in CRList)
-                                        {
-                                            <tr id="JGJDtr_@item.ID">
-                                                <td>
-                                                    @item.Borrow
-                                                </td>
-                                                <td>
-                                                    @item.Lenders
-                                                </td>
-                                                <td>
-                                                    @item.Deadline
-                                                </td>
-                                                <td>
-                                                    @item.Methods
-                                                </td>
-                                                <td>
-                                                    @item.Collateral
-                                                </td>
-                                                <td>
-                                                    @item.Sponsors
-                                                </td>
-                                                <td>
-                                                    @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "JGJDXX", Text = "[附件]", Table = "CompanyReference", TableId = item.ID, EnumAttachmentType = 0, IsEnabled = false });}
-                                                </td>
-                                                <td>
-                                                    <a  data-toggle='modal' onclick='EditJGJKXX(@item.ID)' href='#div_guanlian_JGJKXX'>修改</a>
-                                                    @Ajax.ActionLink("删除", "DeleteJGJDXX", "Company", new { ID = item.ID, CID = item.CompanyID }, new AjaxOptions() { UpdateTargetId = "alert", OnBegin = "return AppDelete('确定删除?')" }, true)
-                                                </td>
-                                            </tr>
-                                        }
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                        <hr />
-                        <div class="row-fluid">
-                            <div class="control-group">
-                                <div style="margin-left: 59px; width: 550px; float: left;">
-                                    1. 近三年审计报告</div>
-                                <div style="float: left; margin-left: 50px">
-                                    @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "18", Text = "[附件]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.ShenJiBaoGao });}
-                                </div>
-                                <div style="clear: both">
-                                </div>
-                            </div>
-                            <div class="control-group">
-                                <div style="margin-left: 59px; width: 550px; float: left;">
-                                    2. 近3个月财务报表（资产负债表、利润表和现金流量表）、往来款明细、固定资产清单</div>
-                                <div style="float: left; margin-left: 50px">
-                                    @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "19", Text = "[附件]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.ErJiKeMuMingXi });}
-                                </div>
-                                <div style="clear: both">
-                                </div>
-                            </div>
-                            <div class="control-group">
-                                <div style="margin-left: 59px; width: 550px; float: left;">
-                                    3. 最近一年的增值税、营业税、所得税纳税申报表和纳税凭证</div>
-                                <div style="float: left; margin-left: 50px">
-                                    @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "20", Text = "[附件]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.ZengZhiShui_YingYeShui_SuoDeShui });}
-                                </div>
-                                <div style="clear: both">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="portlet box blue">
-                    <div class="portlet-title">
-                        <div class="caption">
-                            <i class="icon-reorder"></i>项目资料（房地产）</div>
-                        <div class="tools">
-                        </div>
-                    </div>
-                    <div class="portlet-body form">
-                        <div class="row-fluid">
-                            <div class="control-group">
-                                <div style="margin-left: 59px; width: 550px; float: left;">
-                                    1. 资产清单</div>
-                                <div style="float: left; margin-left: 50px">
-                                    @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "30", Text = "[附件]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.ZiChanQingDan });}
-                                </div>
-                                <div style="clear: both">
-                                </div>
-                            </div>
-                            <div class="control-group">
-                                <div style="margin-left: 59px; width: 550px; float: left;">
-                                    2. 抵押物清单，抵押评估报告</div>
-                                <div style="float: left; margin-left: 50px">
-                                    @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "21", Text = "[附件]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.DiYaWuZhiLiao });}
-                                </div>
-                                <div style="clear: both">
-                                </div>
-                            </div>
-                            <div class="control-group">
-                                <div style="margin-left: 59px; width: 550px; float: left;">
-                                    3. 项目可研报告</div>
-                                <div style="float: left; margin-left: 50px">
-                                    @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "22", Text = "[附件]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.KeXingXingBaoGao });}
-                                </div>
-                                <div style="clear: both">
-                                </div>
-                            </div>
-                            <div class="control-group">
-                                <div style="margin-left: 59px; width: 550px; float: left;">
-                                    4. 项目相关批文</div>
-                                <div style="float: left; margin-left: 50px">
-                                    @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "23", Text = "[附件]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.XiangMuXiangGuanPiWen });}
-                                </div>
-                                <div style="clear: both">
-                                </div>
-                            </div>
-                            
-                            
-                            <div class="control-group">
-                                <div style="margin-left: 59px; width: 550px; float: left;">
-                                    5. 国有土地使用证</div>
-                                <div style="float: left; margin-left: 50px">
-                                    @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "24", Text = "[附件]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.WuZheng_4 });}
-                                </div>
-                                <div style="clear: both">
-                                </div>
-                            </div>
-                            <div class="control-group">
-                                <div style="margin-left: 59px; width: 550px; float: left;">
-                                    6. 建设用地规划许可证</div>
-                                <div style="float: left; margin-left: 50px">
-                                    @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "24", Text = "[附件]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.WuZheng_1 });}
-                                </div>
-                                <div style="clear: both">
-                                </div>
-                            </div>
-                            <div class="control-group">
-                                <div style="margin-left: 59px; width: 550px; float: left;">
-                                    7. 建设工程规划许可证</div>
-                                <div style="float: left; margin-left: 50px">
-                                    @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "24", Text = "[附件]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.WuZheng_2 });}
-                                </div>
-                                <div style="clear: both">
-                                </div>
-                            </div>
-                            
-                            <div class="control-group">
-                                <div style="margin-left: 59px; width: 550px; float: left;">
-                                    8. 建筑工程施工许可证</div>
-                                <div style="float: left; margin-left: 50px">
-                                    @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "24", Text = "[附件]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.WuZheng_3 });}
-                                </div>
-                                <div style="clear: both">
-                                </div>
-                            </div>
-                            
-                            <div class="control-group">
-                                <div style="margin-left: 59px; width: 550px; float: left;">
-                                    9. 商品房预售许可证</div>
-                                <div style="float: left; margin-left: 50px">
-                                    @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "24", Text = "[附件]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.WuZheng_5 });}
-                                </div>
-                                <div style="clear: both">
-                                </div>
-                            </div>
-                            <div class="control-group">
-                                <div style="margin-left: 59px; width: 550px; float: left;">
-                                    10. 施工合同</div>
-                                <div style="float: left; margin-left: 50px">
-                                    @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "25", Text = "[附件]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.ShiGongHeTong });}
-                                </div>
-                                <div style="clear: both">
-                                </div>
-                            </div>
-                            <div class="control-group">
-                                <div style="margin-left: 59px; width: 550px; float: left;">
-                                    11. 销售明细</div>
-                                <div style="float: left; margin-left: 50px">
-                                    @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "26", Text = "[附件]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.XiaoShouMingXi });}
-                                </div>
-                                <div style="clear: both">
-                                </div>
-                            </div>
-                            <div class="control-group">
-                                <div style="margin-left: 59px; width: 550px; float: left;">
-                                    12. 过往房地产开发经验</div>
-                                <div style="float: left; margin-left: 50px">
-                                    @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "28", Text = "[附件]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.GuoWangFangDiChanKaiFaJingYan });}
-                                </div>
-                                <div style="clear: both">
-                                </div>
-                            </div>
-                            <div class="control-group">
-                                <div style="margin-left: 59px; width: 550px; float: left;">
-                                    13. 房管局档案查询</div>
-                                <div style="float: left; margin-left: 50px">
-                                    @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "29", Text = "[附件]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.FangGuanJuDangAnChaXun });}
-                                </div>
-                                <div style="clear: both">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <div class="myoption">
                     <div>
                         <button type="submit" class="btn blue submitbtn">
                             保存</button>
-                        @if (ViewBag.HasGuanLian)
-                        { 
-                            <button type="button" class="btn" onclick="location.href='@ViewBag.BackUrl'">
-                                返回</button>
-                        }
+                        
+                          <a href="@Url.Action("Index", "Company")" class="btn" style="">返回</a>
                     </div>
                 </div>
             }
         </div>
     </div>
 </div>
-<div id="div_guanlian_JGJKXX" class="modal hide fade" tabindex="-1" data-width="970"
-    style="">
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-        </button>
-        <h3>
-            金融机构借贷信息</h3>
-    </div>
-    <div class="modal-body" style="min-height: 570px">
-        <div class="row-fluid">
-            <div class="span12">
-                <iframe style="width: 100%; height: 565px; border: none" id="iframe_JGJKXX"></iframe>
-            </div>
-        </div>
-    </div>
-    <div class="modal-footer">
-        <button type="button" id="del_JGJKXX" data-dismiss="modal" class="btn">
-            关闭</button>
-    </div>
-</div>
-<script>
-    
-</script>

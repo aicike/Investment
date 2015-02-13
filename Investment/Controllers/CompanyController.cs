@@ -116,14 +116,16 @@ namespace Investment.Controllers
             return JavaScript(javascript);
         }
 
+
+        /// <summary>
+        /// 更改公司基本资料
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ActionResult Edit(int id)
         {
             CompanyModel companyModel = new CompanyModel();
             var company = companyModel.Get(id);
-            if (company.Phone.Equals("0"))
-            {
-                company.Phone = "";
-            }
             ViewBag.Layout = "~/Views/Shared/_Layout.cshtml";
             ViewBag.HasGuanLian = true;
             ViewBag.CompanyID = company.ID;
@@ -134,6 +136,11 @@ namespace Investment.Controllers
             return View(company);
         }
 
+        /// <summary>
+        /// 更改公司基本资料
+        /// </summary>
+        /// <param name="company"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult Edit(Company company)
         {
@@ -150,6 +157,120 @@ namespace Investment.Controllers
                 return JavaScript("JMessage('保存成功！',false,true)");
             }
         }
+        /// <summary>
+        /// 更改公司详细资料
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult EditWith(int id)
+        {
+            CompanyModel companyModel = new CompanyModel();
+            var company = companyModel.Get(id);
+            if (company.Phone=="0")
+            {
+                company.Phone = "";
+            }
+            ViewBag.CompanyID = company.ID;
+            return View(company);
+        }
+
+        /// <summary>
+        ///  更改公司详细资料
+        /// </summary>
+        /// <param name="company"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult EditWith(Company company)
+        {
+            Result result = null;
+            CompanyModel companyModel = new CompanyModel();
+            List<Attachment> attachments = GetAttachment_Edit();
+            result = companyModel.Edit(company, attachments);
+            if (result.HasError)
+            {
+                return JavaScript("JMessage('" + result.Error + "',true)");
+            }
+            else
+            {
+                return JavaScript("JMessage('保存成功！',false,true)");
+            }
+        }
+        /// <summary>
+        /// 更改公司财务资料
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult EditFinance(int id)
+        {
+            //查找借贷信息
+            CompanyReferenceModel crmodel = new CompanyReferenceModel();
+            var crlist = crmodel.GetInfo_byCID(id);
+            ViewBag.CRList = crlist;
+            ViewBag.CompanyID = id;
+            return View();
+        }
+        /// <summary>
+        /// 更改公司财务资料
+        /// </summary>
+        /// <param name="company"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult EditFinances(int companyID)
+        {
+            Result result = null;
+            CompanyModel companyModel = new CompanyModel();
+            List<Attachment> attachments = GetAttachment_Edit();
+            var company = companyModel.Get(companyID);
+            result = companyModel.Edit(company, attachments);
+            if (result.HasError)
+            {
+                return JavaScript("JMessage('" + result.Error + "',true)");
+            }
+            else
+            {
+                return JavaScript("JMessage('保存成功！',false,true)");
+            }
+        }
+
+        /// <summary>
+        /// 更改公司项目资料（房地产）
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult EditRealEstate (int id)
+        {
+           
+            ViewBag.CompanyID = id;
+            return View();
+        }
+        /// <summary>
+        /// 更改公司项目资料（房地产）
+        /// </summary>
+        /// <param name="company"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult EditRealEstates(int CompanyID)
+        {
+            Result result = null;
+            CompanyModel companyModel = new CompanyModel();
+            List<Attachment> attachments = GetAttachment_Edit();
+            var company = companyModel.Get(CompanyID);
+            result = companyModel.Edit(company, attachments);
+            if (result.HasError)
+            {
+                return JavaScript("JMessage('" + result.Error + "',true)");
+            }
+            else
+            {
+                return JavaScript("JMessage('保存成功！',false,true)");
+            }
+        }
+
+
+
+
+
+
 
         private List<Attachment> GetAttachment_Add()
         {
@@ -217,7 +338,7 @@ namespace Investment.Controllers
                 attachmentList.AddRange(attachment_ZuZhiJiGouDaiMa);
             }
             string ShuiWu = Request.Form["hid_attachment_4"];
-            if (string.IsNullOrEmpty(ZuZhiJiGouDaiMa) == false)
+            if (string.IsNullOrEmpty(ShuiWu) == false)
             {
                 var attachment_ShuiWu = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Attachment>>(ShuiWu);
                 attachmentList.AddRange(attachment_ShuiWu);
@@ -384,6 +505,31 @@ namespace Investment.Controllers
             {
                 var attachment_ZiChanQingDan = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Attachment>>(ZiChanQingDan);
                 attachmentList.AddRange(attachment_ZiChanQingDan);
+            }
+
+            string JianSheYongDi = Request.Form["hid_attachment_31"];
+            if (string.IsNullOrEmpty(JianSheYongDi) == false)
+            {
+                var attachment_JianSheYongDi = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Attachment>>(JianSheYongDi);
+                attachmentList.AddRange(attachment_JianSheYongDi);
+            }
+            string JianSheGongChengGuiHua = Request.Form["hid_attachment_32"];
+            if (string.IsNullOrEmpty(JianSheGongChengGuiHua) == false)
+            {
+                var attachment_JianSheGongChengGuiHua = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Attachment>>(JianSheGongChengGuiHua);
+                attachmentList.AddRange(attachment_JianSheGongChengGuiHua);
+            }
+            string JianSheGongChengShiGong = Request.Form["hid_attachment_33"];
+            if (string.IsNullOrEmpty(JianSheGongChengShiGong) == false)
+            {
+                var attachment_JianSheGongChengShiGong = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Attachment>>(JianSheGongChengShiGong);
+                attachmentList.AddRange(attachment_JianSheGongChengShiGong);
+            }
+            string ShangPinFangYuShou = Request.Form["hid_attachment_34"];
+            if (string.IsNullOrEmpty(ShangPinFangYuShou) == false)
+            {
+                var attachment_ShangPinFangYuShou = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Attachment>>(ShangPinFangYuShou);
+                attachmentList.AddRange(attachment_ShangPinFangYuShou);
             }
             return attachmentList;
         }
@@ -580,6 +726,20 @@ namespace Investment.Controllers
         #endregion
 
         #region 客户信息用户控件
+
+        /// <summary>
+        /// 借贷信息列表
+        /// </summary>
+        /// <param name="Cid">公司ID</param>
+        /// <returns></returns>
+        public ActionResult JGJDXXList(int Cid)
+        {
+            //查找借贷信息
+            CompanyReferenceModel crmodel = new CompanyReferenceModel();
+            var crlist = crmodel.GetInfo_byCID(Cid);
+            return View(crlist);
+        }
+
         /// <summary>
         /// 机构借贷信息控件
         /// </summary>
@@ -631,8 +791,17 @@ namespace Investment.Controllers
             }
             var jsonreference = Newtonsoft.Json.JsonConvert.SerializeObject(companyreference);
             return JavaScript("AddJGJDXX(" + jsonreference + ")");
-            //return JavaScript(" window.location.href='" + Url.Action("Edit", "Company", new { id = companyreference.CompanyID}) + "';");
+            //return RedirectToAction("JGJDXXList","Company", new { Cid = companyreference.CompanyID});
 
+        }
+        /// <summary>
+        /// 刷新机构贷款列表
+        /// </summary>
+        /// <param name="CID"></param>
+        /// <returns></returns>
+        public ActionResult ReadJGJDXX(int CID)
+        {
+            return RedirectToAction("JGJDXXList", "Company", new { Cid = CID });
         }
         /// <summary>
         /// 删除借贷信息
