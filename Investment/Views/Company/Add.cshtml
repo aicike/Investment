@@ -486,7 +486,7 @@
                             </div>
                             <div class="control-group">
                                 <div style="margin-left: 59px; width: 550px; float: left;">
-                                    1. 近6个月财务报表（资产负债表、利润表和现金流量表）、往来款明细</div>
+                                    2. 近6个月财务报表（资产负债表、利润表和现金流量表）、往来款明细</div>
                                 <div style="float: left; margin-left: 50px">
                                     @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "19", Text = "[附件]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.ErJiKeMuMingXi });}
                                 </div>
@@ -495,7 +495,7 @@
                             </div>
                             <div class="control-group">
                                 <div style="margin-left: 59px; width: 550px; float: left;">
-                                    2. 最近一年的增值税、营业税、所得税纳税申报表和纳税凭证</div>
+                                    3. 最近一年的增值税、营业税、所得税纳税申报表和纳税凭证</div>
                                 <div style="float: left; margin-left: 50px">
                                     @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "20", Text = "[附件]", Table = Entity.SystemConst.TableName.Company, TableId = Model.ID, EnumAttachmentType = Entity.Enum.EnumAttachmentType.ZengZhiShui_YingYeShui_SuoDeShui });}
                                 </div>
