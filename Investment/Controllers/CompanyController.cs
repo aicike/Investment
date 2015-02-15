@@ -266,12 +266,6 @@ namespace Investment.Controllers
             }
         }
 
-
-
-
-
-
-
         private List<Attachment> GetAttachment_Add()
         {
             List<Attachment> attachmentList = new List<Attachment>();
@@ -386,6 +380,12 @@ namespace Investment.Controllers
             {
                 var attachment_FaRen = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Attachment>>(FaRen);
                 attachmentList.AddRange(attachment_FaRen);
+            }
+            string FaDingDaiBiaoRen = Request.Form["hid_attachment_11"];
+            if (string.IsNullOrEmpty(FaDingDaiBiaoRen) == false)
+            {
+                var attachment_FaDingDaiBiaoRen = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Attachment>>(FaDingDaiBiaoRen);
+                attachmentList.AddRange(attachment_FaDingDaiBiaoRen);
             }
             string GuDong = Request.Form["hid_attachment_12"];
             if (string.IsNullOrEmpty(GuDong) == false)
