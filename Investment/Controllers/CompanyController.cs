@@ -624,11 +624,11 @@ namespace Investment.Controllers
             {
                 attachments.AddRange(Newtonsoft.Json.JsonConvert.DeserializeObject<List<Attachment>>(XiangMuXianChangHeCha));
             }
-            financing.Owner_A_ID = LoginAccount.UserID;
-            if (financing.Owner_B_ID.HasValue && financing.Owner_B_ID.Value == 0)
-            {
-                financing.Owner_B_ID = null;
-            }
+            //financing.Owner_A_ID = LoginAccount.UserID;
+            //if (financing.Owner_B_ID.HasValue && financing.Owner_B_ID.Value == 0)
+            //{
+            //    financing.Owner_B_ID = null;
+            //}
             financing.BusinessType = 0;//业务类型，未确定
             Result result = fm.Add(financing, attachments);
             if (result.HasError)
@@ -682,11 +682,11 @@ namespace Investment.Controllers
             {
                 attachments.AddRange(Newtonsoft.Json.JsonConvert.DeserializeObject<List<Attachment>>(XiangMuXianChangHeCha));
             }
-            if (financing.Owner_B_ID.HasValue && financing.Owner_B_ID.Value == 0)
-            {
-                financing.Owner_B_ID = null;
-            }
-            if (financing.BusinessType == 0)
+            //if (financing.Owner_B_ID.HasValue && financing.Owner_B_ID.Value == 0)
+            //{
+            //    financing.Owner_B_ID = null;
+            //}
+            if (financing.BusinessType == 1)
             {
                 financing.WorkFlowManagerID = 4;
             }
