@@ -61,7 +61,7 @@ namespace Investment.Controllers
             if (result.HasError)
             {
                 return JavaScript("JMessage('添加失败 请稍后再试',true)");
-            
+
             }
             return JavaScript("window.location.href='" + Url.Action("Index", "MechanismProducts", new { MID = mechanismProducts.MechanismID }) + "'");
         }
@@ -72,7 +72,7 @@ namespace Investment.Controllers
         /// </summary>
         /// <param name="MID"></param>
         /// <returns></returns>
-        public ActionResult Edit(int MID,int MPID)
+        public ActionResult Edit(int MID, int MPID)
         {
             //产品机构信息
             MechanismModel MModel = new MechanismModel();
@@ -115,16 +115,16 @@ namespace Investment.Controllers
             MechanismProductsModel mpModel = new MechanismProductsModel();
 
             var mplist = mpModel.List();
-            if(!string.IsNullOrEmpty(Name))
+            if (!string.IsNullOrEmpty(Name))
             {
-                if(Name.Trim().Length>0)
+                if (Name.Trim().Length > 0)
                 {
-                    mplist = mplist.Where(a=>a.Name.Contains(Name));
+                    mplist = mplist.Where(a => a.Name.Contains(Name));
                     ViewBag.Name = Name;
                 }
             }
             var pagelist = mplist.ToPagedList(id ?? 1, 15);
-            int index = id??1-1;
+            int index = (id ?? 1) - 1;
             ViewBag.Index = 15 * index;
 
             return View(pagelist);
