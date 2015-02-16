@@ -28,6 +28,12 @@
             var changeStatusUrl = '@Url.Action("ChangeStatus", "Financing")';
             $(".changeStatus").click(function () {
                 var status_val= $(this).attr("status");
+                if(status_val==1){
+                    if($("#Owner_A_ID").val()==0){
+                        JMessage("请指定项目A角。",true);
+                        return;
+                    }
+                }
                 $.post(changeStatusUrl, {id:@Model.ID,status:status_val}, function (result) { 
                     if(result.HasError){
                         JMessage(result.Error,true);
@@ -57,6 +63,13 @@
                 }else{
                     $("#div_changeMsg").hide();
                     $("#btnSubmit").addClass("disabled").addAttr("disabled");
+                }
+            });
+
+            $("#btnSubmit").click(function(){
+                if($("#Owner_A_ID").val()==0){
+                    JMessage("请指定项目A角。",true);
+                    return false;
                 }
             });
         });
@@ -125,7 +138,7 @@
                                                     break;
                                                     case 2:
                                                     @:融资顾问
-                                                                                                                                                    break;
+                                                                                                                                                                                                                                                                                                                                                    break;
                                                 }
                                             </span>
                                         }
@@ -209,7 +222,7 @@
                                                 case 2:
 
                                                 @:不通过
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    break;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    break;
                                             }
                                         </span>
                                     </div>
@@ -234,7 +247,7 @@
                                                 case 2:
 
                                                 @:已完成
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    break;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    break;
                                             }
                                         </span>
                                     </div>

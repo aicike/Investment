@@ -25,7 +25,7 @@
                             <th style="width: 110px;">
                                 编号
                             </th>
-                            <th >
+                            <th>
                                 贷款主体
                             </th>
                             <th style="width: 110px;">
@@ -49,10 +49,10 @@
                         @foreach (var item in Model)
                         {
                             <tr>
-                               <td style=" text-align:center">
-                                    <a href="@Url.Action("WorkFlowSchedule", "WorkFlow", new { WorkFlowID=item.ID })" title="流程节点与操作指引" target="_blank" style="">
+                                <td style="text-align: center">
+                                    <a href="@Url.Action("WorkFlowSchedule", "WorkFlow", new { WorkFlowID = item.ID })" title="流程节点与操作指引" target="_blank" style="">
                                         <img src="@Url.Content("/Image/lct.png")" style=" max-width:25px" />
-                                    </a>    
+                                    </a>
                                 </td>
                                 <td>
                                     @Html.ActionLink(@item.Number, item.WorkFlow_Node.WorkFlowNodeManager.Action, item.WorkFlow_Node.WorkFlowNodeManager.Controllers, new { WorkFlowID = item.ID }, new { target = "_blank" })
@@ -64,7 +64,10 @@
                                     @item.BeginDate.ToString("yyyy/MM/dd")
                                 </td>
                                 <td>
+                                    @if (item.Financing.Owner_A != null)
+                                    { 
                                     @item.Financing.Owner_A.Name
+                                    }
                                 </td>
                                 <td>
                                     @switch (item.State)
@@ -80,7 +83,7 @@
                                                 break;
                                         case 3:
                                         @:未通过
-                                                                                                                       break;
+                                                                                                                                                           break;
                                     }
                                 </td>
                                 <td>
@@ -93,7 +96,7 @@
                                     @foreach (var ar in ars)
                                     {
                                         @:@ar.AccountPosition：@ar.AccountName<br />
-                                                                                                            }
+                                                                                                                                                }
                                 </td>
                             </tr>
                         }

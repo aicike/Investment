@@ -43,6 +43,18 @@ namespace Entity
         public string FormJson { get; set; }
 
         /// <summary>
+        /// 项目负责人A角色(JSON)
+        /// </summary>
+        public int? JSON_Owner_A_ID { get; set; }
+        public virtual GroupAccount JSON_Owner_A { get; set; }
+
+        /// <summary>
+        /// 项目负责人B角色(JSON)
+        /// </summary>
+        public int? JSON_Owner_B_ID { get; set; }
+        public virtual GroupAccount JSON_Owner_B { get; set; }
+
+        /// <summary>
         /// 状态 0草稿，1进行中，2已完成，3未通过
         /// </summary>
         [Display(Name = "状态")]

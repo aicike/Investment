@@ -34,7 +34,8 @@ namespace Business
         /// <returns></returns>
         public IQueryable<WorkFlow> GetMyApplication(int groupAccountID)
         {
-            var list = List().Where(a => a.Financing.Owner_A_ID == groupAccountID && a.State != 0);
+            var list = List().Where(a => (a.Financing.Owner_A_ID == groupAccountID||a.JSON_Owner_A_ID==groupAccountID) && a.State != 0).Distinct().OrderByDescending(a => a.ID);//包含实时数据和JSON数据
+
             return list;
         }
 
@@ -67,7 +68,7 @@ namespace Business
         /// <returns></returns>
         public IQueryable<WorkFlow> GetAssist(int groupAccountID)
         {
-            var list = List().Where(a => a.Financing.Owner_B_ID == groupAccountID);
+            var list = List().Where(a => a.Financing.Owner_B_ID == groupAccountID || a.JSON_Owner_B_ID == groupAccountID).Distinct().OrderByDescending(a => a.ID);
             return list;
         }
 

@@ -37,6 +37,7 @@ namespace EF
             modelBuilder.Configurations.Add(new MechanismProductsMap());
             modelBuilder.Configurations.Add(new AttachmentMap());
             modelBuilder.Configurations.Add(new CompanyRelationMap());
+            modelBuilder.Configurations.Add(new WorkFlowMap());
             
             
         }

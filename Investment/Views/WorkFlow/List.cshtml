@@ -43,7 +43,7 @@
                             <th style="width: 100px;">
                                 编号
                             </th>
-                            <th >
+                            <th>
                                 贷款主体
                             </th>
                             <th style="width: 110px;">
@@ -69,6 +69,8 @@
                     <tbody>
                         @foreach (var item in Model)
                         {
+                            if (item.State == 1)
+                            { //进行中的从实时数据取
                             <tr>
                                 <td style="text-align: center">
                                     <a href="@Url.Action("WorkFlowSchedule", "WorkFlow", new { WorkFlowID = item.ID })" title="流程节点与操作指引" target="_blank" style="">
@@ -85,7 +87,10 @@
                                     @item.BeginDate.ToString("yyyy/MM/dd")
                                 </td>
                                 <td>
-                                    @item.Financing.Owner_A.Name
+                                    @if (item.Financing.Owner_A != null)
+                                    { 
+                                        @item.Financing.Owner_A.Name
+                                    }
                                 </td>
                                 <td>
                                     @switch (item.State)
@@ -101,7 +106,7 @@
                                                 break;
                                         case 3:
                                         @:未通过
-                                                                                                                                                                                                break;
+                                                                                                                                                                                                                                                                                                            break;
                                     }
                                 </td>
                                 <td>
@@ -114,12 +119,77 @@
                                     @foreach (var ar in ars)
                                     {
                                         @:@ar.AccountPosition：@ar.AccountName<br />
-                                                                                                                                                                                    }
+                                                                                                                                                                                                                                                                                                }
                                 </td>
                                 <td>
                                     <a data-toggle="modal" onclick="GetABRole(@item.ID)" href="#div_guanlian_GGAB">更改AB角</a>
                                 </td>
                             </tr>
+                            }
+                            else
+                            {
+                                if (string.IsNullOrEmpty(item.FormJson))
+                                {
+                                    var financing = Newtonsoft.Json.JsonConvert.DeserializeObject<Entity.Financing>(item.FormJson);
+                                    if (financing != null)
+                                    { 
+                                        <tr>
+                                            <td style="text-align: center">
+                                                <a href="@Url.Action("WorkFlowSchedule", "WorkFlow", new { WorkFlowID = item.ID })" title="流程节点与操作指引" target="_blank" style="">
+                                                    <img src="@Url.Content("/Image/lct.png")" style=" max-width:25px" />
+                                                </a>
+                                            </td>
+                                            <td>
+                                                @Html.ActionLink(@item.Number, "SelInfoPath", "WorkFlowApproval", new { WorkFlowID = item.ID }, new { target = "_blank" })
+                                            </td>
+                                            <td>
+                                                @financing.Name
+                                            </td>
+                                            <td>
+                                                @item.BeginDate.ToString("yyyy/MM/dd")
+                                            </td>
+                                            <td>
+                                                @if (financing.Owner_A != null)
+                                                { 
+                                                    @financing.Owner_A.Name
+                                                }
+                                            </td>
+                                            <td>
+                                                @switch (item.State)
+                                                {
+                                                    case 0:
+                                                    @:草稿
+                                                            break;
+                                                    case 1:
+                                                    @:进行中
+                                                            break;
+                                                    case 2:
+                                                    @:已完成
+                                                            break;
+                                                    case 3:
+                                                    @:未通过
+                                                                                                                                                                                                                                                                                                                        break;
+                                                }
+                                            </td>
+                                            <td>
+                                                @item.WorkFlow_Node.WorkFlowNodeManager.Name
+                                            </td>
+                                            <td>
+                                                @{
+                                                var ars = item.ApprovalRecord.Where(a => a.Operation == -1).ToList();
+                                                }
+                                                @foreach (var ar in ars)
+                                                {
+                                                    @:@ar.AccountPosition：@ar.AccountName<br />
+                                                                                                                                                                                                                                                                                                            }
+                                            </td>
+                                            <td>
+                                                <a data-toggle="modal" onclick="GetABRole(@item.ID)" href="#div_guanlian_GGAB">更改AB角</a>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            }
                         }
                     </tbody>
                 </table>

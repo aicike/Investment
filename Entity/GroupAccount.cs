@@ -87,6 +87,10 @@ namespace Entity
 
         public virtual ICollection<Financing> Financings_B { get; set; }
 
+        public virtual ICollection<WorkFlow> WorkFlow_A { get; set; }
+
+        public virtual ICollection<WorkFlow> WorkFlow_B { get; set; }
+        
         /// <summary>
         /// 审批记录表
         /// </summary>
