@@ -347,7 +347,7 @@ namespace Business
             }
 
             //邮件通知
-            EmailApprovalNotice(WorkFlowID, 3,"");
+            EmailApprovalNotice(WorkFlowID, 3, "");
             return result;
         }
 
@@ -388,52 +388,44 @@ namespace Business
         /// <param name="type">1 通过 2 不通过 3 驳回 4通过流程结束 5流程提交</param>
         /// <param name="email">不通过时 传入收件人邮件地址</param>
         /// <returns></returns>
-        public Result EmailApprovalNotice(int workflowID, int type,string email)
+        public Result EmailApprovalNotice(int workflowID, int type, string email)
         {
             Result result = new Result();
-            try
+            var sendEmail = System.Configuration.ConfigurationManager.AppSettings["sendEmail"];
+            if (sendEmail == "True")
             {
-                var workflow = base.Get(workflowID);
-                ApprovalRecordModel ARModel = new ApprovalRecordModel();
-                WorkFlow_NodeModel w_nModel = new WorkFlow_NodeModel();
-                EmailInfo emailInfo;
-                var strUrl = System.Configuration.ConfigurationManager.AppSettings["URl"];
-                Task t = new Task(() =>
+
+
+                try
                 {
-                    switch (type)
+                    var workflow = base.Get(workflowID);
+                    ApprovalRecordModel ARModel = new ApprovalRecordModel();
+                    WorkFlow_NodeModel w_nModel = new WorkFlow_NodeModel();
+                    EmailInfo emailInfo;
+                    var strUrl = System.Configuration.ConfigurationManager.AppSettings["URl"];
+                    Task t = new Task(() =>
                     {
-                        case 1: //通过
-                            //查找最后审批通过的节点
-                            var workflow_node = w_nModel.GetLastWorkFlow_Node(workflow.Financing.WorkFlowManagerID.Value, workflow.WorkFlow_NodeID.Value);
-                            //通知申请人
-                            emailInfo = new EmailInfo();
-                            emailInfo.To = workflow.Financing.Owner_A.Email;
-                            emailInfo.Subject = "流程审批通知（通过）--陕西兆恒投资业务管理系统";
-                            emailInfo.IsHtml = true;
-                            emailInfo.UseSSL = false;
-
-                            emailInfo.Body = "您好！<br/><br/>您申请的业务：" + workflow.Number + "。" + workflow_node.WorkFlowNodeManager.Name + "节点已审批<span style='color:Green'>通过</span>。 <br/><br/>请点击<a href='" + strUrl + "'>兆恒投资业务管理系统</a> 登陆查看<br/><br/>----陕西兆恒投资有限公司";
-                            SendEmail.SendMailAsync(emailInfo);
-                            //通知审批人
-
-                            //自审批
-                            if (workflow.WorkFlow_Node.IsSinceApproval)
-                            {
+                        switch (type)
+                        {
+                            case 1: //通过
+                                //查找最后审批通过的节点
+                                var workflow_node = w_nModel.GetLastWorkFlow_Node(workflow.Financing.WorkFlowManagerID.Value, workflow.WorkFlow_NodeID.Value);
+                                //通知申请人
                                 emailInfo = new EmailInfo();
                                 emailInfo.To = workflow.Financing.Owner_A.Email;
-                                emailInfo.Subject = "流程审批通知--陕西兆恒投资业务管理系统";
+                                emailInfo.Subject = "流程审批通知（通过）--陕西兆恒投资业务管理系统";
                                 emailInfo.IsHtml = true;
                                 emailInfo.UseSSL = false;
 
-                                emailInfo.Body = "您好！<br/><br/>您有一个新的业务：" + workflow.Number + "。等待您的审批<br/><br/>请点击<a href='" + strUrl + "'>兆恒投资业务管理系统</a> 登陆查看<br/><br/>----陕西兆恒投资有限公司";
+                                emailInfo.Body = "您好！<br/><br/>您申请的业务：" + workflow.Number + "。" + workflow_node.WorkFlowNodeManager.Name + "节点已审批<span style='color:Green'>通过</span>。 <br/><br/>请点击<a href='" + strUrl + "'>兆恒投资业务管理系统</a> 登陆查看<br/><br/>----陕西兆恒投资有限公司";
                                 SendEmail.SendMailAsync(emailInfo);
-                            }
-                            else
-                            {
-                                foreach (var item in workflow.WorkFlow_Node.WorkFlowApprovalManager)
+                                //通知审批人
+
+                                //自审批
+                                if (workflow.WorkFlow_Node.IsSinceApproval)
                                 {
                                     emailInfo = new EmailInfo();
-                                    emailInfo.To = item.GroupAccount.Email;
+                                    emailInfo.To = workflow.Financing.Owner_A.Email;
                                     emailInfo.Subject = "流程审批通知--陕西兆恒投资业务管理系统";
                                     emailInfo.IsHtml = true;
                                     emailInfo.UseSSL = false;
@@ -441,49 +433,49 @@ namespace Business
                                     emailInfo.Body = "您好！<br/><br/>您有一个新的业务：" + workflow.Number + "。等待您的审批<br/><br/>请点击<a href='" + strUrl + "'>兆恒投资业务管理系统</a> 登陆查看<br/><br/>----陕西兆恒投资有限公司";
                                     SendEmail.SendMailAsync(emailInfo);
                                 }
-                            }
-                            break;
-                        case 2: //不通过
+                                else
+                                {
+                                    foreach (var item in workflow.WorkFlow_Node.WorkFlowApprovalManager)
+                                    {
+                                        emailInfo = new EmailInfo();
+                                        emailInfo.To = item.GroupAccount.Email;
+                                        emailInfo.Subject = "流程审批通知--陕西兆恒投资业务管理系统";
+                                        emailInfo.IsHtml = true;
+                                        emailInfo.UseSSL = false;
 
-                            emailInfo = new EmailInfo();
-                            emailInfo.To = email;
-                            emailInfo.Subject = "流程审批通知（不通过）--陕西兆恒投资业务管理系统";
-                            emailInfo.IsHtml = true;
-                            emailInfo.UseSSL = false;
+                                        emailInfo.Body = "您好！<br/><br/>您有一个新的业务：" + workflow.Number + "。等待您的审批<br/><br/>请点击<a href='" + strUrl + "'>兆恒投资业务管理系统</a> 登陆查看<br/><br/>----陕西兆恒投资有限公司";
+                                        SendEmail.SendMailAsync(emailInfo);
+                                    }
+                                }
+                                break;
+                            case 2: //不通过
 
-                            emailInfo.Body = "您好！<br/><br/>您申请的业务：" + workflow.Number + "。审批<span style='color:red'>未通过</span>。流程已结束 <br/><br/>请点击<a href='" + strUrl + "'>兆恒投资业务管理系统</a> 登陆查看<br/><br/>----陕西兆恒投资有限公司";
-                            SendEmail.SendMailAsync(emailInfo);
-                            break;
-                        case 3: //驳回
-                            //通知申请人
-                            emailInfo = new EmailInfo();
-                            emailInfo.To = workflow.Financing.Owner_A.Email;
-                            emailInfo.Subject = "流程审批通知（驳回）--陕西兆恒投资业务管理系统";
-                            emailInfo.IsHtml = true;
-                            emailInfo.UseSSL = false;
-
-                            emailInfo.Body = "您好！<br/><br/>您申请的业务：" + workflow.Number + "。被<span style='color:blue'>驳回</span>。 <br/><br/>请点击<a href='" + strUrl + "'>兆恒投资业务管理系统</a> 登陆查看<br/><br/>----陕西兆恒投资有限公司";
-                            SendEmail.SendMailAsync(emailInfo);
-                            //通知审批人
-
-                            //自审批
-                            if (workflow.WorkFlow_Node.IsSinceApproval)
-                            {
                                 emailInfo = new EmailInfo();
-                                emailInfo.To = workflow.Financing.Owner_A.Email;
-                                emailInfo.Subject = "流程审批通知--陕西兆恒投资业务管理系统";
+                                emailInfo.To = email;
+                                emailInfo.Subject = "流程审批通知（不通过）--陕西兆恒投资业务管理系统";
                                 emailInfo.IsHtml = true;
                                 emailInfo.UseSSL = false;
 
-                                emailInfo.Body = "您好！<br/><br/>您有一个新的业务：" + workflow.Number + "。等待您的审批<br/><br/>请点击<a href='" + strUrl + "'>兆恒投资业务管理系统</a> 登陆查看<br/><br/>----陕西兆恒投资有限公司";
+                                emailInfo.Body = "您好！<br/><br/>您申请的业务：" + workflow.Number + "。审批<span style='color:red'>未通过</span>。流程已结束 <br/><br/>请点击<a href='" + strUrl + "'>兆恒投资业务管理系统</a> 登陆查看<br/><br/>----陕西兆恒投资有限公司";
                                 SendEmail.SendMailAsync(emailInfo);
-                            }
-                            else
-                            {
-                                foreach (var item in workflow.WorkFlow_Node.WorkFlowApprovalManager)
+                                break;
+                            case 3: //驳回
+                                //通知申请人
+                                emailInfo = new EmailInfo();
+                                emailInfo.To = workflow.Financing.Owner_A.Email;
+                                emailInfo.Subject = "流程审批通知（驳回）--陕西兆恒投资业务管理系统";
+                                emailInfo.IsHtml = true;
+                                emailInfo.UseSSL = false;
+
+                                emailInfo.Body = "您好！<br/><br/>您申请的业务：" + workflow.Number + "。被<span style='color:blue'>驳回</span>。 <br/><br/>请点击<a href='" + strUrl + "'>兆恒投资业务管理系统</a> 登陆查看<br/><br/>----陕西兆恒投资有限公司";
+                                SendEmail.SendMailAsync(emailInfo);
+                                //通知审批人
+
+                                //自审批
+                                if (workflow.WorkFlow_Node.IsSinceApproval)
                                 {
                                     emailInfo = new EmailInfo();
-                                    emailInfo.To = item.GroupAccount.Email;
+                                    emailInfo.To = workflow.Financing.Owner_A.Email;
                                     emailInfo.Subject = "流程审批通知--陕西兆恒投资业务管理系统";
                                     emailInfo.IsHtml = true;
                                     emailInfo.UseSSL = false;
@@ -491,38 +483,38 @@ namespace Business
                                     emailInfo.Body = "您好！<br/><br/>您有一个新的业务：" + workflow.Number + "。等待您的审批<br/><br/>请点击<a href='" + strUrl + "'>兆恒投资业务管理系统</a> 登陆查看<br/><br/>----陕西兆恒投资有限公司";
                                     SendEmail.SendMailAsync(emailInfo);
                                 }
-                            }
-                            break;
-                        case 4: //流程结束 通过
-                            //通知申请人
-                            emailInfo = new EmailInfo();
-                            emailInfo.To = workflow.Financing.Owner_A.Email;
-                            emailInfo.Subject = "流程审批通知（通过 流程完成）--陕西兆恒投资业务管理系统";
-                            emailInfo.IsHtml = true;
-                            emailInfo.UseSSL = false;
+                                else
+                                {
+                                    foreach (var item in workflow.WorkFlow_Node.WorkFlowApprovalManager)
+                                    {
+                                        emailInfo = new EmailInfo();
+                                        emailInfo.To = item.GroupAccount.Email;
+                                        emailInfo.Subject = "流程审批通知--陕西兆恒投资业务管理系统";
+                                        emailInfo.IsHtml = true;
+                                        emailInfo.UseSSL = false;
 
-                            emailInfo.Body = "您好！<br/><br/>您申请的业务：" + workflow.Number + "。已审批<span style='color:Green'>通过</span>。 <br/><br/>请点击<a href='" + strUrl + "'>兆恒投资业务管理系统</a> 登陆查看<br/><br/>----陕西兆恒投资有限公司";
-                            SendEmail.SendMailAsync(emailInfo);
-                            break;
-                        case 5:
-                            //自审批
-                            if (workflow.WorkFlow_Node.IsSinceApproval)
-                            {
+                                        emailInfo.Body = "您好！<br/><br/>您有一个新的业务：" + workflow.Number + "。等待您的审批<br/><br/>请点击<a href='" + strUrl + "'>兆恒投资业务管理系统</a> 登陆查看<br/><br/>----陕西兆恒投资有限公司";
+                                        SendEmail.SendMailAsync(emailInfo);
+                                    }
+                                }
+                                break;
+                            case 4: //流程结束 通过
+                                //通知申请人
                                 emailInfo = new EmailInfo();
                                 emailInfo.To = workflow.Financing.Owner_A.Email;
-                                emailInfo.Subject = "流程审批通知--陕西兆恒投资业务管理系统";
+                                emailInfo.Subject = "流程审批通知（通过 流程完成）--陕西兆恒投资业务管理系统";
                                 emailInfo.IsHtml = true;
                                 emailInfo.UseSSL = false;
 
-                                emailInfo.Body = "您好！<br/><br/>您有一个新的业务：" + workflow.Number + "。等待您的审批<br/><br/>请点击<a href='" + strUrl + "'>兆恒投资业务管理系统</a> 登陆查看<br/><br/>----陕西兆恒投资有限公司";
+                                emailInfo.Body = "您好！<br/><br/>您申请的业务：" + workflow.Number + "。已审批<span style='color:Green'>通过</span>。 <br/><br/>请点击<a href='" + strUrl + "'>兆恒投资业务管理系统</a> 登陆查看<br/><br/>----陕西兆恒投资有限公司";
                                 SendEmail.SendMailAsync(emailInfo);
-                            }
-                            else
-                            {
-                                foreach (var item in workflow.WorkFlow_Node.WorkFlowApprovalManager)
+                                break;
+                            case 5:
+                                //自审批
+                                if (workflow.WorkFlow_Node.IsSinceApproval)
                                 {
                                     emailInfo = new EmailInfo();
-                                    emailInfo.To = item.GroupAccount.Email;
+                                    emailInfo.To = workflow.Financing.Owner_A.Email;
                                     emailInfo.Subject = "流程审批通知--陕西兆恒投资业务管理系统";
                                     emailInfo.IsHtml = true;
                                     emailInfo.UseSSL = false;
@@ -530,16 +522,30 @@ namespace Business
                                     emailInfo.Body = "您好！<br/><br/>您有一个新的业务：" + workflow.Number + "。等待您的审批<br/><br/>请点击<a href='" + strUrl + "'>兆恒投资业务管理系统</a> 登陆查看<br/><br/>----陕西兆恒投资有限公司";
                                     SendEmail.SendMailAsync(emailInfo);
                                 }
-                            }
-                            break;
-                    }
-                });
+                                else
+                                {
+                                    foreach (var item in workflow.WorkFlow_Node.WorkFlowApprovalManager)
+                                    {
+                                        emailInfo = new EmailInfo();
+                                        emailInfo.To = item.GroupAccount.Email;
+                                        emailInfo.Subject = "流程审批通知--陕西兆恒投资业务管理系统";
+                                        emailInfo.IsHtml = true;
+                                        emailInfo.UseSSL = false;
 
-                t.Start();
-            }
-            catch
-            {
+                                        emailInfo.Body = "您好！<br/><br/>您有一个新的业务：" + workflow.Number + "。等待您的审批<br/><br/>请点击<a href='" + strUrl + "'>兆恒投资业务管理系统</a> 登陆查看<br/><br/>----陕西兆恒投资有限公司";
+                                        SendEmail.SendMailAsync(emailInfo);
+                                    }
+                                }
+                                break;
+                        }
+                    });
 
+                    t.Start();
+                }
+                catch
+                {
+
+                }
             }
             return result;
         }

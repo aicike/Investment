@@ -14,6 +14,9 @@
             if (buserid != "" && buserid != undefined) {
                 $("#BuserID").val("@Model.Financing.Owner_B_ID");
             }
+
+            $("#div_sh", parent.document).hide();
+            $("#iframe_GGAB", parent.document).show();
         });
 
         function ckbOk()

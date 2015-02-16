@@ -1,5 +1,6 @@
 ﻿@{
     Layout = null;
+    var crlist = ViewBag.crlist as List<Entity.CompanyReference>;
 }
 @model Entity.Financing
 <style>
@@ -47,7 +48,7 @@
                     if (Model.Owner_B != null)
                     { 
                     @:B：@Model.Owner_B.Name
-                                                    }
+                                                                    }
                 }
             </td>
         </tr>
@@ -70,7 +71,7 @@
                 @if (Model.MaxTimeLimit != 0)
                 {
                     @:@Model.MinTimeLimit + @Model.MaxTimeLimit
-                                                                            }
+                                                                                                }
                 else
                 {
                     @Model.MinTimeLimit
@@ -207,7 +208,6 @@
             <td class="span4">
                 @Model.Company.ZhuYingYeWu
             </td>
-
             <td class="span2 td_title">
                 经营范围
             </td>
@@ -231,54 +231,67 @@
                 @Model.Company.GuQuanJieGou
             </td>
         </tr>
+    </table>
+    <table class="table table-bordered dataTable">
         <tr>
-            <td colspan="4" class="td_title" style="font-weight: bold">
+            <td colspan="7" class="td_title" style="font-weight: bold">
                 财务信息
             </td>
         </tr>
         <tr>
-            <td class="span2 td_title">
-                资产总额（万元）
-            </td>
-            <td class="span4">
-                @Model.Company.ZiChanZongE
-            </td>
-            <td class="span2 td_title">
-                负债总额（万元）
-            </td>
-            <td class="span4">
-                @Model.Company.FuZhaiZongE
-            </td>
-        </tr>
-        <tr>
-            <td class="span2 td_title">
-                收入（万元）
-            </td>
-            <td class="span4">
-                @Model.Company.ZhuYingYeWuShouRu
-            </td>
-            <td class="span2 td_title">
-                成本（万元）
-            </td>
-            <td class="span4">
-                @Model.Company.ChengBen
-            </td>
-        </tr>
-        <tr>
-            <td class="span2 td_title">
-                净利润（万元）
-            </td>
-            <td class="span10" colspan="3">
-                @Model.Company.JingLiRun
-            </td>
-        </tr>
-        <tr>
-            <td class="span2 td_title">
+            <td colspan="7" style="font-weight: bold">
                 金融机构借贷信息
             </td>
-            <td class="span10" colspan="3">
-                @Model.Company.MuQianDaiKuanDanBaoZhiXingQingKuang
+        </tr>
+        <tr>
+            <td class="td_title" >
+                借款金额
+            </td>
+            <td class="td_title" >
+                贷款方
+            </td>
+            <td class="td_title" >
+                借款期限
+            </td>
+            <td class="td_title" >
+                借款方式
+            </td>
+            <td class="td_title" >
+                抵押物信息
+            </td>
+            <td class="td_title" >
+                担保方
+            </td>
+            <td class="td_title" >
+                相关附件
             </td>
         </tr>
+        @foreach (var item in crlist)
+        {
+            <tr id="JGJDtr_@item.ID">
+                <td>
+                    @item.Borrow
+                </td>
+                <td>
+                    @item.Lenders
+                </td>
+                <td>
+                    @item.Deadline
+                </td>
+                <td>
+                    @item.Methods
+                </td>
+                <td>
+                    @item.Collateral
+                </td>
+                <td>
+                    @item.Sponsors
+                </td>
+                <td>
+                    @{Html.RenderAction("Manage", "Attachment", new Investment.Models.AttachmentControl { ID = "JGJDXX", Text = "[附件]", Table = "CompanyReference", TableId = item.ID, EnumAttachmentType = 0, IsEnabled = false });}
+                </td>
+            </tr>
+        
+        }
     </table>
 </div>

@@ -59,30 +59,30 @@
                             操作
                         </th>
                     </tr>
-                    @foreach (var item in Model)
+                    @for (int i = 0; i < Model.Count; i++)
                     {
-                        <tr>
+                         <tr>
                             <td>
-                                @ViewBag.Index+1
+                                @(ViewBag.Index+i+1)
                             </td>
                             <td>
-                                @item.Mechanism.ShortName
+                                @Model[i].Mechanism.ShortName
                             </td>
                             <td>
-                                @if (string.IsNullOrEmpty(item.WebSite))
+                                @if (string.IsNullOrEmpty(Model[i].WebSite))
                                 { 
-                                    <span class="tooltips" data-placement="top" data-original-title="暂无官网">@item.Name</span>
+                                    <span class="tooltips" data-placement="top" data-original-title="暂无官网">@Model[i].Name</span>
                                 }
                                 else
                                 { 
-                                    <a class="tooltips"  href="@item.WebSite"  target="_blank"  data-placement="top" data-original-title="点击进入官网">@item.Name</a>
+                                    <a class="tooltips"  href="@Model[i].WebSite"  target="_blank"  data-placement="top" data-original-title="点击进入官网">@Model[i].Name</a>
                                 }
                             </td>
                             <td>
-                                @item.MaxQuota
+                                @Model[i].MaxQuota
                             </td>
                             <td>
-                                @if (item.IsEnable)
+                                @if (Model[i].IsEnable)
                                 {
                                     @:正常
                                 }
@@ -93,7 +93,7 @@
                                 }
                             </td>
                             <td>
-                                <a href="@Url.Action("GetInfo", "MechanismProducts", new { MPID = item.ID })" target="_blank">
+                                <a href="@Url.Action("GetInfo", "MechanismProducts", new { MPID = Model[i].ID })" target="_blank">
                                     查看详细</a>
                             </td>
                         </tr>
