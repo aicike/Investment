@@ -686,7 +686,7 @@ namespace Investment.Controllers
             {
                 financing.Owner_B_ID = null;
             }
-            if (financing.BusinessType == 0)
+            if (financing.BusinessType == 1)
             {
                 financing.WorkFlowManagerID = 4;
             }
