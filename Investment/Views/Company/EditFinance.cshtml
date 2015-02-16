@@ -43,13 +43,16 @@
         }
         function AddJGJKXX() {
             var url = '@Html.Raw(@Url.Action("JGJDXX", "Company", new { Types = 0, CompanyID = ViewBag.CompanyID }))';
-
+            $("#div_sh").show();
+            $("#iframe_JGJKXX").hide();
             $("#iframe_JGJKXX").attr("src", url);
         }
 
         function EditJGJKXX(referenceid) {
             var url = '@Html.Raw(@Url.Action("JGJDXX", "Company", new { Types = 1, CompanyID = ViewBag.CompanyID }))';
             url = url + "&referenceID=" + referenceid
+            $("#div_sh").show();
+            $("#iframe_JGJKXX").hide();
             $("#iframe_JGJKXX").attr("src", url);
         }
 
@@ -64,7 +67,7 @@
         <div class="tabbable tabbable-custom boxless">
               @using (Ajax.BeginForm("ReadJGJDXX", "Company", new { CID = ViewBag.CompanyID }, new AjaxOptions() { UpdateTargetId = "div_data" }))
             { 
-                <input type="submit" id="reloadJGJDXX" onclick="reloadJGJDXXs()" name="reloadJGJDXX" />
+                <input type="submit" id="reloadJGJDXX" onclick="reloadJGJDXXs()" name="reloadJGJDXX" style=" display:none" />
             }
             @using (Ajax.BeginForm("EditFinances", "Company", new AjaxOptions() { UpdateTargetId = "alert" }, new { @class = "form-horizontal" }))
             {
@@ -154,7 +157,10 @@
     <div class="modal-body" style="min-height: 570px">
         <div class="row-fluid">
             <div class="span12">
-                <iframe style="width: 100%; height: 565px; border: none" id="iframe_JGJKXX"></iframe>
+                <div id="div_sh" style="width: 100%; height: 305px; text-align:center;">
+                    <div style=" margin-top:250px"><img src="@Url.Content("/Image/DD.gif")"  /><span style=" margin-left:10px; font-size:16px">请稍等...</span></div>
+                </div>
+                <iframe style="width: 100%; height: 565px; border: none; display:none" id="iframe_JGJKXX"></iframe>
             </div>
         </div>
     </div>

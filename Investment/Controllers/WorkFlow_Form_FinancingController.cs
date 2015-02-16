@@ -36,7 +36,13 @@ namespace Investment.Controllers
             {
                 FinancingModel fm = new FinancingModel();
                 financing = fm.Get(financingID);
+
+                //查找借贷信息
+                CompanyReferenceModel crmodel = new CompanyReferenceModel();
+                var crlist = crmodel.GetInfo_byCID(financing.CompanyID);
+                ViewBag.crlist = crlist;
             }
+            
             return PartialView(financing);
         }
 

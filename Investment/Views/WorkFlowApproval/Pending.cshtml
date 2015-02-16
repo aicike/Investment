@@ -65,10 +65,10 @@
                         </tr>
                         <tr>
                             <td>
-                                申请日期：2015-01-01
+                                申请日期：
                             </td>
                             <td style="text-align: right">
-                                单号：ZXR20150101001
+                                单号：
                             </td>
                         </tr>
                     </table>
@@ -82,11 +82,6 @@
             <tr>
                 <td>
                      @{Html.RenderAction("MechanismProducts", "WorkFlow_Form_Financing", new { Products = "", WorkFlowID = Model.ID });}
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    @{Html.RenderAction("MechanismProducts", "WorkFlow_Form_Financing", new { Products = "", WorkFlowID= Model.ID});}
                 </td>
             </tr>
         </table>

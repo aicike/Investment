@@ -8,6 +8,9 @@
         var url = "@Url.Action("EditABRole", "WorkFlow")";
         url = url+"?WorkFlowID="+workflowID;
          $("#iframe_GGAB").attr("src", url);
+         $("#div_sh").show();
+         $("#iframe_GGAB").hide();
+
     }
     function ckbABOk()
     {
@@ -117,7 +120,10 @@
                                                                                                                                                                                     }
                                 </td>
                                 <td>
+                                    @if (item.State == 1)
+                                    { 
                                     <a data-toggle="modal" onclick="GetABRole(@item.ID)" href="#div_guanlian_GGAB">更改AB角</a>
+                                    }
                                 </td>
                             </tr>
                         }
@@ -153,7 +159,10 @@
     <div class="modal-body" style="min-height: 300px">
         <div class="row-fluid">
             <div class="span12">
-                <iframe style="width: 100%; height: 295px; border: none" id="iframe_GGAB"></iframe>
+            <div id="div_sh" style="width: 100%; height: 155px; text-align:center;">
+                    <div style=" margin-top:130px"><img src="@Url.Content("/Image/DD.gif")"  /><span style=" margin-left:10px; font-size:16px">请稍等...</span></div>
+                </div>
+                <iframe style="width: 100%; height: 295px; border: none; display:none" id="iframe_GGAB"></iframe>
             </div>
         </div>
     </div>
