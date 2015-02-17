@@ -29,6 +29,10 @@ namespace Investment.Controllers
                     if (wf.State == 2 || wf.State == 3)
                     {
                         financing = Newtonsoft.Json.JsonConvert.DeserializeObject<Financing>(wf.FormJson);
+                        //查找借贷信息
+                        CompanyReferenceModel crmodel = new CompanyReferenceModel();
+                        var crlist = crmodel.GetInfo_byCID(financing.CompanyID);
+                        ViewBag.crlist = crlist;
                     }
                 }
             }

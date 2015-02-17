@@ -98,11 +98,12 @@
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;产品网站地址：
         @if (string.IsNullOrEmpty(Model.WebSite))
         { 
-            @:暂无网站地址
+            @:暂无产品地址
                         }
         else
         { 
-            <a href="@Model.WebSite"  target="_blank" >@Model.WebSite</a>
+            <a href="@Model.WebSite" target="_blank" class="tooltips" data-placement="top" data-original-title="点击查看产品地址">
+                产品地址 </a> 
         }
     </div>
     <div class="conter">
