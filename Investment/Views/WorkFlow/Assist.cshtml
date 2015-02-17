@@ -104,7 +104,7 @@
                             }
                             else
                             {
-                                if (string.IsNullOrEmpty(item.FormJson))
+                                if (!string.IsNullOrEmpty(item.FormJson))
                                 {
                                     var financing = Newtonsoft.Json.JsonConvert.DeserializeObject<Entity.Financing>(item.FormJson);
                                     if (financing != null)

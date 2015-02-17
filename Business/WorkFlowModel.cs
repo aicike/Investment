@@ -231,18 +231,20 @@ namespace Business
                     //流程结束
                     if (Nextworkflow_node == null)
                     {
-                        //更改流程状态
-                        workflow.State = 2;//已完成
-                        //生成意向快照
-                        workflow.FormJson = Get_To_Json_Financing(WorkFlowID);
-                        base.Edit(workflow);
-                        //生成产品快照
-                        Get_To_Json_Product(WorkFlowID);
                         //更改贷款意向状态
                         FinancingModel FModel = new FinancingModel();
                         var financing = FModel.Get(workflow.FinancingID);
                         financing.Status = 2;
                         FModel.Edit(financing);
+                        //更改流程状态
+                        workflow.State = 2;//已完成
+                        //生成意向快照
+                        workflow.FormJson = Get_To_Json_Financing(WorkFlowID);
+                        workflow.JSON_Owner_A_ID = financing.Owner_A_ID;
+                        workflow.JSON_Owner_B_ID = financing.Owner_B_ID;
+                        base.Edit(workflow);
+                        //生成产品快照
+                        Get_To_Json_Product(WorkFlowID);
 
                     }
                     else

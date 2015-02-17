@@ -3,12 +3,12 @@ SET IDENTITY_INSERT [dbo].[Menu] ON
 
 --集团
 INSERT [dbo].[Menu] ([ID], [Area], [Controller], [Action], [Name], [ShowName], [Order], [ParentMenuID],AccountType) VALUES (11, NULL, 'Home', 'Home', N'客户管理', N'客户管理', 1, NULL,0)
-INSERT [dbo].[Menu] ([ID], [Area], [Controller], [Action], [Name], [ShowName], [Order], [ParentMenuID],AccountType) VALUES (1101, NULL, 'Company', 'Index', N'客户管理', N'客户管理', 1, 11,0)
+INSERT [dbo].[Menu] ([ID], [Area], [Controller], [Action], [Name], [ShowName], [Order], [ParentMenuID],AccountType) VALUES (1101, NULL, 'Company', 'Index', N'客户信息', N'客户信息', 1, 11,0)
 INSERT [dbo].[Menu] ([ID], [Area], [Controller], [Action], [Name], [ShowName], [Order], [ParentMenuID],AccountType) VALUES (1102, NULL, 'Financing', 'Index', N'贷款信息列表', N'贷款信息列表', 2, 11,0)
 INSERT [dbo].[Menu] ([ID], [Area], [Controller], [Action], [Name], [ShowName], [Order], [ParentMenuID],AccountType) VALUES (1103, NULL, 'Financing', 'IndexALL', N'贷款信息列表（全）', N'贷款信息列表（全）', 3, 11,0)
 
 INSERT [dbo].[Menu] ([ID], [Area], [Controller], [Action], [Name], [ShowName], [Order], [ParentMenuID],AccountType) VALUES (21, NULL, 'Home', 'Home', N'机构管理', N'机构管理', 2, NULL,0)
-INSERT [dbo].[Menu] ([ID], [Area], [Controller], [Action], [Name], [ShowName], [Order], [ParentMenuID],AccountType) VALUES (2101, NULL, 'Mechanism', 'Index', N'机构管理', N'机构管理', 1, 21,0)
+INSERT [dbo].[Menu] ([ID], [Area], [Controller], [Action], [Name], [ShowName], [Order], [ParentMenuID],AccountType) VALUES (2101, NULL, 'Mechanism', 'Index', N'机构信息', N'机构信息', 1, 21,0)
 INSERT [dbo].[Menu] ([ID], [Area], [Controller], [Action], [Name], [ShowName], [Order], [ParentMenuID],AccountType,IsShow) VALUES (210101, NULL, 'MechanismProducts', 'Index', N'机构产品列表', N'机构产品列表', 1, 2101,0,0)
 INSERT [dbo].[Menu] ([ID], [Area], [Controller], [Action], [Name], [ShowName], [Order], [ParentMenuID],AccountType,IsShow) VALUES (210102, NULL, 'MechanismProducts', 'Add', N'机构产品添加', N'机构产品添加', 2, 2101,0,0)
 INSERT [dbo].[Menu] ([ID], [Area], [Controller], [Action], [Name], [ShowName], [Order], [ParentMenuID],AccountType,IsShow) VALUES (210103, NULL, 'MechanismProducts', 'Edit', N'机构产品修改', N'机构产品修改', 3, 2101,0,0)
