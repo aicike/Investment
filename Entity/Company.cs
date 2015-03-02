@@ -29,6 +29,25 @@ namespace Entity
         public virtual GroupAccount Owner { get; set; }
 
         /// <summary>
+        /// 所属行业
+        /// </summary>
+        [Display(Name = "所属行业")]
+        [Required(ErrorMessage = "请选择所属行业")]
+        [RegularExpression(@"\d+", ErrorMessage = "请选择所属行业")]
+        public int IndustryID { get; set; }
+
+        public virtual Industry Industry { get; set; }
+
+        /// <summary>
+        /// 所属行业级别
+        /// </summary>
+        [Display(Name = "公司规模")]
+        [RegularExpression(@"\d+", ErrorMessage = "公司规模")]
+        public int IndustryLevelID { get; set; }
+
+        public virtual IndustryLevel IndustryLevel { get; set; }
+
+        /// <summary>
         /// 信息是否齐全
         /// </summary>
         public bool IsComplete { get; set; }

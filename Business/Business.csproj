@@ -77,6 +77,8 @@
     <Compile Include="EFModel.cs" />
     <Compile Include="FinancingMatchingModel.cs" />
     <Compile Include="FinancingModel.cs" />
+    <Compile Include="IndustryLevelModel.cs" />
+    <Compile Include="IndustryModel.cs" />
     <Compile Include="MechanismProductsModel.cs" />
     <Compile Include="PositionModel.cs" />
     <Compile Include="Position_AccountModel.cs" />

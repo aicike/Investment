@@ -19,19 +19,36 @@
     </style>
     <script>
         var hasGuanLian = '@ViewBag.HasGuanLian';
-//        $(function () {
-//            var url_gl = '@Url.Action("Add_GuanLian", "Company")';
-
-//            init_gl();
-//        });
-//        function init_gl() {
-//            if (hasGuanLian == 'False') {
-//                $("#_Title").hide();
-//                $("#div_noMenu_top").hide();
-//                $("#div_noMenu_head").css("margin-top", "0px");
-//                $("#div_page_root").css("margin-top", "10px");
-//            }
-//        }
+        $(function () {
+            var url_ci = '@Url.Action("ChangeIndustry", "Company")';
+            $("#ZhuCheZiJin").keyup(function () {
+                $("#IndustryID").change();
+            });
+            $("#IndustryID").change(function () {
+                var industryID = $("#IndustryID").val();
+                if (industryID == "select") {
+                    return;
+                }
+                var ZhuCheZiJin = $("#ZhuCheZiJin").val();
+                $.get(url_ci, { industryID: industryID, ZhuCheZiJin: ZhuCheZiJin }, function (result) {
+                    var il_value = "小微企业";
+                    switch (result.Level) {
+                        case 0:
+                        case 1:
+                            il_value = "小微企业";
+                            break;
+                        case 2:
+                            il_value = "中小企业";
+                            break;
+                        case 3:
+                            il_value = "大型企业";
+                            break;
+                    }
+                    $("#txtIndustryLevel").val(il_value);
+                    $("#IndustryLevelID").val(result.ID);
+                }, "json");
+            });
+        });
     </script>
 }
 @model Entity.Company
@@ -125,6 +142,29 @@
                                     <div class="controls">
                                         @Html.TextBoxFor(a => a.ShiShouZiBen, new { @class = "m-wrap span8" })
                                         <span class="help-inline">@Html.ValidationMessageFor(a => a.ShiShouZiBen)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row-fluid">
+                            <div class="span6">
+                                <div class="control-group">
+                                    <label class="control-label">
+                                        所属行业</label>
+                                    <div class="controls">
+                                        @Html.DropDownListFor(a => a.IndustryID, ViewData["Industry"] as List<SelectListItem>, new { @class = "span8 m-wrap" })
+                                        <span class="help-inline">@Html.ValidationMessageFor(a => a.IndustryID)</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="span6">
+                                <div class="control-group">
+                                    <label class="control-label">
+                                        公司规模</label>
+                                    <div class="controls">
+                                        <input type="text" id="txtIndustryLevel" class="m-wrap span8" readonly="readonly" />
+                                        @Html.HiddenFor(a => a.IndustryLevelID, new { @class = "m-wrap span8", @readonly = "readonly" })
+                                        <span class="help-inline">@Html.ValidationMessageFor(a => a.IndustryLevelID)</span>
                                     </div>
                                 </div>
                             </div>
@@ -550,7 +590,6 @@
                                 <div style="clear: both">
                                 </div>
                             </div>
-                            
                             <div class="control-group">
                                 <div style="margin-left: 59px; width: 550px; float: left;">
                                     4. 国有土地使用证</div>
@@ -569,7 +608,6 @@
                                 <div style="clear: both">
                                 </div>
                             </div>
-                            
                             <div class="control-group">
                                 <div style="margin-left: 59px; width: 550px; float: left;">
                                     4. 建设工程规划许可证</div>
@@ -579,7 +617,6 @@
                                 <div style="clear: both">
                                 </div>
                             </div>
-                            
                             <div class="control-group">
                                 <div style="margin-left: 59px; width: 550px; float: left;">
                                     4. 建筑工程施工许可证</div>
@@ -589,8 +626,6 @@
                                 <div style="clear: both">
                                 </div>
                             </div>
-                            
-                            
                             <div class="control-group">
                                 <div style="margin-left: 59px; width: 550px; float: left;">
                                     4. 商品房预售许可证</div>

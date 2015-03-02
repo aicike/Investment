@@ -19,7 +19,7 @@
         }
     </style>
     <script type="text/javascript">
-      
+
 
 
 
@@ -36,7 +36,38 @@
                 $("#iframe_guanlian").attr("src", url_gl);
                 init_gl();
             });
+
+            var url_ci = '@Url.Action("ChangeIndustry", "Company")';
+            $("#ZhuCheZiJin").keyup(function () {
+                $("#IndustryID").change();
+            });
+            $("#IndustryID").change(function () {
+                var industryID = $("#IndustryID").val();
+                if (industryID == "select") {
+                    return;
+                }
+                var ZhuCheZiJin = $("#ZhuCheZiJin").val();
+                $.get(url_ci, { industryID: industryID, ZhuCheZiJin: ZhuCheZiJin }, function (result) {
+                    var il_value = "小微企业";
+                    switch (result.Level) {
+                        case 0:
+                        case 1:
+                            il_value = "小微企业";
+                            break;
+                        case 2:
+                            il_value = "中小企业";
+                            break;
+                        case 3:
+                            il_value = "大型企业";
+                            break;
+                    }
+                    $("#txtIndustryLevel").val(il_value);
+                    $("#IndustryLevelID").val(result.ID);
+                }, "json");
+            });
+
             init_gl();
+            $("#IndustryID").change();
         });
         function init_gl() {
             if (hasGuanLian == 'False') {
@@ -57,22 +88,22 @@
         <div class="tabbable tabbable-custom boxless">
             @using (Ajax.BeginForm("Edit", "Company", new AjaxOptions() { UpdateTargetId = "alert" }, new { @class = "form-horizontal" }))
             {
-                <div style=" margin-bottom:10px; margin-top:10px; height:30px">
-                    <a href="@Url.Action("Edit", "Company", new { id = ViewBag.CompanyID })"  style="  font-size:13px; color:#fff; background-color:#4b77be; padding:10px 10px;text-decoration:none; margin-right:8px">公司基本资料</a>
-                    <a href="@Url.Action("EditWith", "Company", new { id = ViewBag.CompanyID })" style="  font-size:13px;font-weight:bold; color:Black; background-color:#e4e4e4; padding:10px 10px;text-decoration:none; margin-right:8px">公司详细资料</a>
-                    <a href="@Url.Action("EditFinance", "Company", new { id = ViewBag.CompanyID })" style="  font-size:13px;font-weight:bold; color:Black; background-color:#e4e4e4; padding:10px 10px;text-decoration:none; margin-right:8px">公司财务/债务情况</a>
-                    <a href="@Url.Action("EditRealEstate", "Company", new { id = ViewBag.CompanyID })" style="  font-size:13px;font-weight:bold; color:Black; background-color:#e4e4e4; padding:10px 10px;text-decoration:none; margin-right:8px">项目资料（房地产）</a>
+                <div style="margin-bottom: 10px; margin-top: 10px; height: 30px">
+                    <a href="@Url.Action("Edit", "Company", new { id = ViewBag.CompanyID })"  style="  font-size:13px; color:#fff; background-color:#4b77be; padding:10px 10px;text-decoration:none; margin-right:8px">
+                        公司基本资料</a> <a href="@Url.Action("EditWith", "Company", new { id = ViewBag.CompanyID })" style="  font-size:13px;font-weight:bold; color:Black; background-color:#e4e4e4; padding:10px 10px;text-decoration:none; margin-right:8px">
+                            公司详细资料</a> <a href="@Url.Action("EditFinance", "Company", new { id = ViewBag.CompanyID })" style="  font-size:13px;font-weight:bold; color:Black; background-color:#e4e4e4; padding:10px 10px;text-decoration:none; margin-right:8px">
+                                公司财务/债务情况</a> <a href="@Url.Action("EditRealEstate", "Company", new { id = ViewBag.CompanyID })" style="  font-size:13px;font-weight:bold; color:Black; background-color:#e4e4e4; padding:10px 10px;text-decoration:none; margin-right:8px">
+                                    项目资料（房地产）</a>
                 </div>
                 <div class="myoption">
                     <div>
                         <button type="submit" class="btn blue submitbtn">
                             保存</button>
-                       
-                          <a href="@Url.Action("Index", "Company")" class="btn" style="">返回</a>
-                          @Html.HiddenFor(a => a.ID)@Html.HiddenFor(a => a.OwnerID)@Html.HiddenFor(a => a.Status)
-                          @Html.HiddenFor(a => a.Phone)
-                          @Html.HiddenFor(a => a.WebSite)
-                          @Html.HiddenFor(a => a.Fax)
+                        <a href="@Url.Action("Index", "Company")" class="btn" style="">返回</a>
+                        @Html.HiddenFor(a => a.ID)@Html.HiddenFor(a => a.OwnerID)@Html.HiddenFor(a => a.Status)
+                        @Html.HiddenFor(a => a.Phone)
+                        @Html.HiddenFor(a => a.WebSite)
+                        @Html.HiddenFor(a => a.Fax)
                     </div>
                 </div>
                 <div class="portlet box blue">
@@ -145,6 +176,29 @@
                                     <div class="controls">
                                         @Html.TextBoxFor(a => a.ShiShouZiBen, new { @class = "m-wrap span8" })
                                         <span class="help-inline">@Html.ValidationMessageFor(a => a.ShiShouZiBen)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row-fluid">
+                            <div class="span6">
+                                <div class="control-group">
+                                    <label class="control-label">
+                                        所属行业</label>
+                                    <div class="controls">
+                                        @Html.DropDownListFor(a => a.IndustryID, ViewData["Industry"] as List<SelectListItem>, new { @class = "span8 m-wrap" })
+                                        <span class="help-inline">@Html.ValidationMessageFor(a => a.IndustryID)</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="span6">
+                                <div class="control-group">
+                                    <label class="control-label">
+                                        公司规模</label>
+                                    <div class="controls">
+                                        <input type="text" id="txtIndustryLevel" class="m-wrap span8" readonly="readonly" />
+                                        @Html.HiddenFor(a => a.IndustryLevelID, new { @class = "m-wrap span8", @readonly = "readonly" })
+                                        <span class="help-inline">@Html.ValidationMessageFor(a => a.IndustryLevelID)</span>
                                     </div>
                                 </div>
                             </div>
@@ -344,7 +398,7 @@
                                                 经营范围
                                             </td>
                                             <td style="width: 170px;">
-                                                操作（<a data-toggle="modal" href="#div_guanlian_company" id="link_open_guanlian">新增</a>&nbsp;|&nbsp;<a href="@Url.Action("Index_gl", "Company", new {id=Model.ID })" target="_blank">管理</a>）
+                                                操作（<a data-toggle="modal" href="#div_guanlian_company" id="link_open_guanlian">新增</a>&nbsp;|&nbsp;<a href="@Url.Action("Index_gl", "Company", new { id = Model.ID })" target="_blank">管理</a>）
                                             </td>
                                         </tr>
                                         @if (Model.CompanyRelations2 != null)
@@ -379,8 +433,7 @@
                     <div>
                         <button type="submit" class="btn blue submitbtn">
                             保存</button>
-                        
-                          <a href="@Url.Action("Index", "Company")" class="btn" style="">返回</a>
+                        <a href="@Url.Action("Index", "Company")" class="btn" style="">返回</a>
                     </div>
                 </div>
             }

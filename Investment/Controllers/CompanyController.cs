@@ -54,6 +54,15 @@ namespace Investment.Controllers
             Company company = new Company();
             ViewBag.Layout = "~/Views/Shared/_Layout.cshtml";
             ViewBag.HasGuanLian = true;
+
+            IndustryModel industryModel = new IndustryModel();
+            var industrys = industryModel.GetList();
+            List<SelectListItem> industrysList = new List<SelectListItem>();
+            var industrys_list = new SelectList(industrys, "ID", "Name");
+            industrysList.Add(new SelectListItem { Text = "请选择行业", Value = "select", Selected = true });
+            industrysList.AddRange(industrys_list);
+            ViewData["Industry"] = industrysList;
+
             return View(company);
         }
 
@@ -78,6 +87,17 @@ namespace Investment.Controllers
         }
 
         /// <summary>
+        /// 更改行业后，返回公司规模
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult ChangeIndustry(int industryID, double ZhuCheZiJin)
+        {
+            IndustryLevelModel ilm = new IndustryLevelModel();
+            var il= ilm.GetIndustry(industryID, ZhuCheZiJin);
+            return Json(il,JsonRequestBehavior.AllowGet);
+        }
+
+        /// <summary>
         /// 新增关联公司
         /// </summary>
         /// <param name="companyID">主关联公司ID</param>
@@ -88,6 +108,15 @@ namespace Investment.Controllers
             ViewBag.Layout = "~/Views/Shared/_Layout_noMenu.cshtml";
             ViewBag.HasGuanLian = false;
             ViewBag.CompanyID = companyID;
+
+            IndustryModel industryModel = new IndustryModel();
+            var industrys = industryModel.GetList();
+            List<SelectListItem> industrysList = new List<SelectListItem>();
+            var industrys_list = new SelectList(industrys, "ID", "Name");
+            industrysList.Add(new SelectListItem { Text = "请选择行业", Value = "select", Selected = true });
+            industrysList.AddRange(industrys_list);
+            ViewData["Industry"] = industrysList;
+
             return View("Add", company);
         }
 
@@ -133,6 +162,15 @@ namespace Investment.Controllers
             CompanyReferenceModel crmodel = new CompanyReferenceModel();
             var crlist = crmodel.GetInfo_byCID(company.ID);
             ViewBag.CRList = crlist;
+
+            IndustryModel industryModel = new IndustryModel();
+            var industrys = industryModel.GetList();
+            List<SelectListItem> industrysList = new List<SelectListItem>();
+            var industrys_list = new SelectList(industrys, "ID", "Name");
+            industrysList.Add(new SelectListItem { Text = "请选择行业", Value = "select", Selected = true });
+            industrysList.AddRange(industrys_list);
+            ViewData["Industry"] = industrysList;
+
             return View(company);
         }
 
@@ -166,7 +204,7 @@ namespace Investment.Controllers
         {
             CompanyModel companyModel = new CompanyModel();
             var company = companyModel.Get(id);
-            if (company.Phone=="0")
+            if (company.Phone == "0")
             {
                 company.Phone = "";
             }
@@ -237,9 +275,9 @@ namespace Investment.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public ActionResult EditRealEstate (int id)
+        public ActionResult EditRealEstate(int id)
         {
-           
+
             ViewBag.CompanyID = id;
             return View();
         }

@@ -76,9 +76,106 @@ INSERT INTO dbo.MenuOption(MenuID ,Name ,Controller ,[Action] ,[Order]) VALUES  
 INSERT INTO dbo.MenuOption(MenuID ,Name ,Controller ,[Action] ,[Order]) VALUES  ( 6103 ,N'新增' , N'GroupAccount' , N'Add' , 1)
 INSERT INTO dbo.MenuOption(MenuID ,Name ,Controller ,[Action] ,[Order]) VALUES  ( 6103 ,N'修改' , N'GroupAccount' , N'Edit' , 2)
 
+--行业分类
+SET IDENTITY_INSERT [dbo].[Industry] ON
+INSERT INTO dbo.Industry (ID, Name) VALUES ( 1, N'农、林、牧、渔业')
+INSERT INTO dbo.Industry (ID, Name) VALUES ( 2, N'工业')
+INSERT INTO dbo.Industry (ID, Name) VALUES ( 3, N'建筑业')
+INSERT INTO dbo.Industry (ID, Name) VALUES ( 4, N'批发业')
+INSERT INTO dbo.Industry (ID, Name) VALUES ( 5, N'零售业')
+INSERT INTO dbo.Industry (ID, Name) VALUES ( 6, N'交通运输业')
+INSERT INTO dbo.Industry (ID, Name) VALUES ( 7, N'仓储业')
+INSERT INTO dbo.Industry (ID, Name) VALUES ( 8, N'邮政业')
+INSERT INTO dbo.Industry (ID, Name) VALUES ( 9, N'住宿业')
+INSERT INTO dbo.Industry (ID, Name) VALUES ( 10, N'餐饮业')
+INSERT INTO dbo.Industry (ID, Name) VALUES ( 11, N'信息传输业')
+INSERT INTO dbo.Industry (ID, Name) VALUES ( 12, N'软件和信息技术服务业')
+INSERT INTO dbo.Industry (ID, Name) VALUES ( 13, N'房地产开发经营')
+INSERT INTO dbo.Industry (ID, Name) VALUES ( 14, N'物业管理')
+INSERT INTO dbo.Industry (ID, Name) VALUES ( 15, N'租赁和商务服务业')
+INSERT INTO dbo.Industry (ID, Name) VALUES ( 16, N'其他未列明行业')
+SET IDENTITY_INSERT [dbo].[Industry] OFF
 
+--行业级别
+INSERT INTO dbo.IndustryLevel( Level ,YingYeShouRu , ZongZiChan , ChongYeRenYuan ,IndustryID)VALUES  ( 0 ,0,NULL ,NULL,1)
+INSERT INTO dbo.IndustryLevel( Level ,YingYeShouRu , ZongZiChan , ChongYeRenYuan ,IndustryID)VALUES  ( 1 ,50,NULL ,NULL,1)
+INSERT INTO dbo.IndustryLevel( Level ,YingYeShouRu , ZongZiChan , ChongYeRenYuan ,IndustryID)VALUES  ( 2 ,500,NULL ,NULL,1)
+INSERT INTO dbo.IndustryLevel( Level ,YingYeShouRu , ZongZiChan , ChongYeRenYuan ,IndustryID)VALUES  ( 3 ,20000,NULL ,NULL,1)
 
+INSERT INTO dbo.IndustryLevel( Level ,YingYeShouRu , ZongZiChan , ChongYeRenYuan ,IndustryID)VALUES  ( 0 ,0,NULL ,0,2)
+INSERT INTO dbo.IndustryLevel( Level ,YingYeShouRu , ZongZiChan , ChongYeRenYuan ,IndustryID)VALUES  ( 1 ,300,NULL ,20,2)
+INSERT INTO dbo.IndustryLevel( Level ,YingYeShouRu , ZongZiChan , ChongYeRenYuan ,IndustryID)VALUES  ( 2 ,2000,NULL ,300,2)
+INSERT INTO dbo.IndustryLevel( Level ,YingYeShouRu , ZongZiChan , ChongYeRenYuan ,IndustryID)VALUES  ( 3 ,40000,NULL ,1000,2)
 
+INSERT INTO dbo.IndustryLevel( Level ,YingYeShouRu , ZongZiChan , ChongYeRenYuan ,IndustryID)VALUES  ( 0 ,0,0 ,NULL,3)
+INSERT INTO dbo.IndustryLevel( Level ,YingYeShouRu , ZongZiChan , ChongYeRenYuan ,IndustryID)VALUES  ( 1 ,300,300 ,NULL,3)
+INSERT INTO dbo.IndustryLevel( Level ,YingYeShouRu , ZongZiChan , ChongYeRenYuan ,IndustryID)VALUES  ( 2 ,6000,5000 ,NULL,3)
+INSERT INTO dbo.IndustryLevel( Level ,YingYeShouRu , ZongZiChan , ChongYeRenYuan ,IndustryID)VALUES  ( 3 ,80000,80000 ,NULL,3)
+
+INSERT INTO dbo.IndustryLevel( Level ,YingYeShouRu , ZongZiChan , ChongYeRenYuan ,IndustryID)VALUES  ( 0 ,0,NULL ,0,4)
+INSERT INTO dbo.IndustryLevel( Level ,YingYeShouRu , ZongZiChan , ChongYeRenYuan ,IndustryID)VALUES  ( 1 ,1000,NULL ,5,4)
+INSERT INTO dbo.IndustryLevel( Level ,YingYeShouRu , ZongZiChan , ChongYeRenYuan ,IndustryID)VALUES  ( 2 ,5000,NULL ,20,4)
+INSERT INTO dbo.IndustryLevel( Level ,YingYeShouRu , ZongZiChan , ChongYeRenYuan ,IndustryID)VALUES  ( 3 ,40000,NULL ,200,4)
+
+INSERT INTO dbo.IndustryLevel( Level ,YingYeShouRu , ZongZiChan , ChongYeRenYuan ,IndustryID)VALUES  ( 0 ,0,NULL ,0,5)
+INSERT INTO dbo.IndustryLevel( Level ,YingYeShouRu , ZongZiChan , ChongYeRenYuan ,IndustryID)VALUES  ( 1 ,100,NULL ,10,5)
+INSERT INTO dbo.IndustryLevel( Level ,YingYeShouRu , ZongZiChan , ChongYeRenYuan ,IndustryID)VALUES  ( 2 ,500,NULL ,50,5)
+INSERT INTO dbo.IndustryLevel( Level ,YingYeShouRu , ZongZiChan , ChongYeRenYuan ,IndustryID)VALUES  ( 3 ,20000,NULL ,300,5)
+
+INSERT INTO dbo.IndustryLevel( Level ,YingYeShouRu , ZongZiChan , ChongYeRenYuan ,IndustryID)VALUES  ( 0 ,0,NULL ,0,6)
+INSERT INTO dbo.IndustryLevel( Level ,YingYeShouRu , ZongZiChan , ChongYeRenYuan ,IndustryID)VALUES  ( 1 ,200,NULL ,20,6)
+INSERT INTO dbo.IndustryLevel( Level ,YingYeShouRu , ZongZiChan , ChongYeRenYuan ,IndustryID)VALUES  ( 2 ,3000,NULL ,300,6)
+INSERT INTO dbo.IndustryLevel( Level ,YingYeShouRu , ZongZiChan , ChongYeRenYuan ,IndustryID)VALUES  ( 3 ,30000,NULL ,1000,6)
+
+INSERT INTO dbo.IndustryLevel( Level ,YingYeShouRu , ZongZiChan , ChongYeRenYuan ,IndustryID)VALUES  ( 0 ,0,NULL ,0,7)
+INSERT INTO dbo.IndustryLevel( Level ,YingYeShouRu , ZongZiChan , ChongYeRenYuan ,IndustryID)VALUES  ( 1 ,100,NULL ,20,7)
+INSERT INTO dbo.IndustryLevel( Level ,YingYeShouRu , ZongZiChan , ChongYeRenYuan ,IndustryID)VALUES  ( 2 ,1000,NULL ,100,7)
+INSERT INTO dbo.IndustryLevel( Level ,YingYeShouRu , ZongZiChan , ChongYeRenYuan ,IndustryID)VALUES  ( 3 ,3000,NULL ,200,7)
+
+INSERT INTO dbo.IndustryLevel( Level ,YingYeShouRu , ZongZiChan , ChongYeRenYuan ,IndustryID)VALUES  ( 0 ,0,NULL ,0,8)
+INSERT INTO dbo.IndustryLevel( Level ,YingYeShouRu , ZongZiChan , ChongYeRenYuan ,IndustryID)VALUES  ( 1 ,300,NULL ,20,8)
+INSERT INTO dbo.IndustryLevel( Level ,YingYeShouRu , ZongZiChan , ChongYeRenYuan ,IndustryID)VALUES  ( 2 ,2000,NULL ,300,8)
+INSERT INTO dbo.IndustryLevel( Level ,YingYeShouRu , ZongZiChan , ChongYeRenYuan ,IndustryID)VALUES  ( 3 ,30000,NULL ,1000,8)
+
+INSERT INTO dbo.IndustryLevel( Level ,YingYeShouRu , ZongZiChan , ChongYeRenYuan ,IndustryID)VALUES  ( 0 ,0,NULL ,0,9)
+INSERT INTO dbo.IndustryLevel( Level ,YingYeShouRu , ZongZiChan , ChongYeRenYuan ,IndustryID)VALUES  ( 1 ,100,NULL ,10,9)
+INSERT INTO dbo.IndustryLevel( Level ,YingYeShouRu , ZongZiChan , ChongYeRenYuan ,IndustryID)VALUES  ( 2 ,2000,NULL ,100,9)
+INSERT INTO dbo.IndustryLevel( Level ,YingYeShouRu , ZongZiChan , ChongYeRenYuan ,IndustryID)VALUES  ( 3 ,10000,NULL ,300,9)
+
+INSERT INTO dbo.IndustryLevel( Level ,YingYeShouRu , ZongZiChan , ChongYeRenYuan ,IndustryID)VALUES  ( 0 ,0,NULL ,0,10)
+INSERT INTO dbo.IndustryLevel( Level ,YingYeShouRu , ZongZiChan , ChongYeRenYuan ,IndustryID)VALUES  ( 1 ,100,NULL ,10,10)
+INSERT INTO dbo.IndustryLevel( Level ,YingYeShouRu , ZongZiChan , ChongYeRenYuan ,IndustryID)VALUES  ( 2 ,2000,NULL ,100,10)
+INSERT INTO dbo.IndustryLevel( Level ,YingYeShouRu , ZongZiChan , ChongYeRenYuan ,IndustryID)VALUES  ( 3 ,10000,NULL ,300,10)
+
+INSERT INTO dbo.IndustryLevel( Level ,YingYeShouRu , ZongZiChan , ChongYeRenYuan ,IndustryID)VALUES  ( 0 ,0,NULL ,0,11)
+INSERT INTO dbo.IndustryLevel( Level ,YingYeShouRu , ZongZiChan , ChongYeRenYuan ,IndustryID)VALUES  ( 1 ,100,NULL ,10,11)
+INSERT INTO dbo.IndustryLevel( Level ,YingYeShouRu , ZongZiChan , ChongYeRenYuan ,IndustryID)VALUES  ( 2 ,1000,NULL ,100,11)
+INSERT INTO dbo.IndustryLevel( Level ,YingYeShouRu , ZongZiChan , ChongYeRenYuan ,IndustryID)VALUES  ( 3 ,100000,NULL ,2000,11)
+
+INSERT INTO dbo.IndustryLevel( Level ,YingYeShouRu , ZongZiChan , ChongYeRenYuan ,IndustryID)VALUES  ( 0 ,0,NULL ,0,12)
+INSERT INTO dbo.IndustryLevel( Level ,YingYeShouRu , ZongZiChan , ChongYeRenYuan ,IndustryID)VALUES  ( 1 ,50,NULL ,10,12)
+INSERT INTO dbo.IndustryLevel( Level ,YingYeShouRu , ZongZiChan , ChongYeRenYuan ,IndustryID)VALUES  ( 2 ,1000,NULL ,100,12)
+INSERT INTO dbo.IndustryLevel( Level ,YingYeShouRu , ZongZiChan , ChongYeRenYuan ,IndustryID)VALUES  ( 3 ,10000,NULL ,300,12)
+
+INSERT INTO dbo.IndustryLevel( Level ,YingYeShouRu , ZongZiChan , ChongYeRenYuan ,IndustryID)VALUES  ( 0 ,0,0 ,NULL,13)
+INSERT INTO dbo.IndustryLevel( Level ,YingYeShouRu , ZongZiChan , ChongYeRenYuan ,IndustryID)VALUES  ( 1 ,100,2000 ,NULL,13)
+INSERT INTO dbo.IndustryLevel( Level ,YingYeShouRu , ZongZiChan , ChongYeRenYuan ,IndustryID)VALUES  ( 2 ,1000,5000 ,NULL,13)
+INSERT INTO dbo.IndustryLevel( Level ,YingYeShouRu , ZongZiChan , ChongYeRenYuan ,IndustryID)VALUES  ( 3 ,20000,10000 ,NULL,13)
+
+INSERT INTO dbo.IndustryLevel( Level ,YingYeShouRu , ZongZiChan , ChongYeRenYuan ,IndustryID)VALUES  ( 0 ,0,NULL ,0,14)
+INSERT INTO dbo.IndustryLevel( Level ,YingYeShouRu , ZongZiChan , ChongYeRenYuan ,IndustryID)VALUES  ( 1 ,500,NULL ,100,14)
+INSERT INTO dbo.IndustryLevel( Level ,YingYeShouRu , ZongZiChan , ChongYeRenYuan ,IndustryID)VALUES  ( 2 ,1000,NULL ,300,14)
+INSERT INTO dbo.IndustryLevel( Level ,YingYeShouRu , ZongZiChan , ChongYeRenYuan ,IndustryID)VALUES  ( 3 ,5000,NULL ,1000,14)
+
+INSERT INTO dbo.IndustryLevel( Level ,YingYeShouRu , ZongZiChan , ChongYeRenYuan ,IndustryID)VALUES  ( 0 ,0,NULL ,0,15)
+INSERT INTO dbo.IndustryLevel( Level ,YingYeShouRu , ZongZiChan , ChongYeRenYuan ,IndustryID)VALUES  ( 1 ,100,NULL ,10,15)
+INSERT INTO dbo.IndustryLevel( Level ,YingYeShouRu , ZongZiChan , ChongYeRenYuan ,IndustryID)VALUES  ( 2 ,8000,NULL ,100,15)
+INSERT INTO dbo.IndustryLevel( Level ,YingYeShouRu , ZongZiChan , ChongYeRenYuan ,IndustryID)VALUES  ( 3 ,12000,NULL ,300,15)
+
+INSERT INTO dbo.IndustryLevel( Level ,YingYeShouRu , ZongZiChan , ChongYeRenYuan ,IndustryID)VALUES  ( 0 ,NULL,NULL ,0,16)
+INSERT INTO dbo.IndustryLevel( Level ,YingYeShouRu , ZongZiChan , ChongYeRenYuan ,IndustryID)VALUES  ( 1 ,NULL,NULL ,10,16)
+INSERT INTO dbo.IndustryLevel( Level ,YingYeShouRu , ZongZiChan , ChongYeRenYuan ,IndustryID)VALUES  ( 2 ,NULL,NULL ,100,16)
+INSERT INTO dbo.IndustryLevel( Level ,YingYeShouRu , ZongZiChan , ChongYeRenYuan ,IndustryID)VALUES  ( 3 ,NULL,NULL ,300,16)
 
 /****** Object:  Table [dbo].[Role]    Script Date: 12/05/2014 13:04:55 ******/
 

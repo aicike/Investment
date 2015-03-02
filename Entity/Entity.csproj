@@ -52,6 +52,8 @@
     <Compile Include="Enum\EnumAttachmentFormat.cs" />
     <Compile Include="Financing.cs" />
     <Compile Include="FinancingMatching.cs" />
+    <Compile Include="Industry.cs" />
+    <Compile Include="IndustryLevel.cs" />
     <Compile Include="MechanismProducts.cs" />
     <Compile Include="Enum\EnumAttachmentType.cs" />
     <Compile Include="Mechanism.cs" />
