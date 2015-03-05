@@ -56,9 +56,9 @@ INSERT INTO dbo.MenuOption(MenuID ,Name ,Controller ,[Action] ,[Order]) VALUES  
 --机构、产品管理
 INSERT INTO dbo.MenuOption(MenuID ,Name ,Controller ,[Action] ,[Order]) VALUES  ( 2101 ,N'添加' , N'Mechanism' , N'Add' , 1)
 INSERT INTO dbo.MenuOption(MenuID ,Name ,Controller ,[Action] ,[Order]) VALUES  ( 2101 ,N'修改' , N'Mechanism' , N'Edit' , 2)
-INSERT INTO dbo.MenuOption(MenuID ,Name ,Controller ,[Action] ,[Order]) VALUES  ( 2101 ,N'机构产品列表' , N'MechanismProducts' , N'Index' , 3)
-INSERT INTO dbo.MenuOption(MenuID ,Name ,Controller ,[Action] ,[Order]) VALUES  ( 2101 ,N'新增机构产品' , N'MechanismProducts' , N'Add' , 4)
-INSERT INTO dbo.MenuOption(MenuID ,Name ,Controller ,[Action] ,[Order]) VALUES  ( 2101 ,N'修改机构产品' , N'MechanismProducts' , N'Edit' , 5)
+INSERT INTO dbo.MenuOption(MenuID ,Name ,Controller ,[Action] ,[Order]) VALUES  ( 2102 ,N'机构产品列表' , N'MechanismProducts' , N'Index' , 3)
+INSERT INTO dbo.MenuOption(MenuID ,Name ,Controller ,[Action] ,[Order]) VALUES  ( 2102 ,N'新增机构产品' , N'MechanismProducts' , N'Add' , 4)
+INSERT INTO dbo.MenuOption(MenuID ,Name ,Controller ,[Action] ,[Order]) VALUES  ( 2102 ,N'修改机构产品' , N'MechanismProducts' , N'Edit' , 5)
 --项目管理
 
 --角色管理
