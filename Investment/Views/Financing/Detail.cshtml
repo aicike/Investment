@@ -72,6 +72,22 @@
                     return false;
                 }
             });
+
+            var ywlx='@Model.Company.IndustryLevel.Level';
+            var WorkFlowManagerID=4;
+            switch(ywlx){
+                case "0":
+                case "1":
+                    WorkFlowManagerID=3;
+                    break;
+                case "2":
+                    WorkFlowManagerID=2;
+                    break;
+                case "3":
+                    WorkFlowManagerID=1;
+                    break;
+            }
+            $("#WorkFlowManagerID option[value='"+WorkFlowManagerID+"']").attr("selected","selected");
         });
     </script>
 }
@@ -138,7 +154,7 @@
                                                     break;
                                                     case 2:
                                                     @:融资顾问
-                                                                                                                                                                                                                                                                                                                                                    break;
+                                                                                                                                                                                                                                                                                                                                                                                                    break;
                                                 }
                                             </span>
                                         }
@@ -152,7 +168,7 @@
                                     <div class="controls">
                                         @if (ViewBag.hasPermissions)
                                         { 
-                                            @Html.DropDownListFor(a => a.WorkFlowManagerID, ViewData["wfm"] as List<SelectListItem>, new { @class = "span6 m-wrap" })
+                                            @Html.DropDownListFor(a => a.WorkFlowManagerID, ViewData["wfm"] as List<SelectListItem>, new { @class = "span6 m-wrap disabled", disabled="disabled" })
                                             <span class="help-inline">@Html.ValidationMessageFor(a => a.WorkFlowManagerID)</span>
                                         }
                                         else
@@ -222,7 +238,7 @@
                                                 case 2:
 
                                                 @:不通过
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    break;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                break;
                                             }
                                         </span>
                                     </div>
@@ -247,7 +263,7 @@
                                                 case 2:
 
                                                 @:已完成
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    break;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                break;
                                             }
                                         </span>
                                     </div>
