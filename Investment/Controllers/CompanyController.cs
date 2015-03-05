@@ -31,7 +31,7 @@ namespace Investment.Controllers
                 ViewBag.Radio = 1;
             }
             ViewBag.Name = Name;
-            var list = objs.Where(a => a.OwnerID == LoginAccount.UserID).ToPagedList(id ?? 1, 15);
+            var list = objs.Where(a => a.OwnerID == LoginAccount.UserID || a.Financings.Any(b => b.Owner_A_ID == LoginAccount.UserID)).ToPagedList(id ?? 1, 15);
             return View(list);
         }
 
