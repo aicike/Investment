@@ -23,6 +23,7 @@
                         保存</button>
                     <button type="button" class="btn" onclick="location.href='@ViewBag.BackUrl'">
                         返回</button>@Html.HiddenFor(a => a.ID)@Html.HiddenFor(a => a.CompanyID)@Html.HiddenFor(a => a.Owner_A_ID)@Html.HiddenFor(a => a.Owner_B_ID)@Html.HiddenFor(a => a.BusinessType)@Html.HiddenFor(a => a.WorkFlowManagerID)
+                        @Html.HiddenFor(a => a.Status)@Html.HiddenFor(a => a.AuditStatus)
                 </div>
                 <div class="tabbable tabbable-custom boxless">
                     <div class="portlet box blue">
