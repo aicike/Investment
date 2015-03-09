@@ -44,34 +44,34 @@
                             <th style="width: 50px">
                                 序号
                             </th>
-                            <th style="width: 200px;">
+                            <th>
                                 贷款主体
                             </th>
                             <th style="width: 130px;">
                                 公司名称
                             </th>
-                            <th style="width: 80px;">
+                            <th style="width: 120px;">
                                 贷款金额（万元）
                             </th>
-                            <th style="width: 80px;">
+                            <th style="width: 120px;">
                                 贷款期限（月）
                             </th>
-                            <th style="width: 80px;">
+                            <th style="width: 90px;">
                                 贷款利率
                             </th>
-                            <th style="width: 130px;">
+                            <th style="width: 90px;">
                                 业务类型
                             </th>
-                            <th style="width: 80px;">
+                            <th style="width: 90px;">
                                 项目经理
                             </th>
-                            <th style="width: 80px;">
+                            <th style="width: 90px;">
                                 进行状态
                             </th>
-                            <th style="width: 80px;">
+                            <th style="width: 90px;">
                                 审核状态
                             </th>
-                            <th style="width: 80px;">
+                            <th style="width: 160px">
                                 操作
                             </th>
                         </tr>
@@ -101,7 +101,7 @@
                                     @if (item.MaxTimeLimit != 0)
                                     {
                                         @:@item.MinTimeLimit + @item.MaxTimeLimit
-                                                                                                                    }
+                                                                            }
                                     else
                                     {
                                         @item.MinTimeLimit
@@ -127,11 +127,19 @@
                                                 break;
                                         case 2:
                                         @:已完成
-                                                                                    break;
+                                                break;
                                     }
                                 </td>
                                 <td>
-                                    @if (item.AuditStatus == 0)
+                                    @if (item.AuditStatus == -2)
+                                    { 
+                                        @:申请修改
+                                                                                                            }
+                                    else if (item.AuditStatus == -1)
+                                    { 
+                                        @:未提交审核
+                                                                                                            }
+                                    else if (item.AuditStatus == 0)
                                     { 
                                         @:待审核
                                     }
@@ -142,11 +150,19 @@
                                     else if (item.AuditStatus == 2)
                                     { 
                                         @:未通过
-                                                                        }
+                                    }
                                 </td>
                                 <td>
+                                    @if (item.AuditStatus == -1 || item.AuditStatus == 2)
+                                    {
+                                        @Ajax.ActionLink("提交审核", "Commit", "Financing", new { id = item.ID }, new AjaxOptions() { UpdateTargetId = "alert", OnBegin = "return AppDelete('提交审核后将无法修改数据，确定提交审核？')" }, null)
+                                    }
+                                    else if (item.AuditStatus == 0 || item.AuditStatus == 1)
+                                    { 
+                                        @Ajax.ActionLink("申请修改", "CommitEdit", "Financing", new { id = item.ID }, new AjaxOptions() { UpdateTargetId = "alert", OnBegin = "return AppDelete('确定审请修改该条数据？')" }, null)
+                                    }
                                     @Html.ActionLink("详细", "Detail", "Financing", new { id = item.ID }, null, true)
-                                    @if (ViewBag.LoginUesrID == item.Owner_A_ID)
+                                    @if ((ViewBag.LoginUesrID == item.Owner_A_ID) && (item.AuditStatus == -1 || item.AuditStatus == 2))
                                     { 
                                         @Html.ActionLink("修改", "EditFinancing", "Company", new { id = item.ID, companyID = item.CompanyID, page = Model.CurrentPageIndex, fromID = 2 }, null, true)@:
                                         @Ajax.ActionLink("删除", "DeleteFinancing", "Company", new { id = item.ID, companyID = item.CompanyID, page = Model.CurrentPageIndex, fromID = 2 }, new AjaxOptions() { UpdateTargetId = "alert", OnBegin = "return AppDelete('确定删除?删除此项将会删除其关联的所有数据！')" }, true)

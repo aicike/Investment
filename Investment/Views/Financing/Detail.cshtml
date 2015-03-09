@@ -228,6 +228,9 @@
                                         <span class="help-inline" style="margin-top: 7px; color: #f03038">
                                             @switch (Model.AuditStatus)
                                             {
+                                            case -2:
+                                                @:申请修改
+                                                    break;
                                                 case 0:
                                                 @:未审核
                                             break;

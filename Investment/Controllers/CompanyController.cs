@@ -662,12 +662,13 @@ namespace Investment.Controllers
             {
                 attachments.AddRange(Newtonsoft.Json.JsonConvert.DeserializeObject<List<Attachment>>(XiangMuXianChangHeCha));
             }
-            //financing.Owner_A_ID = LoginAccount.UserID;
+            financing.Owner_A_ID = LoginAccount.UserID;
             //if (financing.Owner_B_ID.HasValue && financing.Owner_B_ID.Value == 0)
             //{
             //    financing.Owner_B_ID = null;
             //}
             financing.BusinessType = 0;//业务类型，未确定
+            financing.AuditStatus = -1;//未提交审核
             Result result = fm.Add(financing, attachments);
             if (result.HasError)
             {

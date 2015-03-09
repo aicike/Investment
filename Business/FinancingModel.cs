@@ -106,7 +106,7 @@ namespace Business
         /// 更改融资信息审核状态
         /// </summary>
         /// <param name="id"></param>
-        /// <param name="status">0：未审核  1：审核通过  2：审核不通过</param>
+        /// <param name="status">  -2:申请修改数据  -1未提交审核  0：未审核  1：审核通过  2：审核不通过</param>
         /// <returns></returns>
         public Result ChangeAuditStatus(int id, int status)
         {

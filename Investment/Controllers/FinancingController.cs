@@ -40,7 +40,7 @@ namespace Investment.Controllers
         {
             FinancingModel fm = new FinancingModel();
 
-            var objs = fm.List();
+            var objs = fm.List().Where(a=>a.AuditStatus!=-1);
 
             if (!string.IsNullOrEmpty(Name))
             {
@@ -145,5 +145,38 @@ namespace Investment.Controllers
             return Json(result);
         }
 
+        /// <summary>
+        /// 提交审核
+        /// </summary>
+        public string Commit(int id)
+        {
+            FinancingModel fm = new FinancingModel();
+            var result = fm.ChangeAuditStatus(id, 0);
+            if (result.HasError)
+            {
+                return "<script>JMessage('" + result.Error + "',true)</script>";
+            }
+            else
+            {
+                return "<script>JMessage('操作成功。',false,true,'" + Request.UrlReferrer.AbsoluteUri + "',500);</script>";
+            }
+        }
+        
+        /// <summary>
+        /// 申请修改
+        /// </summary>
+        public string CommitEdit(int id)
+        {
+            FinancingModel fm = new FinancingModel();
+            var result = fm.ChangeAuditStatus(id, -2);
+            if (result.HasError)
+            {
+                return "<script>JMessage('" + result.Error + "',true)</script>";
+            }
+            else
+            {
+                return "<script>JMessage('操作成功。',false,true,'" + Request.UrlReferrer.AbsoluteUri + "',500);</script>";
+            }
+        }
     }
 }

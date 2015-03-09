@@ -131,7 +131,16 @@
                                     }
                                 </td>
                                 <td>
-                                    @if (item.AuditStatus == 0)
+                                 
+                                    @if (item.AuditStatus == -2)
+                                    { 
+                                        @:已申请修改
+                                    }
+                                    else if (item.AuditStatus == -1)
+                                    { 
+                                        @:未提交审核审核
+                                    }
+                                    else if (item.AuditStatus == 0)
                                     { 
                                         @:待审核
                                     }

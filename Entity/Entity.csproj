@@ -88,6 +88,8 @@
     <Compile Include="_System_SystemConst.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="CompanyHistory.cs" />
+    <Compile Include="FinancingHistory.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
