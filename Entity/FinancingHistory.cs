@@ -9,7 +9,7 @@ namespace Entity
     /// <summary>
     /// 贷款信息表
     /// </summary>
-    public class Financing : BaseEntity
+    public class FinancingHistory : BaseEntity
     {
         public int ID { get; set; }
 
@@ -30,12 +30,12 @@ namespace Entity
         public virtual GroupAccount Owner_B { get; set; }
 
         /// <summary>
-        /// 贷款信息状态  0：未进行   1：进行中   2：已结束
+        /// 贷款信息状态   0：未进行   1：进行中   2：已结束
         /// </summary>
         public int Status { get; set; }
 
         /// <summary>
-        /// 贷款信息审核状态  -2:申请修改数据  -1：未提交申请   0：未审核   1：审核通过  2：审核不通过
+        /// 贷款信息审核状态  -2:申请修改数据   -1：未提交申请   0：未审核   1：审核通过  2：审核不通过
         /// </summary>
         public int AuditStatus { get; set; }
 

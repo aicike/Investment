@@ -39,7 +39,11 @@
                                     @item.Name
                                 </td>
                                 <td>
-                                    @if (item.Status == 0)
+                                    @if (item.Status == -1)
+                                    { 
+                                        @:未提交审核
+                                    }
+                                    else if (item.Status == 0)
                                     { 
                                         @:待审核
                                     }

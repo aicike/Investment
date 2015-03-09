@@ -7,9 +7,9 @@ using System.ComponentModel.DataAnnotations;
 namespace Entity
 {
     /// <summary>
-    /// 公司信息主表
+    /// 公司信息主表(历史记录表)
     /// </summary>
-    public class Company : BaseEntity
+    public class CompanyHistory : BaseEntity
     {
         /// <summary>
         /// 自增主键
@@ -17,7 +17,7 @@ namespace Entity
         public int ID { get; set; }
 
         /// <summary>
-        /// 状态：-1未提交审核   0未审核   1:审核通过    2:审核不通过
+        /// 状态：-1未提交审核  0未审核   1:审核通过    2:审核不通过
         /// </summary>
         public int Status { get; set; }
 
