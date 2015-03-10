@@ -53,7 +53,7 @@ namespace Business
         {
             FinancingModel fmodel = new FinancingModel();
             var f = fmodel.Get(FinancingID);
-            var list = List().Where(a=>a.IsEnable==true&&a.MaxQuota>=f.Amount).ToList();
+            var list = List().Where(a => a.IsEnable == true && a.MaxQuota >= f.Amount && (f.MinTimeLimit + f.MaxTimeLimit ?? 0) <= a.MaxMonth).ToList();
             return list;
         }
 

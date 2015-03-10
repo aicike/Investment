@@ -30,7 +30,7 @@ namespace Entity
         public virtual GroupAccount Owner_B { get; set; }
 
         /// <summary>
-        /// 贷款信息状态  0：未进行   1：进行中   2：已结束
+        /// 贷款信息状态  0：未进行   1：进行中   2：已结束  3:待定中
         /// </summary>
         public int Status { get; set; }
 

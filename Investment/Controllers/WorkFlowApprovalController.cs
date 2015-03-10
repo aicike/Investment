@@ -65,6 +65,9 @@ namespace Investment.Controllers
                 //贷款意向
                 FinancingModel FModel = new FinancingModel();
                 var financing = FModel.Get(financingID);
+                //更改贷款意向状态
+                financing.Status =3;
+                FModel.Edit(financing);
                 //流程数据
                 WorkFlow workflow = new WorkFlow();
                 workflow.BeginDate = DateTime.Now;
@@ -100,7 +103,7 @@ namespace Investment.Controllers
             }
             else
             {
-                return JavaScript("window.location.href='" + Url.Action("Pending", "WorkFlow") + "'");
+                return JavaScript("JMessage('生成成功',false);setTimeout(function(){window.location.href='" + Url.Action("IndexAll", "ToLoanMatching") + "'},1000);");
             }
         }
         #endregion
@@ -144,6 +147,17 @@ namespace Investment.Controllers
             WorkFlowModel WKModel = new WorkFlowModel();
             WorkFlowMechanismProductModel wmpmodel = new WorkFlowMechanismProductModel();
             Result result = new Result();
+            //更改贷款意向状态
+            FinancingModel FModel = new FinancingModel();
+            var fina = WKModel.Get(WorkFlowID);
+            var financing = FModel.Get(fina.FinancingID);
+            financing.Status = 0;
+            result= FModel.Edit(financing);
+            if (result.HasError)
+            {
+                return "<script>JMessage('更改状态时出错，请联系管理员！',true)</script>";
+
+            }
             result = wmpmodel.DelInfo_BYWorkFlowID(WorkFlowID);
             if (result.HasError)
             {
@@ -156,6 +170,7 @@ namespace Investment.Controllers
                 return "<script>JMessage('" + result.Error + "',true)</script>";
 
             }
+            
             return "<script>window.location.href='" + Url.Action("Pending", "WorkFlow") + "';</script>";
 
         }

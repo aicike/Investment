@@ -14,7 +14,7 @@ INSERT [dbo].[Menu] ([ID], [Area], [Controller], [Action], [Name], [ShowName], [
 INSERT [dbo].[Menu] ([ID], [Area], [Controller], [Action], [Name], [ShowName], [Order], [ParentMenuID],AccountType,IsShow) VALUES (210103, NULL, 'MechanismProducts', 'Edit', N'机构产品修改', N'机构产品修改', 3, 2101,0,0)
 INSERT [dbo].[Menu] ([ID], [Area], [Controller], [Action], [Name], [ShowName], [Order], [ParentMenuID],AccountType) VALUES (2102, NULL, 'MechanismProducts', 'SelAll', N'机构产品列表', N'机构产品列表', 2, 21,0)
 
-INSERT [dbo].[Menu] ([ID], [Area], [Controller], [Action], [Name], [ShowName], [Order], [ParentMenuID],AccountType) VALUES (31, NULL, 'ToLoanMatching', 'Index', N'借贷匹配', N'借贷匹配', 3, NULL,0)
+INSERT [dbo].[Menu] ([ID], [Area], [Controller], [Action], [Name], [ShowName], [Order], [ParentMenuID],AccountType) VALUES (31, NULL, 'ToLoanMatching', 'IndexAll', N'借贷匹配', N'借贷匹配', 3, NULL,0)
 INSERT [dbo].[Menu] ([ID], [Area], [Controller], [Action], [Name], [ShowName], [Order], [ParentMenuID],AccountType,IsShow) VALUES (310101, NULL, 'WorkFlowApproval', 'Preview', N'待定业务预览', N'待定业务预览', 1, 31,0,0)
 
 INSERT [dbo].[Menu] ([ID], [Area], [Controller], [Action], [Name], [ShowName], [Order], [ParentMenuID],AccountType) VALUES (41, NULL, 'Home', 'Home', N'项目管理', N'项目管理', 4, NULL,0)
@@ -203,21 +203,22 @@ SET IDENTITY_INSERT [dbo].[WorkFlowManager] OFF
 
 /***流程节点***/
 SET IDENTITY_INSERT [dbo].[WorkFlowNodeManager] ON
-INSERT [dbo].[WorkFlowNodeManager] ([ID], [Name], [Remark],[IsSinceApproval],[Controllers],[Action]) VALUES (1, '业务初审','无','False','WorkFlowApproval','RongZiLiXiangChuShen')
-INSERT [dbo].[WorkFlowNodeManager] ([ID], [Name], [Remark],[IsSinceApproval],[Controllers],[Action]) VALUES (2, '项目立项','无','False','WorkFlowApproval','XiangMuLiXiang')
-INSERT [dbo].[WorkFlowNodeManager] ([ID], [Name], [Remark],[IsSinceApproval],[Controllers],[Action]) VALUES (3, '签署协议','无','True','WorkFlowApproval','QianShuXieYi')
-INSERT [dbo].[WorkFlowNodeManager] ([ID], [Name], [Remark],[IsSinceApproval],[Controllers],[Action]) VALUES (4, '协议确认','无','False','WorkFlowApproval','XieYiQueRen')
-INSERT [dbo].[WorkFlowNodeManager] ([ID], [Name], [Remark],[IsSinceApproval],[Controllers],[Action]) VALUES (5, '调查辅导','无','True','WorkFlowApproval','DiaoChaFuDao')
-INSERT [dbo].[WorkFlowNodeManager] ([ID], [Name], [Remark],[IsSinceApproval],[Controllers],[Action]) VALUES (6, '机构对接','无','True','WorkFlowApproval','JiGouDuiJie')
-INSERT [dbo].[WorkFlowNodeManager] ([ID], [Name], [Remark],[IsSinceApproval],[Controllers],[Action]) VALUES (7, '落实放款','无','False','WorkFlowApproval','LuoShiFangKuan')
-INSERT [dbo].[WorkFlowNodeManager] ([ID], [Name], [Remark],[IsSinceApproval],[Controllers],[Action]) VALUES (8, '确认收取费用','无','False','WorkFlowApproval','QueRenShouQuFeiYong')
-INSERT [dbo].[WorkFlowNodeManager] ([ID], [Name], [Remark],[IsSinceApproval],[Controllers],[Action]) VALUES (9, '提交申请','无','True','WorkFlowApproval','TiJiaoShenQing')
+INSERT [dbo].[WorkFlowNodeManager] ([ID], [Name], [Remark],[Controllers],[Action]) VALUES (1, '业务初审','无','WorkFlowApproval','RongZiLiXiangChuShen')
+INSERT [dbo].[WorkFlowNodeManager] ([ID], [Name], [Remark],[Controllers],[Action]) VALUES (2, '项目立项','无','WorkFlowApproval','XiangMuLiXiang')
+INSERT [dbo].[WorkFlowNodeManager] ([ID], [Name], [Remark],[Controllers],[Action]) VALUES (3, '签署协议','无','WorkFlowApproval','QianShuXieYi')
+INSERT [dbo].[WorkFlowNodeManager] ([ID], [Name], [Remark],[Controllers],[Action]) VALUES (4, '协议确认','无','WorkFlowApproval','XieYiQueRen')
+INSERT [dbo].[WorkFlowNodeManager] ([ID], [Name], [Remark],[Controllers],[Action]) VALUES (5, '调查辅导','无','WorkFlowApproval','DiaoChaFuDao')
+INSERT [dbo].[WorkFlowNodeManager] ([ID], [Name], [Remark],[Controllers],[Action]) VALUES (6, '机构对接','无','WorkFlowApproval','JiGouDuiJie')
+INSERT [dbo].[WorkFlowNodeManager] ([ID], [Name], [Remark],[Controllers],[Action]) VALUES (7, '落实放款','无','WorkFlowApproval','LuoShiFangKuan')
+INSERT [dbo].[WorkFlowNodeManager] ([ID], [Name], [Remark],[Controllers],[Action]) VALUES (8, '确认收取费用','无','WorkFlowApproval','QueRenShouQuFeiYong')
+INSERT [dbo].[WorkFlowNodeManager] ([ID], [Name], [Remark],[Controllers],[Action]) VALUES (9, '提交申请','无','WorkFlowApproval','TiJiaoShenQing')
 
-INSERT [dbo].[WorkFlowNodeManager] ([ID], [Name], [Remark],[IsSinceApproval],[Controllers],[Action]) VALUES (10, '详尽调查','无','True','WorkFlowApproval','XiangJinDiaoCha')
-INSERT [dbo].[WorkFlowNodeManager] ([ID], [Name], [Remark],[IsSinceApproval],[Controllers],[Action]) VALUES (11, '风控审核','无','False','WorkFlowApproval','FengKongShenHe')
-INSERT [dbo].[WorkFlowNodeManager] ([ID], [Name], [Remark],[IsSinceApproval],[Controllers],[Action]) VALUES (12, '落实放款条件','无','False','WorkFlowApproval','LuoShiFangKuanTiaoJian')
-INSERT [dbo].[WorkFlowNodeManager] ([ID], [Name], [Remark],[IsSinceApproval],[Controllers],[Action]) VALUES (13, '放款审批','无','False','WorkFlowApproval','FangKuanShenPi')
-INSERT [dbo].[WorkFlowNodeManager] ([ID], [Name], [Remark],[IsSinceApproval],[Controllers],[Action]) VALUES (14, '放款','无','False','WorkFlowApproval','FangKuan')
+INSERT [dbo].[WorkFlowNodeManager] ([ID], [Name], [Remark],[Controllers],[Action]) VALUES (10, '详尽调查','无','WorkFlowApproval','XiangJinDiaoCha')
+INSERT [dbo].[WorkFlowNodeManager] ([ID], [Name], [Remark],[Controllers],[Action]) VALUES (11, '风控审核','无','WorkFlowApproval','FengKongShenHe')
+INSERT [dbo].[WorkFlowNodeManager] ([ID], [Name], [Remark],[Controllers],[Action]) VALUES (12, '落实放款条件','无','WorkFlowApproval','LuoShiFangKuanTiaoJian')
+INSERT [dbo].[WorkFlowNodeManager] ([ID], [Name], [Remark],[Controllers],[Action]) VALUES (13, '放款审批','无','WorkFlowApproval','FangKuanShenPi')
+INSERT [dbo].[WorkFlowNodeManager] ([ID], [Name], [Remark],[Controllers],[Action]) VALUES (14, '放款','无','WorkFlowApproval','FangKuan')
+INSERT [dbo].[WorkFlowNodeManager] ([ID], [Name], [Remark],[Controllers],[Action]) VALUES (15, '确认放款日期','无','WorkFlowApproval','FangKuanRiQi')
 
 
 
