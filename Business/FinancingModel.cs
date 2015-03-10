@@ -103,10 +103,10 @@ namespace Business
         }
 
         /// <summary>
-        /// 更改融资信息审核状态
+        /// 更改融资信息审核状态   -1未提交审核  0：未审核  1：审核通过  2：审核不通过
         /// </summary>
         /// <param name="id"></param>
-        /// <param name="status">  -2:申请修改数据  -1未提交审核  0：未审核  1：审核通过  2：审核不通过</param>
+        /// <param name="status">-1未提交审核  0：未审核  1：审核通过  2：审核不通过</param>
         /// <returns></returns>
         public Result ChangeAuditStatus(int id, int status)
         {
@@ -114,6 +114,24 @@ namespace Business
             string sql = "update Financing set AuditStatus=" + status + " where id=" + id;
             int i= base.SqlExecute(sql);
             if (i == 0) {
+                result.Error = "操作失败。";
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// 更改融资信息申请修改数据状态  0：无  1：申请修改中   2：同意修改   3：不同意修改
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="status"> 0：无  1：申请修改中   2：同意修改   3：不同意修改</param>
+        /// <returns></returns>
+        public Result ChangeEditStatus(int id, int status)
+        {
+            Result result = new Result();
+            string sql = "update Financing set EditStatus=" + status + " where id=" + id;
+            int i = base.SqlExecute(sql);
+            if (i == 0)
+            {
                 result.Error = "操作失败。";
             }
             return result;
