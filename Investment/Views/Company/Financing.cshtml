@@ -2,6 +2,27 @@
     ViewBag.Title = "贷款信息管理";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var company = ViewBag.Company as Entity.Company;
+    
+}
+@helper GetEditStr(Entity.Financing financing)
+    {
+        string value = null;
+        switch (financing.EditStatus)
+        {
+            case 0:
+                value = "";
+                break;
+            case 1:
+                value = "已申请修改";
+                break;
+            case 2:
+                value = "已同意修改";
+                break;
+            case 3:
+                value = "不同意修改";
+                break;
+        }
+    <br/>@value
 }
 @section scripts{
 }
@@ -85,17 +106,17 @@
                                     @if (item.MaxTimeLimit != 0)
                                     {
                                         @:@item.MinTimeLimit + @item.MaxTimeLimit
-                                     }
+                                                                             }
                                     else
                                     {
                                         @item.MinTimeLimit
                                     }
                                 </td>
                                 <td>
-                                    @item.ShouYiLv @(item.ShouYiLvType==0?"月":"年")
+                                    @item.ShouYiLv @(item.ShouYiLvType == 0 ? "月" : "年")
                                 </td>
                                 <td>
-                                    @(item.WorkFlowManager==null?"-":item.WorkFlowManager.Name)
+                                    @(item.WorkFlowManager == null ? "-" : item.WorkFlowManager.Name)
                                 </td>
                                 <td>
                                     @switch (item.Status)
@@ -108,25 +129,24 @@
                                                 break;
                                         case 2:
                                         @:已完成
-                                                break;
+                                                                                    break;
                                     }
                                 </td>
                                 <td>
-                                    @if (item.AuditStatus == -2)
-                                    { 
-                                        @:申请修改
-                                    }
-                                    else if (item.AuditStatus == -1)
+                                    @if (item.AuditStatus == -1)
                                     { 
                                         @:未提交审核
+                                        @GetEditStr(item)
                                     }
                                     else if (item.AuditStatus == 0)
                                     { 
                                         @:待审核
+                                        @GetEditStr(item)
                                     }
                                     else if (item.AuditStatus == 1)
                                     {
                                         @:通过
+                                        @GetEditStr(item)
                                     }
                                     else if (item.AuditStatus == 2)
                                     { 
@@ -139,11 +159,18 @@
                                         @Ajax.ActionLink("提交审核", "Commit", "Financing", new { id = item.ID }, new AjaxOptions() { UpdateTargetId = "alert", OnBegin = "return AppDelete('提交审核后将无法修改数据，确定提交审核？')" }, null)
                                     }
                                     else if (item.AuditStatus == 0 || item.AuditStatus == 1)
-                                    { 
+                                    {
+                                        if (item.EditStatus == 0 || item.EditStatus == 3)
+                                        { 
                                         @Ajax.ActionLink("申请修改", "CommitEdit", "Financing", new { id = item.ID }, new AjaxOptions() { UpdateTargetId = "alert", OnBegin = "return AppDelete('确定审请修改该条数据？')" }, null)
+                                        }
+                                        else
+                                        {
+
+                                        }
                                     }
                                     @Html.ActionLink("详细", "Detail", "Financing", new { id = item.ID }, null, true)
-                                    @if ((ViewBag.LoginUesrID == item.Owner_A_ID )&& (item.AuditStatus == -1 || item.AuditStatus == 2))
+                                    @if ((ViewBag.LoginUesrID == item.Owner_A_ID) && (item.AuditStatus == -1 || item.AuditStatus == 2||item.EditStatus==2))
                                     { 
                                         @Html.ActionLink("修改", "EditFinancing", "Company", new { id = item.ID, companyID = company.ID, page = ViewBag.Page, fromID = 1 }, null, true)@:
                                         @Ajax.ActionLink("删除", "DeleteFinancing", "Company", new { id = item.ID, companyID = company.ID, page = ViewBag.Page, fromID = 1 }, new AjaxOptions() { UpdateTargetId = "alert", OnBegin = "return AppDelete('确定删除?删除此项将会删除其关联的所有数据！')" }, true)

@@ -35,9 +35,14 @@ namespace Entity
         public int Status { get; set; }
 
         /// <summary>
-        /// 贷款信息审核状态  -2:申请修改数据  -1：未提交申请   0：未审核   1：审核通过  2：审核不通过
+        /// 贷款信息审核状态  -1：未提交申请   0：未审核   1：审核通过  2：审核不通过
         /// </summary>
         public int AuditStatus { get; set; }
+
+        /// <summary>
+        /// 贷款信息修改数据状态  0：无  1：申请修改中   2：同意修改   3：不同意修改
+        /// </summary>
+        public int EditStatus { get; set; }
 
         /// <summary>
         /// 贷款贷款主体

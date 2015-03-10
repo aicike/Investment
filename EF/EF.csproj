@@ -55,6 +55,10 @@
     <Compile Include="Mapping\AttachmentMap.cs" />
     <Compile Include="Mapping\CompanyRelationMap.cs" />
     <Compile Include="Mapping\WorkFlowMap.cs" />
+    <Compile Include="Migrations\201503090658242_Update.cs" />
+    <Compile Include="Migrations\201503090658242_Update.Designer.cs">
+      <DependentUpon>201503090658242_Update.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -70,6 +74,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Initial.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201503090658242_Update.resx">
+      <DependentUpon>201503090658242_Update.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

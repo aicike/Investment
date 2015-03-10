@@ -2,6 +2,25 @@
     ViewBag.Title = "贷款信息";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@helper GetEditStr(Entity.Financing financing)
+    {
+        string value = null;
+        switch (financing.EditStatus)
+        {
+            case 0:
+                value = "";
+                break;
+            case 1:
+                value = "（已申请修改）";
+                break;
+            case 2:
+                value = "（已同意修改）";
+                break;
+            case 3:
+                value = "（不同意修改）";
+                break;
+        }@value
+}
 @section scripts{
     <style>
         .myLink
@@ -27,6 +46,9 @@
 
             var changeStatusUrl = '@Url.Action("ChangeStatus", "Financing")';
             $(".changeStatus").click(function () {
+                if(!confirm("确定执行操作？")){
+                    return;
+                }
                 var status_val= $(this).attr("status");
                 if(status_val==1){
                     if($("#Owner_A_ID").val()==0){
@@ -35,6 +57,27 @@
                     }
                 }
                 $.post(changeStatusUrl, {id:@Model.ID,status:status_val}, function (result) { 
+                    if(result.HasError){
+                        JMessage(result.Error,true);
+                    }else{
+                        JMessage("操作成功",false,true,null,200);
+                    }
+                },"json");
+            });
+
+            var changeEditStatusUrl = '@Url.Action("ChangeEditStatus", "Financing")';
+            $(".changeEditStatus").click(function () {
+                var status_val= $(this).attr("status");
+                if(status_val==2){
+                    if(!confirm("同意修改后，贷款信息的审核状态会变更为“未提交审核”并需要重新提交审核，确定执行操作？")){
+                        return;
+                    }
+                }else{
+                    if(!confirm("确定执行操作？")){
+                        return;
+                    }
+                }
+                $.post(changeEditStatusUrl, {id:@Model.ID,status:status_val}, function (result) { 
                     if(result.HasError){
                         JMessage(result.Error,true);
                     }else{
@@ -59,9 +102,11 @@
                 var new_Owner_B=$("#Owner_B_ID").val();
                 if(BusinessType!=new_BusinessType||WorkFlowManagerID!=new_WorkFlowManagerID||Owner_A!=new_Owner_A||Owner_B!=new_Owner_B){
                     $("#div_changeMsg").show();
+                    $("#btnSubmit").text("保存");
                     $("#btnSubmit").removeClass("disabled").removeAttr("disabled");
                 }else{
                     $("#div_changeMsg").hide();
+                    $("#btnSubmit").text("保存（数据未更改）");
                     $("#btnSubmit").addClass("disabled").addAttr("disabled");
                 }
             });
@@ -101,15 +146,24 @@
                     <button type="button" class="btn" onclick="location.href='@ViewBag.BackUrl'">
                         返回</button>
                     @if (ViewBag.hasPermissions)
-                    { 
-                        <button type="button" class='btn blue changeStatus @(Model.AuditStatus == 1 ? "disabled" : "")'  @(Model.AuditStatus == 1 ? "disabled" : "") style="margin-left: 15px;" status="1">
+                    {
+                        if (Model.EditStatus == 1)
+                        { 
+                        <button type="button" class='btn blue changeEditStatus' style="margin-left: 15px;
+                            width: 98px" status="2">
+                            同意修改</button>
+                        <button type="button" class='btn red changeEditStatus' style="margin-left: -4px;
+                            width: 98px" status="3">
+                            禁止修改</button>
+                        }
+                        <button type="button" class='btn blue changeStatus @(Model.AuditStatus == 1 ? "disabled" : "")'  @(Model.AuditStatus == 1 ? "disabled" : "") style="margin-left: 15px;width:98px" status="1">
                             审核通过</button>
-                        <button type="button" class='btn red changeStatus @(Model.AuditStatus == 2 ? "disabled" : "")' @(Model.AuditStatus == 2 ? "disabled" : "") style="margin-left: 15px;" status="2">
+                        <button type="button" class='btn red changeStatus @(Model.AuditStatus == 2 ? "disabled" : "")' @(Model.AuditStatus == 2 ? "disabled" : "") style="margin-left: -4px;width:98px" status="2">
                             审核不通过</button>
                         <button type="submit" class='btn blue disabled' style="margin-left: 15px;" disabled="disabled"
                             id="btnSubmit">
-                            保存</button><label id="div_changeMsg" style="margin-left: 15px; color: #f03038; display: none"
-                                class="inline">数据已更改，请点击 [保存] 按钮。</label>
+                            保存（数据未更改）</button><label id="div_changeMsg" style="margin-left: 15px; color: #f03038;
+                                display: none" class="inline">数据已更改，请点击 [保存] 按钮。</label>
                     }
                 </div>
                 <div class="portlet box blue">
@@ -154,7 +208,7 @@
                                                     break;
                                                     case 2:
                                                     @:融资顾问
-                                                                                                                                                                                                                                                                                                                                                                                                    break;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                    break;
                                                 }
                                             </span>
                                         }
@@ -168,7 +222,7 @@
                                     <div class="controls">
                                         @if (ViewBag.hasPermissions)
                                         { 
-                                            @Html.DropDownListFor(a => a.WorkFlowManagerID, ViewData["wfm"] as List<SelectListItem>, new { @class = "span6 m-wrap disabled"})
+                                            @Html.DropDownListFor(a => a.WorkFlowManagerID, ViewData["wfm"] as List<SelectListItem>, new { @class = "span6 m-wrap disabled" })
                                             <span class="help-inline">@Html.ValidationMessageFor(a => a.WorkFlowManagerID)</span>
                                         }
                                         else
@@ -228,22 +282,18 @@
                                         <span class="help-inline" style="margin-top: 7px; color: #f03038">
                                             @switch (Model.AuditStatus)
                                             {
-                                            case -2:
-                                                @:申请修改
-                                                    break;
                                                 case 0:
                                                 @:未审核
-                                            break;
+                                           break;
                                                 case 1:
-
+                                                
                                                 @:通过
                                             break;
                                                 case 2:
-
                                                 @:不通过
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                break;
+                                                                                       break;
                                             }
-                                        </span>
+                                        </span><span class="help-inline" style="margin-top: 7px;">@GetEditStr(Model)</span>
                                     </div>
                                 </div>
                             </div>
@@ -266,7 +316,7 @@
                                                 case 2:
 
                                                 @:已完成
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                break;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            break;
                                             }
                                         </span>
                                     </div>

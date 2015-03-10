@@ -152,6 +152,7 @@ namespace Investment.Controllers
         {
             FinancingModel fm = new FinancingModel();
             var result = fm.ChangeAuditStatus(id, 0);
+            fm.ChangeEditStatus(id, 0);
             if (result.HasError)
             {
                 return "<script>JMessage('" + result.Error + "',true)</script>";
@@ -168,7 +169,7 @@ namespace Investment.Controllers
         public string CommitEdit(int id)
         {
             FinancingModel fm = new FinancingModel();
-            var result = fm.ChangeAuditStatus(id, -2);
+            var result = fm.ChangeEditStatus(id,1);
             if (result.HasError)
             {
                 return "<script>JMessage('" + result.Error + "',true)</script>";
@@ -177,6 +178,20 @@ namespace Investment.Controllers
             {
                 return "<script>JMessage('操作成功。',false,true,'" + Request.UrlReferrer.AbsoluteUri + "',500);</script>";
             }
+        }
+
+        /// <summary>
+        /// 更改申请修改状态
+        /// </summary>
+        public ActionResult ChangeEditStatus(int id, int status)
+        {
+            FinancingModel fm = new FinancingModel();
+            if (status == 2) {
+                //同意修改后，审核状态为未提交审核
+                fm.ChangeAuditStatus(id, -1);
+            }
+            var result = fm.ChangeEditStatus(id, status);
+            return Json(result);
         }
     }
 }
