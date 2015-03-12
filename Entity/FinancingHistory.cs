@@ -13,31 +13,42 @@ namespace Entity
     {
         public int ID { get; set; }
 
-        public int CompanyID { get; set; }
+        /// <summary>
+        /// 最后一次修改时间
+        /// </summary>
+        public DateTime CreatDateTime { get; set; }
 
-        public virtual Company Company { get; set; }
+        /// <summary>
+        /// 最后一次修改人
+        /// </summary>
+        public int CreatGroupAccountID { get; set; }
+
+        public int CompanyID { get; set; }
 
         /// <summary>
         /// 项目负责人A角色
         /// </summary>
         public int? Owner_A_ID { get; set; }
-        public virtual GroupAccount Owner_A { get; set; }
 
         /// <summary>
         /// 项目负责人B角色
         /// </summary>
         public int? Owner_B_ID { get; set; }
-        public virtual GroupAccount Owner_B { get; set; }
 
         /// <summary>
-        /// 贷款信息状态   0：未进行   1：进行中   2：已结束
+        /// 贷款信息状态  0：未进行   1：进行中   2：已结束
         /// </summary>
         public int Status { get; set; }
 
         /// <summary>
-        /// 贷款信息审核状态  -2:申请修改数据   -1：未提交申请   0：未审核   1：审核通过  2：审核不通过
+        /// 贷款信息审核状态  -1：未提交申请   0：未审核   1：审核通过  2：审核不通过
         /// </summary>
         public int AuditStatus { get; set; }
+
+        /// <summary>
+        /// 贷款信息修改数据状态  0：无  1：申请修改中   2：同意修改   3：不同意修改
+        /// </summary>
+        public int EditStatus { get; set; }
 
         /// <summary>
         /// 贷款贷款主体
@@ -92,7 +103,7 @@ namespace Entity
         [Display(Name = "还款来源")]
         [Required(ErrorMessage = "请输入还款来源")]
         public string Repayment { get; set; }
-        
+
         /// <summary>
         /// 抵押物清单
         /// </summary>
@@ -138,10 +149,5 @@ namespace Entity
         [Display(Name = "项目类型")]
         public int? WorkFlowManagerID { get; set; }
 
-        public virtual WorkFlowManager WorkFlowManager { get; set; }
-        /// <summary>
-        /// 流程表
-        /// </summary>
-        public virtual ICollection<WorkFlow> WorkFlow { get; set; }
     }
 }

@@ -12,7 +12,7 @@ namespace Business
     public class GroupAccountModel : BaseModel<GroupAccount>
     {
         /// <summary>
-        /// 集团登陆
+        /// 集团登录
         /// </summary>
         /// <param name="userName"></param>
         /// <param name="password"></param>
@@ -34,7 +34,7 @@ namespace Business
         }
 
         /// <summary>
-        /// 查询登陆账号是否已存在
+        /// 查询登录账号是否已存在
         /// </summary>
         /// <param name="Name"></param>
         /// <returns>True:存在；false 不存在</returns>

@@ -24,11 +24,11 @@ namespace Entity
         public virtual Company Company { get; set; }
 
         /// <summary>
-        /// 登陆账号
+        /// 登录账号
         /// </summary>
         [Display(Name = "登录账号")]
         [Required(ErrorMessage = "请输入登录账号")]
-        [StringLength(50, ErrorMessage = "登陆账号不能超过50字")]
+        [StringLength(50, ErrorMessage = "登录账号不能超过50字")]
         public string AccountNumber { get; set; }
 
         /// <summary>

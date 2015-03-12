@@ -419,7 +419,7 @@ namespace Business
                                 emailInfo.IsHtml = true;
                                 emailInfo.UseSSL = false;
 
-                                emailInfo.Body = "您好！<br/><br/>您申请的业务：" + workflow.Number + "。" + workflow_node.WorkFlowNodeManager.Name + "节点已审批<span style='color:Green'>通过</span>。 <br/><br/>请点击<a href='" + strUrl + "'>兆恒投资业务管理系统</a> 登陆查看<br/><br/>----陕西兆恒投资有限公司";
+                                emailInfo.Body = "您好！<br/><br/>您申请的业务：" + workflow.Number + "。" + workflow_node.WorkFlowNodeManager.Name + "节点已审批<span style='color:Green'>通过</span>。 <br/><br/>请点击<a href='" + strUrl + "'>兆恒投资业务管理系统</a> 登录查看<br/><br/>----陕西兆恒投资有限公司";
                                 SendEmail.SendMailAsync(emailInfo);
                                 //通知审批人
 
@@ -432,7 +432,7 @@ namespace Business
                                     emailInfo.IsHtml = true;
                                     emailInfo.UseSSL = false;
 
-                                    emailInfo.Body = "您好！<br/><br/>您有一个新的业务：" + workflow.Number + "。等待您的审批<br/><br/>请点击<a href='" + strUrl + "'>兆恒投资业务管理系统</a> 登陆查看<br/><br/>----陕西兆恒投资有限公司";
+                                    emailInfo.Body = "您好！<br/><br/>您有一个新的业务：" + workflow.Number + "。等待您的审批<br/><br/>请点击<a href='" + strUrl + "'>兆恒投资业务管理系统</a> 登录查看<br/><br/>----陕西兆恒投资有限公司";
                                     SendEmail.SendMailAsync(emailInfo);
                                 }
                                 else
@@ -445,7 +445,7 @@ namespace Business
                                         emailInfo.IsHtml = true;
                                         emailInfo.UseSSL = false;
 
-                                        emailInfo.Body = "您好！<br/><br/>您有一个新的业务：" + workflow.Number + "。等待您的审批<br/><br/>请点击<a href='" + strUrl + "'>兆恒投资业务管理系统</a> 登陆查看<br/><br/>----陕西兆恒投资有限公司";
+                                        emailInfo.Body = "您好！<br/><br/>您有一个新的业务：" + workflow.Number + "。等待您的审批<br/><br/>请点击<a href='" + strUrl + "'>兆恒投资业务管理系统</a> 登录查看<br/><br/>----陕西兆恒投资有限公司";
                                         SendEmail.SendMailAsync(emailInfo);
                                     }
                                 }
@@ -458,7 +458,7 @@ namespace Business
                                 emailInfo.IsHtml = true;
                                 emailInfo.UseSSL = false;
 
-                                emailInfo.Body = "您好！<br/><br/>您申请的业务：" + workflow.Number + "。审批<span style='color:red'>未通过</span>。流程已结束 <br/><br/>请点击<a href='" + strUrl + "'>兆恒投资业务管理系统</a> 登陆查看<br/><br/>----陕西兆恒投资有限公司";
+                                emailInfo.Body = "您好！<br/><br/>您申请的业务：" + workflow.Number + "。审批<span style='color:red'>未通过</span>。流程已结束 <br/><br/>请点击<a href='" + strUrl + "'>兆恒投资业务管理系统</a> 登录查看<br/><br/>----陕西兆恒投资有限公司";
                                 SendEmail.SendMailAsync(emailInfo);
                                 break;
                             case 3: //驳回
@@ -469,7 +469,7 @@ namespace Business
                                 emailInfo.IsHtml = true;
                                 emailInfo.UseSSL = false;
 
-                                emailInfo.Body = "您好！<br/><br/>您申请的业务：" + workflow.Number + "。被<span style='color:blue'>驳回</span>。 <br/><br/>请点击<a href='" + strUrl + "'>兆恒投资业务管理系统</a> 登陆查看<br/><br/>----陕西兆恒投资有限公司";
+                                emailInfo.Body = "您好！<br/><br/>您申请的业务：" + workflow.Number + "。被<span style='color:blue'>驳回</span>。 <br/><br/>请点击<a href='" + strUrl + "'>兆恒投资业务管理系统</a> 登录查看<br/><br/>----陕西兆恒投资有限公司";
                                 SendEmail.SendMailAsync(emailInfo);
                                 //通知审批人
 
@@ -482,7 +482,7 @@ namespace Business
                                     emailInfo.IsHtml = true;
                                     emailInfo.UseSSL = false;
 
-                                    emailInfo.Body = "您好！<br/><br/>您有一个新的业务：" + workflow.Number + "。等待您的审批<br/><br/>请点击<a href='" + strUrl + "'>兆恒投资业务管理系统</a> 登陆查看<br/><br/>----陕西兆恒投资有限公司";
+                                    emailInfo.Body = "您好！<br/><br/>您有一个新的业务：" + workflow.Number + "。等待您的审批<br/><br/>请点击<a href='" + strUrl + "'>兆恒投资业务管理系统</a> 登录查看<br/><br/>----陕西兆恒投资有限公司";
                                     SendEmail.SendMailAsync(emailInfo);
                                 }
                                 else
@@ -495,7 +495,7 @@ namespace Business
                                         emailInfo.IsHtml = true;
                                         emailInfo.UseSSL = false;
 
-                                        emailInfo.Body = "您好！<br/><br/>您有一个新的业务：" + workflow.Number + "。等待您的审批<br/><br/>请点击<a href='" + strUrl + "'>兆恒投资业务管理系统</a> 登陆查看<br/><br/>----陕西兆恒投资有限公司";
+                                        emailInfo.Body = "您好！<br/><br/>您有一个新的业务：" + workflow.Number + "。等待您的审批<br/><br/>请点击<a href='" + strUrl + "'>兆恒投资业务管理系统</a> 登录查看<br/><br/>----陕西兆恒投资有限公司";
                                         SendEmail.SendMailAsync(emailInfo);
                                     }
                                 }
@@ -508,7 +508,7 @@ namespace Business
                                 emailInfo.IsHtml = true;
                                 emailInfo.UseSSL = false;
 
-                                emailInfo.Body = "您好！<br/><br/>您申请的业务：" + workflow.Number + "。已审批<span style='color:Green'>通过</span>。 <br/><br/>请点击<a href='" + strUrl + "'>兆恒投资业务管理系统</a> 登陆查看<br/><br/>----陕西兆恒投资有限公司";
+                                emailInfo.Body = "您好！<br/><br/>您申请的业务：" + workflow.Number + "。已审批<span style='color:Green'>通过</span>。 <br/><br/>请点击<a href='" + strUrl + "'>兆恒投资业务管理系统</a> 登录查看<br/><br/>----陕西兆恒投资有限公司";
                                 SendEmail.SendMailAsync(emailInfo);
                                 break;
                             case 5:
@@ -521,7 +521,7 @@ namespace Business
                                     emailInfo.IsHtml = true;
                                     emailInfo.UseSSL = false;
 
-                                    emailInfo.Body = "您好！<br/><br/>您有一个新的业务：" + workflow.Number + "。等待您的审批<br/><br/>请点击<a href='" + strUrl + "'>兆恒投资业务管理系统</a> 登陆查看<br/><br/>----陕西兆恒投资有限公司";
+                                    emailInfo.Body = "您好！<br/><br/>您有一个新的业务：" + workflow.Number + "。等待您的审批<br/><br/>请点击<a href='" + strUrl + "'>兆恒投资业务管理系统</a> 登录查看<br/><br/>----陕西兆恒投资有限公司";
                                     SendEmail.SendMailAsync(emailInfo);
                                 }
                                 else
@@ -534,7 +534,7 @@ namespace Business
                                         emailInfo.IsHtml = true;
                                         emailInfo.UseSSL = false;
 
-                                        emailInfo.Body = "您好！<br/><br/>您有一个新的业务：" + workflow.Number + "。等待您的审批<br/><br/>请点击<a href='" + strUrl + "'>兆恒投资业务管理系统</a> 登陆查看<br/><br/>----陕西兆恒投资有限公司";
+                                        emailInfo.Body = "您好！<br/><br/>您有一个新的业务：" + workflow.Number + "。等待您的审批<br/><br/>请点击<a href='" + strUrl + "'>兆恒投资业务管理系统</a> 登录查看<br/><br/>----陕西兆恒投资有限公司";
                                         SendEmail.SendMailAsync(emailInfo);
                                     }
                                 }

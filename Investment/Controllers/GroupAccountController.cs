@@ -51,7 +51,7 @@ namespace Investment.Controllers
             //校验
             if (gaModel.GetUnameIsOnly(gAccount.AccountNumber))
             {
-                return JavaScript("JMessage('登陆账号已存在，请换一个试试！',true)");
+                return JavaScript("JMessage('登录账号已存在，请换一个试试！',true)");
             }
             Common Com = new Common();
             var pwd = Com.CreateRandom("", 6);
@@ -96,7 +96,7 @@ namespace Investment.Controllers
                 emailInfo.UseSSL = false;
 
                 var strUrl = System.Configuration.ConfigurationManager.AppSettings["URl"];
-                emailInfo.Body = "您好！<br/><br/>您的陕西兆恒投资业务管理系统账号为：" + gAccount.AccountNumber + " <br/><br/>您的密码为：" + pwd + "<br/><br/>请点击<a href='" + strUrl + "'>兆恒投资业务管理系统</a> 选择集团登陆，尽快更改密码！<br/><br/>----陕西兆恒投资有限公司";
+                emailInfo.Body = "您好！<br/><br/>您的陕西兆恒投资业务管理系统账号为：" + gAccount.AccountNumber + " <br/><br/>您的密码为：" + pwd + "<br/><br/>请点击<a href='" + strUrl + "'>兆恒投资业务管理系统</a> 选择集团登录，尽快更改密码！<br/><br/>----陕西兆恒投资有限公司";
                 SendEmail.SendMailAsync(emailInfo);
             }
             return JavaScript("window.location.href='" + Url.Action("Index", "GroupAccount") + "'");

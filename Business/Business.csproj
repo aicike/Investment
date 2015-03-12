@@ -75,6 +75,7 @@
     <Compile Include="CompanyReferenceModel.cs" />
     <Compile Include="CompanyRelationModel.cs" />
     <Compile Include="EFModel.cs" />
+    <Compile Include="FinancingHistoryModel.cs" />
     <Compile Include="FinancingMatchingModel.cs" />
     <Compile Include="FinancingModel.cs" />
     <Compile Include="IndustryLevelModel.cs" />

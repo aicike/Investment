@@ -9,6 +9,10 @@
         $(function () {
             SetFC();
             $("#_Title").hide();
+//            $("#btn_fangkuan_ok").click(function () {
+//                var cusjson = '{ FunName: "GMY", FunParam: {A:1,B:2} }';
+//                var commitstr = $("#responsive_approvalrecord1").find(".btnCommitOpinion").attr("CustomFun", cusjson);
+//            });
         });
 
         function SetFC() {
@@ -94,7 +98,7 @@
             <table align="center">
                 <tr>
                     <td>
-                        <a class="btn green" style="width: 80px" data-toggle="modal" href="#responsive_approvalrecord1">
+                        <a class="btn green" style="width: 80px" data-toggle="modal" href="#responsive_approvalrecord1" id="btn_fangkuan_ok">
                             同意</a> <a  href="#responsive_approvalrecord2" data-toggle="modal" class="btn blue" style="width:80px;margin-left:15px;">
                                 驳回</a> <a  href="#responsive_approvalrecord3" data-toggle="modal" class="btn red" style="width:80px;margin-left:15px;">
                                     不同意</a> <a href="@Url.Action("Pending", "WorkFlow")" class="btn" style="width:80px;margin-left:15px;">
