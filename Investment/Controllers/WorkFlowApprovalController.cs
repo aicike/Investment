@@ -369,25 +369,6 @@ namespace Investment.Controllers
             return View(item);
         }
 
-        //日期同意 审批
-        public ActionResult Agree(int WorkFlowID, string Opinion, string hid_attachment, string FKRI)
-        {
-            WorkFlowModel wfm = new WorkFlowModel();
-            var workFlow = wfm.Get(WorkFlowID);
-            //更改放款日期
-            wfm.Upd_FKRI(WorkFlowID, FKRI);
-            var result = wfm.WorkFlow_Agree(WorkFlowID, LoginAccount.UserID, Opinion);
-            if (result.HasError == false && string.IsNullOrEmpty(hid_attachment) == false)
-            {
-                var attachment = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Attachment>>(hid_attachment);
-                AttachmentModel attachmentModel = new AttachmentModel();
-                foreach (var item in attachment)
-                {
-                    attachmentModel.CopyAttachment_Company(workFlow.CompanyID, item, "/Approval" + WorkFlowID);
-                }
-            }
-            return Json(result);
-        }
         #endregion
 
 
@@ -488,8 +469,8 @@ namespace Investment.Controllers
                 Result reslut = null;
                 switch (FunName)
                 {
-                    case "GMY":
-                        reslut = GMY(FunParam);
+                    case "FangKuanRiQi":
+                        reslut = FangKuanRiQi(FunParam);
                         break;
                 }
                 return reslut;
@@ -500,6 +481,16 @@ namespace Investment.Controllers
                 int a = FunParam.A;
                 int b = FunParam.B;
                 return null;
+            }
+            public Result FangKuanRiQi(dynamic FunParam)
+            {
+                Result reslut = null;
+                WorkFlowModel wmodel = new WorkFlowModel();
+                int workflowID = FunParam.WorkFlowID;
+                var witem = wmodel.Get(workflowID);
+                witem.LoanDay = FunParam.Date;
+                wmodel.Edit(witem);
+                return reslut;
             }
         }
 

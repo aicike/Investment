@@ -31,6 +31,7 @@ namespace Investment.Controllers
             InterestManagerModel immodel = new InterestManagerModel();
             var im = immodel.Get(id);
             im.IsCharge = true;
+            im.OperDate = DateTime.Now;
             var result = immodel.Edit(im);
             if (result.HasError)
             {

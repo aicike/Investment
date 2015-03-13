@@ -3,13 +3,14 @@
     Layout = "~/Views/Shared/_Layout_noMenu.cshtml";
 }
 @model Entity.WorkFlow
-           <script type="text/javascript" src="../../Scripts/JqueryUI/i18n/jquery.ui.datepicker-zh-CN.js"></script>
+<script type="text/javascript" src="../../Scripts/JqueryUI/i18n/jquery.ui.datepicker-zh-CN.js"></script>
 @section scripts{
     <script>
 
         $(function () {
             SetFC();
             $("#_Title").hide();
+
 
               $("#FKRI").datepicker({
                     changeMonth: true,
@@ -46,7 +47,12 @@
                 JMessage("请选择放款日期",true);
                 return false;
             }
+            
             $(a).attr("href","#responsive_approvalrecord1");
+             var fkri = $("#FKRI").val();
+             var workflowid = "@Model.ID";
+                var cusjson = '{ FunName: "FangKuanRiQi", FunParam: {Date:"'+fkri+'",WorkFlowID:'+workflowid+'} }';
+                var commitstr = $("#responsive_approvalrecord1").find(".btnCommitOpinion").attr("CustomFun", cusjson);
         }
 
         window.onscroll = function () {
@@ -134,12 +140,12 @@
             <table align="center">
                 <tr>
                     <td>
-                        <a class="btn green" onclick="return ckFKRI(this)" style="width: 80px" data-toggle="modal" href="#responsive_approvalrecord1">
-                            同意</a> <a href="#responsive_approvalrecord2" data-toggle="modal" class="btn blue"
-                                style="width: 80px; margin-left: 15px;">驳回</a> <a href="#responsive_approvalrecord3"
-                                    data-toggle="modal" class="btn red" style="width: 80px; margin-left: 15px;">不同意</a>
-                        <a href="@Url.Action("Pending", "WorkFlow")" class="btn" style="width:80px;margin-left:15px;">
-                            返回</a>
+                        <a class="btn green" onclick="return ckFKRI(this)" id="btn_fangkuanRQ" style="width: 80px"
+                            data-toggle="modal" href="#responsive_approvalrecord1">同意</a> <a href="#responsive_approvalrecord2"
+                                data-toggle="modal" class="btn blue" style="width: 80px; margin-left: 15px;">驳回</a>
+                        <a href="#responsive_approvalrecord3" data-toggle="modal" class="btn red" style="width: 80px;
+                            margin-left: 15px;">不同意</a> <a href="@Url.Action("Pending", "WorkFlow")" class="btn" style="width:80px;margin-left:15px;">
+                                返回</a>
                     </td>
                 </tr>
             </table>

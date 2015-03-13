@@ -246,7 +246,7 @@ namespace Business
                         base.Edit(workflow);
                         //生成产品快照
                         Get_To_Json_Product(WorkFlowID);
-
+                        
                     }
                     else
                     {
@@ -264,6 +264,14 @@ namespace Business
             {
                 //邮件通知 流程结束
                 EmailApprovalNotice(WorkFlowID, 4, "");
+                FinancingModel FModel = new FinancingModel();
+                var financing = FModel.Get(workflow.FinancingID);
+                //生成利息 自有
+                if (financing.WorkFlowManagerID == 4)
+                {
+                    InterestManagerModel immodel = new InterestManagerModel();
+                    immodel.InsertInterest(financing.ID, workflow.ID);
+                }
             }
             else
             {

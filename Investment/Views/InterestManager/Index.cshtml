@@ -4,11 +4,11 @@
     var intlist = ViewBag.intlist as List<Entity.Interest>;
 }
 @section scripts{
-<script>
-    function ckbQRSBJ() {
-        AppDelete("");
-    }
-</script>
+    <script>
+        function ckbQRSBJ() {
+            AppDelete("");
+        }
+    </script>
     <style>
         .td_title
         {
@@ -25,7 +25,8 @@
             if (!Model.IsInterest)
             {
             <div class="myoption">
-                <input type="submit" onclick="return AppDelete('确认已收回本金？确认后不可再次更改！');" value="确认收回本金" class="btn blue"  />
+                <input type="submit" onclick="return AppDelete('确认已收回本金？确认后不可再次更改！');" value="确认收回本金"
+                    class="btn blue" />
             </div>
             }
         }
@@ -100,7 +101,7 @@
                                 else
                                 { 
                                     @:否
-                                                                                                                            }
+                                                                                                                                                            }
                             </td>
                         </tr>
                     </table>
@@ -143,7 +144,10 @@
                                 }
                             </td>
                             <td>
-                                @Ajax.ActionLink("已收利息", "EditInterest", "InterestManager", new { id = item.ID }, new AjaxOptions() { UpdateTargetId = "alert", OnBegin = "return AppDelete('确定已收利息?确认后将不可更改！')" })
+                                @if (!item.IsCharge)
+                                { 
+                                    @Ajax.ActionLink("已收利息", "EditInterest", "InterestManager", new { id = item.ID }, new AjaxOptions() { UpdateTargetId = "alert", OnBegin = "return AppDelete('确定已收利息?确认后将不可更改！')" })
+                                }
                             </td>
                         </tr>
                     }
