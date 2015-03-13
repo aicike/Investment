@@ -21,6 +21,8 @@ namespace EF
         public DbSet<WorkFlowManager> WorkFlowManager { get; set; }
         public DbSet<Financing> Financings { get; set; }
         public DbSet<MechanismProducts> MechanismProducts { get; set; }
+        public DbSet<FinancingHistory> FinancingHistory { get; set; }
+        public DbSet<CompanyHistory> CompanyHistory { get; set; }
         
 
         

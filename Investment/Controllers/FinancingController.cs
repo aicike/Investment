@@ -40,7 +40,7 @@ namespace Investment.Controllers
         {
             FinancingModel fm = new FinancingModel();
 
-            var objs = fm.List().Where(a=>a.AuditStatus!=-1);
+            var objs = fm.List().Where(a => a.AuditStatus != -1);
 
             if (!string.IsNullOrEmpty(Name))
             {
@@ -162,14 +162,14 @@ namespace Investment.Controllers
                 return "<script>JMessage('操作成功。',false,true,'" + Request.UrlReferrer.AbsoluteUri + "',500);</script>";
             }
         }
-        
+
         /// <summary>
         /// 申请修改
         /// </summary>
         public string CommitEdit(int id)
         {
             FinancingModel fm = new FinancingModel();
-            var result = fm.ChangeEditStatus(id,1);
+            var result = fm.ChangeEditStatus(id, 1);
             if (result.HasError)
             {
                 return "<script>JMessage('" + result.Error + "',true)</script>";
@@ -186,11 +186,19 @@ namespace Investment.Controllers
         public ActionResult ChangeEditStatus(int id, int status)
         {
             FinancingModel fm = new FinancingModel();
-            if (status == 2) {
-                //同意修改后，审核状态为未提交审核
-                fm.ChangeAuditStatus(id, -1);
+            Result result = null;
+            if (status == 2)
+            {
+                //同意修改后，保存镜像到历史记录表中
+                FinancingHistoryModel fhm = new FinancingHistoryModel();
+                result = fhm.Add(id);
+                if (result.HasError == false)
+                {
+                    //同意修改后，审核状态为未提交审核
+                    result= fm.ChangeAuditStatus(id, -1);
+                }
             }
-            var result = fm.ChangeEditStatus(id, status);
+            result = fm.ChangeEditStatus(id, status);
             return Json(result);
         }
     }

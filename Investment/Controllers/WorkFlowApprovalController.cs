@@ -36,7 +36,7 @@ namespace Investment.Controllers
             ViewBag.AllProduct = AllProduct;
             //是否为自有业务
             if (financing.WorkFlowManagerID == 4)
-            { 
+            {
                 ViewBag.ISZY = 1;
             }
 
@@ -405,23 +405,34 @@ namespace Investment.Controllers
 
         #region 审批操作（同意，不同意，驳回）
 
+
         /// <summary>
         /// 同意
         /// </summary>
         /// <returns></returns>
-        public ActionResult Agree(int WorkFlowID, string Opinion, string hid_attachment)
+        public ActionResult Agree(int WorkFlowID, string Opinion, string hid_attachment, string CustomFun_Json = null)
         {
             WorkFlowModel wfm = new WorkFlowModel();
             var workFlow = wfm.Get(WorkFlowID);
             var result = wfm.WorkFlow_Agree(WorkFlowID, LoginAccount.UserID, Opinion);
-            if (result.HasError == false && string.IsNullOrEmpty(hid_attachment) == false)
+            if (result.HasError == false)
             {
-                var attachment = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Attachment>>(hid_attachment);
-                AttachmentModel attachmentModel = new AttachmentModel();
-                foreach (var item in attachment)
+                if (string.IsNullOrEmpty(hid_attachment) == false)
                 {
-                    attachmentModel.CopyAttachment_Company(workFlow.CompanyID, item, "/Approval" + WorkFlowID);
+                    var attachment = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Attachment>>(hid_attachment);
+                    AttachmentModel attachmentModel = new AttachmentModel();
+                    foreach (var item in attachment)
+                    {
+                        attachmentModel.CopyAttachment_Company(workFlow.CompanyID, item, "/Approval" + WorkFlowID);
+                    }
                 }
+                //执行自定义函数
+                if (CustomFun_Json != null && CustomFun_Json.Length > 0)
+                {
+                    var cf = Newtonsoft.Json.JsonConvert.DeserializeObject<CustomFun>(CustomFun_Json);
+                    if (cf != null) { cf.Exec(); }
+                }
+
             }
             return Json(result);
         }
@@ -430,10 +441,19 @@ namespace Investment.Controllers
         /// 不同意
         /// </summary>
         /// <returns></returns>
-        public ActionResult Disagree(int WorkFlowID, string Opinion, string hid_attachment)
+        public ActionResult Disagree(int WorkFlowID, string Opinion, string hid_attachment, string CustomFun_Json = null)
         {
             WorkFlowModel wfm = new WorkFlowModel();
             var result = wfm.WorkFlow_Disagree(WorkFlowID, LoginAccount.UserID, Opinion);
+            if (result.HasError == false)
+            {
+                //执行自定义函数
+                if (CustomFun_Json != null && CustomFun_Json.Length > 0)
+                {
+                    var cf = Newtonsoft.Json.JsonConvert.DeserializeObject<CustomFun>(CustomFun_Json);
+                    if (cf != null) { cf.Exec(); }
+                }
+            }
             return Json(result);
         }
 
@@ -446,6 +466,41 @@ namespace Investment.Controllers
             WorkFlowModel wfm = new WorkFlowModel();
             var result = wfm.WorkFlow_Reject(WorkFlowID, LoginAccount.UserID, Node, Opinion);
             return Json(result);
+        }
+
+        /// <summary>
+        /// 自定义函数委托
+        /// </summary>
+        public class CustomFun
+        {
+            /// <summary>
+            /// 函数名称
+            /// </summary>
+            public string FunName { get; set; }
+
+            /// <summary>
+            /// 函数参数
+            /// </summary>
+            public dynamic FunParam { get; set; }
+
+            public Result Exec()
+            {
+                Result reslut = null;
+                switch (FunName)
+                {
+                    case "GMY":
+                        reslut = GMY(FunParam);
+                        break;
+                }
+                return reslut;
+            }
+
+            public Result GMY(dynamic FunParam)
+            {
+                int a = FunParam.A;
+                int b = FunParam.B;
+                return null;
+            }
         }
 
         #endregion

@@ -24,7 +24,7 @@ namespace Entity
         public virtual Group Group { get; set; }
 
         /// <summary>
-        /// 登陆账号
+        /// 登录账号
         /// </summary>
         [Display(Name = "登录账号")]
         [Required(ErrorMessage = "请输入登录账号")]

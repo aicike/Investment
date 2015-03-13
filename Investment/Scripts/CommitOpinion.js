@@ -2,12 +2,15 @@
     $(".btnCommitOpinion").click(function () {
         try {
             var url = $(this).attr("commit");
+            var CustomFun_Json = $(this).attr("CustomFun");
+            if (CustomFun_Json == undefined || CustomFun_Json == null) {
+                CustomFun_Json = "";
+            }
             var value = $(this).parent().parent().find(".txtCommitOpinion").val().trim();
             var approvalrecord = $(this).attr("status");
             if (approvalrecord == "approvalrecord2" || approvalrecord == "approvalrecord3") {
                 if (value.length <= 0) {
                     JMessage("请填写审批意见。", true);
-                    return false;
                 }
             }
             open_modal_div();
@@ -31,7 +34,7 @@
                 });
             } else {
                 //同意，不同意
-                $.post(url, { WorkFlowID: CommitOpinion_WorkFlowID, Opinion: value, hid_attachment: hid_attachment }, function (result) {
+                $.post(url, { WorkFlowID: CommitOpinion_WorkFlowID, Opinion: value, hid_attachment: hid_attachment, CustomFun_Json: CustomFun_Json }, function (result) {
                     close_modal_div();
                     if (result.HasError) {
                         JMessage("操作失败，请联系管理员。", true);
