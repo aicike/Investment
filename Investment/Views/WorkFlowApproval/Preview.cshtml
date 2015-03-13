@@ -164,7 +164,7 @@
                                                         <input type="checkbox" value="@AllProduct[i].ID" name="CK_Product" />
                                                         @AllProduct[i].Name
                                                     </label>
-                                                   <a href="@Url.Action("GetInfo", "MechanismProducts", new { MPID = MatchingProduct[i].ID })" target="_blank">(查看详细)</a>
+                                                   <a href="@Url.Action("GetInfo", "MechanismProducts", new { MPID = AllProduct[i].ID })" target="_blank">(查看详细)</a>
                                                 </td>
                                                 <td>
                                                     @if (i != AllProduct.Count - 1)
@@ -174,7 +174,7 @@
                                                             <input type="checkbox" value="@AllProduct[i].ID" name="CK_Product" />
                                                             @AllProduct[i].Name
                                                         </label>
-                                                        <a href="@Url.Action("GetInfo", "MechanismProducts", new { MPID = MatchingProduct[i].ID })" target="_blank">(查看详细)</a>
+                                                        <a href="@Url.Action("GetInfo", "MechanismProducts", new { MPID = AllProduct[i].ID })" target="_blank">(查看详细)</a>
                                                     }
                                                 </td>
                                             </tr>

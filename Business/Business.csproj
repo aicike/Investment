@@ -79,6 +79,7 @@
     <Compile Include="FinancingModel.cs" />
     <Compile Include="IndustryLevelModel.cs" />
     <Compile Include="IndustryModel.cs" />
+    <Compile Include="InterestManagerModel.cs" />
     <Compile Include="MechanismProductsModel.cs" />
     <Compile Include="PositionModel.cs" />
     <Compile Include="Position_AccountModel.cs" />

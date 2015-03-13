@@ -161,6 +161,7 @@ namespace Business
                     var number = com.SqlQuery<string>("select dbo.GetWorkFlowNumber('ZH',3)");
                     workflow.Number = number.FirstOrDefault();
                     workflow.State = 1;
+                    workflow.IsInterest = false;
                     //查找下一节点
                     WorkFlow_NodeModel w_nModel = new WorkFlow_NodeModel();
                     var workflow_node = w_nModel.Getwork_node(workflow.Financing.WorkFlowManagerID.Value, 2);
@@ -551,5 +552,21 @@ namespace Business
             }
             return result;
         }
+
+        /// <summary>
+        /// 更改放款日期
+        /// </summary>
+        /// <param name="workflowID"></param>
+        /// <param name="FKRI"></param>
+        /// <returns></returns>
+        public Result Upd_FKRI(int workflowID, string FKRI)
+        {
+            Result result = new Result();
+            string sql = string.Format("update workflow set LoanDay ='{0}'  where id = {1}",FKRI,workflowID);
+            base.SqlExecute(sql);
+            return result;
+        }
+
+        
     }
 }

@@ -183,5 +183,21 @@ namespace Investment.Controllers
 
             return PartialView(mchanismproducts);
         }
+
+
+        /// <summary>
+        /// 放款日期控件
+        /// </summary>
+        /// <param name="WorkFlowID"></param>
+        /// <returns></returns>
+        public ActionResult FangKuanRIQI(int WorkFlowID)
+        {
+            WorkFlowModel wfm = new WorkFlowModel();
+            var wf = wfm.Get(WorkFlowID);
+
+            return PartialView(wf);
+        }
+
+
     }
 }

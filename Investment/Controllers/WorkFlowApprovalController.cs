@@ -359,7 +359,36 @@ namespace Investment.Controllers
 
         #endregion
 
+        #region 确认放款日期
 
+        public ActionResult FangKuanRiQi(int WorkFlowID)
+        {
+            WorkFlowModel WFModel = new WorkFlowModel();
+            var item = WFModel.Get(WorkFlowID);
+            CheckGroupAccount(item);
+            return View(item);
+        }
+
+        //日期同意 审批
+        public ActionResult Agree(int WorkFlowID, string Opinion, string hid_attachment, string FKRI)
+        {
+            WorkFlowModel wfm = new WorkFlowModel();
+            var workFlow = wfm.Get(WorkFlowID);
+            //更改放款日期
+            wfm.Upd_FKRI(WorkFlowID, FKRI);
+            var result = wfm.WorkFlow_Agree(WorkFlowID, LoginAccount.UserID, Opinion);
+            if (result.HasError == false && string.IsNullOrEmpty(hid_attachment) == false)
+            {
+                var attachment = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Attachment>>(hid_attachment);
+                AttachmentModel attachmentModel = new AttachmentModel();
+                foreach (var item in attachment)
+                {
+                    attachmentModel.CopyAttachment_Company(workFlow.CompanyID, item, "/Approval" + WorkFlowID);
+                }
+            }
+            return Json(result);
+        }
+        #endregion
 
 
 

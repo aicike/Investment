@@ -54,6 +54,7 @@
     <Compile Include="FinancingMatching.cs" />
     <Compile Include="Industry.cs" />
     <Compile Include="IndustryLevel.cs" />
+    <Compile Include="Interest.cs" />
     <Compile Include="MechanismProducts.cs" />
     <Compile Include="Enum\EnumAttachmentType.cs" />
     <Compile Include="Mechanism.cs" />

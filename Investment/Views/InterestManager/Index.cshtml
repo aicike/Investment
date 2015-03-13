@@ -1,0 +1,154 @@
+﻿@{
+    ViewBag.Title = "利息管理";
+    Layout = "~/Views/Shared/_Layout_noMenu.cshtml";
+    var intlist = ViewBag.intlist as List<Entity.Interest>;
+}
+@section scripts{
+<script>
+    function ckbQRSBJ() {
+        AppDelete("");
+    }
+</script>
+    <style>
+        .td_title
+        {
+            text-align: center !important;
+            background-color: #f9f9f9;
+        }
+    </style>
+}
+@model Entity.WorkFlow
+<div class="row-fluid">
+    <div class="span12">
+        @using (Ajax.BeginForm("EditSHBJ", "InterestManager", new { WorkFlowID = Model.ID }, new AjaxOptions() { UpdateTargetId = "alert" }, new { @class = "form-horizontal" }))
+        {
+            if (!Model.IsInterest)
+            {
+            <div class="myoption">
+                <input type="submit" onclick="return AppDelete('确认已收回本金？确认后不可再次更改！');" value="确认收回本金" class="btn blue"  />
+            </div>
+            }
+        }
+        <div class="portlet box blue" style="margin-top: 10px;">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-cogs"></i>利息管理
+                </div>
+                <div class="tools">
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="span12" style="margin-left: 0px">
+                    <table class="table table-bordered dataTable" style="border-collapse: collapse">
+                        <tr>
+                            <td style="width: 200px" class="td_title">
+                                单号：
+                            </td>
+                            <td style="width: 30%">
+                                @Model.Number
+                            </td>
+                            <td style="width: 200px" class="td_title">
+                                公司名称：
+                            </td>
+                            <td style="width: 30%">
+                                @Model.Financing.Company.Name
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 200px" class="td_title">
+                                贷款主体：
+                            </td>
+                            <td>
+                                @Model.Financing.Name
+                            </td>
+                            <td style="width: 200px" class="td_title">
+                                贷款金额：
+                            </td>
+                            <td>
+                                @Model.Financing.Amount
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 200px" class="td_title">
+                                每月利息：
+                            </td>
+                            <td>
+                                @Model.Financing.ShouYiLv%
+                            </td>
+                            <td style="width: 200px" class="td_title">
+                                贷款期限：
+                            </td>
+                            <td>
+                                @Model.Financing.MinTimeLimit + @Model.Financing.MaxTimeLimit
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 200px" class="td_title">
+                                放款日期：
+                            </td>
+                            <td>
+                                @Model.LoanDay
+                            </td>
+                            <td style="width: 200px" class="td_title">
+                                是否已收回本金：
+                            </td>
+                            <td>
+                                @if (Model.IsInterest)
+                                { 
+                                    @:是
+                            }
+                                else
+                                { 
+                                    @:否
+                                                                                                                            }
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <table class="table table-bordered table-hover" id="table_company">
+                    <tr>
+                        <th style="">
+                            日期
+                        </th>
+                        <th style="width: 150px;">
+                            是否已收取利息
+                        </th>
+                        <th style="width: 150px;">
+                            操作日期
+                        </th>
+                        <th style="width: 150px;">
+                            操作
+                        </th>
+                    </tr>
+                    @foreach (var item in intlist)
+                    {
+                        <tr>
+                            <td>
+                                @item.BeginDate.ToString("yyyy-MM-dd") —— @item.EndDate.ToString("yyyy-MM-dd")
+                            </td>
+                            <td>
+                                @if (item.IsCharge)
+                                { 
+                                    <span style="color: #428bca">已收取利息</span>    
+                                }
+                                else
+                                { 
+                                    <span style="color: #f3565d">未收取利息</span>    
+                                }
+                            </td>
+                            <td>
+                                @if (item.OperDate.HasValue)
+                                { 
+                                    @item.OperDate.Value.ToString("yyyy-MM-dd")    
+                                }
+                            </td>
+                            <td>
+                                @Ajax.ActionLink("已收利息", "EditInterest", "InterestManager", new { id = item.ID }, new AjaxOptions() { UpdateTargetId = "alert", OnBegin = "return AppDelete('确定已收利息?确认后将不可更改！')" })
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

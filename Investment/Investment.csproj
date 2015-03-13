@@ -124,6 +124,7 @@
     <Compile Include="Controllers\GroupProfileController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InfoMatchingController.cs" />
+    <Compile Include="Controllers\InterestManagerController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MechanismController.cs" />
     <Compile Include="Controllers\MechanismProductsController.cs" />
@@ -1159,6 +1160,8 @@
     <Content Include="Views\Company\EditRealEstate.cshtml" />
     <Content Include="Views\Company\JGJDXXList.cshtml" />
     <Content Include="Views\ToLoanMatching\IndexAll.cshtml" />
+    <Content Include="Views\WorkFlowApproval\FangKuanRiQi.cshtml" />
+    <Content Include="Views\InterestManager\Index.cshtml" />
     <None Include="Views\WorkFlowApproval\QianShuXieYi.cshtml" />
     <None Include="Views\WorkFlowApproval\QueRenShouQuFeiYong.cshtml" />
     <Content Include="Views\WorkFlowApproval\SelInfoPath.cshtml" />
@@ -1175,6 +1178,7 @@
     <Content Include="Views\WorkFlowApproval\FengKongShenHe.cshtml" />
     <Content Include="Views\WorkFlowApproval\FangKuan.cshtml" />
     <Content Include="Views\WorkFlow\EditABRole.cshtml" />
+    <Content Include="Views\WorkFlow_Form_Financing\FangKuanRIQI.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
