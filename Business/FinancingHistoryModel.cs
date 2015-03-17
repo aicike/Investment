@@ -11,8 +11,9 @@ namespace Business
         public Result Add(int financingID)
         {
             FinancingModel fm = new FinancingModel();
-            var financing= fm.Get(financingID);
+            var financing = fm.Get(financingID);
             FinancingHistory fh = new FinancingHistory();
+            fh.FinancingID = financingID;
             fh.CreatDateTime = DateTime.Now;
             fh.CreatGroupAccountID = financing.Owner_A_ID.Value;
             fh.CompanyID = financing.CompanyID;
@@ -36,7 +37,14 @@ namespace Business
             fh.BusinessResource = financing.BusinessResource;
             fh.BusinessType = financing.BusinessType;
             fh.WorkFlowManagerID = financing.WorkFlowManagerID;
-            return base.Add(fh);
+            var result = base.Add(fh);
+            result.Entity = fh;
+            return result;
+        }
+
+        public FinancingHistory GetByFinancingID(int financingID)
+        {
+            return List().Where(a => a.FinancingID == financingID).OrderByDescending(a => a.ID).FirstOrDefault();
         }
     }
 }

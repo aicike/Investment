@@ -1151,12 +1151,12 @@
     <Content Include="Views\Company\Edit.cshtml" />
     <Content Include="Views\Company\Add4.cshtml" />
     <Content Include="Views\Company\Index_gl.cshtml" />
-    <Content Include="Views\Company\Detail2.cshtml" />    
+    <Content Include="Views\Company\Detail2.cshtml" />
     <Content Include="Views\Company\Detail.cshtml" />
     <Content Include="Views\Company\JGJDXX.cshtml" />
     <Content Include="Views\Company\EditWith.cshtml" />
     <Content Include="Views\Company\EditFinance.cshtml" />
-        <Content Include="Views\Company\EditRealEstate.cshtml" />
+    <Content Include="Views\Company\EditRealEstate.cshtml" />
     <Content Include="Views\Company\JGJDXXList.cshtml" />
     <None Include="Views\WorkFlowApproval\QianShuXieYi.cshtml" />
     <None Include="Views\WorkFlowApproval\QueRenShouQuFeiYong.cshtml" />
@@ -1174,6 +1174,7 @@
     <Content Include="Views\WorkFlowApproval\FengKongShenHe.cshtml" />
     <Content Include="Views\WorkFlowApproval\FangKuan.cshtml" />
     <Content Include="Views\WorkFlow\EditABRole.cshtml" />
+    <Content Include="Views\WorkLog\MyWorkLog.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

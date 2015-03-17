@@ -1,6 +1,7 @@
 ﻿@{
     ViewBag.Title = "贷款信息";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var fh = ViewBag.FH as Entity.FinancingHistory;
 }
 @helper GetEditStr(Entity.Financing financing)
     {
@@ -208,7 +209,7 @@
                                                     break;
                                                     case 2:
                                                     @:融资顾问
-                                                                                                                                                                                                                                                                                                                                                                                                                                                    break;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    break;
                                                 }
                                             </span>
                                         }
@@ -291,7 +292,7 @@
                                             break;
                                                 case 2:
                                                 @:不通过
-                                                                                       break;
+                                                                                                                                                                               break;
                                             }
                                         </span><span class="help-inline" style="margin-top: 7px;">@GetEditStr(Model)</span>
                                     </div>
@@ -316,7 +317,27 @@
                                                 case 2:
 
                                                 @:已完成
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            break;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    break;
+                                            }
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row-fluid">
+                            <div class="span5">
+                                <div class="control-group">
+                                    <label class="control-label">
+                                        最近一次修改时间：</label>
+                                    <div class="controls">
+                                        <span class="help-inline" style="margin-top: 7px;">
+                                            @if (fh == null)
+                                            {
+                                                @:-
+                                            }
+                                            else
+                                            {
+                                                @fh.CreatDateTime.ToString("yyyy-MM-dd hh:mm")
                                             }
                                         </span>
                                     </div>

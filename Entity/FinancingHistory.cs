@@ -14,6 +14,11 @@ namespace Entity
         public int ID { get; set; }
 
         /// <summary>
+        /// 原贷款信息ID
+        /// </summary>
+        public int FinancingID { get; set; }
+
+        /// <summary>
         /// 最后一次修改时间
         /// </summary>
         public DateTime CreatDateTime { get; set; }

@@ -69,5 +69,10 @@ namespace Investment.Controllers
                 return "<script>window.location.href='" + Url.Action("Index", "WorkLog", new { workFlowID = workFlowID, hasGroupAccount = false }) + "';</script>";
             }
         }
+
+        public ActionResult MyWorkLog()
+        {
+            return View();
+        }
     }
 }

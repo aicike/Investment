@@ -17,6 +17,21 @@ namespace Entity
         public int ID { get; set; }
 
         /// <summary>
+        /// 原公司信息ID
+        /// </summary>
+        public int CompanyID { get; set; }
+
+        /// <summary>
+        /// 最后一次修改时间
+        /// </summary>
+        public DateTime CreatDateTime { get; set; }
+
+        /// <summary>
+        /// 最后一次修改人
+        /// </summary>
+        public int CreatGroupAccountID { get; set; }
+
+        /// <summary>
         /// 状态：-1未提交审核   0未审核   1:审核通过    2:审核不通过
         /// </summary>
         public int Status { get; set; }
@@ -26,8 +41,6 @@ namespace Entity
         /// </summary>
         public int? OwnerID { get; set; }
 
-        public virtual GroupAccount Owner { get; set; }
-
         /// <summary>
         /// 所属行业
         /// </summary>
@@ -35,17 +48,13 @@ namespace Entity
         [Required(ErrorMessage = "请选择所属行业")]
         [RegularExpression(@"\d+", ErrorMessage = "请选择所属行业")]
         public int IndustryID { get; set; }
-
-        public virtual Industry Industry { get; set; }
-
+        
         /// <summary>
         /// 所属行业级别
         /// </summary>
         [Display(Name = "公司规模")]
         [RegularExpression(@"\d+", ErrorMessage = "公司规模")]
         public int IndustryLevelID { get; set; }
-
-        public virtual IndustryLevel IndustryLevel { get; set; }
 
         /// <summary>
         /// 信息是否齐全
@@ -307,32 +316,6 @@ namespace Entity
         /// </summary>
         [Display(Name = "关联公司")]
         public string GuanLianGongSi { get; set; }
-
-
-        //----------------------子表------------------------------------------
-        /// <summary>
-        /// 公司用户表
-        /// </summary>
-        public virtual ICollection<CompanyAccount> CompanyAccount { get; set; }
-
-        public virtual ICollection<CompanyLoan> CompanyLoans { get; set; }
-
-        /// <summary>
-        /// 主关联该对象公司的公司（不常用）
-        /// </summary>
-        public virtual ICollection<CompanyRelation> CompanyRelations1 { get; set; }
-
-        /// <summary>
-        /// 我的关联公司（常用）
-        /// </summary>
-        public virtual ICollection<CompanyRelation> CompanyRelations2 { get; set; }
-
-        public virtual ICollection<Financing> Financings { get; set; }
-
-        public virtual ICollection<WorkFlow> WorkFlows { get; set; }
-
-
-        public virtual ICollection<CompanyReference> CompanyReference { get; set; }
 
     }
 }

@@ -83,6 +83,12 @@ namespace Investment.Controllers
             newGAList.AddRange(ga_list);
             ViewData["gaList"] = newGAList;
 
+            //最近一次修改记录
+            FinancingHistoryModel fhm = new FinancingHistoryModel();
+            var fh = fhm.GetByFinancingID(id);
+            ViewBag.FH = fh;
+
+
             return View(obj);
         }
 
@@ -189,13 +195,20 @@ namespace Investment.Controllers
             Result result = null;
             if (status == 2)
             {
-                //同意修改后，保存镜像到历史记录表中
+                //同意修改后，保存镜像到历史记录表中(贷款信息)
                 FinancingHistoryModel fhm = new FinancingHistoryModel();
                 result = fhm.Add(id);
                 if (result.HasError == false)
                 {
+                    var f = result.Entity as FinancingHistory;
+                    //同意修改后，保存镜像到历史记录表中(公司信息)
+                    CompanyHistoryModel chm = new CompanyHistoryModel();
+                    result = chm.Add(f.CompanyID);
+                }
+                if (result.HasError == false)
+                {
                     //同意修改后，审核状态为未提交审核
-                    result= fm.ChangeAuditStatus(id, -1);
+                    result = fm.ChangeAuditStatus(id, -1);
                 }
             }
             result = fm.ChangeEditStatus(id, status);

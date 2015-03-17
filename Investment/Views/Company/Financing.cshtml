@@ -169,12 +169,13 @@
 
                                         }
                                     }
-                                    @Html.ActionLink("详细", "Detail", "Financing", new { id = item.ID }, null, true)
                                     @if ((ViewBag.LoginUesrID == item.Owner_A_ID) && (item.AuditStatus == -1 || item.AuditStatus == 2||item.EditStatus==2))
-                                    { 
-                                        @Html.ActionLink("修改", "EditFinancing", "Company", new { id = item.ID, companyID = company.ID, page = ViewBag.Page, fromID = 1 }, null, true)@:
+                                    { <br />
+                                        @Html.ActionLink("修改贷款信息", "EditFinancing", "Company", new { id = item.ID, companyID = company.ID, page = ViewBag.Page, fromID = 1 }, null, true)<br />
+                                        @Html.ActionLink("修改客户信息", "Edit", "Company", new { id = item.CompanyID, page = ViewBag.Page, fromID = 1 }, null, true)<br />
                                         @Ajax.ActionLink("删除", "DeleteFinancing", "Company", new { id = item.ID, companyID = company.ID, page = ViewBag.Page, fromID = 1 }, new AjaxOptions() { UpdateTargetId = "alert", OnBegin = "return AppDelete('确定删除?删除此项将会删除其关联的所有数据！')" }, true)
                                     }
+                                    @Html.ActionLink("详细", "Detail", "Financing", new { id = item.ID }, null, true)
                                 </td>
                             </tr>
                         }

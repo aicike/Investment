@@ -101,6 +101,7 @@
     <Compile Include="WorkFlowNodeManagerModel.cs" />
     <Compile Include="WorkFlow_NodeModel.cs" />
     <Compile Include="WorkLogModel.cs" />
+    <Compile Include="CompanyHistoryModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EF\EF.csproj">
