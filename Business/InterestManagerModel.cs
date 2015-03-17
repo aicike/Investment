@@ -46,6 +46,8 @@ namespace Business
             using (TransactionScope scope = new TransactionScope())
             {
                 Interest interest = new Interest();
+                interest.CWZJSendEmail = false;
+                interest.JLSendEmail = false;
                 interest.IsCharge = false;
                 interest.WorkFlowID = workflowID;
                 for (int i = 0; i < mindate; i++)
@@ -68,6 +70,27 @@ namespace Business
                 scope.Complete();
             }
             return result;
+        }
+
+        /// <summary>
+        /// 更改项目经理 已发邮件
+        /// </summary>
+        /// <param name="id"></param>
+        public void UpdJLSendEmail(int id)
+        {
+            var item = base.Get(id);
+            item.JLSendEmail = true;
+            base.Edit(item);
+        }
+        /// <summary>
+        /// 更改财务总监 已发邮件
+        /// </summary>
+        /// <param name="id"></param>
+        public void UpdCWZJSendEmail(int id)
+        {
+            var item = base.Get(id);
+            item.CWZJSendEmail = true;
+            base.Edit(item);
         }
     }
 }

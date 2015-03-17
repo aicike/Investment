@@ -87,6 +87,11 @@ namespace Entity
         /// </summary>
         public bool IsInterest { get; set; }
 
+        /// <summary>
+        /// 是否已发邮件
+        /// </summary>
+        public bool IsSendEmail { get; set; }
+
         //-------------子表----------------------------
         /// <summary>
         /// 审批记录表

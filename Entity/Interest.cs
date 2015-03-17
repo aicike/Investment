@@ -44,5 +44,15 @@ namespace Entity
         /// 类别 0 最小还款月份 1最多还款月份
         /// </summary>
         public int? type { get; set; }
+
+        /// <summary>
+        /// 是否已经给项目经理发送通知
+        /// </summary>
+        public bool JLSendEmail { get; set; }
+
+        /// <summary>
+        /// 是否已给财务总监发送通知
+        /// </summary>
+        public bool CWZJSendEmail { get; set; }
     }
 }

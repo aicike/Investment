@@ -575,6 +575,22 @@ namespace Business
             return result;
         }
 
-        
+        /// <summary>
+        /// 更改流程 已发邮件
+        /// </summary>
+        /// <param name="workflowID"></param>
+        /// <returns></returns>
+        public Result Upd_EmailType(int workflowID)
+        {
+            Result result = new Result();
+            var item = base.Get(workflowID);
+            item.IsSendEmail = true;
+            result = base.Edit(item);
+            return result;
+        }
+
+
+
+
     }
 }

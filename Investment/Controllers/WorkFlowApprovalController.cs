@@ -74,6 +74,7 @@ namespace Investment.Controllers
                 workflow.FinancingID = financingID;
                 workflow.FormJson = "";
                 workflow.State = 0;
+                workflow.IsSendEmail = false;
                 workflow.CompanyID = financing.CompanyID;
                 result = WFModel.Add(workflow);
                 if (!string.IsNullOrEmpty(Products))
