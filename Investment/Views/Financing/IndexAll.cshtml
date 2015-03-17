@@ -61,6 +61,9 @@
                 <table class="table table-bordered table-hover" id="table_company">
                     <thead>
                         <tr>
+                            <th style="width: 50px">
+                                序号
+                            </th>
                             <th style="width: 200px;">
                                 贷款主体
                             </th>
@@ -94,9 +97,17 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @{
+                            var i = 1;
+                            var page = (Model.CurrentPageIndex - 1) * Model.PageSize;
+                        }
                         @foreach (var item in Model)
                         {
+                                 
                             <tr>
+                                <td>@(page + i)
+                                    @{i++;}
+                                </td>
                                 <td>
                                     @item.Name
                                 </td>
@@ -110,14 +121,14 @@
                                     @if (item.MaxTimeLimit != 0)
                                     {
                                         @:@item.MinTimeLimit + @item.MaxTimeLimit
-                                    }
+                                                                            }
                                     else
                                     {
                                         @item.MinTimeLimit
                                     }
                                 </td>
                                 <td>
-                                    @item.ShouYiLv @(item.ShouYiLvType==0?"月":"年")
+                                    @item.ShouYiLv @(item.ShouYiLvType == 0 ? "月" : "年")
                                 </td>
                                 <td>
                                     @(item.WorkFlowManager == null ? "-" : @item.WorkFlowManager.Name)
@@ -136,10 +147,10 @@
                                                 break;
                                         case 2:
                                         @:已完成
-                                                break;
+                                                                                    break;
                                     }
                                 </td>
-                                 <td>
+                                <td>
                                     @if (item.AuditStatus == -1)
                                     { 
                                         @:未提交审核
@@ -157,7 +168,7 @@
                                     else if (item.AuditStatus == 2)
                                     { 
                                         @:未通过
-                                    }
+                                                                        }
                                 </td>
                                 <td>
                                     @Html.ActionLink("详细", "Detail", "Financing", new { id = item.ID }, null, true)

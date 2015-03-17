@@ -58,6 +58,7 @@
                 <table class="table table-bordered table-hover" id="table_company">
                     <thead>
                         <tr>
+                            <th style=" width:50px">序号</th>
                             <th>
                                 客户名称
                             </th>
@@ -73,9 +74,16 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @{
+                        var i = 1;
+                        var page = (Model.CurrentPageIndex - 1) * Model.PageSize;
+                        }
                         @foreach (var item in Model)
                         {
                             <tr>
+                                <td>@(page+i)
+                                    @{i++;}
+                                </td>
                                 <td>
                                     @item.Name
                                 </td>

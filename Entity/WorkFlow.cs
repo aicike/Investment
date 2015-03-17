@@ -77,6 +77,20 @@ namespace Entity
         public int? WorkFlow_NodeID { get; set; }
         public virtual WorkFlow_Node WorkFlow_Node { get; set; }
 
+        /// <summary>
+        /// 放款日期
+        /// </summary>
+        public DateTime? LoanDay { get; set; }
+
+        /// <summary>
+        /// 是否已收利息
+        /// </summary>
+        public bool IsInterest { get; set; }
+
+        /// <summary>
+        /// 是否已发邮件
+        /// </summary>
+        public bool IsSendEmail { get; set; }
 
         //-------------子表----------------------------
         /// <summary>
@@ -93,6 +107,10 @@ namespace Entity
         /// 工作日志
         /// </summary>
         public virtual ICollection<WorkLog> WorkLogs { get; set; }
-        
+
+        /// <summary>
+        /// 利息表（自有）
+        /// </summary>
+        public virtual ICollection<Interest> Interest { get; set; }
     }
 }

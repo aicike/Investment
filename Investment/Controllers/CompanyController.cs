@@ -204,7 +204,7 @@ namespace Investment.Controllers
         {
             CompanyModel companyModel = new CompanyModel();
             var company = companyModel.Get(id);
-            if (company.Phone!=null&&company.Phone == "0")
+            if (company.Phone!=null&& company.Phone == "0")
             {
                 company.Phone = "";
             }

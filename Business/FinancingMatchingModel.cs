@@ -63,7 +63,7 @@ namespace Business
         public IQueryable<FinancingMatching> GetMatchingZY()
         {
             var query = from a in Context.Financings
-                        where a.WorkFlowManagerID == 4 && a.Status == 0
+                        where a.WorkFlowManagerID == 4 && a.Status == 0 && a.AuditStatus == 1 
                         orderby a.ID
                         select new FinancingMatching { FID = a.ID, FName = a.Name, MID = a.ID, MName = a.Name };
             return query;

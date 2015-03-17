@@ -26,7 +26,7 @@ namespace Business
 
         public Menu GetMenuByController(string controller)
         {
-            return List().Where(a => a.Controller.Equals(controller, StringComparison.CurrentCultureIgnoreCase)).OrderBy(a=>a.ID).FirstOrDefault();
+            return List().Where(a => a.Controller.Equals(controller, StringComparison.CurrentCultureIgnoreCase)).OrderBy(a => a.ID).FirstOrDefault();
         }
         #endregion
 
@@ -55,7 +55,7 @@ namespace Business
         /// <returns></returns>
         public List<Menu> GetMenuForAdmin()
         {
-            var list = List().ToList().Where(a => a.AccountType==0&& a.ParentMenuID.HasValue==false).OrderBy(a => a.Order).ToList();
+            var list = List().ToList().Where(a => a.AccountType == 0 && a.ParentMenuID.HasValue == false).OrderBy(a => a.Order).ToList();
             foreach (var item in list)
             {
                 item.Menus = item.Menus.OrderBy(a => a.Order).ToList();
@@ -71,18 +71,32 @@ namespace Business
             //判断有没有权限操作当前菜单(Contorller)
             RoleMenuModel roleMenuModel = new RoleMenuModel(); ;
 
-            var menu = roleMenuModel.List().Where(a => roleID.Contains(a.RoleID) &&
-                                                       ((area != null && a.Menu.Area != null && a.Menu.Area.Equals(area, StringComparison.CurrentCultureIgnoreCase)) || (area == null && a.Menu.Area == null)) &&
-                                                       (a.Menu.Controller != null && a.Menu.Controller.Equals(controller, StringComparison.CurrentCultureIgnoreCase))).Select(a => a.Menu).FirstOrDefault();
-            
+            //var menu = roleMenuModel.List().Where(a => roleID.Contains(a.RoleID) &&
+            //                                           ((area != null && a.Menu.Area != null && a.Menu.Area.Equals(area, StringComparison.CurrentCultureIgnoreCase)) || (area == null && a.Menu.Area == null)) &&
+            //                                           (a.Menu.Controller != null && a.Menu.Controller.Equals(controller, StringComparison.CurrentCultureIgnoreCase))).Select(a => a.Menu).FirstOrDefault();
 
-            if (menu == null) { return false; }
+
+            //if (menu == null) { return false; }
 
             //判断有没有权限操作当前功能(Action)
+            //RoleOptionModel roleOptionModel = new RoleOptionModel();
+            //var result = roleOptionModel.List().Any(a => roleID.Contains(a.RoleID) &&
+            //                                             a.MenuOption.MenuID == menu.ID &&
+            //                                             a.MenuOption.Action.Equals(action, StringComparison.CurrentCultureIgnoreCase));
+
+            var menu = roleMenuModel.List().Where(a => roleID.Contains(a.RoleID) &&
+                                                       ((area != null && a.Menu.Area != null && a.Menu.Area.Equals(area, StringComparison.CurrentCultureIgnoreCase)) || (area == null && a.Menu.Area == null)) &&
+                                                       (a.Menu.Controller != null && a.Menu.Controller.Equals(controller, StringComparison.CurrentCultureIgnoreCase))).Select(a => a.Menu).ToList();
+
+
+            if (menu == null || menu.Count == 0) { return false; }
+            //判断有没有权限操作当前功能(Action)
+            var menuIDs = menu.Select(a => a.ID).ToList();
             RoleOptionModel roleOptionModel = new RoleOptionModel();
             var result = roleOptionModel.List().Any(a => roleID.Contains(a.RoleID) &&
-                                                         a.MenuOption.MenuID == menu.ID &&
+                                                        menuIDs.Contains(a.MenuOption.MenuID) &&
                                                          a.MenuOption.Action.Equals(action, StringComparison.CurrentCultureIgnoreCase));
+
             return result;
         }
 

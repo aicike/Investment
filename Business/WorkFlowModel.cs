@@ -161,6 +161,7 @@ namespace Business
                     var number = com.SqlQuery<string>("select dbo.GetWorkFlowNumber('ZH',3)");
                     workflow.Number = number.FirstOrDefault();
                     workflow.State = 1;
+                    workflow.IsInterest = false;
                     //查找下一节点
                     WorkFlow_NodeModel w_nModel = new WorkFlow_NodeModel();
                     var workflow_node = w_nModel.Getwork_node(workflow.Financing.WorkFlowManagerID.Value, 2);
@@ -245,7 +246,7 @@ namespace Business
                         base.Edit(workflow);
                         //生成产品快照
                         Get_To_Json_Product(WorkFlowID);
-
+                        
                     }
                     else
                     {
@@ -263,6 +264,14 @@ namespace Business
             {
                 //邮件通知 流程结束
                 EmailApprovalNotice(WorkFlowID, 4, "");
+                FinancingModel FModel = new FinancingModel();
+                var financing = FModel.Get(workflow.FinancingID);
+                //生成利息 自有
+                if (financing.WorkFlowManagerID == 4)
+                {
+                    InterestManagerModel immodel = new InterestManagerModel();
+                    immodel.InsertInterest(financing.ID, workflow.ID);
+                }
             }
             else
             {
@@ -551,5 +560,37 @@ namespace Business
             }
             return result;
         }
+
+        /// <summary>
+        /// 更改放款日期
+        /// </summary>
+        /// <param name="workflowID"></param>
+        /// <param name="FKRI"></param>
+        /// <returns></returns>
+        public Result Upd_FKRI(int workflowID, string FKRI)
+        {
+            Result result = new Result();
+            string sql = string.Format("update workflow set LoanDay ='{0}'  where id = {1}",FKRI,workflowID);
+            base.SqlExecute(sql);
+            return result;
+        }
+
+        /// <summary>
+        /// 更改流程 已发邮件
+        /// </summary>
+        /// <param name="workflowID"></param>
+        /// <returns></returns>
+        public Result Upd_EmailType(int workflowID)
+        {
+            Result result = new Result();
+            var item = base.Get(workflowID);
+            item.IsSendEmail = true;
+            result = base.Edit(item);
+            return result;
+        }
+
+
+
+
     }
 }

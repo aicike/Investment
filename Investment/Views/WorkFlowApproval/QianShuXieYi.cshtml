@@ -86,6 +86,11 @@
             </tr>
             <tr>
                 <td>
+                    @{Html.RenderAction("FangKuanRIQI", "WorkFlow_Form_Financing", new { WorkFlowID = Model.ID });}
+                </td>
+            </tr>
+            <tr>
+                <td>
                     @{Html.RenderAction("ApprovalRecord", "WorkFlow_Form_Financing", new { workflowID = Model.ID });}
                 </td>
             </tr>

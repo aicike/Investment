@@ -28,6 +28,9 @@
                             <th>
                                 贷款主体
                             </th>
+                            <th>
+                                业务类型
+                            </th>
                             <th style="width: 110px;">
                                 申请时间
                             </th>
@@ -63,6 +66,9 @@
                                     @item.Financing.Name
                                 </td>
                                 <td>
+                                    @item.Financing.WorkFlowManager.Name
+                                </td>
+                                <td>
                                     @item.BeginDate.ToString("yyyy/MM/dd")
                                 </td>
                                 <td>
@@ -79,7 +85,7 @@
                                                 break;
                                         case 3:
                                         @:未通过
-                                                                                                                                                                                                                                                                                                                                                                                    break;
+                                                                                                                                                                                                                                                                                                                                                                                                                        break;
                                     }
                                 </td>
                                 <td>
@@ -92,7 +98,7 @@
                                     @foreach (var ar in ars)
                                     {
                                         @:@ar.AccountPosition：@ar.AccountName<br />
-                                                                                                                                                }
+                                                                                                                                                                                    }
                                 </td>
                                 <td>
                                     @Html.ActionLink("工作日志", "Index", "WorkLog", new { workFlowID = item.ID, hasGroupAccount = true }, new { target = "_blank" }, false)
@@ -119,6 +125,9 @@
                                     @financing.Name
                                 </td>
                                 <td>
+                                    @item.Financing.WorkFlowManager.Name
+                                </td>
+                                <td>
                                     @item.BeginDate.ToString("yyyy/MM/dd")
                                 </td>
                                 <td>
@@ -135,7 +144,7 @@
                                                 break;
                                         case 3:
                                         @:未通过
-                                                                                                                                                                                                                                                                                                                                                                                    break;
+                                                                                                                                                                                                                                                                                                                                                                                                                        break;
                                     }
                                 </td>
                                 <td>
@@ -148,10 +157,15 @@
                                     @foreach (var ar in ars)
                                     {
                                         @:@ar.AccountPosition：@ar.AccountName<br />
-                                     }
+                                                                         }
                                 </td>
                                 <td>
                                     @Html.ActionLink("工作日志", "Index", "WorkLog", new { workFlowID = item.ID, hasGroupAccount = true }, new { target = "_blank" }, false)
+                                    @if (item.State == 2 && item.Financing.BusinessType == 1)
+                                    { 
+                                        <br />
+                                        <a href="@Url.Action("Index", "InterestManager", new { WorkFlowID =item.ID})" target="_blank">利息管理</a>
+                                    }
                                 </td>
                             </tr>
                                     }

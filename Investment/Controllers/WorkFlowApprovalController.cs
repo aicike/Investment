@@ -65,12 +65,16 @@ namespace Investment.Controllers
                 //贷款意向
                 FinancingModel FModel = new FinancingModel();
                 var financing = FModel.Get(financingID);
+                //更改贷款意向状态
+                financing.Status =3;
+                FModel.Edit(financing);
                 //流程数据
                 WorkFlow workflow = new WorkFlow();
                 workflow.BeginDate = DateTime.Now;
                 workflow.FinancingID = financingID;
                 workflow.FormJson = "";
                 workflow.State = 0;
+                workflow.IsSendEmail = false;
                 workflow.CompanyID = financing.CompanyID;
                 result = WFModel.Add(workflow);
                 if (!string.IsNullOrEmpty(Products))
@@ -100,7 +104,7 @@ namespace Investment.Controllers
             }
             else
             {
-                return JavaScript("window.location.href='" + Url.Action("Pending", "WorkFlow") + "'");
+                return JavaScript("JMessage('生成成功',false);setTimeout(function(){window.location.href='" + Url.Action("IndexAll", "ToLoanMatching") + "'},1000);");
             }
         }
         #endregion
@@ -144,6 +148,17 @@ namespace Investment.Controllers
             WorkFlowModel WKModel = new WorkFlowModel();
             WorkFlowMechanismProductModel wmpmodel = new WorkFlowMechanismProductModel();
             Result result = new Result();
+            //更改贷款意向状态
+            FinancingModel FModel = new FinancingModel();
+            var fina = WKModel.Get(WorkFlowID);
+            var financing = FModel.Get(fina.FinancingID);
+            financing.Status = 0;
+            result= FModel.Edit(financing);
+            if (result.HasError)
+            {
+                return "<script>JMessage('更改状态时出错，请联系管理员！',true)</script>";
+
+            }
             result = wmpmodel.DelInfo_BYWorkFlowID(WorkFlowID);
             if (result.HasError)
             {
@@ -156,6 +171,7 @@ namespace Investment.Controllers
                 return "<script>JMessage('" + result.Error + "',true)</script>";
 
             }
+            
             return "<script>window.location.href='" + Url.Action("Pending", "WorkFlow") + "';</script>";
 
         }
@@ -344,7 +360,17 @@ namespace Investment.Controllers
 
         #endregion
 
+        #region 确认放款日期
 
+        public ActionResult FangKuanRiQi(int WorkFlowID)
+        {
+            WorkFlowModel WFModel = new WorkFlowModel();
+            var item = WFModel.Get(WorkFlowID);
+            CheckGroupAccount(item);
+            return View(item);
+        }
+
+        #endregion
 
 
 
@@ -444,8 +470,8 @@ namespace Investment.Controllers
                 Result reslut = null;
                 switch (FunName)
                 {
-                    case "GMY":
-                        reslut = GMY(FunParam);
+                    case "FangKuanRiQi":
+                        reslut = FangKuanRiQi(FunParam);
                         break;
                 }
                 return reslut;
@@ -456,6 +482,16 @@ namespace Investment.Controllers
                 int a = FunParam.A;
                 int b = FunParam.B;
                 return null;
+            }
+            public Result FangKuanRiQi(dynamic FunParam)
+            {
+                Result reslut = null;
+                WorkFlowModel wmodel = new WorkFlowModel();
+                int workflowID = FunParam.WorkFlowID;
+                var witem = wmodel.Get(workflowID);
+                witem.LoanDay = FunParam.Date;
+                wmodel.Edit(witem);
+                return reslut;
             }
         }
 

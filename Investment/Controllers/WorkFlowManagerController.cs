@@ -200,11 +200,14 @@ namespace Investment.Controllers
                 
                 //删除节点
                 result = wnModel.Delete(workFlow_nodeID);
+                if (result.HasError)
+                {
+                    return "<script>JMessage('有流程正在此节点审批，不能删除',true)</script>";
+                
+                }
                 wnModel.SetOrder_del(WorkFlowID, wnitem.Order);
                 scope.Complete();
             }
-
-
             if (result.HasError)
             {
                 return "<script>JMessage('" + result.Error + "',true)</script>";

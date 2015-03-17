@@ -1,0 +1,155 @@
+﻿@{
+    ViewBag.Title = Model.WorkFlow_Node.WorkFlowNodeManager.Name;
+    Layout = "~/Views/Shared/_Layout_noMenu.cshtml";
+}
+@model Entity.WorkFlow
+<script type="text/javascript" src="../../Scripts/JqueryUI/i18n/jquery.ui.datepicker-zh-CN.js"></script>
+@section scripts{
+    <script>
+
+        $(function () {
+            SetFC();
+            $("#_Title").hide();
+
+
+              $("#FKRI").datepicker({
+                    changeMonth: true,
+                    changeYear: true,
+        //            onSelect: function (selectedDate) {
+        //                $("#HCheckInDate").datepicker("option", "maxDate", selectedDate);
+        //            }
+                });
+        });
+
+        function SetFC() {
+            var scrolltop = $(document).scrollTop();
+            var buttom = $(document).height() - $(window).height();
+            var mainwidth = $("#TabMain").width() - 12;
+            if ((buttom - scrolltop) <= 60) {
+                $("#div_FC").removeClass("Float_div");
+                $("#div_FC").addClass("Floaty_div");
+
+            }
+            else {
+                $("#div_FC").addClass("Float_div");
+                $("#div_FC").width(mainwidth + "px");
+                $("#div_FC").removeClass("Floaty_div");
+            }
+        }
+
+        function ckFKRI (a)
+        {
+            var fkri = $("#FKRI").val();
+            
+            $(a).attr("href","#");
+            if(fkri =="" ||fkri==undefined)
+            {
+                JMessage("请选择放款日期",true);
+                return false;
+            }
+            
+            $(a).attr("href","#responsive_approvalrecord1");
+             var fkri = $("#FKRI").val();
+             var workflowid = "@Model.ID";
+                var cusjson = '{ FunName: "FangKuanRiQi", FunParam: {Date:"'+fkri+'",WorkFlowID:'+workflowid+'} }';
+                var commitstr = $("#responsive_approvalrecord1").find(".btnCommitOpinion").attr("CustomFun", cusjson);
+        }
+
+        window.onscroll = function () {
+            SetFC();
+        };
+        window.onresize = function () {
+            SetFC();
+        };
+    </script>
+    <style>
+        .Float_div
+        {
+            position: fixed;
+            bottom: 0;
+            margin-bottom: 10px;
+            background: url('/media/image/fancybox_overlay.png');
+            padding: 5px;
+        }
+        .Floaty_div
+        {
+            margin-bottom: 25px;
+            width: 100%;
+            padding: 5px;
+        }
+    </style>
+}
+<div class="row-fluid">
+    <div class="span12" style="margin-top: 50px;">
+        @{Html.RenderAction("RightOption", "WorkFlow_Form_Financing", new { financingID = Model.FinancingID, workflowID = Model.ID });}
+        <table id="TabMain" align="center" style="width: 100%; margin-bottom: 20px;">
+            <tr>
+                <td>
+                    <table style="width: 100%; line-height: 30px">
+                        <tr>
+                            <td colspan="2" align="center">
+                                <span style="font-weight: bold; font-size: 24px">@Model.Financing.WorkFlowManager.Name</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                申请日期：@Model.BeginDate.ToString("yyyy/MM/dd")
+                            </td>
+                            <td style="text-align: right">
+                                单号：@Model.Number
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @{Html.RenderAction("Index", "WorkFlow_Form_Financing", new { financingID = Model.FinancingID, workflowID = Model.ID });}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @{Html.RenderAction("MechanismProducts", "WorkFlow_Form_Financing", new { Products = "", WorkFlowID = Model.ID });}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="span12" style="margin-left: 0px">
+                        <table class="table table-bordered dataTable" style="border-collapse: collapse">
+                            <tr>
+                                <td colspan="6" class="td_title" style="font-weight: bold; text-align: left !important;">
+                                    放款日期
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="text" id="FKRI" name="FKRI" />
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @{Html.RenderAction("ApprovalRecord", "WorkFlow_Form_Financing", new { workflowID = Model.ID });}
+                </td>
+            </tr>
+        </table>
+        <div id="div_FC" class="Float_div control-group">
+            <table align="center">
+                <tr>
+                    <td>
+                        <a class="btn green" onclick="return ckFKRI(this)" id="btn_fangkuanRQ" style="width: 80px"
+                            data-toggle="modal" href="#responsive_approvalrecord1">同意</a> <a href="#responsive_approvalrecord2"
+                                data-toggle="modal" class="btn blue" style="width: 80px; margin-left: 15px;">驳回</a>
+                        <a href="#responsive_approvalrecord3" data-toggle="modal" class="btn red" style="width: 80px;
+                            margin-left: 15px;">不同意</a> <a href="@Url.Action("Pending", "WorkFlow")" class="btn" style="width:80px;margin-left:15px;">
+                                返回</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+@{Html.RenderAction("CommitOpinion", "WorkFlow_Form_Financing", new { WorkFlowID = @Model.ID });}

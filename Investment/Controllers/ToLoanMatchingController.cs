@@ -13,7 +13,7 @@ namespace Investment.Controllers
         //
         // GET: /ToLoanMatching/
         /// <summary>
-        /// 借贷匹配
+        /// 借贷匹配（只匹配自己的客户）
         /// </summary>
         /// <param name="Types">类型 1或无：贷款业务，2自有资金</param>
         /// <returns></returns>
@@ -44,6 +44,40 @@ namespace Investment.Controllers
             var pagelist = fmlist.ToPagedList(id ?? 1, 15);
             return View(pagelist);
 
+        }
+
+        /// <summary>
+        /// 借贷匹配 (全用户)
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="Types">类型 1或无：贷款业务，2自有资金</param>
+        /// <returns></returns>
+        public ActionResult IndexAll(int ? id,int ?Types)
+        {
+            FinancingMatchingModel FMModel = new FinancingMatchingModel();
+            IQueryable<FinancingMatching> fmlist;
+            if (Types.HasValue)
+            {
+                if (Types.Value == 1) //贷款业务
+                {
+                    fmlist = FMModel.GetMatching();
+                }
+                else //自有
+                {
+                    fmlist = FMModel.GetMatchingZY();
+                }
+            }
+            else //贷款业务
+            {
+                fmlist = FMModel.GetMatching();
+            }
+            ViewBag.Types = 1;
+            if (Types.HasValue)
+            {
+                ViewBag.Types = Types.Value;
+            }
+            var pagelist = fmlist.ToPagedList(id ?? 1, 50);
+            return View(pagelist);
         }
 
     }
