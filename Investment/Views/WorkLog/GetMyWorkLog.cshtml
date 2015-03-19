@@ -1,0 +1,35 @@
+﻿@model List<Entity.WorkLog>
+<table class="table table-bordered table-hover" id="table_company">
+    <thead>
+        <tr>
+            <th style="width: 100px;">
+                时间
+            </th>
+            <th style="width: 450px;">
+                内容
+            </th>
+            <th style="width: 80px;">
+                操作
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.LogDate.ToString("yyyy/MM/dd hh:mm")
+                </td>
+                <td>
+                    @item.Log
+                </td>
+                <td>
+                    @Ajax.ActionLink("删除", "Delete", "WorkLog", new { id = item.ID, workFlowID = item.WorkFlowID, hasGroupAccount = ViewBag.hasGroupAccount }, new AjaxOptions() { UpdateTargetId = "alert", OnBegin = "return AppDelete('确定删除?删除此项将会删除其关联的所有数据！')" }, true)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<script>
+    
+</script>

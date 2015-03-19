@@ -24,5 +24,30 @@ namespace Business
             }
             return list.OrderByDescending(a => a.LogDate).ToList();
         }
+
+        /// <summary>
+        /// 根据人员ID和时间获取工作日志
+        /// </summary>
+        /// <param name="groupAccountID">人员ID</param>
+        /// <param name="dt">时间</param>
+        /// <returns></returns>
+        public List<WorkLog> GetList(int groupAccountID,DateTime dt)
+        {
+            var nextDate = dt.Date.AddDays(1);
+            var list = List().Where(a => a.GroupAccountID == groupAccountID && (a.LogDate >= dt.Date && a.LogDate < nextDate));
+
+            return list.OrderByDescending(a => a.LogDate).ToList();
+        }
+
+        /// <summary>
+        /// 获取当月日志统计
+        /// </summary>
+        public List<WorkLog> GetAllMonthList(int groupAccountID, DateTime dt)
+        {
+            var begin= Convert.ToDateTime(dt.ToString("yyyy-MM-01")).Date;
+            var end = Convert.ToDateTime(dt.AddMonths(1).ToString("yyyy-MM-01")).Date;
+            var list = List().Where(a => a.GroupAccountID == groupAccountID && (a.LogDate >= begin && a.LogDate < end));
+            return list.OrderByDescending(a => a.LogDate).ToList();
+        }
     }
 }

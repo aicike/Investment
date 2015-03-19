@@ -97,5 +97,7 @@ namespace Entity
         public virtual ICollection<ApprovalRecord> ApprovalRecord { get; set; }
 
         public virtual ICollection<WorkLog> WorkLogs { get; set; }
+
+        public virtual ICollection<WorkFlowLog> WorkFlowLogs { get; set; }
     }
 }

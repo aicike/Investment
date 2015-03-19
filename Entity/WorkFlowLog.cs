@@ -20,8 +20,15 @@ namespace Entity
         /// 流程表ID
         /// </summary>
         [Display(Name = "流程表ID")]
-        public int WorkFlowID { get; set; }
+        public int? WorkFlowID { get; set; }
         public virtual WorkFlow WorkFlow { get; set; }
+
+        /// <summary>
+        /// 创建人ID
+        /// </summary>
+        public int GroupAccountID { get; set; }
+
+        public virtual GroupAccount GroupAccount { get; set; } 
 
         /// <summary>
         /// 节点名称

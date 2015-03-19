@@ -32,23 +32,34 @@ namespace Investment.Controllers
         }
 
         [HttpPost]
-        public ActionResult Add(WorkLog workLog, bool hasGroupAccount)
+        public ActionResult Add(WorkLog workLog, bool hasGroupAccount, int page = 0)
         {
             WorkLogModel wlm = new WorkLogModel();
-            workLog.LogDate = DateTime.Now;
+            if (workLog.LogDate.Year <= 2000)
+            {
+                return JavaScript("JMessage('请输入正确的填写时间。',true)");
+            }
             workLog.GroupAccountID = LoginAccount.UserID;
             Result result = wlm.Add(workLog);
             if (result.HasError)
             {
                 return JavaScript("JMessage('" + result.Error + "',true)");
             }
-            if (hasGroupAccount)
+            if (page == -1)
             {
-                return JavaScript("window.location.href='" + Url.Action("Index", "WorkLog", new { workFlowID = workLog.WorkFlowID, hasGroupAccount = true }) + "'");
+                //从 MyWorklog页面跳转过来，Ajax刷新
+                return JavaScript("JMessage('操作成功。',false);$('#Log').val('');LoadWorkLog('" + workLog.LogDate.ToShortDateString() + "')");
             }
             else
             {
-                return JavaScript("window.location.href='" + Url.Action("Index", "WorkLog", new { workFlowID = workLog.WorkFlowID, hasGroupAccount = false }) + "'");
+                if (hasGroupAccount)
+                {
+                    return JavaScript("window.location.href='" + Url.Action("Index", "WorkLog", new { workFlowID = workLog.WorkFlowID, hasGroupAccount = true }) + "'");
+                }
+                else
+                {
+                    return JavaScript("window.location.href='" + Url.Action("Index", "WorkLog", new { workFlowID = workLog.WorkFlowID, hasGroupAccount = false }) + "'");
+                }
             }
         }
 
@@ -72,7 +83,23 @@ namespace Investment.Controllers
 
         public ActionResult MyWorkLog()
         {
+            //WorkFlowModel wfm = new WorkFlowModel();
+            //var workflow = wfm.Get(workFlowID);
+            //(workflow != null).NotAuthorizedPage();
+            WorkLogModel wlm = new WorkLogModel();
+            List<WorkLog> list = wlm.GetList(LoginAccount.UserID, DateTime.Now);
+            ViewBag.List = list;
             return View();
+        }
+
+        //Ajax列表页面
+        public PartialViewResult GetMyWorkLog(DateTime dt) {
+            WorkLogModel wlm = new WorkLogModel();
+            List<WorkLog> list = wlm.GetList(LoginAccount.UserID, dt);
+
+            var allMonth= wlm.GetAllMonthList(LoginAccount.UserID, dt);
+
+            return PartialView(list);
         }
     }
 }

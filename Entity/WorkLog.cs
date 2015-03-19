@@ -24,7 +24,7 @@ namespace Entity
 
         public virtual GroupAccount GroupAccount { get; set; }
 
-        public int WorkFlowID { get; set; }
+        public int? WorkFlowID { get; set; }
 
         public virtual WorkFlow WorkFlow { get; set; }
     }

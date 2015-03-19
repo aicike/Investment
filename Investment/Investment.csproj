@@ -1178,6 +1178,11 @@
     <Content Include="Views\WorkFlowApproval\FengKongShenHe.cshtml" />
     <Content Include="Views\WorkFlowApproval\FangKuan.cshtml" />
     <Content Include="Views\WorkFlow\EditABRole.cshtml" />
+    <Content Include="Views\WorkLog\MyWorkLog.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\WorkLog\GetMyWorkLog.cshtml" />
+    <Content Include="Views\WorkFlow_Form_Financing\FangKuanRIQI.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
