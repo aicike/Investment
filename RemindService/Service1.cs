@@ -23,7 +23,7 @@ namespace RemindService
         protected override void OnStart(string[] args)
         {
             //没个1小时执行一次
-            timer1.Interval = 3600000;
+            timer1.Interval = 10000;//3600000;
             timer1.Start();
         }
 
@@ -37,17 +37,24 @@ namespace RemindService
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void timer1_Tick(object sender, EventArgs e)
+         private void timer1_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
-            string SendEmail = ConfigurationManager.AppSettings["sendEmail"].ToString();
-            if (SendEmail == "True")
+            try
             {
-                // 提前一天提醒出纳放款（自有资金）
-                RemindCNFK();
-                // 放款后收利息提醒 （自有资金） 提前5天通知项目经理，如未收利息提前3天通知财务总监
-                RemindCNFKLX();
+
+                string SendEmail = ConfigurationManager.AppSettings["sendEmail"].ToString();
+                if (SendEmail == "True")
+                {
+                    // 提前一天提醒出纳放款（自有资金）
+                    RemindCNFK();
+                    // 放款后收利息提醒 （自有资金） 提前5天通知项目经理，如未收利息提前3天通知财务总监
+                    RemindCNFKLX();
+                }
+
             }
+            catch { }
         }
+    
 
         #region 流程定期提醒
         /// <summary>
@@ -55,8 +62,8 @@ namespace RemindService
         /// </summary>
         public void RemindCNFK()
         {
-            System.Threading.Tasks.Task t = new System.Threading.Tasks.Task(() =>
-            {
+            //System.Threading.Tasks.Task t = new System.Threading.Tasks.Task(() =>
+            //{
                 WorkFlowModel wmodel = new WorkFlowModel();
 
                 var workflowList = wmodel.List().Where(a => a.State == 2 && a.LoanDay != null && a.IsInterest == true && a.Financing.WorkFlowManagerID == 4 && a.IsSendEmail == false);
@@ -90,8 +97,8 @@ namespace RemindService
                 }
 
 
-            });
-            t.Start();
+            //});
+            //t.Start();
         }
 
         /// <summary>
@@ -159,5 +166,8 @@ namespace RemindService
             emailInfo.Body = Content;// "您好！<br/><br/>您的陕西兆恒投资业务管理系统账号为：" + gAccount.AccountNumber + " <br/><br/>您的密码为：" + pwd + "<br/><br/>请点击<a href='" + strUrl + "'>兆恒投资业务管理系统</a> 选择集团登录，尽快更改密码！<br/><br/>----陕西兆恒投资有限公司";
             SendEmail.SendMailAsync(emailInfo);
         }
+
+      
+
     }
 }

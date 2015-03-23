@@ -28,22 +28,24 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.timer1 = new System.Timers.Timer();
+            ((System.ComponentModel.ISupportInitialize)(this.timer1)).BeginInit();
             // 
             // timer1
             // 
-            this.timer1.Interval = 10000;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            this.timer1.Enabled = true;
+            this.timer1.Elapsed += new System.Timers.ElapsedEventHandler(this.timer1_Elapsed);
             // 
             // Service1
             // 
-            this.ServiceName = "Service1";
+            this.ServiceName = "RemindService";
+            ((System.ComponentModel.ISupportInitialize)(this.timer1)).EndInit();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Timer timer1;
+        private System.Timers.Timer timer1;
+
     }
 }
