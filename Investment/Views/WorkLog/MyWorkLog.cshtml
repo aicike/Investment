@@ -50,7 +50,7 @@
                             h = {
                                 right: 'title',
                                 center: '',
-                                left: 'agendaDay, agendaWeek, month, today, prev,next'
+                                left: 'agendaDay, agendaWeek, month'
                             };
                         }
                     } else {
@@ -59,14 +59,14 @@
                             h = {
                                 left: 'title, prev, next',
                                 center: '',
-                                right: 'today,month,agendaWeek,agendaDay'
+                                right: 'today,month'
                             };
                         } else {
                             $('#calendar').removeClass("mobile");
                             h = {
                                 left: 'title',
                                 center: '',
-                                right: 'prev,next,today,month,agendaWeek,agendaDay'
+                                right: 'prev,next,today,month'//'prev,next,today,month,agendaWeek,agendaDay'
                             };
                         }
                     }
@@ -80,6 +80,14 @@
                         selectable: true,
                         selectHelper: true,
                         select: function (start, end) {
+                            var currentDate = new Date();
+                            if (start > currentDate) {
+                                JMessage('不能选择今天之后的日期进行操作。', true);
+                                $("#div_worklog_option *").attr("disabled", "disabled");
+                                return;
+                            } else {
+                                $("#div_worklog_option *").removeAttr("disabled");
+                            }
                             $("#lab_sel_day").text(start.format("yyyy 年 MM 月 dd 日"));
                             var mydate = start.format("yyyy-MM-dd");
                             $("#LogDate").val(mydate);
@@ -109,10 +117,13 @@
 
         } ();
         Calendar.init();
-
+        LoadWorkLog(new Date().format("yyyy-MM-dd"));
         function LoadWorkLog(date) {
             var GetMyWorkLogUrl = '@Url.Action("GetMyWorkLog","WorkLog")';
-            $("#div_workLogList").load(GetMyWorkLogUrl, { dt: date }, function () { });
+            $("#div_workLogList").load(GetMyWorkLogUrl, { dt: date }, function () {
+                $('#calendar').fullCalendar('removeEvents');
+                $('#calendar').fullCalendar('addEventSource', workLog_msg);
+            });
         }
     </script>
 }
@@ -128,7 +139,7 @@
             <div class="portlet-body light-grey">
                 <div class="row-fluid">
                     <div class="span6 responsive" data-tablet="span12 fix-margin" data-desktop="span8">
-                        <div>
+                        <div id="div_worklog_option">
                             @using (Ajax.BeginForm("Add", "WorkLog", new { hasGroupAccount = true, page = -1 }, new AjaxOptions() { UpdateTargetId = "alert" }, new { @class = "form-horizontal" }))
                             {
                                 <h3>
@@ -139,7 +150,7 @@
                                     @Html.ValidationMessageFor(a => a.Log)@Html.HiddenFor(a => a.WorkFlowID)
                                     @Html.Hidden("LogDate", DateTime.Now)
                                 </div>
-                                <input type="submit" value="填写工作日志" class="btn blue" style="margin-top: 15px;" />
+                                <input type="submit" value="填写工作日志" class="btn blue" style="margin-top: 15px;"  />
                             }
                         </div>
                         <div style="margin-top: 20px;" id="div_workLogList">

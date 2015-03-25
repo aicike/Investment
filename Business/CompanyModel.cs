@@ -44,7 +44,7 @@ namespace Business
         /// <param name="attachment_YingYeZhiZhao">营业执照附件</param>
         /// <param name="deleteFileNameNumbers">需要删除的文件</param>
         /// <returns></returns>
-        public new Result Edit(Company company, List<Attachment> attachments)
+        public Result Edit(Company company, List<Attachment> attachments)
         {
             if (string.IsNullOrEmpty(company.Name) || string.IsNullOrEmpty(company.Address) || string.IsNullOrEmpty(company.ChengLiShiJianJiYingYeQiXian) ||
                    company.ZhuCheZiJin <= 0 || company.ShiShouZiBen <= 0 || company.ZiChanZongE <= 0 || company.FuZhaiZongE <= 0 || company.ZhuYingYeWuShouRu <= 0 || company.JingLiRun <= 0 ||

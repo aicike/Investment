@@ -27,5 +27,15 @@ namespace Entity
         public int? WorkFlowID { get; set; }
 
         public virtual WorkFlow WorkFlow { get; set; }
+
+        /// <summary>
+        /// 月份
+        /// </summary>
+        public int Month { get; set; }
+
+        /// <summary>
+        /// 天
+        /// </summary>
+        public int day { get; set; }
     }
 }

@@ -1,9 +1,16 @@
 ﻿@model List<Entity.WorkLog>
+<script>
+    var workLog_msg = JSON.parse('@Html.Raw(ViewBag.Msg)');
+</script>
+
 <table class="table table-bordered table-hover" id="table_company">
     <thead>
         <tr>
             <th style="width: 100px;">
                 时间
+            </th>
+            <th style="width: 100px;">
+                关联项目
             </th>
             <th style="width: 450px;">
                 内容
@@ -21,10 +28,21 @@
                     @item.LogDate.ToString("yyyy/MM/dd hh:mm")
                 </td>
                 <td>
+                    @if (item.WorkFlow != null)
+                    {
+
+                        @Html.ActionLink(item.WorkFlow.Financing.Name, "SelInfoPath", "WorkFlowApproval", new { WorkFlowID = item.WorkFlowID}, new { target = "_blank" })
+                    }
+                    else
+                    {
+                        @:-
+                    }
+                </td>
+                <td>
                     @item.Log
                 </td>
                 <td>
-                    @Ajax.ActionLink("删除", "Delete", "WorkLog", new { id = item.ID, workFlowID = item.WorkFlowID, hasGroupAccount = ViewBag.hasGroupAccount }, new AjaxOptions() { UpdateTargetId = "alert", OnBegin = "return AppDelete('确定删除?删除此项将会删除其关联的所有数据！')" }, true)
+                    @Ajax.ActionLink("删除", "Delete_MyWrokLog", "WorkLog", new { id = item.ID, date = item.LogDate, workFlowID = item.WorkFlowID }, new AjaxOptions() { UpdateTargetId = "alert", OnBegin = "return AppDelete('确定删除?删除此项将会删除其关联的所有数据！')" }, true)
                 </td>
             </tr>
         }
