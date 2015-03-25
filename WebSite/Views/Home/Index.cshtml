@@ -1,0 +1,117 @@
+﻿@{
+    ViewBag.Title = "陕西兆恒投资-首页-诚信、专业、共赢";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section scripts{
+    <link href="@Url.Content("/Content/HomeActice.css")" rel="stylesheet" type="text/css" />
+    <style>
+        
+    </style>
+    <script>
+        $(function () {
+            $('#dowebok').fullpage({
+                verticalCentered: false,
+                'navigation': true,
+                anchors: ['page1', 'page2', 'page3', 'page4', 'page5']
+
+            });
+
+        });
+
+        //当屏幕宽度小于固定值时 取消动画效果
+        $(window).resize(function () {
+            //                    autoScrolling();
+        });
+        //                function autoScrolling() {
+        //                    var $ww = $(window).width();
+        //                    if ($ww < 800) {
+        //                        $.fn.fullpage.setAutoScrolling(false);
+        //                    } else {
+        //                        $.fn.fullpage.setAutoScrolling(true);
+        //                    }
+        //                }
+        //                autoScrolling();
+    </script>
+}
+<div id="dowebok">
+    <div class="section section1">
+        <div class="bg">
+            <img src="/Images/BG1.jpg" alt />
+        </div>
+        <div  class="bg11">因为有你</div>
+        <div  class="bg12">我们而在</div>
+        <div  class="bg13">BECAUSE OF YOU</div>
+        <div  class="bg14">诚信|专业|共赢</div>
+    </div>
+    <div class="section section2 " >
+        <div class="bg">
+            <img src="/Images/BG2.jpg" alt />
+        </div>
+        <div class="bg21">
+            <img src="/Images/BG21.png" style="padding: 1px 1px" alt />
+        </div>
+        <div class="bg22">
+            <img src="/Images/BG22.png" alt />
+        </div>
+        <div class="bg23">
+            <img src="/Images/BG23.png" alt />
+        </div>
+        <strong>[ 我们的优势 ]</strong>
+        <h3>
+            专业，稳定，可靠</h3>
+        <p class="p1 ">
+            专业的团队，十年以上投资行业背景和从业经验。丰富的市场资源，与多达70余家投资人和投资机构建立长期紧密的合作关系。稳定可靠的资金来源，自有资金充足，并与多家战略投资方形成长期紧密的合作关系。
+        </p>
+    </div>
+    @*<div class="section section3">
+        <div class="bg">
+            <img src="/Images/BG3.jpg" alt />
+        </div>
+    </div>*@
+    <div class="section section4">
+        <div class="bg">
+            <img src="/Images/BG4.jpg" alt />
+        </div>
+        <div class="bg41">
+        </div>
+        <div class="bg42">
+        </div>
+        <div class="bg43">
+        </div>
+        <div class="bg44">
+        </div>
+        <strong>[ 我们的理念 ]</strong>
+        <h3>
+            诚信、专业、共赢</h3>
+        <p class="p1">
+            恪守契约精神、重承诺、守信用、并以守法诚信为目标选择合作伙伴，规范合作行为。坚持走专业化和创新路线，以科学、审慎、规范、创新的态度开拓市场。推崇合作而非博弈，通过合作实现共同发展，在互惠互利的基础上获取回报，实现共赢。
+
+        </p>
+    </div>
+    <div class="section section5">
+        <div class="bg">
+            <img src="/Images/BG5.jpg" alt />
+        </div>
+        <div class="bg51">
+        </div>
+        <div class="bg52">
+        </div>
+        <div class="bg53">
+            <img src="/Images/BG53.png" alt="">
+        </div>
+        <div class="bg54">
+            <a><img src="/Images/log1.png" alt=""></a>
+            <a><img src="/Images/log2.png" alt=""></a>
+            <a><img src="/Images/log3.png" alt=""></a>
+            <a><img src="/Images/log4.png" alt=""></a>
+            <a><img src="/Images/log5.png" alt=""></a>
+            <a><img src="/Images/log6.png" alt=""></a>
+        </div>
+        <strong>[ 合作伙伴或投资项目 ]</strong>
+        <p class="copyright">
+            <a href="javascript:">关于兆恒</a> <a href="javascript:">联系我们</a> <a href="javascript:">
+                官方微信</a> <a href="javascript:">客户服务</a> <a href="javascript:">隐私政策</a> <span>|</span>
+            <span>兆恒投资公司版权所有 © 2014-2015 </span>
+        </p>
+    </div>
+</div>
