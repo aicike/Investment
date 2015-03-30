@@ -26,6 +26,25 @@ namespace Investment.Controllers
             ApprovalRecordModel arModel = new ApprovalRecordModel();
             var DBList = arModel.GetList_ByUID(LoginAccount.UserID);
             ViewBag.DBCnt = DBList.Count();
+
+            //是否有分配用户权限
+            RoleAccountModel RAM = new RoleAccountModel();
+            var ralist = RAM.GetInfo_ByGAID(LoginAccount.UserID);
+            ViewBag.ISDSH = "false";
+            foreach (var item in ralist)
+            {
+                if (item.Role.ID == 13)
+                {
+                    ViewBag.ISDSH = "true";
+                    //获取待审批客户数
+                    FinancingModel fm = new FinancingModel();
+                    var dshCnt = fm.List().Where(a => a.AuditStatus==0).Count();
+                    ViewBag.dshCnt = dshCnt;
+                    break;
+                }
+            }
+
+
             return View();
 
 

@@ -19,7 +19,8 @@
                         待处理业务
                     </div>
                 </div>
-                <a class="more" href="@Url.Action("Backlog", "WorkFlow")">进入查看<i class="m-icon-swapright m-icon-white"></i> </a>
+                <a class="more" href="@Url.Action("Backlog", "WorkFlow")">进入查看<i class="m-icon-swapright m-icon-white"></i>
+                </a>
             </div>
         </div>
         <div class="span3 responsive" data-tablet="span6" data-desktop="span3">
@@ -33,24 +34,28 @@
                     <div class="desc">
                         待定业务</div>
                 </div>
-                <a class="more" href="@Url.Action("Pending", "WorkFlow")">进入查看 <i class="m-icon-swapright m-icon-white"></i></a>
+                <a class="more" href="@Url.Action("Pending", "WorkFlow")">进入查看 <i class="m-icon-swapright m-icon-white">
+                </i></a>
             </div>
         </div>
-        <div class="span3 responsive" data-tablet="span6  fix-offset" data-desktop="span3">
-            <div class="dashboard-stat yellow">
-                <div class="visual">
-                    <i class=" icon-user"></i>
+        @if (ViewBag.ISDSH == "true")
+        { 
+            <div class="span3 responsive" data-tablet="span6  fix-offset" data-desktop="span3">
+                <div class="dashboard-stat yellow">
+                    <div class="visual">
+                        <i class=" icon-user"></i>
+                    </div>
+                    <div class="details">
+                        <div class="number">
+                            @ViewBag.dshCnt</div>
+                        <div class="desc">
+                            待审核客户</div>
+                    </div>
+                    <a class="more" href="@Url.Action("IndexALL", "Financing")">进入查看 <i class="m-icon-swapright m-icon-white"></i></a>
                 </div>
-                <div class="details">
-                    <div class="number">
-                        0</div>
-                    <div class="desc">
-                        待审核客户</div>
-                </div>
-                <a class="more" href="#">进入查看 <i class="m-icon-swapright m-icon-white"></i></a>
             </div>
-        </div>
-        @*
+        }
+@*
     <div class="row-fluid">
         <div class="span3 responsive" data-tablet="span6" data-desktop="span3">
             <div class="dashboard-stat blue">
@@ -115,6 +120,5 @@
         </div>*@
     </div>
     <div class="row-fluid">
-
     </div>
 </div>
