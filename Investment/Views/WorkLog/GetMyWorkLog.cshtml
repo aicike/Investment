@@ -42,7 +42,7 @@
                     @item.Log
                 </td>
                 <td>
-                    @Ajax.ActionLink("删除", "Delete_MyWrokLog", "WorkLog", new { id = item.ID, date = item.LogDate, workFlowID = item.WorkFlowID }, new AjaxOptions() { UpdateTargetId = "alert", OnBegin = "return AppDelete('确定删除?删除此项将会删除其关联的所有数据！')" }, true)
+                    @Ajax.ActionLink("删除", "Delete_MyWrokLog", "WorkLog", new { id = item.ID, date = item.LogDate, workFlowID = item.WorkFlowID },new AjaxOptions() { UpdateTargetId = "alert", OnBegin = "return AppDelete('确定删除?删除此项将会删除其关联的所有数据！')" })
                 </td>
             </tr>
         }

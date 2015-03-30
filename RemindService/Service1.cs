@@ -150,6 +150,14 @@ namespace RemindService
         }
         #endregion
 
+        #region 未写日志题型
+
+        public void NotWriteWorlLog() { 
+            
+        }
+
+        #endregion
+
         /// <summary>
         /// 发送邮件公共方法
         /// </summary>
