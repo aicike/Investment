@@ -23,7 +23,7 @@ namespace RemindService
         protected override void OnStart(string[] args)
         {
             //没个1小时执行一次
-            timer1.Interval = 10000;//3600000;
+            timer1.Interval =3600000;
             timer1.Start();
         }
 
@@ -41,15 +41,21 @@ namespace RemindService
         {
             try
             {
-
-                string SendEmail = ConfigurationManager.AppSettings["sendEmail"].ToString();
-                if (SendEmail == "True")
+                //提前一天提醒出纳放款（自有资金）是否发送邮件
+                string TQYTEmail = ConfigurationManager.AppSettings["TQYTEmail"].ToString();
+                if (TQYTEmail == "True")
                 {
                     // 提前一天提醒出纳放款（自有资金）
                     RemindCNFK();
+                }
+                string LXEmail = ConfigurationManager.AppSettings["LXEmail"].ToString();
+                if (LXEmail == "True")
+                {
                     // 放款后收利息提醒 （自有资金） 提前5天通知项目经理，如未收利息提前3天通知财务总监
                     RemindCNFKLX();
                 }
+
+               
 
             }
             catch { }
