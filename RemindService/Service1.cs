@@ -164,25 +164,26 @@ namespace RemindService
             {
 
                 var days = DateTime.Now.Date.Subtract(writeWorkLogTime.Date).Days;
-                if (days > 0)
+                if (days <= 0)
                 {
                     //第二天了
                     var zuoTian = DateTime.Now.AddDays(-1).Date;//昨天
                     RoleAccountModel ram = new RoleAccountModel();
                     var groupAccountIdsList = ram.List().Where(a => a.RoleID == 19).ToList();
-                    if(groupAccountIdsList==null){
+                    if(groupAccountIdsList==null||groupAccountIdsList.Count==0){
                         return;
                     }
-                    var groupAccountIds=groupAccountIdsList.Select(a => a.GroupAccount.ID);     //所有有写日志权利的人员
+                    var groupAccountIds = groupAccountIdsList.Select(a => a.GroupAccount.ID);     //所有有写日志权利的人员
                     GroupAccountModel gam = new GroupAccountModel();
                     List<string> emails = new List<string>();
                     WorkLogModel wflm = new WorkLogModel();
                     var zuoTianAccountIDsList = wflm.List().Where(a => a.LogDate.Date == zuoTian).ToList();//昨天写日志的人员
-                    if(zuoTianAccountIDsList==null){
+                    if (zuoTianAccountIDsList == null)
+                    {
                         return;
                     }
-                    var zuoTianAccountIDs =zuoTianAccountIDsList.Select(a => a.GroupAccountID);
-                    if (zuoTianAccountIDs != null)
+                    var zuoTianAccountIDs = zuoTianAccountIDsList.Select(a => a.GroupAccountID);
+                    if (zuoTianAccountIDs != null&&zuoTianAccountIDs.Count()>0)
                     {
                         var notWriteAccountIDs = groupAccountIds.Where(a => zuoTianAccountIDs.Contains(a) == false).ToList();    //没有写日志的人员
                         emails = gam.List().Where(a => notWriteAccountIDs.Contains(a.ID)).Select(a => a.Email).ToList();      //获取email地址
